@@ -20,7 +20,7 @@ However, this dynamic styling mechanism introduces challenges for Server-Side Re
 
 ### V4 Styled Mode - The Problem
 
-In an SSR setup, the DOM structure is sent from the server to the client without accompanying styles. Components do not receive their generated styles until JavaScript is fully loaded and executed on the client side. This delay leads to a visually "jumpy" UI, where components appear unstyled for a brief moment before the client-side styling is available.
+In an SSR setup, the DOM structure is sent from the server to the client without accompanying styles. Components do not receive their generated styles until JavaScript is fully loaded and executed on the client side. This delay leads to a visually "jumpy" UI, where components appear unstyled for a brief moment before the client-side styling is applied.
 
 This issue is particularly noticeable when the page's content or structure depends heavily on PrimeVue components, such as:
 
