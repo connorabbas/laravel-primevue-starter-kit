@@ -16,8 +16,6 @@
         }"
     >
         <template #item="{ item, active }">
-            <!-- add if using 'nora' preset theme -->
-            <!-- hover:text-primary-100 hover:dark:text-primary-950 -->
             <Link
                 v-if="item.route"
                 :href="item.route"
@@ -51,7 +49,7 @@
                 <span
                     v-if="item.items"
                     :class="[
-                        'pi text-muted-color ml-auto',
+                        'pi text-color-secondary ml-auto',
                         active ? 'pi-angle-down' : 'pi-angle-right',
                     ]"
                 />

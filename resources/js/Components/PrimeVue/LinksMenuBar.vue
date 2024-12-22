@@ -1,7 +1,7 @@
 <script setup>
-import { useTemplateRef } from 'vue';
+import { useTemplateRef } from "vue";
 
-const childRef = useTemplateRef('child-ref');
+const childRef = useTemplateRef("child-ref");
 defineExpose({
     childRef,
 });
@@ -13,48 +13,29 @@ defineExpose({
             <slot name="start"></slot>
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
-            <!-- add if using 'nora' preset theme -->
-            <!-- hover:text-primary-100 hover:dark:text-primary-950 -->
             <Link
                 v-if="item.route"
                 :href="item.route"
-                class="p-menubar-item-link"
+                class="hidden sm:hidden md:hidden lg:flex p-menuitem-link"
                 :class="{
                     'font-bold text-primary': item.active,
-                    'text-muted-color': root && !item.active,
+                    'text-color-secondary': root && !item.active,
                 }"
                 custom
             >
-                <span
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-menu-item-icon"
-                />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+                <span v-show="item.icon" :class="[item.icon, 'mr-2']" />
+                <span>{{ item.label }}</span>
+                <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
             </Link>
             <a
                 v-else
                 :href="item.url"
                 :target="item.target"
                 v-bind="props.action"
-                class="p-menubar-item-link"
-                :class="{
-                    'text-muted-color': root,
-                }"
             >
-                <span
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-menu-item-icon"
-                />
-                <span class="p-menu-item-label">{{ item.label }}</span>
-                <i
-                    v-if="hasSubmenu"
-                    :class="[
-                        'pi text-muted-color',
-                        root ? 'pi-angle-down text-xs' : 'pi-angle-right',
-                    ]"
-                ></i>
+                <span v-show="item.icon" :class="[item.icon, 'mr-2']" />
+                <span>{{ item.label }}</span>
+                <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
             </a>
         </template>
         <template v-if="$slots.end" #end>

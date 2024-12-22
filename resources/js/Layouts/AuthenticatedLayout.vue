@@ -176,7 +176,7 @@ watchEffect(() => {
                         <div>
                             <div class="mb-5">
                                 <p
-                                    class="text-muted-color font-bold uppercase text-sm mb-2"
+                                    class="text-color-secondary font-bold uppercase text-sm mb-2"
                                 >
                                     Home
                                 </p>
