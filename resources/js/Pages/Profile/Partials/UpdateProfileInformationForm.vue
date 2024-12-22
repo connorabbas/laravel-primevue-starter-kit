@@ -22,19 +22,16 @@ const form = useForm({
     email: user.email,
 });
 
-const showSuccessToast = () => {
-    toast.add({
-        severity: "success",
-        summary: "Saved",
-        detail: "Profile information has been updated",
-        life: 3000,
-    });
-};
 const updateProfileInformation = () => {
     form.patch(route("profile.update"), {
         preserveScroll: true,
         onSuccess: () => {
-            showSuccessToast();
+            toast.add({
+                severity: "success",
+                summary: "Saved",
+                detail: "Profile information has been updated",
+                life: 3000,
+            });
         },
     });
 };
@@ -60,7 +57,7 @@ onMounted(() => {
                         type="text"
                         v-model="form.name"
                         class="w-full"
-                        :class="form.errors?.name ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.name)"
                         autocomplete="name"
                     />
                     <InputError :message="form.errors?.name" />
@@ -75,7 +72,7 @@ onMounted(() => {
                         type="email"
                         v-model="form.email"
                         class="w-full"
-                        :class="form.errors?.email ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.email)"
                         autocomplete="username"
                     />
                     <InputError :message="form.errors?.email" />

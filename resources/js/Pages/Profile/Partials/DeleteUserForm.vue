@@ -43,7 +43,7 @@ function focusPasswordInput() {
                 </p>
             </div>
 
-            <div>
+            <div class="flex flex-column gap-2">
                 <InputText
                     autofocus
                     required
@@ -53,28 +53,29 @@ function focusPasswordInput() {
                     placeholder="Password"
                     v-model="form.password"
                     class="w-full"
-                    :class="form.errors.password ? 'p-invalid' : ''"
+                    :invalid="Boolean(form.errors?.password)"
                     autocomplete="current-password"
                     @keyup.enter="deleteUser"
                 />
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors?.password" />
             </div>
 
             <template #footer>
-                <Button
-                    class="mr-2"
-                    label="Cancel"
-                    plain
-                    text
-                    @click="modalOpen = false"
-                />
-                <Button
-                    raised
-                    @click="deleteUser"
-                    :loading="form.processing"
-                    label="Delete Account"
-                    severity="danger"
-                />
+                <div class="flex gap-2">
+                    <Button
+                        label="Cancel"
+                        plain
+                        text
+                        @click="modalOpen = false"
+                    />
+                    <Button
+                        raised
+                        @click="deleteUser"
+                        :loading="form.processing"
+                        label="Delete Account"
+                        severity="danger"
+                    />
+                </div>
             </template>
         </Dialog>
 
