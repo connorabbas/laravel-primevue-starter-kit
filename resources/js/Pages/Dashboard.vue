@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
+import Container from "@/Components/Container.vue";
 </script>
 
 <template>
@@ -9,9 +9,9 @@ import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
     <AuthenticatedLayout>
         <template #header>
             <div class="surface-overlay py-4 shadow-1">
-                <OuterLayoutContainer>
+                <Container>
                     <h2 class="m-0">Dashboard</h2>
-                </OuterLayoutContainer>
+                </Container>
             </div>
         </template>
         <div class="my-6 surface-overlay p-5 shadow-1 border-noround sm:border-round-lg">

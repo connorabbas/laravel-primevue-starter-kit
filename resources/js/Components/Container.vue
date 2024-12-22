@@ -16,7 +16,7 @@ const props = defineProps({
 <template>
     <div
         :class="[
-            { 'max-w-screen-xl mx-auto': !fluid },
+            { 'col-12 md:col-10 md:col-offset-1 lg:col-8 lg:col-offset-2': !fluid },
             spacedMobile ? 'px-4' : 'px-0',
             'md:px-8',
         ]"

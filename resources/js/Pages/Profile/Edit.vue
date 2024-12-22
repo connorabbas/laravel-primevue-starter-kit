@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import DeleteUserForm from "./Partials/DeleteUserForm.vue";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
-import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
+import Container from "@/Components/Container.vue";
 import { Head } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -22,35 +22,51 @@ const props = defineProps({
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="surface-overlay py-4 shadow-1">
-                <OuterLayoutContainer>
-                    <h2 class="m-0">Profile</h2>
-                </OuterLayoutContainer>
-            </div>
+            <h1 class="font-bold text-2xl leading-tight m-0">Profile</h1>
         </template>
 
-        <div class="my-6">
-            <div
-                class="p-3 sm:p-5 surface-overlay shadow-1 border-noround sm:border-round-lg mb-5"
-            >
-                <UpdateProfileInformationForm
-                    :must-verify-email="mustVerifyEmail"
-                    :status="status"
-                    class="max-w-xl"
-                />
-            </div>
+        <Container>
+            <div class="py-3 md:py-6">
+                <div class="flex flex-column gap-3 md:gap-5">
+                    <Card>
+                        <template #title>Profile Information</template>
+                        <template #subtitle>
+                            Update your account's profile information and email
+                            address.
+                        </template>
+                        <template #content>
+                            <!-- <UpdateProfileInformationForm
+                                :must-verify-email="mustVerifyEmail"
+                                :status="status"
+                            /> -->
+                        </template>
+                    </Card>
 
-            <div
-                class="p-3 sm:p-5 surface-overlay shadow-1 border-noround sm:border-round-lg mb-5"
-            >
-                <UpdatePasswordForm class="max-w-xl" />
-            </div>
+                    <Card>
+                        <template #title>Update Password</template>
+                        <template #subtitle>
+                            Ensure your account is using a long, random password
+                            to stay secure.
+                        </template>
+                        <template #content>
+                            <!-- <UpdatePasswordForm /> -->
+                        </template>
+                    </Card>
 
-            <div
-                class="p-3 sm:p-5 surface-overlay shadow-1 border-noround sm:border-round-lg mb-5"
-            >
-                <DeleteUserForm class="max-w-xl" />
+                    <Card>
+                        <template #title>Delete Account</template>
+                        <template #subtitle>
+                            Once your account is deleted, all of its resources
+                            and data will be permanently deleted. Before
+                            deleting your account, please download any data or
+                            information that you wish to retain.
+                        </template>
+                        <template #content>
+                            <!--  <DeleteUserForm /> -->
+                        </template>
+                    </Card>
+                </div>
             </div>
-        </div>
+        </Container>
     </AuthenticatedLayout>
 </template>
