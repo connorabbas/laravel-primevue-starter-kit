@@ -56,8 +56,6 @@ onMounted(() => {
             </div>
         </header>
 
-        <Toast />
-
         <form @submit.prevent="updateProfileInformation">
             <div class="mb-4 flex">
                 <div class="w-12 lg:w-10 xl:w-6">

@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted, watchEffect, computed } from "vue";
 import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import ToggleThemeButton from "@/Components/ToggleThemeButton.vue";
+import Toast from 'primevue/toast';
 
 const mainMenuItems = [
     {
@@ -208,6 +209,8 @@ watchEffect(() => {
                 </ul>
             </Sidebar>
         </header>
+
+        <Toast position="top-center" />
         <main>
             <slot name="header" />
             <OuterLayoutContainer :spaced-mobile="false">
