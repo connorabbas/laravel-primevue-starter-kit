@@ -1,6 +1,6 @@
 # Laravel, Inertia, & PrimeVue Starter Kit
 
-This branch is tailored towards applications that rely on Server-Side Rendering (SSR), this means the PrimeVue [styled mode](https://primevue.org/theming/styled/) implementation (used in the other branches of this project) is not a suitable solution for the component styling.
+This branch is tailored towards content-driven applications that rely on Server-Side Rendering (SSR).
 
 Run the site with SSR:
 
@@ -14,13 +14,13 @@ php artisan inertia:start-ssr
 
 ## PrimeVue V4 Styled Mode and SSR
 
-With **PrimeVue V4** styled mode, component styles are dynamically generated on the client side based on the design token values configured in your theme. This approach is well-suited for Single Page Applications (SPAs), where the initial render begins with a blank page, hydration seamlessly takes over, and client-side routing ensures smooth navigation.
+With **PrimeVue V4** [styled mode](https://primevue.org/theming/styled/), component styles are dynamically generated on the client side based on the design token values configured in your theme. This approach is well-suited for Single Page Applications (SPAs), where the initial render begins with a blank page, hydration seamlessly takes over, and client-side routing ensures smooth navigation.
 
 However, this dynamic styling mechanism introduces challenges for Server-Side Rendering (SSR).
 
 ### V4 Styled Mode - The Problem
 
-In an SSR setup, the DOM structure is sent from the server to the client without accompanying styles. Components do not receive their generated styles until JavaScript is fully loaded and executed on the client side. This delay leads to a visually "jumpy" UI, where components appear unstyled for a brief moment before the client-side styling is applied.
+In an SSR setup, the DOM structure is sent from the server to the client without accompanying styles. Components do not receive their generated styles until JavaScript is fully loaded and executed on the client side. This delay leads to a visually "jumpy" UI, where components appear unstyled for a brief moment before the client-side styling is available.
 
 This issue is particularly noticeable when the page's content or structure depends heavily on PrimeVue components, such as:
 
