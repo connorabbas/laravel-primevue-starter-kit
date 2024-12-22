@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, ref, watch } from "vue";
+import { nextTick, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
@@ -19,25 +19,21 @@ const deleteUser = () => {
     });
 };
 
-watch(modalOpen, (newModalOpen) => {
-    if (newModalOpen) {
-        nextTick(() => {
-            passwordInput.value.$el.focus();
-        });
-    } else {
-        form.clearErrors();
-    }
-});
+function focusPasswordInput() {
+    passwordInput.value.$el.focus();
+}
 </script>
 
 <template>
     <section class="space-y-6">
         <Dialog
+            :draggable="false"
             position="center"
             v-model:visible="modalOpen"
             modal
             header="Are you sure you want to delete your account?"
             :style="{ width: '40rem' }"
+            @show="focusPasswordInput"
         >
             <div class="mb-4">
                 <p class="m-0 text-color-secondary">
@@ -49,6 +45,7 @@ watch(modalOpen, (newModalOpen) => {
 
             <div>
                 <InputText
+                    autofocus
                     required
                     id="password"
                     ref="passwordInput"
@@ -80,18 +77,6 @@ watch(modalOpen, (newModalOpen) => {
                 />
             </template>
         </Dialog>
-
-        <header class="mb-5 flex">
-            <div class="w-12 lg:w-10 xl:w-6">
-                <h2 class="text-lg font-medium mt-0">Delete Account</h2>
-                <p class="mb-0 text-sm text-color-secondary">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Before deleting your account,
-                    please download any data or information that you wish to
-                    retain.
-                </p>
-            </div>
-        </header>
 
         <Button
             raised

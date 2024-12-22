@@ -46,20 +46,13 @@ onMounted(() => {
 
 <template>
     <section>
-        <header class="mb-5 flex">
+        <form
+            @submit.prevent="updateProfileInformation"
+            class="flex flex-column gap-4"
+        >
             <div class="w-12 lg:w-10 xl:w-6">
-                <h2 class="text-lg font-medium mt-0">Profile Information</h2>
-
-                <p class="mb-0 text-sm text-color-secondary">
-                    Update your account's profile information and email address.
-                </p>
-            </div>
-        </header>
-
-        <form @submit.prevent="updateProfileInformation">
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="name" class="block mb-2">Name</label>
+                <div class="flex flex-column gap-2">
+                    <label for="name">Name</label>
                     <InputText
                         required
                         ref="nameInput"
@@ -70,15 +63,12 @@ onMounted(() => {
                         :class="form.errors?.name ? 'p-invalid' : ''"
                         autocomplete="name"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.name"
-                    />
+                    <InputError :message="form.errors?.name" />
                 </div>
             </div>
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="email" class="block mb-2">Email</label>
+            <div class="w-12 lg:w-10 xl:w-6">
+                <div class="flex flex-column gap-2">
+                    <label for="email">Email</label>
                     <InputText
                         required
                         id="email"
@@ -88,19 +78,15 @@ onMounted(() => {
                         :class="form.errors?.email ? 'p-invalid' : ''"
                         autocomplete="username"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.email"
-                    />
+                    <InputError :message="form.errors?.email" />
                 </div>
             </div>
-
             <div
                 v-if="mustVerifyEmail && user.email_verified_at === null"
-                class="mb-4 flex"
+                class="w-12 lg:w-10 xl:w-6"
             >
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <p class="text-sm mt-2">
+                <div class="flex flex-column gap-3">
+                    <p class="text-sm m-0">
                         Your email address is unverified.
                         <Link
                             :href="route('verification.send')"
@@ -110,12 +96,11 @@ onMounted(() => {
                             Click here to re-send the verification email.
                         </Link>
                     </p>
-
                     <Message
                         v-if="status === 'verification-link-sent'"
                         severity="success"
                         :closable="false"
-                        class="shadow-1"
+                        class="shadow-1 m-0"
                     >
                         A new verification link has been sent to your email
                         address.

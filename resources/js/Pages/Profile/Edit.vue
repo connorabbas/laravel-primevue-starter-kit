@@ -35,10 +35,10 @@ const props = defineProps({
                             address.
                         </template>
                         <template #content>
-                            <!-- <UpdateProfileInformationForm
+                            <UpdateProfileInformationForm
                                 :must-verify-email="mustVerifyEmail"
                                 :status="status"
-                            /> -->
+                            />
                         </template>
                     </Card>
 
@@ -49,7 +49,7 @@ const props = defineProps({
                             to stay secure.
                         </template>
                         <template #content>
-                            <!-- <UpdatePasswordForm /> -->
+                            <UpdatePasswordForm />
                         </template>
                     </Card>
 
@@ -62,7 +62,7 @@ const props = defineProps({
                             information that you wish to retain.
                         </template>
                         <template #content>
-                            <!--  <DeleteUserForm /> -->
+                            <DeleteUserForm />
                         </template>
                     </Card>
                 </div>
