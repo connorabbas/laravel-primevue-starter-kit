@@ -1,11 +1,11 @@
 <script setup>
-import { useTemplateRef } from 'vue';
+import { useTemplateRef } from "vue";
 
 // Alternatively, you can use the default <Menu /> component using a command callback, and a manual router visit:
 // https://primevue.org/menu/#command
 // https://inertiajs.com/manual-visits
 
-const childRef = useTemplateRef('child-ref');
+const childRef = useTemplateRef("child-ref");
 defineExpose({
     childRef,
 });
@@ -17,15 +17,15 @@ defineExpose({
             <Link
                 v-if="item.route"
                 :href="item.route"
-                class="p-menu-item-link"
+                class="p-menuitem-link"
                 custom
             >
                 <span
                     v-show="item.icon"
-                    :class="item.icon"
-                    class="p-menu-item-icon"
+                    :class="[item.icon, 'mr-2']"
+                    class="text-color-secondary"
                 />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+                <span>{{ item.label }}</span>
             </Link>
             <a
                 v-else
@@ -35,10 +35,10 @@ defineExpose({
             >
                 <span
                     v-show="item.icon"
-                    :class="item.icon"
-                    class="p-menu-item-icon"
+                    :class="[item.icon, 'mr-2']"
+                    class="text-color-secondary"
                 />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+                <span>{{ item.label }}</span>
             </a>
         </template>
     </Menu>
