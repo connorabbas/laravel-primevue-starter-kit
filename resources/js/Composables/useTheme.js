@@ -14,9 +14,9 @@ function setTheme(theme) {
         document.getElementById("theme-css") || document.createElement("link");
 
     if (theme == "dark") {
-        document.body.classList.add("dark-theme");
+        document.documentElement.classList.add("dark-mode");
     } else {
-        document.body.classList.remove("dark-theme");
+        document.documentElement.classList.remove("dark-mode");
     }
 
     var themeName = theme == "light" ? lightTheme : darkTheme;

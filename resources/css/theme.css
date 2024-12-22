@@ -1,12 +1,13 @@
-/* Define variables for the different theme colors */
+/* Light */
 :root {
     --surface-svg-bg-color: var(--gray-800);
 }
-body.dark-theme {
-    --surface-svg-bg-color: var(--gray-50);
-}
 
-/* Dynamic color fill for svg logo */
-.surface-svg-fill {
-    fill: var(--surface-svg-bg-color);
+/* 
+ * Dark Mode
+*/
+@media (prefers-color-scheme: dark) {
+    :root[class="dark-mode"] {
+        --surface-svg-bg-color: var(--gray-50);
+    }
 }

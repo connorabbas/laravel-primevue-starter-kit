@@ -11,3 +11,7 @@ body {
 .no-underline {
     text-decoration: none;
 }
+
+.surface-svg-fill {
+    fill: var(--surface-svg-bg-color);
+}
