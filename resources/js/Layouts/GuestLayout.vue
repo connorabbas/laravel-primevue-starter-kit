@@ -4,7 +4,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 <template>
     <div
-        class="min-h-screen flex flex-column gap-5 sm:justify-content-center align-items-center"
+        class="min-h-screen flex flex-column gap-3 sm:justify-content-center align-items-center"
     >
         <div>
             <Link href="/">

@@ -30,7 +30,7 @@ onMounted(() => {
 
         <form @submit.prevent="submit" class="flex flex-column gap-4">
             <div class="flex flex-column gap-2">
-                <label for="name" class="block mb-2">Name</label>
+                <label for="name">Name</label>
                 <InputText
                     ref="nameInput"
                     id="name"
@@ -45,7 +45,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-column gap-2">
-                <label for="email" class="block mb-2">Email</label>
+                <label for="email">Email</label>
                 <InputText
                     id="email"
                     type="email"
@@ -59,7 +59,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-column gap-2">
-                <label for="password" class="block mb-2">Password</label>
+                <label for="password">Password</label>
                 <InputText
                     id="password"
                     type="password"
@@ -73,9 +73,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-column gap-2">
-                <label for="password_confirmation" class="block mb-2"
-                    >Confirm Password</label
-                >
+                <label for="password_confirmation">Confirm Password</label>
                 <InputText
                     id="password_confirmation"
                     type="password"
