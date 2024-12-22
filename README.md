@@ -1,6 +1,6 @@
 # Laravel, Inertia, & PrimeVue Starter Kit
 
-This branch is tailored towards applications that rely on Server-Side Rendering (SSR), this means the PrimeVue [styled mode](https://primevue.org/theming/styled/) implementation (used in the other branches of this project) is not a suitable solution for the component styling.
+This branch is tailored towards content-driven applications that rely on Server-Side Rendering (SSR).
 
 Run the site with SSR:
 
@@ -14,7 +14,7 @@ php artisan inertia:start-ssr
 
 ## PrimeVue V4 Styled Mode and SSR
 
-With **PrimeVue V4** styled mode, component styles are dynamically generated on the client side based on the design token values configured in your theme. This approach is well-suited for Single Page Applications (SPAs), where the initial render begins with a blank page, hydration seamlessly takes over, and client-side routing ensures smooth navigation.
+With **PrimeVue V4** [styled mode](https://primevue.org/theming/styled/), component styles are dynamically generated on the client side based on the design token values configured in your theme. This approach is well-suited for Single Page Applications (SPAs), where the initial render begins with a blank page, hydration seamlessly takes over, and client-side routing ensures smooth navigation.
 
 However, this dynamic styling mechanism introduces challenges for Server-Side Rendering (SSR).
 
