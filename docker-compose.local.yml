@@ -27,35 +27,29 @@ services:
       - sail
       - proxy
     depends_on:
-      - mysql
+      - pgsql
 
-  mysql:
-    image: 'mysql/mysql-server:8.0'
+  pgsql:
+    image: 'postgres:17'
     ports:
-      - '${FORWARD_DB_PORT:-3306}:3306'
+      - '${FORWARD_DB_PORT:-5432}:5432'
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ROOT_HOST: '%'
-      MYSQL_DATABASE: '${DB_DATABASE}'
-      MYSQL_USER: '${DB_USERNAME}'
-      MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
-      - 'primevue-inertia-mysql:/var/lib/mysql'
-      - './docker/local/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+      - 'primevue-inertia-pgsql:/var/lib/postgresql/data'
+      - './docker/local/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
       - sail
     healthcheck:
-      test:
-        - CMD
-        - mysqladmin
-        - ping
-        - '-p${DB_PASSWORD}'
+      test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
       retries: 3
       timeout: 5s
 
 volumes:
-  primevue-inertia-mysql:
+  primevue-inertia-pgsql:
     driver: local
 
 networks:
