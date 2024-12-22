@@ -1,6 +1,6 @@
 const constants = Object.freeze({
-    LIGHT_THEME: 'lara-light-indigo',
-    DARK_THEME: 'lara-dark-indigo'
+    LIGHT_THEME: 'aura-light-blue',
+    DARK_THEME: 'aura-dark-blue'
 });
 
 export default constants;
