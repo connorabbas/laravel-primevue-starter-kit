@@ -217,7 +217,7 @@ watchEffect(() => {
             <!-- Page Heading -->
             <header class="surface-overlay shadow-1" v-if="$slots.header">
                 <Container>
-                    <div class="py-3">
+                    <div class="py-4">
                         <slot name="header" />
                     </div>
                 </Container>

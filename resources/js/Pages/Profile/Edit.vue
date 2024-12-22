@@ -26,7 +26,7 @@ const props = defineProps({
         </template>
 
         <Container>
-            <div class="py-3 md:py-6">
+            <div class="py-3 md:py-5">
                 <div class="flex flex-column gap-3 md:gap-5">
                     <Card>
                         <template #title>Profile Information</template>
