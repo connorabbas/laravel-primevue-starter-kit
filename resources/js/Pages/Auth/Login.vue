@@ -42,7 +42,7 @@ onMounted(() => {
             </Message>
         </template>
 
-        <form @submit.prevent="submit" class="flex flex-column gap-5">
+        <form @submit.prevent="submit" class="flex flex-column gap-4">
             <div class="flex flex-column gap-2">
                 <label for="email">Email</label>
                 <InputText
