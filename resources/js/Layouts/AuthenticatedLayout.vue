@@ -1,9 +1,5 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watchEffect, computed } from "vue";
-import { Link } from "@inertiajs/vue3";
-import Menubar from "primevue/menubar";
-import Menu from "primevue/menu";
-import Sidebar from "primevue/sidebar";
 import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import ToggleThemeButton from "@/Components/ToggleThemeButton.vue";

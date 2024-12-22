@@ -1,8 +1,7 @@
 <script setup>
 import { computed } from "vue";
+import { useForm } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import Message from "primevue/message";
-import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     status: {
