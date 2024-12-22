@@ -6,7 +6,7 @@ import Menu from "primevue/menu";
 import Sidebar from "primevue/sidebar";
 import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import ThemeToggleButton from "@/Components/ThemeToggleButton.vue";
+import ToggleThemeButton from "@/Components/ToggleThemeButton.vue";
 
 const mainMenuItems = [
     {
@@ -116,7 +116,7 @@ watchEffect(() => {
                         </template>
                         <template #end>
                             <div class="flex">
-                                <ThemeToggleButton
+                                <ToggleThemeButton
                                     plain
                                     text
                                     class="inline-flex"
