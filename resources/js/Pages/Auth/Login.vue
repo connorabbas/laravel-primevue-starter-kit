@@ -37,7 +37,7 @@ onMounted(() => {
         <Head title="Log in" />
 
         <template #message v-if="status">
-            <Message severity="success" :closable="false" class="shadow-1">
+            <Message severity="success" :closable="false" class="shadow-1 m-0">
                 {{ status }}
             </Message>
         </template>

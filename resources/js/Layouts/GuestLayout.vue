@@ -4,7 +4,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 <template>
     <div
-        class="min-h-screen flex flex-column gap-3 sm:justify-content-center align-items-center"
+        class="min-h-screen flex flex-column gap-4 sm:justify-content-center align-items-center"
     >
         <div>
             <Link href="/">
@@ -14,7 +14,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
             </Link>
         </div>
 
-        <div v-if="$slots.message" class="w-full sm:max-w-30rem px-4 sm:px-0">
+        <div v-if="$slots.message" class="w-full sm:max-w-30rem">
             <slot name="message" />
         </div>
 
