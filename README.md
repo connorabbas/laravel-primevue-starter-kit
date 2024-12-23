@@ -1,4 +1,11 @@
-# Laravel, Inertia.js, & PrimeVue w/ PrimeFlex
+# Laravel, Inertia.js, & PrimeVue V3 w/ PrimeFlex
+
+## About
+
+A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue V3](https://v3.primevue.org/) w/ [PrimeFlex](https://primeflex.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
+
+> [!NOTE]
+> This branch is no longer maintained, please consider using the latest main/master branch which uses [PrimeVue V4](https://primevue.org/), and [Tailwind CSS](https://tailwindcss.com/) instead of PrimeFlex.
 
 ## Theming
 
@@ -12,7 +19,7 @@ The alternative to this approach would be manually copying the theme folders fro
 
 Both the file copying process, and the light/dark theme toggle functionality rely on the `VITE_LIGHT_THEME` and `VITE_DARK_THEME` `.env` values.
 
-To change what themes are used on the site for light and dark modes, simply modify the string values to any theme name that is available from [PrimeVue's Built-in Themes](https://v3.primevue.org/theming/#builtinthemes). After changing the values to your desired themes, you will need to run the `npm run build` command again, to copy the theme files for use.
+To change what theme/s are used on the site for light and dark modes, simply modify the string values to any theme name that is available from [PrimeVue's Built-in Themes](https://v3.primevue.org/theming/#builtinthemes). After changing the values to your desired themes, you will need to run the `npm run build` command again, to copy the theme files for use.
 
 The `aura-light-blue` and `aura-dark-blue` themes are used by default.
 
