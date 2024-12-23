@@ -26,7 +26,7 @@
                 v-if="item.route"
                 :href="item.route"
                 custom
-                class="flex align-items-center gap-2 cursor-pointer no-underline px-3 py-2"
+                class="flex align-items-center gap-2 cursor-pointer text-decorate-none px-3 py-2"
                 :class="{
                     'font-bold text-primary': item.active,
                 }"
@@ -40,7 +40,7 @@
             </Link>
             <a
                 v-else
-                class="flex align-items-center gap-2 cursor-pointer no-underline px-3 py-2"
+                class="flex align-items-center gap-2 cursor-pointer text-decorate-none px-3 py-2"
                 :href="item.url"
                 :target="item.target"
             >

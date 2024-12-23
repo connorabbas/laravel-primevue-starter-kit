@@ -1,6 +1,6 @@
 import "./bootstrap";
 
-import '../css/app.css';
+import '../css/styles.css';
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 

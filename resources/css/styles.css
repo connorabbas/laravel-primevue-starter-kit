@@ -1,3 +1,17 @@
+/* Light */
+:root {
+    --surface-svg-bg-color: var(--gray-800);
+}
+
+/* 
+ * Dark Mode
+*/
+@media (prefers-color-scheme: dark) {
+    :root[class="dark-mode"] {
+        --surface-svg-bg-color: var(--gray-50);
+    }
+}
+
 html {
     /* font size will determine the PrimeVue Components scaling */
     font-size: 14px;
@@ -8,7 +22,7 @@ body {
     padding: 0 !important;
 }
 
-.no-underline {
+.text-decorate-none {
     text-decoration: none;
 }
 
