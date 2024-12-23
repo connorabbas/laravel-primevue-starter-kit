@@ -14,7 +14,7 @@ Both the file copying process, and the light/dark theme toggle functionality rel
 
 To change what themes are used on the site for light and dark modes, simply modify the string values to any theme name that is available from [PrimeVue's Built-in Themes](https://v3.primevue.org/theming/#builtinthemes). After changing the values to your desired themes, you will need to run the `npm run build` command again, to copy the theme files for use.
 
-## The `aura-light-blue` and `aura-dark-blue` themes are used by default.
+The `aura-light-blue` and `aura-dark-blue` themes are used by default.
 
 ## Usage with Docker
 
