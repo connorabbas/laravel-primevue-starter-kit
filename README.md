@@ -1,4 +1,8 @@
-# Laravel, Inertia, & PrimeVue Starter Kit
+# Laravel, Inertia.js, & PrimeVue Starter Kit
+
+## About
+
+A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue](https://primevue.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
 This branch is tailored towards content-driven applications that rely on Server-Side Rendering (SSR).
 
