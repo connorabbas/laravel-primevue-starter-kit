@@ -4,16 +4,14 @@ import vue from "@vitejs/plugin-vue";
 import Components from "unplugin-vue-components/vite";
 import { PrimeVueResolver } from "unplugin-vue-components/resolvers";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import constants from "./resources/js/Modules/constants.mjs";
-
-const lightTheme = constants.LIGHT_THEME;
-const darkTheme = constants.DARK_THEME;
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
     const env = loadEnv(mode, process.cwd());
     const devPort = parseInt(env.VITE_PORT) || 5173;
     const hostDomain = env.VITE_HOST_DOMAIN || "localhost";
+    const lightTheme = env.VITE_LIGHT_THEME || "aura-light-blue";
+    const darkTheme = env.VITE_DARK_THEME || "aura-dark-blue";
 
     return defineConfig({
         plugins: [

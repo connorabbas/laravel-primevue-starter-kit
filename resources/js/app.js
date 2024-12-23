@@ -1,4 +1,6 @@
-import "./bootstrap"; // not the framework, terminology
+import "./bootstrap";
+
+import '../css/app.css';
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 
