@@ -23,19 +23,32 @@ defineExpose({
                 }"
                 custom
             >
-                <span v-show="item.icon" :class="[item.icon, 'mr-2']" />
+                <span
+                    v-if="item.icon"
+                    :class="[item.icon, 'mr-2', 'text-color-secondary']"
+                />
                 <span>{{ item.label }}</span>
-                <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
+                <span
+                    v-if="hasSubmenu"
+                    class="pi pi-fw pi-angle-down ml-2 text-sm"
+                />
             </Link>
             <a
                 v-else
                 :href="item.url"
                 :target="item.target"
                 v-bind="props.action"
+                class="text-color-secondary"
             >
-                <span v-show="item.icon" :class="[item.icon, 'mr-2']" />
+                <span
+                    v-if="item.icon"
+                    :class="[item.icon, 'mr-2', 'text-color-secondary']"
+                />
                 <span>{{ item.label }}</span>
-                <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
+                <span
+                    v-if="hasSubmenu"
+                    class="pi pi-fw pi-angle-down ml-2 text-sm"
+                />
             </a>
         </template>
         <template v-if="$slots.end" #end>

@@ -172,7 +172,7 @@ watchEffect(() => {
                     <template #header>
                         <ToggleThemeButton text severity="secondary" rounded />
                     </template>
-                    <div>
+                    <div class="flex flex-column h-full">
                         <div>
                             <div class="mb-5">
                                 <p
@@ -186,31 +186,32 @@ watchEffect(() => {
                                 />
                             </div>
                         </div>
-                    </div>
-                    <template #footer>
-                        <div class="flex align-items-center gap-2">
-                            <Link
-                                :href="route('profile.edit')"
-                                class="flex-auto"
-                            >
+                        <div class="mt-auto">
+                            <div class="flex align-items-center gap-3">
+                                <Link
+                                    :href="route('profile.edit')"
+                                    class="flex-auto"
+                                >
+                                    <Button
+                                        label="Profile"
+                                        icon="pi pi-user"
+                                        fluid
+                                        severity="secondary"
+                                        outlined
+                                        class="w-full"
+                                    ></Button>
+                                </Link>
                                 <Button
-                                    label="Profile"
-                                    icon="pi pi-user"
-                                    fluid
-                                    severity="secondary"
-                                    outlined
+                                    label="Logout"
+                                    icon="pi pi-sign-out"
+                                    severity="danger"
+                                    text
+                                    @click="logout"
+                                    class="flex-auto"
                                 ></Button>
-                            </Link>
-                            <Button
-                                label="Logout"
-                                icon="pi pi-sign-out"
-                                class="flex-auto"
-                                severity="danger"
-                                text
-                                @click="logout"
-                            ></Button>
+                            </div>
                         </div>
-                    </template>
+                    </div>
                 </Sidebar>
             </nav>
 

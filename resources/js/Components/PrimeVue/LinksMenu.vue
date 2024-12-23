@@ -21,9 +21,8 @@ defineExpose({
                 custom
             >
                 <span
-                    v-show="item.icon"
-                    :class="[item.icon, 'mr-2']"
-                    class="text-color-secondary"
+                    v-if="item.icon"
+                    :class="[item.icon, 'mr-2', 'text-color-secondary']"
                 />
                 <span>{{ item.label }}</span>
             </Link>
@@ -34,9 +33,8 @@ defineExpose({
                 v-bind="props.action"
             >
                 <span
-                    v-show="item.icon"
-                    :class="[item.icon, 'mr-2']"
-                    class="text-color-secondary"
+                    v-if="item.icon"
+                    :class="[item.icon, 'mr-2', 'text-color-secondary']"
                 />
                 <span>{{ item.label }}</span>
             </a>
