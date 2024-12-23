@@ -8,9 +8,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
     >
         <div>
             <Link href="/">
-                <ApplicationLogo
-                    class="h-5rem w-auto surface-svg-fill"
-                />
+                <ApplicationLogo class="h-5rem w-auto surface-svg-fill" />
             </Link>
         </div>
 
@@ -19,7 +17,13 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
         </div>
 
         <div class="w-full sm:max-w-30rem">
-            <Card>
+            <Card
+                :pt="{
+                    content: {
+                        class: 'p-0',
+                    },
+                }"
+            >
                 <template #content>
                     <slot />
                 </template>

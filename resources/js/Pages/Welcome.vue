@@ -29,6 +29,9 @@ defineProps({
                     body: {
                         class: 'p-6 sm:p-12',
                     },
+                    content: {
+                        class: 'p-0',
+                    },
                 }"
             >
                 <template #content>
@@ -52,7 +55,9 @@ defineProps({
                         >
                             & PrimeFlex
                         </div>
-                        <p class="mt-0 mb-4 text-color-secondary leading-normal">
+                        <p
+                            class="mt-0 mb-4 text-color-secondary leading-normal"
+                        >
                             A starter kit using
                             <a
                                 href="https://laravel.com/docs/master"

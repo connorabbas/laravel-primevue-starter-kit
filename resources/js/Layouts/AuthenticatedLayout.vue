@@ -90,7 +90,7 @@ watchEffect(() => {
                         :model="mainMenuItems"
                         :pt="{
                             root: {
-                                class: 'px-0 py-1 border-0 rounded-none surface-overlay',
+                                class: 'px-0 py-1 border-none rounded-none surface-overlay',
                             },
                             button: {
                                 class: 'hidden',

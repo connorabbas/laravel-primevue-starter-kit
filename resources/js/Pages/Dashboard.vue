@@ -12,7 +12,13 @@ import Container from "@/Components/Container.vue";
         </template>
         <Container>
             <div class="py-3 md:py-5">
-                <Card>
+                <Card
+                    :pt="{
+                        content: {
+                            class: 'p-0',
+                        },
+                    }"
+                >
                     <template #content>
                         <p class="m-0">You are logged in!</p>
                     </template>

@@ -28,7 +28,16 @@ const props = defineProps({
         <Container>
             <div class="py-3 md:py-5">
                 <div class="flex flex-column gap-3 md:gap-5">
-                    <Card>
+                    <Card
+                        :pt="{
+                            body: {
+                                class: 'flex flex-column gap-3',
+                            },
+                            content: {
+                                class: 'p-0',
+                            },
+                        }"
+                    >
                         <template #title>Profile Information</template>
                         <template #subtitle>
                             Update your account's profile information and email
@@ -42,7 +51,16 @@ const props = defineProps({
                         </template>
                     </Card>
 
-                    <Card>
+                    <Card
+                        :pt="{
+                            body: {
+                                class: 'flex flex-column gap-3',
+                            },
+                            content: {
+                                class: 'p-0',
+                            },
+                        }"
+                    >
                         <template #title>Update Password</template>
                         <template #subtitle>
                             Ensure your account is using a long, random password
@@ -53,7 +71,16 @@ const props = defineProps({
                         </template>
                     </Card>
 
-                    <Card>
+                    <Card
+                        :pt="{
+                            body: {
+                                class: 'flex flex-column gap-3',
+                            },
+                            content: {
+                                class: 'p-0',
+                            },
+                        }"
+                    >
                         <template #title>Delete Account</template>
                         <template #subtitle>
                             Once your account is deleted, all of its resources

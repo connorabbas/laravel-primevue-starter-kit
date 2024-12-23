@@ -5,13 +5,13 @@
                 class: 'p-0 m-0 flex flex-column gap-1',
             },
             panel: {
-                class: 'p-0 m-0 border-0',
+                class: 'p-0 m-0 border-none',
             },
             header: {
-                class: 'p-0 border-0',
+                class: 'p-0 border-none',
             },
             headerContent: {
-                class: 'hover:surface-50 border-round-md',
+                class: 'hover:surface-100 border-round-md border-none',
             },
             menuContent: {
                 class: 'flex flex-column gap-1',
