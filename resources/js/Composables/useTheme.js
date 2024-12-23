@@ -1,8 +1,7 @@
 import { ref } from "vue";
-import constants from "../Modules/constants.mjs";
 
-const lightTheme = constants.LIGHT_THEME;
-const darkTheme = constants.DARK_THEME;
+const lightTheme = import.meta.env.VITE_LIGHT_THEME || "aura-light-blue";
+const darkTheme = import.meta.env.VITE_DARK_THEME || "aura-dark-blue";
 const currentTheme = ref(getSavedThemePreference());
 
 /**
@@ -14,9 +13,9 @@ function setTheme(theme) {
         document.getElementById("theme-css") || document.createElement("link");
 
     if (theme == "dark") {
-        document.body.classList.add("dark-theme");
+        document.documentElement.classList.add("dark-mode");
     } else {
-        document.body.classList.remove("dark-theme");
+        document.documentElement.classList.remove("dark-mode");
     }
 
     var themeName = theme == "light" ? lightTheme : darkTheme;

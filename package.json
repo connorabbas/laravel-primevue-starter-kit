@@ -6,7 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@inertiajs/vue3": "^1.0.0",
+        "@inertiajs/vue3": "^2.0.0",
         "@vitejs/plugin-vue": "^5.0.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.6.4",
@@ -14,6 +14,7 @@
         "primeflex": "^3.3.1",
         "primeicons": "^7.0.0",
         "primevue": "^3.53.0",
+        "unplugin-vue-components": "^0.28.0",
         "vite": "^5.0",
         "vite-plugin-static-copy": "^1.0.5",
         "vue": "^3.4.0"

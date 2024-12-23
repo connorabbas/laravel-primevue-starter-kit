@@ -1,10 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import InputError from "@/Components/InputError.vue";
-import Toast from "primevue/toast";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { useToast } from "primevue/usetoast";
-import { Link, useForm, usePage } from "@inertiajs/vue3";
-import Message from "primevue/message";
+import InputError from "@/Components/InputError.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -24,21 +22,23 @@ const form = useForm({
     email: user.email,
 });
 
-const showSuccessToast = () => {
-    toast.add({
-        severity: "success",
-        summary: "Saved",
-        detail: "Profile information has been updated",
-        life: 3000,
-    });
-};
 const updateProfileInformation = () => {
     form.patch(route("profile.update"), {
         preserveScroll: true,
         onSuccess: () => {
-            showSuccessToast();
+            toast.add({
+                severity: "success",
+                summary: "Saved",
+                detail: "Profile information has been updated",
+                life: 3000,
+            });
         },
     });
+};
+
+const resendEmailForm = useForm({});
+const resendVerificationEmail = () => {
+    resendEmailForm.post(route("verification.send"));
 };
 
 onMounted(() => {
@@ -48,22 +48,13 @@ onMounted(() => {
 
 <template>
     <section>
-        <header class="mb-5 flex">
+        <form
+            @submit.prevent="updateProfileInformation"
+            class="flex flex-column gap-4"
+        >
             <div class="w-12 lg:w-10 xl:w-6">
-                <h2 class="text-lg font-medium mt-0">Profile Information</h2>
-
-                <p class="mb-0 text-sm text-color-secondary">
-                    Update your account's profile information and email address.
-                </p>
-            </div>
-        </header>
-
-        <Toast />
-
-        <form @submit.prevent="updateProfileInformation">
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="name" class="block mb-2">Name</label>
+                <div class="flex flex-column gap-2">
+                    <label for="name">Name</label>
                     <InputText
                         required
                         ref="nameInput"
@@ -71,55 +62,46 @@ onMounted(() => {
                         type="text"
                         v-model="form.name"
                         class="w-full"
-                        :class="form.errors?.name ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.name)"
                         autocomplete="name"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.name"
-                    />
+                    <InputError :message="form.errors?.name" />
                 </div>
             </div>
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="email" class="block mb-2">Email</label>
+            <div class="w-12 lg:w-10 xl:w-6">
+                <div class="flex flex-column gap-2">
+                    <label for="email">Email</label>
                     <InputText
                         required
                         id="email"
                         type="email"
                         v-model="form.email"
                         class="w-full"
-                        :class="form.errors?.email ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.email)"
                         autocomplete="username"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.email"
-                    />
+                    <InputError :message="form.errors?.email" />
                 </div>
             </div>
-
             <div
                 v-if="mustVerifyEmail && user.email_verified_at === null"
-                class="mb-4 flex"
+                class="w-12 lg:w-10 xl:w-6"
             >
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <p class="text-sm mt-2">
-                        Your email address is unverified.
-                        <Link
-                            :href="route('verification.send')"
-                            method="post"
-                            class="underline text-sm text-color-secondary hover:text-color"
-                        >
-                            Click here to re-send the verification email.
-                        </Link>
+                <div class="flex flex-column gap-3">
+                    <p class="text-sm m-0">
+                        Your email address is unverified. 
+                        <Button
+                            label="Click here to re-send the verification email."
+                            class="p-0 text-sm d-inline-block text-color-secondary"
+                            link
+                            @click="resendVerificationEmail"
+                        />
                     </p>
-
                     <Message
                         v-if="status === 'verification-link-sent'"
                         severity="success"
                         :closable="false"
-                        class="shadow-1"
+                        class="shadow-1 m-0"
                     >
                         A new verification link has been sent to your email
                         address.

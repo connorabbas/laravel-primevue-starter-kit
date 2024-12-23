@@ -1,9 +1,8 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
-import Toast from "primevue/toast";
-import { useToast } from "primevue/usetoast";
-import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { useToast } from "primevue/usetoast";
+import InputError from "@/Components/InputError.vue";
 
 const currentPasswordInput = ref(null);
 const passwordInput = ref(null);
@@ -15,20 +14,17 @@ const form = useForm({
     password_confirmation: "",
 });
 
-const showSuccessToast = () => {
-    toast.add({
-        severity: "success",
-        summary: "Saved",
-        detail: "Your password has been updated",
-        life: 3000,
-    });
-};
 const updatePassword = () => {
     form.put(route("password.update"), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset();
-            showSuccessToast();
+            toast.add({
+                severity: "success",
+                summary: "Saved",
+                detail: "Your password has been updated",
+                life: 3000,
+            });
         },
         onError: () => {
             if (form.errors?.password) {
@@ -46,25 +42,10 @@ const updatePassword = () => {
 
 <template>
     <section>
-        <header class="mb-5 flex">
+        <form @submit.prevent="updatePassword" class="flex flex-column gap-4">
             <div class="w-12 lg:w-10 xl:w-6">
-                <h2 class="text-lg font-medium mt-0">Update Password</h2>
-
-                <p class="mb-0 text-sm text-color-secondary">
-                    Ensure your account is using a long, random password to stay
-                    secure.
-                </p>
-            </div>
-        </header>
-
-        <Toast />
-
-        <form @submit.prevent="updatePassword">
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="current_password" class="block mb-2"
-                        >Current Password</label
-                    >
+                <div class="flex flex-column gap-2">
+                    <label for="current_password">Current Password</label>
                     <InputText
                         required
                         id="current_password"
@@ -72,21 +53,16 @@ const updatePassword = () => {
                         type="password"
                         v-model="form.current_password"
                         class="w-full"
-                        :class="form.errors?.current_password ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.current_password)"
                         autocomplete="current-password"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.current_password"
-                    />
+                    <InputError :message="form.errors?.current_password" />
                 </div>
             </div>
 
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="password" class="block mb-2"
-                        >New Password</label
-                    >
+            <div class="w-12 lg:w-10 xl:w-6">
+                <div class="flex flex-column gap-2">
+                    <label for="password">New Password</label>
                     <InputText
                         required
                         id="password"
@@ -94,36 +70,26 @@ const updatePassword = () => {
                         type="password"
                         v-model="form.password"
                         class="w-full"
-                        :class="form.errors?.password ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.password)"
                         autocomplete="new-password"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors?.password"
-                    />
+                    <InputError :message="form.errors?.password" />
                 </div>
             </div>
 
-            <div class="mb-4 flex">
-                <div class="w-12 lg:w-10 xl:w-6">
-                    <label for="password_confirmation" class="block mb-2"
-                        >Confirm Password</label
-                    >
+            <div class="w-12 lg:w-10 xl:w-6">
+                <div class="flex flex-column gap-2">
+                    <label for="password_confirmation">Confirm Password</label>
                     <InputText
                         required
                         id="password_confirmation"
                         type="password"
                         v-model="form.password_confirmation"
                         class="w-full"
-                        :class="form.errors?.password_confirmation ? 'p-invalid' : ''"
+                        :invalid="Boolean(form.errors?.password_confirmation)"
                         autocomplete="new-password"
                     />
-                    <InputError
-                        class="mt-2"
-                        :message="
-                            form.errors?.password_confirmation
-                        "
-                    />
+                    <InputError :message="form.errors?.password_confirmation" />
                 </div>
             </div>
 

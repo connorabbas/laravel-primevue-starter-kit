@@ -1,14 +1,17 @@
-import "./bootstrap"; // not the framework, terminology
+import "./bootstrap";
+
+import '../css/styles.css';
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
+
 import { createApp, h } from "vue";
-import { createInertiaApp } from "@inertiajs/vue3";
+import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+
 import PrimeVue from "primevue/config";
-import ToastService from 'primevue/toastservice';
-import InputText from "primevue/inputtext";
-import Button from "primevue/button";
+import ToastService from "primevue/toastservice";
+
 import { useTheme } from "@/Composables/useTheme.js";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
@@ -31,8 +34,8 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue)
             .use(ToastService)
-            .component('InputText', InputText)
-            .component('Button', Button)
+            .component("Head", Head)
+            .component("Link", Link)
             .mount(el);
     },
     progress: {

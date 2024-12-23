@@ -1,8 +1,7 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
-import Dialog from "primevue/dialog";
+import { nextTick, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import { nextTick, ref, watch } from "vue";
+import InputError from "@/Components/InputError.vue";
 
 const passwordInput = ref(null);
 const modalOpen = ref(false);
@@ -20,25 +19,21 @@ const deleteUser = () => {
     });
 };
 
-watch(modalOpen, (newModalOpen) => {
-    if (newModalOpen) {
-        nextTick(() => {
-            passwordInput.value.$el.focus();
-        });
-    } else {
-        form.clearErrors();
-    }
-});
+function focusPasswordInput() {
+    passwordInput.value.$el.focus();
+}
 </script>
 
 <template>
     <section class="space-y-6">
         <Dialog
+            :draggable="false"
             position="center"
             v-model:visible="modalOpen"
             modal
             header="Are you sure you want to delete your account?"
             :style="{ width: '40rem' }"
+            @show="focusPasswordInput"
         >
             <div class="mb-4">
                 <p class="m-0 text-color-secondary">
@@ -48,8 +43,9 @@ watch(modalOpen, (newModalOpen) => {
                 </p>
             </div>
 
-            <div>
+            <div class="flex flex-column gap-2">
                 <InputText
+                    autofocus
                     required
                     id="password"
                     ref="passwordInput"
@@ -57,42 +53,31 @@ watch(modalOpen, (newModalOpen) => {
                     placeholder="Password"
                     v-model="form.password"
                     class="w-full"
-                    :class="form.errors.password ? 'p-invalid' : ''"
+                    :invalid="Boolean(form.errors?.password)"
                     autocomplete="current-password"
                     @keyup.enter="deleteUser"
                 />
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors?.password" />
             </div>
 
             <template #footer>
-                <Button
-                    class="mr-2"
-                    label="Cancel"
-                    plain
-                    text
-                    @click="modalOpen = false"
-                />
-                <Button
-                    raised
-                    @click="deleteUser"
-                    :loading="form.processing"
-                    label="Delete Account"
-                    severity="danger"
-                />
+                <div class="flex gap-2">
+                    <Button
+                        label="Cancel"
+                        plain
+                        text
+                        @click="modalOpen = false"
+                    />
+                    <Button
+                        raised
+                        @click="deleteUser"
+                        :loading="form.processing"
+                        label="Delete Account"
+                        severity="danger"
+                    />
+                </div>
             </template>
         </Dialog>
-
-        <header class="mb-5 flex">
-            <div class="w-12 lg:w-10 xl:w-6">
-                <h2 class="text-lg font-medium mt-0">Delete Account</h2>
-                <p class="mb-0 text-sm text-color-secondary">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Before deleting your account,
-                    please download any data or information that you wish to
-                    retain.
-                </p>
-            </div>
-        </header>
 
         <Button
             raised

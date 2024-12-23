@@ -1,23 +1,29 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import OuterLayoutContainer from "@/Components/OuterLayoutContainer.vue";
+import Container from "@/Components/Container.vue";
 </script>
 
 <template>
     <Head title="Dashboard" />
     <AuthenticatedLayout>
         <template #header>
-            <div class="surface-overlay py-4 shadow-1">
-                <OuterLayoutContainer>
-                    <h2 class="m-0">Dashboard</h2>
-                </OuterLayoutContainer>
-            </div>
+            <h1 class="font-bold text-2xl leading-tight m-0">Dashboard</h1>
         </template>
-        <div class="my-6 surface-overlay p-5 shadow-1 border-noround sm:border-round-lg">
-            <div>
-                <p class="m-0">You are logged in!</p>
+        <Container>
+            <div class="py-3 md:py-5">
+                <Card
+                    :pt="{
+                        content: {
+                            class: 'p-0',
+                        },
+                    }"
+                >
+                    <template #content>
+                        <p class="m-0">You are logged in!</p>
+                    </template>
+                </Card>
             </div>
-        </div>
+        </Container>
     </AuthenticatedLayout>
 </template>
