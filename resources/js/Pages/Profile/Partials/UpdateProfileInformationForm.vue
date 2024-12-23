@@ -36,6 +36,11 @@ const updateProfileInformation = () => {
     });
 };
 
+const resendEmailForm = useForm({});
+const resendVerificationEmail = () => {
+    resendEmailForm.post(route("verification.send"));
+};
+
 onMounted(() => {
     nameInput.value.$el.focus();
 });
@@ -84,14 +89,13 @@ onMounted(() => {
             >
                 <div class="flex flex-column gap-3">
                     <p class="text-sm m-0">
-                        Your email address is unverified.
-                        <Link
-                            :href="route('verification.send')"
-                            method="post"
-                            class="underline text-sm text-color-secondary hover:text-color"
-                        >
-                            Click here to re-send the verification email.
-                        </Link>
+                        Your email address is unverified. 
+                        <Button
+                            label="Click here to re-send the verification email."
+                            class="p-0 text-sm d-inline-block text-color-secondary"
+                            link
+                            @click="resendVerificationEmail"
+                        />
                     </p>
                     <Message
                         v-if="status === 'verification-link-sent'"

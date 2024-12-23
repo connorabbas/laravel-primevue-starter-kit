@@ -11,6 +11,9 @@ const props = defineProps({
 
 const form = useForm({});
 
+const logout = () => {
+    form.post(route("logout"));
+};
 const submit = () => {
     form.post(route("verification.send"));
 };
@@ -46,12 +49,12 @@ const verificationLinkSent = computed(
                     label="Resend Verification Email"
                     severity="contrast"
                 />
-                <Link
-                    :href="route('logout')"
-                    method="post"
-                    class="text-color-secondary hover:text-color"
-                    >Log Out</Link
-                >
+                <Button
+                    label="Logout"
+                    class="text-color-secondary"
+                    link
+                    @click="logout"
+                />
             </div>
         </form>
     </GuestLayout>
