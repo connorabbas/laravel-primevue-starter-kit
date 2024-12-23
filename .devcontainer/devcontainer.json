@@ -12,20 +12,16 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-azuretools.vscode-docker",
-                "absszero.vscode-laravel-goto",
-                "codingyu.laravel-goto-view",
-                "onecentlin.laravel-blade",
-                "amiralizadeh9480.laravel-extra-intellisense",
                 "DEVSENSE.phptools-vscode",
                 "MehediDracula.php-namespace-resolver",
+                "laravel.vscode-laravel",
+                "Vue.volar",
+                "hollowtree.vue-snippets",
+                "bradlc.vscode-tailwindcss",
                 "eamodio.gitlens",
                 "esbenp.prettier-vscode",
                 "mikestead.dotenv",
                 "streetsidesoftware.code-spell-checker",
-                "hollowtree.vue-snippets",
-                "Vue.volar",
-                "bradlc.vscode-tailwindcss",
                 "shd101wyy.markdown-preview-enhanced"
             ],
             "settings": {}
