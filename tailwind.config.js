@@ -1,5 +1,3 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -11,7 +9,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', 'sans-serif'],
             },
         },
     },
