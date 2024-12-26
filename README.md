@@ -4,6 +4,10 @@
 
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue](https://primevue.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
+```
+git clone -b feature/ssr https://github.com/connorabbas/laravel-inertia-primevue.git
+```
+
 This branch is tailored towards content-driven applications that rely on Server-Side Rendering (SSR).
 
 Run the site with SSR:
@@ -16,7 +20,7 @@ npm run build
 php artisan inertia:start-ssr
 ```
 
-## PrimeVue V4 Styled Mode and SSR
+## PrimeVue V4 and SSR
 
 With **PrimeVue V4** [styled mode](https://primevue.org/theming/styled/), component styles are dynamically generated on the client side based on the design token values configured in your theme. This approach is well-suited for Single Page Applications (SPAs), where the initial render begins with a blank page, hydration seamlessly takes over, and client-side routing ensures smooth navigation.
 
