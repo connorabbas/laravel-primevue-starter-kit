@@ -1,5 +1,5 @@
 <script setup>
-import ToggleThemeButton from '@/Components/ToggleThemeButton.vue';
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 defineProps({
     canLogin: {
@@ -91,7 +91,7 @@ defineProps({
                                 />
                             </Link>
                         </template>
-                        <ToggleThemeButton outlined />
+                        <ToggleDarkModeButton outlined />
                         <div class="mt-6">
                             <p class="m-0 text-sm text-muted-color">
                                 Laravel v{{ laravelVersion }} (PHP v{{
