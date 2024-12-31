@@ -6,7 +6,7 @@ import Container from '@/Components/Container.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
 import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
-import ToggleThemeButton from '@/Components/ToggleThemeButton.vue';
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 const currentRoute = route().current();
 const logoutForm = useForm({});
@@ -113,7 +113,7 @@ if (import.meta.env.SSR === false) {
                                 class="hidden lg:flex items-center ms-6 space-x-3"
                             >
                                 <div>
-                                    <ToggleThemeButton
+                                    <ToggleDarkModeButton
                                         text
                                         severity="secondary"
                                         rounded
@@ -171,7 +171,7 @@ if (import.meta.env.SSR === false) {
                 <!-- Mobile drawer menu -->
                 <Drawer v-model:visible="mobileMenuOpen" position="right">
                     <template #header>
-                        <ToggleThemeButton text severity="secondary" rounded />
+                        <ToggleDarkModeButton text severity="secondary" rounded />
                     </template>
                     <div>
                         <div>
