@@ -24,7 +24,7 @@ const verificationLinkSent = computed(
     <GuestLayout>
         <Head title="Email Verification" />
 
-        <template #message v-if="verificationLinkSent">
+        <template v-if="verificationLinkSent" #message>
             <Message severity="success" :closable="false" class="shadow">
                 A new verification link has been sent to the email address you
                 provided during registration.
@@ -40,11 +40,11 @@ const verificationLinkSent = computed(
         <form @submit.prevent="submit">
             <div class="mt-6 flex justify-between items-center">
                 <Button
-                    raised
-                    type="submit"
                     :loading="form.processing"
+                    type="submit"
                     label="Resend Verification Email"
                     severity="contrast"
+                    raised
                 />
                 <Link
                     :href="route('logout')"

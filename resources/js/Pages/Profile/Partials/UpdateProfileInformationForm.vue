@@ -44,15 +44,15 @@ onMounted(() => {
 </script>
 
 <template>
-    <form @submit.prevent="updateProfileInformation" class="space-y-6">
+    <form class="space-y-6" @submit.prevent="updateProfileInformation">
         <div class="space-y-2">
             <label for="name">Name</label>
             <InputText
-                required
-                ref="name-input"
                 id="name"
-                type="text"
+                ref="name-input"
                 v-model="form.name"
+                type="text"
+                required
                 fluid
                 :invalid="Boolean(form.errors.name)"
                 autocomplete="name"
@@ -69,10 +69,10 @@ onMounted(() => {
         <div class="space-y-2">
             <label for="email">Email</label>
             <InputText
-                required
                 id="email"
-                type="email"
                 v-model="form.email"
+                type="email"
+                required
                 fluid
                 :invalid="Boolean(form.errors.email)"
                 autocomplete="username"
@@ -111,11 +111,11 @@ onMounted(() => {
 
         <div class="flex items-center gap-4">
             <Button
-                raised
-                type="submit"
                 :loading="form.processing"
+                type="submit"
                 label="Save"
                 severity="contrast"
+                raised
             />
 
             <Transition
