@@ -17,6 +17,7 @@ export default typescriptEslint.config(
             ecmaVersion: 'latest',
             sourceType: 'module',
             globals: {
+                ...globals.node,
                 ...globals.browser,
                 process: 'readonly',
                 module: 'readonly',

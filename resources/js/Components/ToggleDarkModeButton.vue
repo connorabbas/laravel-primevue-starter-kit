@@ -2,7 +2,7 @@
 import { inject } from 'vue';
 import { useToggle } from '@vueuse/core';
 
-var isDarkMode = false;
+let isDarkMode = false;
 if (import.meta.env.SSR === false) {
     isDarkMode = inject('darkMode');
 }
