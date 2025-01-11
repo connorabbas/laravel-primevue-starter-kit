@@ -42,6 +42,7 @@
 .p-toast-message-error,
 .p-toast-message-secondary,
 .p-toast-message-contrast {
+    /* TODO: investigate */
     @apply border backdrop-blur-sm dark:backdrop-blur-md rounded-md
 }
 

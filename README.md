@@ -1,9 +1,6 @@
 # Laravel, Inertia.js, & PrimeVue Starter Kit
 
 ## About
-![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)) ![Static Badge](https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129))
-
-## About
 
 ![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)>)
 
