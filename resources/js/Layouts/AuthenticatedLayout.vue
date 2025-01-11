@@ -135,10 +135,10 @@ if (import.meta.env.SSR === false) {
                                         class="relative"
                                     ></div>
                                     <LinksMenu
+                                        ref="user-menu"
                                         appendTo="#user-menu-append"
                                         :model="userMenuItems"
                                         popup
-                                        ref="user-menu"
                                         :pt="{
                                             root: {
                                                 class: '!left-auto !top-0 right-0',
@@ -155,12 +155,12 @@ if (import.meta.env.SSR === false) {
                                         text
                                         severity="secondary"
                                         icon="pi pi-bars"
-                                        @click="mobileMenuOpen = true"
                                         :pt="{
                                             icon: {
                                                 class: 'text-xl',
                                             },
                                         }"
+                                        @click="mobileMenuOpen = true"
                                     />
                                 </div>
                             </div>
@@ -216,7 +216,7 @@ if (import.meta.env.SSR === false) {
             </nav>
 
             <!-- Page Heading -->
-            <header class="dynamic-bg shadow" v-if="$slots.header">
+            <header v-if="$slots.header" class="dynamic-bg shadow">
                 <Container>
                     <div class="py-6">
                         <slot name="header" />

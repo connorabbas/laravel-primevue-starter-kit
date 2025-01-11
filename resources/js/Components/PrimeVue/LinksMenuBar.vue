@@ -1,7 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { useTemplateRef } from 'vue';
+import Menubar from 'primevue/menubar';
 
-const childRef = useTemplateRef('child-ref');
+type MenubarType = InstanceType<typeof Menubar>
+const childRef = useTemplateRef<MenubarType>('child-ref');
 defineExpose({
     childRef,
 });
