@@ -108,7 +108,6 @@ export function usePaginatedData(
     }
 
     function reset() {
-        window.history.replaceState(null, '', window.location.pathname);
         filters.value = defaultFilters;
         sorting.value = {
             field: '',
@@ -118,9 +117,7 @@ export function usePaginatedData(
             page: 1,
             rows: initialsRows,
         };
-        router.reload({
-            only: ['request', ...new Set(only)],
-        });
+        fetchData();
     }
 
     function parseUrlFilterValues() {
