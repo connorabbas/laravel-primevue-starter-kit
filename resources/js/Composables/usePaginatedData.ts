@@ -110,9 +110,14 @@ export function usePaginatedData(
     function reset() {
         window.history.replaceState(null, '', window.location.pathname);
         filters.value = defaultFilters;
-        sorting.value.field = '';
-        sorting.value.order = 1;
-        pagination.value.page = 1;
+        sorting.value = {
+            field: '',
+            order: 1,
+        };
+        pagination.value = {
+            page: 1,
+            rows: initialsRows,
+        };
         router.reload({
             only: ['request', ...new Set(only)],
         });
