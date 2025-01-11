@@ -22,7 +22,9 @@
                 "esbenp.prettier-vscode",
                 "mikestead.dotenv",
                 "streetsidesoftware.code-spell-checker",
-                "shd101wyy.markdown-preview-enhanced"
+                "shd101wyy.markdown-preview-enhanced",
+                "formulahendry.auto-rename-tag",
+                "pmneo.tsimporter"
             ],
             "settings": {}
         }
