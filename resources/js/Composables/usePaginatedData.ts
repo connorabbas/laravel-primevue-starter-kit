@@ -20,10 +20,13 @@ interface SortState {
 }
 
 export function usePaginatedData(
-    defaultFilters: PrimeVue.PaginatedDataFilters = {},
+    initialFilters: PrimeVue.PaginatedDataFilters = {},
     only: string[] = ['request'],
     initialsRows: number = 20
 ) {
+    const defaultFilters = initialFilters;
+    const defaultRows = initialsRows;
+
     const page = usePage<{
         request: {
             urlParams: PrimeVue.PaginatedDataUrlParams;
@@ -31,13 +34,13 @@ export function usePaginatedData(
     }>();
 
     const processing = ref<boolean>(false);
-    const filters = ref<PrimeVue.PaginatedDataFilters>(defaultFilters);
+    const filters = ref<PrimeVue.PaginatedDataFilters>(initialFilters);
     const sorting = ref<SortState>({
         field: '',
         order: 1,
     });
     const pagination = ref<PaginationState>({
-        page: parseInt(page.props.request.urlParams?.page ?? '1'),
+        page: 1,
         rows: initialsRows,
     });
 
@@ -108,16 +111,23 @@ export function usePaginatedData(
     }
 
     function reset() {
-        filters.value = defaultFilters;
+        // Alternatively just use: router.get(window.location.pathname);
+        // Caveat to the above approach, we would lose state from our page not related to pagination/filtering/sorting
+
+        Object.keys(defaultFilters).forEach((key) => {
+            filters.value[key].value = defaultFilters[key].value;
+        });
         sorting.value = {
             field: '',
             order: 1,
         };
         pagination.value = {
             page: 1,
-            rows: initialsRows,
+            rows: defaultRows,
         };
-        fetchData();
+        fetchData().then(() => {
+            window.history.replaceState(null, '', window.location.pathname);
+        });
     }
 
     function parseUrlFilterValues() {
@@ -164,10 +174,14 @@ export function usePaginatedData(
         };
         parseUrlFilterValues();
         if (urlParams?.sortField) {
-            sorting.value.field = urlParams?.sortField;
+            sorting.value.field = urlParams.sortField;
         }
         if (urlParams?.sortOrder) {
-            sorting.value.order = parseInt(urlParams?.sortOrder) ? 1 : 0;
+            sorting.value.order =
+                (parseInt(urlParams.sortOrder) as 0 | 1 | -1) || null;
+        }
+        if (urlParams?.page) {
+            pagination.value.page = parseInt(urlParams.page);
         }
     }
 
