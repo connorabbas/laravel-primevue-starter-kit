@@ -12,6 +12,9 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Container from '@/Components/Container.vue';
+
 import { useDark } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -35,6 +38,8 @@ createInertiaApp({
             .use(ToastService)
             .component('Head', Head)
             .component('Link', Link)
+            .component('AuthenticatedLayout', AuthenticatedLayout)
+            .component('Container', Container)
             .mount(el);
     },
     progress: {

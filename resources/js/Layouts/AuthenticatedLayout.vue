@@ -2,7 +2,6 @@
 import { ref, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Container from '@/Components/Container.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
 import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';

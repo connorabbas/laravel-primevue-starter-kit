@@ -2,39 +2,39 @@ import { ref, computed, onMounted } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import { FilterMatchMode } from '@primevue/core/api';
 import debounce from 'lodash-es/debounce';
-import * as PrimeVue from '@/types/primevue';
+import cloneDeep from 'lodash-es/cloneDeep';
+import { PageState, DataTablePageEvent } from 'primevue';
+import { PrimeVueDataFilters } from '@/types';
 
-interface PageStateEvent {
-    first: number;
-    rows: number;
-    page: number;
-    pageCount: number;
+interface PaginatedFilteredSortedQueryParams {
+    filters?: PrimeVueDataFilters;
+    page?: string;
+    rows?: string;
+    sortField?: string;
+    sortOrder?: string;
 }
 interface PaginationState {
     page: number;
     rows: number;
 }
 interface SortState {
-    field: undefined | string;
-    order: undefined | null | 0 | 1 | -1;
+    field: string;
+    order: number;
 }
 
 export function usePaginatedData(
-    initialFilters: PrimeVue.PaginatedDataFilters = {},
+    initialFilters: PrimeVueDataFilters = {},
     only: string[] = ['request'],
     initialsRows: number = 20
 ) {
-    const defaultFilters = initialFilters;
-    const defaultRows = initialsRows;
-
     const page = usePage<{
         request: {
-            urlParams: PrimeVue.PaginatedDataUrlParams;
+            urlParams: PaginatedFilteredSortedQueryParams;
         };
     }>();
 
     const processing = ref<boolean>(false);
-    const filters = ref<PrimeVue.PaginatedDataFilters>(initialFilters);
+    const filters = ref<PrimeVueDataFilters>(cloneDeep(initialFilters));
     const sorting = ref<SortState>({
         field: '',
         order: 1,
@@ -76,7 +76,7 @@ export function usePaginatedData(
             router.reload({
                 only: ['request', ...new Set(only)],
                 data: {
-                    filters: filters.value,
+                    filters: filters.value as any,
                     ...pagination.value,
                     sortField: sorting.value.field,
                     sortOrder: sorting.value.order,
@@ -95,9 +95,9 @@ export function usePaginatedData(
         });
     }
 
-    function paginate(pageStateEvent: PageStateEvent) {
-        pagination.value.page = pageStateEvent.page + 1;
-        pagination.value.rows = pageStateEvent.rows;
+    function paginate(event: PageState | DataTablePageEvent) {
+        pagination.value.page = event.page + 1;
+        pagination.value.rows = event.rows;
         fetchData().then(() => {
             scrollToTop();
         });
@@ -114,6 +114,7 @@ export function usePaginatedData(
         // Alternatively just use: router.get(window.location.pathname);
         // Caveat to the above approach, we would lose state from our page not related to pagination/filtering/sorting
 
+        const defaultFilters = cloneDeep(initialFilters);
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
@@ -123,7 +124,7 @@ export function usePaginatedData(
         };
         pagination.value = {
             page: 1,
-            rows: defaultRows,
+            rows: initialsRows,
         };
         fetchData().then(() => {
             window.history.replaceState(null, '', window.location.pathname);
@@ -167,9 +168,9 @@ export function usePaginatedData(
         });
     }
 
-    function parseUrlParams(urlParams: PrimeVue.PaginatedDataUrlParams) {
+    function parseUrlParams(urlParams: PaginatedFilteredSortedQueryParams) {
         filters.value = {
-            ...defaultFilters,
+            ...cloneDeep(initialFilters),
             ...urlParams?.filters,
         };
         parseUrlFilterValues();
@@ -177,8 +178,7 @@ export function usePaginatedData(
             sorting.value.field = urlParams.sortField;
         }
         if (urlParams?.sortOrder) {
-            sorting.value.order =
-                (parseInt(urlParams.sortOrder) as 0 | 1 | -1) || null;
+            sorting.value.order = parseInt(urlParams.sortOrder);
         }
         if (urlParams?.page) {
             pagination.value.page = parseInt(urlParams.page);

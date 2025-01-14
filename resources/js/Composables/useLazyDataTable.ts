@@ -1,14 +1,17 @@
 import { usePaginatedData } from './usePaginatedData';
-import * as PrimeVue from '@/types/primevue';
+import cloneDeep from 'lodash-es/cloneDeep';
+import {
+    DataTableFilterMetaData,
+    DataTableFilterEvent,
+    DataTableSortEvent,
+} from 'primevue';
+import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(
-    initialFilters: PrimeVue.PaginatedDataFilters = {},
+    initialFilters: PrimeVueDataFilters = {},
     only: string[] = ['request'],
     initialsRows: number = 20
 ) {
-    const defaultFilters = initialFilters;
-    const defaultRows = initialsRows;
-
     const {
         processing,
         filters,
@@ -36,19 +39,29 @@ export function useLazyDataTable(
      * "Override" parent composable function
      * Event driven filtering rather than reactive state
      */
-    function filter(event: { filters: PrimeVue.PaginatedDataFilters }) {
+    function filter(event: DataTableFilterEvent) {
         pagination.value.page = 1;
-        filters.value = { ...event.filters };
+        const newFilters: PrimeVueDataFilters = {};
+        Object.entries(event.filters).forEach(([key, rawFilter]) => {
+            if (
+                rawFilter &&
+                typeof rawFilter === 'object' &&
+                'matchMode' in rawFilter
+            ) {
+                newFilters[key] = rawFilter as DataTableFilterMetaData;
+            }
+        });
+        filters.value = newFilters;
         parseEventFilterValues();
         fetchData().then(() => {
             scrollToTop();
         });
     }
 
-    function sort(event: PrimeVue.SortEvent) {
+    function sort(event: DataTableSortEvent) {
         pagination.value.page = 1;
-        sorting.value.field = event.sortField;
-        sorting.value.order = event.sortOrder;
+        sorting.value.field = String(event.sortField);
+        sorting.value.order = event.sortOrder || 1;
         fetchData().then(() => {
             scrollToTop();
         });
@@ -59,6 +72,7 @@ export function useLazyDataTable(
      * usePaginatedData() resets sorting.value state as a new object, this will not work for DataTable's
      */
     function reset() {
+        const defaultFilters = cloneDeep(initialFilters);
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
@@ -66,7 +80,7 @@ export function useLazyDataTable(
         sorting.value.order = 1;
         pagination.value = {
             page: 1,
-            rows: defaultRows,
+            rows: initialsRows,
         };
         fetchData().then(() => {
             window.history.replaceState(null, '', window.location.pathname);
