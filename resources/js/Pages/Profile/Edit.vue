@@ -1,13 +1,10 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import Container from '@/Components/Container.vue';
 import Heading from '@/Components/Heading.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 
 defineProps({
-    auth: Object,
     mustVerifyEmail: {
         type: Boolean,
     },

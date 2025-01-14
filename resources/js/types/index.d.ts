@@ -1,3 +1,5 @@
+import { DataTableFilterMetaData } from 'primevue';
+
 export interface User {
     id: number;
     name: string;
@@ -8,3 +10,7 @@ export interface User {
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T;
+
+export type PrimeVueDataFilters = {
+    [key: string]: DataTableFilterMetaData;
+};
