@@ -28,6 +28,7 @@ function focusPasswordInput() {
         <Dialog
             v-model:visible="modalOpen"
             :draggable="false"
+            :dismissableMask="true"
             position="center"
             modal
             header="Are you sure you want to delete your account?"
