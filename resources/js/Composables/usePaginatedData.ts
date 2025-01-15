@@ -117,6 +117,7 @@ export function usePaginatedData(
         const defaultFilters = cloneDeep(initialFilters);
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
+            filters.value[key].matchMode = defaultFilters[key].matchMode;
         });
         sorting.value = {
             field: '',
