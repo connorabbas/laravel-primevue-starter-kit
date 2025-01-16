@@ -60,7 +60,7 @@ export function useLazyDataTable(
 
     function sort(event: DataTableSortEvent) {
         pagination.value.page = 1;
-        sorting.value.field = String(event.sortField);
+        sorting.value.field = event.sortField ? String(event.sortField) : '';
         sorting.value.order = event.sortOrder || 1;
         fetchData().then(() => {
             scrollToTop();
