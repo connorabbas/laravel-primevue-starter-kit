@@ -1,5 +1,5 @@
-@import './button';
-@import './tieredmenu';
+@import './button.css';
+@import './tieredmenu.css';
 
 .p-splitbutton {
     @apply inline-flex relative rounded-md

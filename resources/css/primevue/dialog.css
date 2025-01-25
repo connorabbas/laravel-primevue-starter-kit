@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-dialog {
     @apply max-h-[90%] scale-100 rounded-xl

@@ -1,5 +1,5 @@
-@import './inputtext';
-@import './chip';
+@import './inputtext.css';
+@import './chip.css';
 
 .p-autocomplete {
     @apply inline-flex

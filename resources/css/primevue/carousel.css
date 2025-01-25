@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-carousel {
     @apply flex flex-col

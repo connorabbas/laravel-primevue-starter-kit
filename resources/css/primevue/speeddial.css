@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-speeddial {
     @apply static flex gap-2

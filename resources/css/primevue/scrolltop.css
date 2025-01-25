@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-scrolltop.p-button {
     @apply fixed bottom-5 end-5

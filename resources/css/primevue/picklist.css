@@ -1,5 +1,5 @@
-@import './button';
-@import './listbox';
+@import './button.css';
+@import './listbox.css';
 
 .p-picklist {
     @apply flex gap-[1.125rem]

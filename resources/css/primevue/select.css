@@ -1,6 +1,6 @@
-@import './button';
-@import './inputtext';
-@import './iconfield';
+@import './button.css';
+@import './inputtext.css';
+@import './iconfield.css';
 
 .p-select {
     @apply inline-flex cursor-pointer relative select-none rounded-md

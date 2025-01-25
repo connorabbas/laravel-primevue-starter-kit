@@ -1,4 +1,4 @@
-@import './badge';
+@import './badge.css';
 
 .p-overlaybadge {
     @apply relative
