@@ -29,7 +29,7 @@ onMounted(() => {
         <Head title="Forgot Password" />
 
         <template v-if="status" #message>
-            <Message severity="success" :closable="false" class="shadow">
+            <Message severity="success" :closable="false" class="shadow-sm">
                 {{ status }}
             </Message>
         </template>
@@ -41,7 +41,7 @@ onMounted(() => {
         </div>
 
         <form class="space-y-6" @submit.prevent="submit">
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
                     id="email"
