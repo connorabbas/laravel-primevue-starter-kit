@@ -1,5 +1,5 @@
-@import './chip';
-@import './tree';
+@import './chip.css';
+@import './tree.css';
 
 .p-treeselect {
     @apply inline-flex cursor-pointer relative select-none rounded-md

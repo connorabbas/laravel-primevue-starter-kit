@@ -1,4 +1,4 @@
-@import './badge';
+@import './badge.css';
 
 .p-button {
     @apply inline-flex cursor-pointer select-none items-center justify-center overflow-hidden relative

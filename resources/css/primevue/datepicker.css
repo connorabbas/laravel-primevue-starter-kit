@@ -1,5 +1,5 @@
-@import './button';
-@import './inputtext';
+@import './button.css';
+@import './inputtext.css';
 
 .p-datepicker {
     @apply inline-flex max-w-full

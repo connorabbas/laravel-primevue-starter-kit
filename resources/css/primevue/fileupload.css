@@ -1,6 +1,6 @@
-@import './button';
-@import './message';
-@import './progressbar';
+@import './button.css';
+@import './message.css';
+@import './progressbar.css';
 
 .p-fileupload input[type="file"] {
     @apply hidden

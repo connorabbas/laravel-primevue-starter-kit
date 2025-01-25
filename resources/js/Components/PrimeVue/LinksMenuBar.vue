@@ -16,7 +16,7 @@ defineExpose({
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
             <!-- add if using 'nora' preset theme -->
-            <!-- hover:text-primary-100 hover:dark:text-primary-950 -->
+            <!-- hover:text-primary-100 dark:hover:text-primary-950 -->
             <Link
                 v-if="item.route"
                 :href="item.route"

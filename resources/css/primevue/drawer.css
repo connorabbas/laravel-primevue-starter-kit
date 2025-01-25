@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-drawer {
     @apply flex flex-col pointer-events-auto relative transition-transform duration-300

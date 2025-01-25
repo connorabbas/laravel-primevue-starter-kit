@@ -43,7 +43,7 @@ function focusPasswordInput() {
                 </p>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <InputText
                     id="password"
                     ref="password-input"

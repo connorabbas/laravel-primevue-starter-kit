@@ -11,6 +11,9 @@ import { route as routeFn } from 'ziggy-js';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Container from '@/Components/Container.vue';
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createServer((page) =>
@@ -40,7 +43,9 @@ createServer((page) =>
                 })
                 .use(ToastService)
                 .component('Head', Head)
-                .component('Link', Link);
+                .component('Link', Link)
+                .component('AuthenticatedLayout', AuthenticatedLayout)
+                .component('Container', Container);
         },
     })
 );

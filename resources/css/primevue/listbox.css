@@ -1,5 +1,5 @@
-@import './inputtext';
-@import './iconfield';
+@import './inputtext.css';
+@import './iconfield.css';
 
 .p-listbox {
     @apply bg-surface-0 dark:bg-surface-950 text-surface-700 dark:text-surface-0

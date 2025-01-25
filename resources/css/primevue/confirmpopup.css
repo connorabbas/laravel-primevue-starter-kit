@@ -1,4 +1,4 @@
-@import './button';
+@import './button.css';
 
 .p-confirmpopup {
     @apply absolute mt-[10px] top-0 left-0

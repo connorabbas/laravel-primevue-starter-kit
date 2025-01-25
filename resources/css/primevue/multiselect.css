@@ -1,7 +1,7 @@
-@import './checkbox';
-@import './chip';
-@import './inputtext';
-@import './iconfield';
+@import './checkbox.css';
+@import './chip.css';
+@import './inputtext.css';
+@import './iconfield.css';
 
 .p-multiselect {
     @apply inline-flex cursor-pointer relative select-none rounded-md

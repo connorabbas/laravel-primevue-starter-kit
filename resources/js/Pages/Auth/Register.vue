@@ -28,7 +28,7 @@ onMounted(() => {
         <Head title="Register" />
 
         <form class="space-y-6" @submit.prevent="submit">
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="name">Name</label>
                 <InputText
                     id="name"
@@ -50,7 +50,7 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
                     id="email"
@@ -71,7 +71,7 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="password">Password</label>
                 <InputText
                     id="password"
@@ -92,7 +92,7 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="password_confirmation">Confirm Password</label>
                 <InputText
                     id="password_confirmation"

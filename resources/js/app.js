@@ -1,8 +1,7 @@
-import '../css/tailwind.css';
-import '../css/styles.css';
-import 'primeicons/primeicons.css';
-
 import './bootstrap';
+import '../css/app.css';
+import '../css/tailwind.css';
+import 'primeicons/primeicons.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';

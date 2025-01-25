@@ -16,7 +16,7 @@ defineProps({
 <template>
     <div
         :class="[
-            { 'max-w-screen-xl mx-auto': !fluid },
+            { 'max-w-(--breakpoint-2xl) mx-auto': !fluid },
             spacedMobile ? 'px-4' : 'px-0',
             'md:px-8',
         ]"

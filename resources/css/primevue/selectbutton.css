@@ -1,4 +1,4 @@
-@import './togglebutton';
+@import './togglebutton.css';
 
 .p-selectbutton {
     @apply inline-flex select-none rounded-md
