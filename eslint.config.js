@@ -9,7 +9,15 @@ import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
 export default typescriptEslint.config(
-    { ignores: ['*.d.ts', '**/coverage', '**/dist', 'vendor/**', 'public/build/**'] },
+    {
+        ignores: [
+            '*.d.ts',
+            '**/coverage',
+            '**/dist',
+            'vendor/**',
+            'public/build/**',
+        ],
+    },
     {
         files: ['**/*.js'],
         ...eslint.configs.recommended,
@@ -32,7 +40,7 @@ export default typescriptEslint.config(
         extends: [
             eslint.configs.recommended,
             ...typescriptEslint.configs.recommended,
-            ...eslintPluginVue.configs['flat/recommended'],
+            ...eslintPluginVue.configs['flat/strongly-recommended'],
         ],
         languageOptions: {
             ecmaVersion: 'latest',
@@ -51,6 +59,13 @@ export default typescriptEslint.config(
             'vue/v-on-event-hyphenation': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/block-lang': 'off',
+            'vue/first-attribute-linebreak': [
+                'error',
+                {
+                    singleline: 'ignore',
+                    multiline: 'ignore',
+                },
+            ],
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },

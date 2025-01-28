@@ -25,9 +25,12 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <InertiaHead title="Register" />
 
-        <form class="space-y-6" @submit.prevent="submit">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
             <div class="flex flex-col gap-2">
                 <label for="name">Name</label>
                 <InputText
@@ -114,12 +117,9 @@ onMounted(() => {
             </div>
 
             <div class="flex justify-end items-center pt-2">
-                <Link
-                    :href="route('login')"
-                    class="mr-4 underline text-muted-color hover:text-color"
-                >
+                <InertiaLink :href="route('login')" class="mr-4 underline text-muted-color hover:text-color">
                     Already registered?
-                </Link>
+                </InertiaLink>
                 <Button
                     type="submit"
                     :loading="form.processing"

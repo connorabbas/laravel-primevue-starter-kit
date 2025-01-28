@@ -3,7 +3,7 @@ import Heading from '@/Components/Heading.vue';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <InertiaHead title="Dashboard" />
     <AuthenticatedLayout>
         <template #header>
             <Heading level="h1" class="text-2xl">Dashboard</Heading>

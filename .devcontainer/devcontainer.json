@@ -26,7 +26,13 @@
                 "formulahendry.auto-rename-tag",
                 "pmneo.tsimporter"
             ],
-            "settings": {}
+            "settings": {
+                "html.format.wrapAttributes": "force-expand-multiline",
+                "[vue]": {
+                    "editor.defaultFormatter": "Vue.volar",
+                    "editor.tabSize": 4
+                }
+            }
         }
     },
     "remoteUser": "sail",

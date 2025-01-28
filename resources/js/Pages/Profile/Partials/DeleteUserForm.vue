@@ -30,9 +30,9 @@ function focusPasswordInput() {
             :draggable="false"
             :dismissableMask="true"
             position="center"
-            modal
             header="Are you sure you want to delete your account?"
             :style="{ width: '40rem' }"
+            modal
             @show="focusPasswordInput"
         >
             <div class="mb-6">
