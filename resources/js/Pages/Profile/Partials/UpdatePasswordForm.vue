@@ -43,7 +43,10 @@ const updatePassword = () => {
 </script>
 
 <template>
-    <form class="space-y-6" @submit.prevent="updatePassword">
+    <form
+        class="space-y-6"
+        @submit.prevent="updatePassword"
+    >
         <div class="flex flex-col gap-2">
             <label for="current_password">Current Password</label>
             <InputText

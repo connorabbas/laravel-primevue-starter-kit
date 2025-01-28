@@ -44,7 +44,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <form class="space-y-6" @submit.prevent="updateProfileInformation">
+    <form
+        class="space-y-6"
+        @submit.prevent="updateProfileInformation"
+    >
         <div class="flex flex-col gap-2">
             <label for="name">Name</label>
             <InputText
@@ -90,13 +93,13 @@ onMounted(() => {
         <div v-if="mustVerifyEmail && user.email_verified_at === null">
             <p class="text-sm mt-2">
                 Your email address is unverified.
-                <Link
+                <InertiaLink
                     :href="route('verification.send')"
                     method="post"
                     class="underline text-sm text-muted-color hover:text-color"
                 >
                     Click here to re-send the verification email.
-                </Link>
+                </InertiaLink>
             </p>
 
             <Message

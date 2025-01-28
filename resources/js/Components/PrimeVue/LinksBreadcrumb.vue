@@ -13,7 +13,7 @@ const page = usePage();
         }"
     >
         <template #item="{ item, props }">
-            <Link
+            <InertiaLink
                 v-if="item.route"
                 :href="item.route"
                 class="p-breadcrumb-item-link"
@@ -25,7 +25,7 @@ const page = usePage();
                     class="p-breadcrumb-item-icon"
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
-            </Link>
+            </InertiaLink>
             <a
                 v-else
                 :href="item.url"
