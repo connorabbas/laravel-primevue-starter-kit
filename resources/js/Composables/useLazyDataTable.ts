@@ -1,10 +1,6 @@
 import { usePaginatedData } from './usePaginatedData';
 import cloneDeep from 'lodash-es/cloneDeep';
-import {
-    DataTableFilterMetaData,
-    DataTableFilterEvent,
-    DataTableSortEvent,
-} from 'primevue';
+import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(
@@ -23,6 +19,7 @@ export function useLazyDataTable(
         scrollToTop,
         fetchData,
         paginate,
+        hardReset,
     } = usePaginatedData(initialFilters, only, initialsRows);
 
     function parseEventFilterValues() {
@@ -78,13 +75,9 @@ export function useLazyDataTable(
         });
         sorting.value.field = '';
         sorting.value.order = 1;
-        pagination.value = {
-            page: 1,
-            rows: initialsRows,
-        };
-        fetchData().then(() => {
-            window.history.replaceState(null, '', window.location.pathname);
-        });
+        pagination.value.page = 1;
+        pagination.value.rows = initialsRows;
+        fetchData();
     }
 
     return {
@@ -100,5 +93,6 @@ export function useLazyDataTable(
         filter,
         sort,
         reset,
+        hardReset,
     };
 }
