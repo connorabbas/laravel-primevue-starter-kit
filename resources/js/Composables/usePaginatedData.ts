@@ -70,18 +70,21 @@ export function usePaginatedData(
     }
 
     function fetchData() {
-        window.history.replaceState(null, '', window.location.pathname);
         return new Promise((resolve, reject) => {
             processing.value = true;
-            router.reload({
-                only: ['request', ...new Set(only)],
+            router.visit(window.location.pathname, {
+                method: 'get',
                 data: {
                     filters: filters.value as any,
                     ...pagination.value,
                     sortField: sorting.value.field,
                     sortOrder: sorting.value.order,
                 },
+                preserveState: true,
+                preserveUrl: false,
                 showProgress: true,
+                replace: true,
+                only: ['request', ...new Set(only)],
                 onSuccess: (page) => {
                     resolve(page);
                 },
@@ -96,7 +99,11 @@ export function usePaginatedData(
     }
 
     function paginate(event: PageState | DataTablePageEvent) {
-        pagination.value.page = event.page + 1;
+        if (event.rows != pagination.value.rows) {
+            pagination.value.page = 1;
+        } else {
+            pagination.value.page = event.page + 1;
+        }
         pagination.value.rows = event.rows;
         fetchData().then(() => {
             scrollToTop();
@@ -111,9 +118,6 @@ export function usePaginatedData(
     }
 
     function reset() {
-        // Alternatively just use: router.get(window.location.pathname);
-        // Caveat to the above approach, we would lose state from our page not related to pagination/filtering/sorting
-
         const defaultFilters = cloneDeep(initialFilters);
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
@@ -127,8 +131,16 @@ export function usePaginatedData(
             page: 1,
             rows: initialsRows,
         };
-        fetchData().then(() => {
-            window.history.replaceState(null, '', window.location.pathname);
+        fetchData();
+    }
+
+    function hardReset() {
+        router.visit(window.location.pathname, {
+            method: 'get',
+            preserveUrl: false,
+            showProgress: true,
+            replace: true,
+            only: ['request', ...new Set(only)],
         });
     }
 
@@ -203,6 +215,7 @@ export function usePaginatedData(
         paginate,
         filter,
         reset,
+        hardReset,
         parseUrlParams,
     };
 }
