@@ -3,9 +3,14 @@
     "rules": {
         "array_indentation": true,
         "array_syntax": true,
+        "fully_qualified_strict_types": true,
         "method_chaining_indentation": true,
-        "concat_space": {
-            "spacing": "one"
-        }
+        "no_trailing_comma_in_singleline_function_call": true,
+        "no_trailing_comma_in_singleline": true,
+        "no_unused_imports": true,
+        "no_whitespace_before_comma_in_array": true,
+        "single_import_per_statement": true,
+        "whitespace_after_comma_in_array": true,
+        "trailing_comma_in_multiline": false
     }
 }

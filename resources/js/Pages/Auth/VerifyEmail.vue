@@ -22,10 +22,17 @@ const verificationLinkSent = computed(
 
 <template>
     <GuestLayout>
-        <Head title="Email Verification" />
+        <InertiaHead title="Email Verification" />
 
-        <template #message v-if="verificationLinkSent">
-            <Message severity="success" :closable="false" class="shadow">
+        <template
+            v-if="verificationLinkSent"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 A new verification link has been sent to the email address you
                 provided during registration.
             </Message>
@@ -40,18 +47,19 @@ const verificationLinkSent = computed(
         <form @submit.prevent="submit">
             <div class="mt-6 flex justify-between items-center">
                 <Button
-                    raised
-                    type="submit"
                     :loading="form.processing"
+                    type="submit"
                     label="Resend Verification Email"
                     severity="contrast"
+                    raised
                 />
-                <Link
+                <InertiaLink
                     :href="route('logout')"
                     method="post"
                     class="underline text-muted-color hover:text-color"
-                    >Log Out</Link
                 >
+                    Log Out
+                </InertiaLink>
             </div>
         </form>
     </GuestLayout>

@@ -54,10 +54,10 @@ const customThemePreset = definePreset(Preset, {
 export default {
     preset: customThemePreset,
     options: {
-        darkModeSelector: '.dark-mode',
+        darkModeSelector: '.dark',
         cssLayer: {
             name: 'primevue',
-            order: 'tailwind-base, primevue, tailwind-utilities',
+            order: 'tailwind-theme, tailwind-base, primevue, tailwind-utilities',
         },
     },
 };

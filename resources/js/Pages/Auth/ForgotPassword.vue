@@ -26,10 +26,17 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-        <Head title="Forgot Password" />
+        <InertiaHead title="Forgot Password" />
 
-        <template #message v-if="status">
-            <Message severity="success" :closable="false" class="shadow">
+        <template
+            v-if="status"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 {{ status }}
             </Message>
         </template>
@@ -40,15 +47,18 @@ onMounted(() => {
             you to choose a new one.
         </div>
 
-        <form @submit.prevent="submit" class="space-y-6">
-            <div class="space-y-2">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
+            <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
-                    required
-                    ref="email-input"
                     id="email"
-                    type="email"
+                    ref="email-input"
                     v-model="form.email"
+                    type="email"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.email)"
                     autocomplete="username"
@@ -65,11 +75,11 @@ onMounted(() => {
 
             <div class="flex justify-end items-center">
                 <Button
-                    raised
-                    type="submit"
                     :loading="form.processing"
+                    type="submit"
                     label="Email Password Reset Link"
                     severity="contrast"
+                    raised
                 />
             </div>
         </form>

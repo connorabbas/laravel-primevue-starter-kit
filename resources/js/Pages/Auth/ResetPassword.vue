@@ -36,19 +36,22 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-        <Head title="Reset Password" />
+        <InertiaHead title="Reset Password" />
 
-        <form @submit.prevent="submit" class="space-y-6">
-            <div class="space-y-2">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
+            <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
-                    ref="email-input"
                     id="email"
-                    type="email"
+                    ref="email-input"
                     v-model="form.email"
-                    fluid
+                    type="email"
                     :invalid="Boolean(form.errors.email)"
                     required
+                    fluid
                     autocomplete="username"
                 />
                 <Message
@@ -61,15 +64,15 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="password">Password</label>
                 <InputText
                     id="password"
-                    type="password"
                     v-model="form.password"
-                    fluid
+                    type="password"
                     :invalid="Boolean(form.errors.password)"
                     required
+                    fluid
                     autocomplete="new-password"
                 />
                 <Message
@@ -82,15 +85,15 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="password_confirmation">Password</label>
                 <InputText
                     id="password_confirmation"
-                    type="password"
                     v-model="form.password_confirmation"
-                    fluid
+                    type="password"
                     :invalid="Boolean(form.errors.password_confirmation)"
                     required
+                    fluid
                     autocomplete="new-password"
                 />
                 <Message
@@ -105,11 +108,11 @@ onMounted(() => {
 
             <div class="flex justify-end items-center pt-2">
                 <Button
-                    raised
-                    type="submit"
                     :loading="form.processing"
+                    type="submit"
                     label="Reset Password"
                     severity="contrast"
+                    raised
                 />
             </div>
         </form>

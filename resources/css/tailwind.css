@@ -1,0 +1,27 @@
+@layer tailwind-theme, tailwind-base, primevue, tailwind-utilities;
+
+@import 'tailwindcss/theme.css' layer(tailwind-theme);
+@import './custom-preflight.css' layer(tailwind-base);
+/* @import "tailwindcss/preflight.css" layer(tailwind-base); */
+@import 'tailwindcss/utilities.css' layer(tailwind-utilities);
+
+@plugin 'tailwindcss-primeui';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../../resources/views/**/*.blade.php';
+@source '../../resources/js/**/*.vue';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: Inter, sans-serif;
+}
+
+@utility dynamic-bg {
+    @apply bg-surface-0 dark:bg-surface-900;
+}
+
+@utility dynamic-border {
+    @apply border-surface-200 dark:border-surface-800;
+}

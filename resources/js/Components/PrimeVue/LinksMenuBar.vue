@@ -1,21 +1,29 @@
-<script setup>
+<script setup lang="ts">
 import { useTemplateRef } from 'vue';
+import Menubar from 'primevue/menubar';
 
-const childRef = useTemplateRef('child-ref');
+type MenubarType = InstanceType<typeof Menubar>;
+const childRef = useTemplateRef<MenubarType>('child-ref');
 defineExpose({
     childRef,
 });
 </script>
 
 <template>
-    <Menubar ref="child-ref" breakpoint="1024px">
-        <template v-if="$slots.start" #start>
+    <Menubar
+        ref="child-ref"
+        breakpoint="1024px"
+    >
+        <template
+            v-if="$slots.start"
+            #start
+        >
             <slot name="start"></slot>
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
             <!-- add if using 'nora' preset theme -->
-            <!-- hover:text-primary-100 hover:dark:text-primary-950 -->
-            <Link
+            <!-- hover:text-primary-100 dark:hover:text-primary-950 -->
+            <InertiaLink
                 v-if="item.route"
                 :href="item.route"
                 class="p-menubar-item-link"
@@ -31,7 +39,7 @@ defineExpose({
                     class="p-menu-item-icon"
                 />
                 <span class="p-menu-item-label">{{ item.label }}</span>
-            </Link>
+            </InertiaLink>
             <a
                 v-else
                 :href="item.url"
@@ -57,7 +65,10 @@ defineExpose({
                 ></i>
             </a>
         </template>
-        <template v-if="$slots.end" #end>
+        <template
+            v-if="$slots.end"
+            #end
+        >
             <slot name="end"></slot>
         </template>
     </Menubar>

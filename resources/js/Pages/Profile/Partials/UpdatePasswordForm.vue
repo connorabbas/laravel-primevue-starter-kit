@@ -43,15 +43,18 @@ const updatePassword = () => {
 </script>
 
 <template>
-    <form @submit.prevent="updatePassword" class="space-y-6">
-        <div class="space-y-2">
+    <form
+        class="space-y-6"
+        @submit.prevent="updatePassword"
+    >
+        <div class="flex flex-col gap-2">
             <label for="current_password">Current Password</label>
             <InputText
-                required
                 id="current_password"
                 ref="current-password-input"
-                type="password"
                 v-model="form.current_password"
+                type="password"
+                required
                 fluid
                 :invalid="Boolean(form.errors?.current_password)"
                 autocomplete="current-password"
@@ -66,14 +69,14 @@ const updatePassword = () => {
             </Message>
         </div>
 
-        <div class="space-y-2">
+        <div class="flex flex-col gap-2">
             <label for="password">New Password</label>
             <InputText
-                required
                 id="password"
                 ref="new-password-input"
-                type="password"
                 v-model="form.password"
+                type="password"
+                required
                 fluid
                 :invalid="Boolean(form.errors.password)"
                 autocomplete="new-password"
@@ -88,13 +91,13 @@ const updatePassword = () => {
             </Message>
         </div>
 
-        <div class="space-y-2">
+        <div class="flex flex-col gap-2">
             <label for="password_confirmation">Confirm Password</label>
             <InputText
-                required
                 id="password_confirmation"
-                type="password"
                 v-model="form.password_confirmation"
+                type="password"
+                required
                 fluid
                 :invalid="Boolean(form.errors.password_confirmation)"
                 autocomplete="new-password"
@@ -111,11 +114,11 @@ const updatePassword = () => {
 
         <div class="flex items-center gap-4">
             <Button
-                raised
-                type="submit"
                 :loading="form.processing"
+                type="submit"
                 label="Save"
                 severity="contrast"
+                raised
             />
 
             <Transition

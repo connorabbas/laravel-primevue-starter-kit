@@ -26,12 +26,13 @@ function focusPasswordInput() {
 <template>
     <section>
         <Dialog
-            :draggable="false"
-            position="center"
             v-model:visible="modalOpen"
-            modal
+            :draggable="false"
+            :dismissableMask="true"
+            position="center"
             header="Are you sure you want to delete your account?"
             :style="{ width: '40rem' }"
+            modal
             @show="focusPasswordInput"
         >
             <div class="mb-6">
@@ -42,15 +43,15 @@ function focusPasswordInput() {
                 </p>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <InputText
-                    autofocus
-                    required
                     id="password"
                     ref="password-input"
+                    v-model="form.password"
                     type="password"
                     placeholder="Password"
-                    v-model="form.password"
+                    autofocus
+                    required
                     fluid
                     :invalid="Boolean(form.errors.password)"
                     autocomplete="current-password"
@@ -75,20 +76,20 @@ function focusPasswordInput() {
                     @click="modalOpen = false"
                 />
                 <Button
-                    raised
-                    @click="deleteUser"
                     :loading="form.processing"
                     label="Delete Account"
                     severity="danger"
+                    raised
+                    @click="deleteUser"
                 />
             </template>
         </Dialog>
 
         <Button
-            raised
-            @click="modalOpen = true"
             label="Delete Account"
             severity="danger"
+            raised
+            @click="modalOpen = true"
         />
     </section>
 </template>

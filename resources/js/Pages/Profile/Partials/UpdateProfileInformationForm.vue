@@ -44,15 +44,18 @@ onMounted(() => {
 </script>
 
 <template>
-    <form @submit.prevent="updateProfileInformation" class="space-y-6">
-        <div class="space-y-2">
+    <form
+        class="space-y-6"
+        @submit.prevent="updateProfileInformation"
+    >
+        <div class="flex flex-col gap-2">
             <label for="name">Name</label>
             <InputText
-                required
-                ref="name-input"
                 id="name"
-                type="text"
+                ref="name-input"
                 v-model="form.name"
+                type="text"
+                required
                 fluid
                 :invalid="Boolean(form.errors.name)"
                 autocomplete="name"
@@ -66,13 +69,13 @@ onMounted(() => {
                 {{ form.errors?.name }}
             </Message>
         </div>
-        <div class="space-y-2">
+        <div class="flex flex-col gap-2">
             <label for="email">Email</label>
             <InputText
-                required
                 id="email"
-                type="email"
                 v-model="form.email"
+                type="email"
+                required
                 fluid
                 :invalid="Boolean(form.errors.email)"
                 autocomplete="username"
@@ -90,20 +93,20 @@ onMounted(() => {
         <div v-if="mustVerifyEmail && user.email_verified_at === null">
             <p class="text-sm mt-2">
                 Your email address is unverified.
-                <Link
+                <InertiaLink
                     :href="route('verification.send')"
                     method="post"
                     class="underline text-sm text-muted-color hover:text-color"
                 >
                     Click here to re-send the verification email.
-                </Link>
+                </InertiaLink>
             </p>
 
             <Message
                 v-if="status === 'verification-link-sent'"
                 severity="success"
                 :closable="false"
-                class="shadow mt-4"
+                class="shadow-sm mt-4"
             >
                 A new verification link has been sent to your email address.
             </Message>
@@ -111,11 +114,11 @@ onMounted(() => {
 
         <div class="flex items-center gap-4">
             <Button
-                raised
-                type="submit"
                 :loading="form.processing"
+                type="submit"
                 label="Save"
                 severity="contrast"
+                raised
             />
 
             <Transition

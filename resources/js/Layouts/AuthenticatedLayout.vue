@@ -2,11 +2,10 @@
 import { ref, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Container from '@/Components/Container.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
 import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
-import ToggleThemeButton from '@/Components/ToggleThemeButton.vue';
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 const currentRoute = route().current();
 const logoutForm = useForm({});
@@ -81,7 +80,7 @@ watchEffect(() => {
         <div class="min-h-screen">
             <nav
                 class="dynamic-bg border-b"
-                :class="$slots.header ? 'dynamic-border' : 'shadow'"
+                :class="$slots.header ? 'dynamic-border' : 'shadow-sm'"
             >
                 <!-- Primary Navigation Menu -->
                 <Container>
@@ -99,21 +98,19 @@ watchEffect(() => {
                         <template #start>
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center mr-5">
-                                <Link :href="route('welcome')">
+                                <InertiaLink :href="route('welcome')">
                                     <ApplicationLogo
                                         class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                     />
-                                </Link>
+                                </InertiaLink>
                             </div>
                         </template>
                         <template #end>
-                            <div
-                                class="hidden lg:flex items-center ms-6 space-x-3"
-                            >
+                            <div class="hidden lg:flex items-center ms-6 space-x-3">
                                 <div>
-                                    <ToggleThemeButton
-                                        text
+                                    <ToggleDarkModeButton
                                         severity="secondary"
+                                        text
                                         rounded
                                     />
                                 </div>
@@ -133,13 +130,13 @@ watchEffect(() => {
                                         class="relative"
                                     ></div>
                                     <LinksMenu
+                                        ref="user-menu"
                                         appendTo="#user-menu-append"
                                         :model="userMenuItems"
                                         popup
-                                        ref="user-menu"
                                         :pt="{
                                             root: {
-                                                class: '!left-auto !top-0 right-0',
+                                                class: 'left-auto! top-0! right-0',
                                             },
                                         }"
                                     />
@@ -153,12 +150,12 @@ watchEffect(() => {
                                         text
                                         severity="secondary"
                                         icon="pi pi-bars"
-                                        @click="mobileMenuOpen = true"
                                         :pt="{
                                             icon: {
                                                 class: 'text-xl',
                                             },
                                         }"
+                                        @click="mobileMenuOpen = true"
                                     />
                                 </div>
                             </div>
@@ -167,16 +164,21 @@ watchEffect(() => {
                 </Container>
 
                 <!-- Mobile drawer menu -->
-                <Drawer v-model:visible="mobileMenuOpen" position="right">
+                <Drawer
+                    v-model:visible="mobileMenuOpen"
+                    position="right"
+                >
                     <template #header>
-                        <ToggleThemeButton text severity="secondary" rounded />
+                        <ToggleDarkModeButton
+                            severity="secondary"
+                            text
+                            rounded
+                        />
                     </template>
                     <div>
-                        <div>
-                            <div class="mb-5">
-                                <p
-                                    class="text-muted-color font-bold uppercase text-sm mb-2"
-                                >
+                        <div class="space-y-5">
+                            <div class="flex flex-col gap-2">
+                                <p class="text-muted-color font-bold uppercase text-sm">
                                     Home
                                 </p>
                                 <LinksPanelMenu
@@ -188,7 +190,7 @@ watchEffect(() => {
                     </div>
                     <template #footer>
                         <div class="flex items-center gap-2">
-                            <Link
+                            <InertiaLink
                                 :href="route('profile.edit')"
                                 class="flex-auto"
                             >
@@ -199,7 +201,7 @@ watchEffect(() => {
                                     severity="secondary"
                                     outlined
                                 ></Button>
-                            </Link>
+                            </InertiaLink>
                             <Button
                                 label="Logout"
                                 icon="pi pi-sign-out"
@@ -214,7 +216,10 @@ watchEffect(() => {
             </nav>
 
             <!-- Page Heading -->
-            <header class="dynamic-bg shadow" v-if="$slots.header">
+            <header
+                v-if="$slots.header"
+                class="dynamic-bg shadow-sm"
+            >
                 <Container>
                     <div class="py-6">
                         <slot name="header" />

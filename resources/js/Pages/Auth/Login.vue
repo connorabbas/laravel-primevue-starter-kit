@@ -33,23 +33,33 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <InertiaHead title="Log in" />
 
-        <template #message v-if="status">
-            <Message severity="success" :closable="false" class="shadow">
+        <template
+            v-if="status"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 {{ status }}
             </Message>
         </template>
 
-        <form @submit.prevent="submit" class="space-y-6">
-            <div class="space-y-2">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
+            <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
-                    required
-                    ref="email-input"
                     id="email"
-                    type="email"
+                    ref="email-input"
                     v-model="form.email"
+                    type="email"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.email)"
                     autocomplete="username"
@@ -64,13 +74,13 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
                 <label for="password">Password</label>
                 <InputText
-                    required
                     id="password"
-                    type="password"
                     v-model="form.password"
+                    type="password"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.password)"
                     autocomplete="current-password"
@@ -90,9 +100,9 @@ onMounted(() => {
                     <div class="flex items-center">
                         <Checkbox
                             id="remember"
-                            :binary="true"
                             v-model="form.remember"
                             class="mr-2"
+                            :binary="true"
                         ></Checkbox>
                         <label for="remember">Remember me</label>
                     </div>
@@ -100,19 +110,19 @@ onMounted(() => {
             </div>
 
             <div class="flex justify-end items-center pt-2">
-                <Link
+                <InertiaLink
                     v-if="canResetPassword"
                     :href="route('password.request')"
                     class="mr-4 underline text-muted-color hover:text-color"
                 >
                     Forgot your password?
-                </Link>
+                </InertiaLink>
                 <Button
-                    raised
-                    type="submit"
                     :loading="form.processing"
+                    type="submit"
                     label="Log In"
                     severity="contrast"
+                    raised
                 />
             </div>
         </form>

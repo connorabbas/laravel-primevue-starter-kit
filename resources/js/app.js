@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
+import '../css/tailwind.css';
 import 'primeicons/primeicons.css';
 
 import { createApp, h } from 'vue';
@@ -10,10 +11,14 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
-import { useTheme } from '@/Composables/useTheme.js';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Container from '@/Components/Container.vue';
+
 import customThemePreset from '@/theme-preset.js';
+import { useDark } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const darkMode = useDark(); // set Light/Dark Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -23,20 +28,18 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        // set site theme (light/dark mode)
-        const { initSiteTheme } = useTheme();
-        initSiteTheme();
-
-        // start the app
         return createApp({ render: () => h(App, props) })
+            .provide('darkMode', darkMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
                 theme: customThemePreset,
             })
             .use(ToastService)
-            .component('Head', Head)
-            .component('Link', Link)
+            .component('InertiaHead', Head)
+            .component('InertiaLink', Link)
+            .component('AuthenticatedLayout', AuthenticatedLayout)
+            .component('Container', Container)
             .mount(el);
     },
     progress: {
