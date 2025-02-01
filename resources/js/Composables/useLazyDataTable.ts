@@ -4,8 +4,8 @@ import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } fro
 import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(
+    propDataToFetch: string,
     initialFilters: PrimeVueDataFilters = {},
-    only: string[] = ['request'],
     initialsRows: number = 20
 ) {
     const {
@@ -20,7 +20,7 @@ export function useLazyDataTable(
         fetchData,
         paginate,
         hardReset,
-    } = usePaginatedData(initialFilters, only, initialsRows);
+    } = usePaginatedData(propDataToFetch, initialFilters, initialsRows);
 
     function parseEventFilterValues() {
         Object.keys(filters.value).forEach((key) => {
