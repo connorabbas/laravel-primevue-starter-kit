@@ -26,7 +26,7 @@ interface SortState {
 export function usePaginatedData(
     propDataToFetch: string,
     initialFilters: PrimeVueDataFilters = {},
-    initialsRows: number = 20
+    initialRows: number = 20
 ) {
     const urlParams = ref<PaginatedFilteredSortedQueryParams>({});
     const processing = ref<boolean>(false);
@@ -37,7 +37,7 @@ export function usePaginatedData(
     });
     const pagination = ref<PaginationState>({
         page: 1,
-        rows: initialsRows,
+        rows: initialRows,
     });
 
     const firstDatasetIndex = computed(() => {
@@ -140,7 +140,7 @@ export function usePaginatedData(
         };
         pagination.value = {
             page: 1,
-            rows: initialsRows,
+            rows: initialRows,
         };
         fetchData();
     }
