@@ -16,11 +16,6 @@ const currentRoute = computed(() => {
     return route().current();
 });
 
-const logoutForm = useForm({});
-function logout() {
-    logoutForm.post(route('logout'));
-}
-
 // Main menu
 const mainMenuItems = computed(() => [
     {
@@ -32,6 +27,7 @@ const mainMenuItems = computed(() => [
 
 // User menu (desktop)
 const userMenu = useTemplateRef('user-menu');
+const logoutForm = useForm({});
 const userMenuItems = [
     {
         label: 'Profile',
@@ -42,7 +38,7 @@ const userMenuItems = [
         label: 'Log Out',
         icon: 'pi pi-fw pi-sign-out',
         command: () => {
-            logout();
+            logoutForm.post(route('logout'));
         },
     },
 ];
@@ -109,19 +105,19 @@ watchEffect(() => {
                                 <div>
                                     <ToggleDarkModeButton
                                         severity="secondary"
-                                        text
                                         rounded
+                                        text
                                     />
                                 </div>
                                 <!-- User Dropdown Menu -->
                                 <div class="flex flex-col">
                                     <Button
                                         id="user-menu-btn"
-                                        text
                                         severity="secondary"
                                         :label="page.props.auth.user.name"
                                         icon="pi pi-angle-down"
                                         iconPos="right"
+                                        text
                                         @click="toggleUserMenu($event)"
                                     />
                                     <div
@@ -142,10 +138,10 @@ watchEffect(() => {
                             <div class="flex items-center lg:hidden">
                                 <div class="relative">
                                     <Button
-                                        text
                                         severity="secondary"
                                         icon="pi pi-bars"
                                         pt:icon:class="text-xl"
+                                        text
                                         @click="mobileMenuOpen = true"
                                     />
                                 </div>
@@ -162,8 +158,8 @@ watchEffect(() => {
                     <template #header>
                         <ToggleDarkModeButton
                             severity="secondary"
-                            text
                             rounded
+                            text
                         />
                     </template>
                     <div>
@@ -188,9 +184,9 @@ watchEffect(() => {
                                 <Button
                                     label="Profile"
                                     icon="pi pi-user"
-                                    fluid
                                     severity="secondary"
                                     outlined
+                                    fluid
                                 ></Button>
                             </InertiaLink>
                             <Button
