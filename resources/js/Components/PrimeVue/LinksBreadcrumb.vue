@@ -20,7 +20,7 @@ const page = usePage();
                 custom
             >
                 <span
-                    v-show="item.icon"
+                    v-if="item.icon"
                     :class="item.icon"
                     class="p-breadcrumb-item-icon"
                 />
@@ -33,7 +33,7 @@ const page = usePage();
                 v-bind="props.action"
             >
                 <span
-                    v-show="item.icon"
+                    v-if="item.icon"
                     :class="item.icon"
                     class="p-breadcrumb-item-icon"
                 />
