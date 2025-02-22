@@ -117,8 +117,6 @@ onMounted(() => {
                 :loading="form.processing"
                 type="submit"
                 label="Save"
-                severity="contrast"
-                raised
             />
 
             <Transition

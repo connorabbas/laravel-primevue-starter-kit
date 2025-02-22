@@ -111,8 +111,6 @@ onMounted(() => {
                     :loading="form.processing"
                     type="submit"
                     label="Reset Password"
-                    severity="contrast"
-                    raised
                 />
             </div>
         </form>

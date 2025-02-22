@@ -1,4 +1,3 @@
-import './bootstrap';
 import '../css/app.css';
 import '../css/tailwind.css';
 import 'primeicons/primeicons.css';
@@ -17,7 +16,7 @@ import Container from '@/Components/Container.vue';
 import { useDark } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const darkMode = useDark(); // set Light/Dark Mode
+const darkMode = useDark(); // sets Light/Dark Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

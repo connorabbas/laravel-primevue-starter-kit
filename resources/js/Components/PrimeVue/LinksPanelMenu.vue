@@ -1,54 +1,50 @@
 <template>
-    <PanelMenu :pt="{
-        root: {
-            class: 'p-0 m-0 gap-1',
-        },
-        panel: {
-            class: 'p-0 border-0',
-        },
-        header: {
-            class: 'p-0 border-0',
-        },
-        itemContent: {
-            class: 'gap-1',
-        },
-    }">
+    <PanelMenu
+        pt:root:class="p-0 m-0 gap-1"
+        pt:panel:class="p-0 border-0"
+        pt:header:class="p-0 border-0"
+        pt:itemContent:class="gap-1"
+    >
         <template #item="{ item, active }">
-            <!-- add if using 'nora' preset theme -->
-            <!-- hover:text-primary-100 dark:hover:text-primary-950 -->
             <InertiaLink
                 v-if="item.route"
                 :href="item.route"
+                :class="[
+                    'p-panelmenu-item-link flex items-center cursor-pointer no-underline px-4 py-2',
+                    { 'font-bold! text-muted-color': item.active }
+                ]"
                 custom
-                class="flex items-center cursor-pointer no-underline px-4 py-2"
-                :class="item.active
-                    ? 'font-bold text-primary'
-                    : 'text-surface-700 dark:text-surface-0'
-                    "
             >
                 <i
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-panelmenu-item-icon mr-2"
+                    v-if="item.icon"
+                    :class="[
+                        'mr-2 p-panelmenu-item-icon',
+                        item.icon,
+                    ]"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
             <a
                 v-else
-                class="flex items-center cursor-pointer no-underline text-surface-700 dark:text-surface-0 px-4 py-2"
                 :href="item.url"
                 :target="item.target"
+                :class="[
+                    'flex items-center cursor-pointer no-underline px-4 py-2',
+                    item.items ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
+                ]"
             >
                 <i
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-panelmenu-item-icon mr-2"
+                    v-if="item.icon"
+                    :class="[
+                        'mr-2 p-panelmenu-item-icon',
+                        item.icon,
+                    ]"
                 />
                 <span>{{ item.label }}</span>
                 <span
                     v-if="item.items"
                     :class="[
-                        'pi text-muted-color ml-auto',
+                        'pi p-panelmenu-submenu-icon ml-auto',
                         active ? 'pi-angle-down' : 'pi-angle-right',
                     ]"
                 />

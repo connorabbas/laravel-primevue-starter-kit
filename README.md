@@ -2,8 +2,7 @@
 
 ## About
 
-![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)) ![Static Badge](https://img.shields.io/badge/Tailwind%20CSS%20-%20v4%20-%20%230284c7)
-
+![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)>) ![Static Badge](https://img.shields.io/badge/Tailwind%20CSS%20-%20v4%20-%20%230284c7)
 
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
@@ -63,9 +62,9 @@ This approach ensures:
 
 By opting for the Tailwind Theme, it is still possible to achieve a modern, customizable design system while retaining the benefits of server-side styling compatibility.
 
-### Configuration
+### Styling & Configuration
 
-In other branches, theming is handled by the `resources/js/theme-preset.js` file and the extended Aura theme provided by PrimeVue. With this Tailwind Theme version, the configuration of custom base styles is instead handled via CSS variables within the `resources/css/styles.css` file.
+In other branches, component styling is handled by preset themes using styled mode. With this Tailwind Theme version, the configuration of custom base styles is instead handled via CSS variables within the `resources/css/styles.css` file.
 
 The component styles reside within the `resources/css/primevue` directory, copied from the latest release of the [primefaces/primevue-tailwind](https://github.com/primefaces/primevue-tailwind/releases) styles.
 

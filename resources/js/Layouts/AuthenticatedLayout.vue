@@ -88,14 +88,8 @@ if (import.meta.env.SSR === false) {
                 <Container>
                     <LinksMenuBar
                         :model="mainMenuItems"
-                        :pt="{
-                            root: {
-                                class: 'px-0 py-3 border-0 rounded-none dynamic-bg',
-                            },
-                            button: {
-                                class: 'hidden',
-                            },
-                        }"
+                        pt:root:class="px-0 py-3 border-0 rounded-none dynamic-bg"
+                        pt:button:class="hidden"
                     >
                         <template #start>
                             <!-- Logo -->
@@ -135,12 +129,8 @@ if (import.meta.env.SSR === false) {
                                         ref="user-menu"
                                         appendTo="#user-menu-append"
                                         :model="userMenuItems"
+                                        pt:root:class="left-auto! top-0! right-0"
                                         popup
-                                        :pt="{
-                                            root: {
-                                                class: 'left-auto! top-0! right-0',
-                                            },
-                                        }"
                                     />
                                 </div>
                             </div>
@@ -152,11 +142,7 @@ if (import.meta.env.SSR === false) {
                                         text
                                         severity="secondary"
                                         icon="pi pi-bars"
-                                        :pt="{
-                                            icon: {
-                                                class: 'text-xl',
-                                            },
-                                        }"
+                                        pt:icon:class="text-xl"
                                         @click="mobileMenuOpen = true"
                                     />
                                 </div>
