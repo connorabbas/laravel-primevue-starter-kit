@@ -1,11 +1,16 @@
 <script setup>
-defineProps({
-    spacedMobile: {
+const props = defineProps({
+    fluid: {
         type: Boolean,
-        default: true,
+        default: false,
         required: false,
     },
-    fluid: {
+    vertical: {
+        type: Boolean,
+        default: false,
+        required: false,
+    },
+    flushMobile: {
         type: Boolean,
         default: false,
         required: false,
@@ -14,11 +19,16 @@ defineProps({
 </script>
 
 <template>
-    <div :class="[
-        { 'max-w-(--breakpoint-2xl) mx-auto': !fluid },
-        spacedMobile ? 'px-4' : 'px-0',
-        'md:px-8',
-    ]">
+    <div
+        class="md:px-8"
+        :class="[
+            {
+                'max-w-(--breakpoint-2xl) mx-auto': !props.fluid,
+                'py-4 md:py-8 space-y-4 md:space-y-8': props.vertical
+            },
+            props.flushMobile ? 'px-0' : 'px-4',
+        ]"
+    >
         <slot />
     </div>
 </template>
