@@ -1,4 +1,5 @@
 <script setup>
+import { usePage } from '@inertiajs/vue3';
 import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 defineProps({
@@ -17,6 +18,8 @@ defineProps({
         required: true,
     },
 });
+
+const page = usePage();
 </script>
 
 <template>
@@ -49,7 +52,7 @@ defineProps({
                                 class="underline text-primary hover:text-color"
                             >PrimeVue</a>.
                         </p>
-                        <template v-if="$page.props.auth.user">
+                        <template v-if="page.props.auth.user">
                             <InertiaLink :href="route('dashboard')">
                                 <Button
                                     label="Dashboard"

@@ -10,8 +10,8 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
+import PageTitleSection from '@/Components/PageTitleSection.vue';
 
 import { useDark } from '@vueuse/core';
 
@@ -36,8 +36,8 @@ createInertiaApp({
             .use(ToastService)
             .component('InertiaHead', Head)
             .component('InertiaLink', Link)
-            .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Container', Container)
+            .component('PageTitleSection', PageTitleSection)
             .mount(el);
     },
     progress: {

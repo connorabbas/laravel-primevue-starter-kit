@@ -1,26 +1,34 @@
 <script setup>
-import { ref, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { ref, computed, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
+import { usePage, useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
 import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
 import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
-const currentRoute = route().current();
+const page = usePage();
+const currentRoute = computed(() => {
+    // Access page.url to trigger re-computation on navigation.
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const url = page.url;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    return route().current();
+});
+
 const logoutForm = useForm({});
 function logout() {
     logoutForm.post(route('logout'));
 }
 
 // Main menu
-const mainMenuItems = [
+const mainMenuItems = computed(() => [
     {
         label: 'Dashboard',
         route: route('dashboard'),
-        active: currentRoute == 'dashboard',
+        active: currentRoute.value == 'dashboard',
     },
-];
+]);
 
 // User menu (desktop)
 const userMenu = useTemplateRef('user-menu');
@@ -43,18 +51,18 @@ const toggleUserMenu = (event) => {
 };
 
 // Mobile menu (Drawer)
-const homeMobileMenuItems = ref([
+const homeMobileMenuItems = computed(() => [
     {
         label: 'Welcome',
         icon: 'pi pi-home',
         route: route('welcome'),
-        active: currentRoute == 'welcome',
+        active: currentRoute.value == 'welcome',
     },
     {
         label: 'Dashboard',
         icon: 'pi pi-th-large',
         route: route('dashboard'),
-        active: currentRoute == 'dashboard',
+        active: currentRoute.value == 'dashboard',
     },
 ]);
 const mobileMenuOpen = ref(false);
@@ -80,15 +88,12 @@ if (import.meta.env.SSR === false) {
 <template>
     <div>
         <div class="min-h-screen">
-            <nav
-                class="dynamic-bg border-b"
-                :class="$slots.header ? 'dynamic-border' : 'shadow-sm'"
-            >
+            <nav class="dynamic-bg shadow-sm">
                 <!-- Primary Navigation Menu -->
                 <Container>
                     <LinksMenuBar
                         :model="mainMenuItems"
-                        pt:root:class="px-0 py-3 border-0 rounded-none dynamic-bg"
+                        pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >
                         <template #start>
@@ -116,7 +121,7 @@ if (import.meta.env.SSR === false) {
                                         id="user-menu-btn"
                                         text
                                         severity="secondary"
-                                        :label="$page.props.auth.user.name"
+                                        :label="page.props.auth.user.name"
                                         icon="pi pi-angle-down"
                                         iconPos="right"
                                         @click="toggleUserMenu($event)"
@@ -202,18 +207,6 @@ if (import.meta.env.SSR === false) {
                     </template>
                 </Drawer>
             </nav>
-
-            <!-- Page Heading -->
-            <header
-                v-if="$slots.header"
-                class="dynamic-bg shadow-sm"
-            >
-                <Container>
-                    <div class="py-6">
-                        <slot name="header" />
-                    </div>
-                </Container>
-            </header>
 
             <!-- Page Content -->
             <Toast position="top-center" />
