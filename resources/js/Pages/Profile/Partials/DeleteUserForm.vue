@@ -79,7 +79,6 @@ function focusPasswordInput() {
                     :loading="form.processing"
                     label="Delete Account"
                     severity="danger"
-                    raised
                     @click="deleteUser"
                 />
             </template>
@@ -88,7 +87,6 @@ function focusPasswordInput() {
         <Button
             label="Delete Account"
             severity="danger"
-            raised
             @click="modalOpen = true"
         />
     </section>

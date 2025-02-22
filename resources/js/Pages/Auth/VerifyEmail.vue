@@ -50,8 +50,6 @@ const verificationLinkSent = computed(
                     :loading="form.processing"
                     type="submit"
                     label="Resend Verification Email"
-                    severity="contrast"
-                    raised
                 />
                 <InertiaLink
                     :href="route('logout')"

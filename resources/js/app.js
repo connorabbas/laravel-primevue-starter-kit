@@ -1,4 +1,3 @@
-import './bootstrap';
 import '../css/app.css';
 import '../css/tailwind.css';
 import 'primeicons/primeicons.css';
@@ -14,11 +13,11 @@ import ToastService from 'primevue/toastservice';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
 
-import customThemePreset from '@/theme-preset.js';
+import customThemePreset from '@/theme/noir-preset';
 import { useDark } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const darkMode = useDark(); // set Light/Dark Mode
+const darkMode = useDark(); // sets Light/Dark Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -33,7 +32,16 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
-                theme: customThemePreset,
+                theme: {
+                    preset: customThemePreset,
+                    options: {
+                        darkModeSelector: '.dark',
+                        cssLayer: {
+                            name: 'primevue',
+                            order: 'tailwind-theme, tailwind-base, primevue, tailwind-utilities',
+                        },
+                    },
+                },
             })
             .use(ToastService)
             .component('InertiaHead', Head)

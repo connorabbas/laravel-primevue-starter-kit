@@ -23,7 +23,7 @@ defineExpose({
                 custom
             >
                 <span
-                    v-show="item.icon"
+                    v-if="item.icon"
                     :class="item.icon"
                     class="p-menu-item-icon"
                 />
@@ -36,7 +36,7 @@ defineExpose({
                 v-bind="props.action"
             >
                 <span
-                    v-show="item.icon"
+                    v-if="item.icon"
                     :class="item.icon"
                     class="p-menu-item-icon"
                 />
