@@ -87,6 +87,7 @@ watchEffect(() => {
                 <Container>
                     <LinksMenuBar
                         :model="mainMenuItems"
+                        :key="currentRoute"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >

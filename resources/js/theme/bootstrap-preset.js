@@ -1,5 +1,5 @@
-import Preset from '@primeuix/themes/lara';
-import { definePreset } from '@primeuix/themes';
+import Preset from '@primevue/themes/lara';
+import { definePreset } from '@primevue/themes';
 
 const customThemePreset = definePreset(Preset, {
     semantic: {
