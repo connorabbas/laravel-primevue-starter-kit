@@ -35,7 +35,7 @@ defineExpose({
                     :class="item.icon"
                     class="p-menubar-item-icon"
                 />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+                <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
             <a
                 v-else
@@ -49,7 +49,7 @@ defineExpose({
                     :class="item.icon"
                     class="p-menubar-item-icon"
                 />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+                <span class="p-menubar-item-label">{{ item.label }}</span>
                 <i
                     v-if="hasSubmenu"
                     :class="[
