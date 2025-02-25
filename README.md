@@ -4,10 +4,10 @@
 
 ![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v3%20-%20rgb(16%20185%20129)>)
 
-A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue V3](https://v3.primevue.org/) w/ [PrimeFlex](https://primeflex.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
-
 > [!NOTE]
-> This branch is no longer maintained, please consider using the latest main/master branch which uses [PrimeVue V4](https://primevue.org/), and [Tailwind CSS](https://tailwindcss.com/) instead of PrimeFlex.
+> This branch is no longer maintained, please consider using the main/master branch which uses the latest versions of Laravel, PrimeVue, and Tailwind CSS (instead of PrimeFlex).
+
+A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue V3](https://v3.primevue.org/) w/ [PrimeFlex](https://primeflex.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
 ## Theming
 
