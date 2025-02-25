@@ -1,5 +1,5 @@
-import Preset from '@primevue/themes/aura';
-import { definePreset } from '@primevue/themes';
+import Preset from '@primeuix/themes/aura';
+import { definePreset } from '@primeuix/themes';
 
 // https://primevue.org/theming/styled/#noir
 const customThemePreset = definePreset(Preset, {

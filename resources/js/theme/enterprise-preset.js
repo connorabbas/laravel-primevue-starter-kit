@@ -1,5 +1,5 @@
-import Preset from '@primevue/themes/nora';
-import { definePreset } from '@primevue/themes';
+import Preset from '@primeuix/themes/nora';
+import { definePreset } from '@primeuix/themes';
 
 const customThemePreset = definePreset(Preset, {
     semantic: {
