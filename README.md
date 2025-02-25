@@ -4,6 +4,9 @@
 
 ![Static Badge](https://img.shields.io/badge/Laravel%20-%20v11%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)>) ![Static Badge](https://img.shields.io/badge/Tailwind%20CSS%20-%20v4%20-%20%230284c7)
 
+> [!NOTE]
+> This branch is no longer maintained, please consider using the main/master branch which uses the latest versions of Laravel, PrimeVue, and Tailwind CSS.
+
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
 Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
