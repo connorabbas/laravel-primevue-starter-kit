@@ -1,11 +1,11 @@
 <script setup>
 import { ref, computed, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
-import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
-import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
-import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
+import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import LinksMenu from '@/components/primevue/LinksMenu.vue';
+import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
+import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
+import ToggleDarkModeButton from '@/components/ToggleDarkModeButton.vue';
 
 const page = usePage();
 const currentRoute = computed(() => {

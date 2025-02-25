@@ -10,8 +10,8 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
-import Container from '@/Components/Container.vue';
-import PageTitleSection from '@/Components/PageTitleSection.vue';
+import Container from '@/components/Container.vue';
+import PageTitleSection from '@/components/PageTitleSection.vue';
 
 import customThemePreset from '@/theme/noir-preset';
 import { useDark } from '@vueuse/core';
@@ -23,8 +23,8 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
         resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob('./Pages/**/*.vue')
+            `./pages/${name}.vue`,
+            import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })

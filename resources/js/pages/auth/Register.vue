@@ -1,7 +1,7 @@
 <script setup>
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 
 const form = useForm({
     name: '',

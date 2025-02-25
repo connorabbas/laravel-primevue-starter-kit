@@ -1,28 +1,31 @@
 <script setup>
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
+const props = defineProps({
+    email: {
         type: String,
+        required: true,
+    },
+    token: {
+        type: String,
+        required: true,
     },
 });
 
 const emailInput = useTemplateRef('email-input');
 
 const form = useForm({
-    email: '',
+    token: props.token,
+    email: props.email,
     password: '',
-    remember: false,
+    password_confirmation: '',
 });
 
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    form.post(route('password.store'), {
+        onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
 
@@ -33,20 +36,7 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-        <InertiaHead title="Log in" />
-
-        <template
-            v-if="status"
-            #message
-        >
-            <Message
-                severity="success"
-                :closable="false"
-                class="shadow-sm"
-            >
-                {{ status }}
-            </Message>
-        </template>
+        <InertiaHead title="Reset Password" />
 
         <form
             class="space-y-6"
@@ -59,9 +49,9 @@ onMounted(() => {
                     ref="email-input"
                     v-model="form.email"
                     type="email"
+                    :invalid="Boolean(form.errors.email)"
                     required
                     fluid
-                    :invalid="Boolean(form.errors.email)"
                     autocomplete="username"
                 />
                 <Message
@@ -80,10 +70,10 @@ onMounted(() => {
                     id="password"
                     v-model="form.password"
                     type="password"
+                    :invalid="Boolean(form.errors.password)"
                     required
                     fluid
-                    :invalid="Boolean(form.errors.password)"
-                    autocomplete="current-password"
+                    autocomplete="new-password"
                 />
                 <Message
                     v-if="form.errors?.password"
@@ -95,32 +85,32 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div>
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <Checkbox
-                            id="remember"
-                            v-model="form.remember"
-                            class="mr-2"
-                            :binary="true"
-                        ></Checkbox>
-                        <label for="remember">Remember me</label>
-                    </div>
-                </div>
+            <div class="flex flex-col gap-2">
+                <label for="password_confirmation">Password</label>
+                <InputText
+                    id="password_confirmation"
+                    v-model="form.password_confirmation"
+                    type="password"
+                    :invalid="Boolean(form.errors.password_confirmation)"
+                    required
+                    fluid
+                    autocomplete="new-password"
+                />
+                <Message
+                    v-if="form.errors?.password_confirmation"
+                    severity="error"
+                    variant="simple"
+                    size="small"
+                >
+                    {{ form.errors?.password_confirmation }}
+                </Message>
             </div>
 
             <div class="flex justify-end items-center pt-2">
-                <InertiaLink
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="mr-4 underline text-muted-color hover:text-color"
-                >
-                    Forgot your password?
-                </InertiaLink>
                 <Button
                     :loading="form.processing"
                     type="submit"
-                    label="Log In"
+                    label="Reset Password"
                 />
             </div>
         </form>
