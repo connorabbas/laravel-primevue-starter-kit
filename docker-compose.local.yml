@@ -21,8 +21,8 @@ services:
       - '.:/var/www/html'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.inertia_primevue.rule=Host(`inertia-primevue.localhost`)"
-      - "traefik.http.services.inertia_primevue.loadbalancer.server.port=80"
+      - "traefik.http.routers.laravel-primevue.rule=Host(`laravel-primevue.localhost`)"
+      - "traefik.http.services.laravel-primevue.loadbalancer.server.port=80"
     networks:
       - sail
       - proxy
@@ -39,7 +39,7 @@ services:
       POSTGRES_USER: '${DB_USERNAME}'
       POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
-      - 'inertia-primevue-pgsql:/var/lib/postgresql/data'
+      - 'laravel-primevue-pgsql:/var/lib/postgresql/data'
       - './docker/local/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
       - sail
@@ -49,7 +49,7 @@ services:
       timeout: 5s
 
 volumes:
-  inertia-primevue-pgsql:
+  laravel-primevue-pgsql:
     driver: local
 
 networks:

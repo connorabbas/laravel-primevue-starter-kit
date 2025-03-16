@@ -78,7 +78,7 @@ This starter kit is configured to use Docker Compose for local development with 
     ```env
     # Use any desired domain ending with .localhost
     # Match with value used in docker-compose.local.yml
-    APP_URL=http://inertia-primevue.localhost
+    APP_URL=http://laravel-primevue.localhost
 
     DB_CONNECTION=pgsql
     DB_HOST=pgsql # name of service
