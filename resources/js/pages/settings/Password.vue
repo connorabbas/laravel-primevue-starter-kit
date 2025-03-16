@@ -14,8 +14,6 @@ defineProps({
     },
 });
 
-defineOptions({ layout: AuthenticatedLayout });
-
 const currentPasswordInput = useTemplateRef('current-password-input');
 const newPasswordInput = useTemplateRef('new-password-input');
 
@@ -60,91 +58,93 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Password Settings" />
+    <AuthenticatedLayout>
+        <InertiaHead title="Password Settings" />
 
-    <SettingsLayout>
-        <Card
-            pt:body:class="max-w-2xl space-y-3"
-            pt:caption:class="space-y-1"
-        >
-            <template #title>Update Password</template>
-            <template #subtitle>
-                Ensure your account is using a long, random password to stay secure
-            </template>
-            <template #content>
-                <form
-                    class="space-y-6"
-                    @submit.prevent="updatePassword"
-                >
-                    <div class="flex flex-col gap-2">
-                        <label for="current_password">Current Password</label>
-                        <InputText
-                            id="current_password"
-                            ref="current-password-input"
-                            v-model="form.current_password"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors?.current_password)"
-                            autocomplete="current-password"
+        <SettingsLayout>
+            <Card
+                pt:body:class="max-w-2xl space-y-3"
+                pt:caption:class="space-y-1"
+            >
+                <template #title>Update Password</template>
+                <template #subtitle>
+                    Ensure your account is using a long, random password to stay secure
+                </template>
+                <template #content>
+                    <form
+                        class="space-y-6"
+                        @submit.prevent="updatePassword"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <label for="current_password">Current Password</label>
+                            <InputText
+                                id="current_password"
+                                ref="current-password-input"
+                                v-model="form.current_password"
+                                type="password"
+                                required
+                                fluid
+                                :invalid="Boolean(form.errors?.current_password)"
+                                autocomplete="current-password"
+                            />
+                            <Message
+                                v-if="form.errors?.current_password"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.current_password }}
+                            </Message>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="password">New Password</label>
+                            <InputText
+                                id="password"
+                                ref="new-password-input"
+                                v-model="form.password"
+                                type="password"
+                                required
+                                fluid
+                                :invalid="Boolean(form.errors.password)"
+                                autocomplete="new-password"
+                            />
+                            <Message
+                                v-if="form.errors?.password"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.password }}
+                            </Message>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <InputText
+                                id="password_confirmation"
+                                v-model="form.password_confirmation"
+                                type="password"
+                                required
+                                fluid
+                                :invalid="Boolean(form.errors.password_confirmation)"
+                                autocomplete="new-password"
+                            />
+                            <Message
+                                v-if="form.errors?.password_confirmation"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.password_confirmation }}
+                            </Message>
+                        </div>
+                        <Button
+                            :loading="form.processing"
+                            type="submit"
+                            label="Save"
                         />
-                        <Message
-                            v-if="form.errors?.current_password"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.current_password }}
-                        </Message>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="password">New Password</label>
-                        <InputText
-                            id="password"
-                            ref="new-password-input"
-                            v-model="form.password"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors.password)"
-                            autocomplete="new-password"
-                        />
-                        <Message
-                            v-if="form.errors?.password"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.password }}
-                        </Message>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="password_confirmation">Confirm Password</label>
-                        <InputText
-                            id="password_confirmation"
-                            v-model="form.password_confirmation"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors.password_confirmation)"
-                            autocomplete="new-password"
-                        />
-                        <Message
-                            v-if="form.errors?.password_confirmation"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.password_confirmation }}
-                        </Message>
-                    </div>
-                    <Button
-                        :loading="form.processing"
-                        type="submit"
-                        label="Save"
-                    />
-                </form>
-            </template>
-        </Card>
-    </SettingsLayout>
+                    </form>
+                </template>
+            </Card>
+        </SettingsLayout>
+    </AuthenticatedLayout>
 </template>

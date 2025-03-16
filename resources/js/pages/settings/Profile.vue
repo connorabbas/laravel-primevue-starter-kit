@@ -15,8 +15,6 @@ defineProps({
     },
 });
 
-defineOptions({ layout: AuthenticatedLayout });
-
 const deleteUserModalOpen = ref(false);
 
 const user = usePage().props.auth.user;
@@ -50,122 +48,124 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Profile Settings" />
+    <AuthenticatedLayout>
+        <InertiaHead title="Profile Settings" />
 
-    <SettingsLayout>
-        <div class="space-y-4 md:space-y-8">
-            <Card
-                pt:body:class="max-w-2xl space-y-3"
-                pt:caption:class="space-y-1"
-            >
-                <template #title>Profile Information</template>
-                <template #subtitle>
-                    Update your name and email address
-                </template>
-                <template #content>
-                    <form
-                        class="space-y-6"
-                        @submit.prevent="updateProfileInformation"
-                    >
-                        <div class="flex flex-col gap-2">
-                            <label for="name">Name</label>
-                            <InputText
-                                id="name"
-                                ref="name-input"
-                                v-model="form.name"
-                                type="text"
-                                required
-                                fluid
-                                :invalid="Boolean(form.errors.name)"
-                                autocomplete="name"
-                            />
-                            <Message
-                                v-if="form.errors?.name"
-                                severity="error"
-                                variant="simple"
-                                size="small"
-                            >
-                                {{ form.errors?.name }}
-                            </Message>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="email">Email</label>
-                            <InputText
-                                id="email"
-                                v-model="form.email"
-                                type="email"
-                                required
-                                fluid
-                                :invalid="Boolean(form.errors.email)"
-                                autocomplete="username"
-                            />
-                            <Message
-                                v-if="form.errors?.email"
-                                severity="error"
-                                variant="simple"
-                                size="small"
-                            >
-                                {{ form.errors?.email }}
-                            </Message>
-                        </div>
-                        <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                            <p class="text-sm mt-2">
-                                Your email address is unverified.
-                                <InertiaLink
-                                    :href="route('verification.send')"
-                                    method="post"
-                                    class="underline text-sm text-muted-color hover:text-color"
-                                >
-                                    Click here to re-send the verification email.
-                                </InertiaLink>
-                            </p>
-                            <Message
-                                v-if="status === 'verification-link-sent'"
-                                severity="success"
-                                :closable="false"
-                                class="shadow-sm mt-4"
-                            >
-                                A new verification link has been sent to your email address.
-                            </Message>
-                        </div>
-                        <Button
-                            :loading="form.processing"
-                            type="submit"
-                            label="Save"
-                        />
-                    </form>
-                </template>
-            </Card>
-            <Card
-                pt:body:class="max-w-2xl space-y-3"
-                pt:caption:class="space-y-1"
-            >
-                <template #title>Delete Account</template>
-                <template #subtitle>
-                    Delete your account and all of its resources
-                </template>
-                <template #content>
-                    <DeleteUserModal v-model="deleteUserModalOpen" />
-                    <Message
-                        severity="error"
-                        pt:root:class="p-2"
-                    >
-                        <div class="flex flex-col gap-4">
-                            <div>
-                                <div class="text-lg">Warning</div>
-                                <div class="">Please proceed with caution, this cannot be undone.</div>
-                            </div>
-                            <div>
-                                <Button
-                                    label="Delete Account"
-                                    severity="danger"
-                                    @click="deleteUserModalOpen = true"
+        <SettingsLayout>
+            <div class="space-y-4 md:space-y-8">
+                <Card
+                    pt:body:class="max-w-2xl space-y-3"
+                    pt:caption:class="space-y-1"
+                >
+                    <template #title>Profile Information</template>
+                    <template #subtitle>
+                        Update your name and email address
+                    </template>
+                    <template #content>
+                        <form
+                            class="space-y-6"
+                            @submit.prevent="updateProfileInformation"
+                        >
+                            <div class="flex flex-col gap-2">
+                                <label for="name">Name</label>
+                                <InputText
+                                    id="name"
+                                    ref="name-input"
+                                    v-model="form.name"
+                                    type="text"
+                                    required
+                                    fluid
+                                    :invalid="Boolean(form.errors.name)"
+                                    autocomplete="name"
                                 />
+                                <Message
+                                    v-if="form.errors?.name"
+                                    severity="error"
+                                    variant="simple"
+                                    size="small"
+                                >
+                                    {{ form.errors?.name }}
+                                </Message>
                             </div>
-                        </div>
-                    </Message>
-                </template>
-            </Card>
-        </div>
-    </SettingsLayout>
+                            <div class="flex flex-col gap-2">
+                                <label for="email">Email</label>
+                                <InputText
+                                    id="email"
+                                    v-model="form.email"
+                                    type="email"
+                                    required
+                                    fluid
+                                    :invalid="Boolean(form.errors.email)"
+                                    autocomplete="username"
+                                />
+                                <Message
+                                    v-if="form.errors?.email"
+                                    severity="error"
+                                    variant="simple"
+                                    size="small"
+                                >
+                                    {{ form.errors?.email }}
+                                </Message>
+                            </div>
+                            <div v-if="mustVerifyEmail && user.email_verified_at === null">
+                                <p class="text-sm mt-2">
+                                    Your email address is unverified.
+                                    <InertiaLink
+                                        :href="route('verification.send')"
+                                        method="post"
+                                        class="underline text-sm text-muted-color hover:text-color"
+                                    >
+                                        Click here to re-send the verification email.
+                                    </InertiaLink>
+                                </p>
+                                <Message
+                                    v-if="status === 'verification-link-sent'"
+                                    severity="success"
+                                    :closable="false"
+                                    class="shadow-sm mt-4"
+                                >
+                                    A new verification link has been sent to your email address.
+                                </Message>
+                            </div>
+                            <Button
+                                :loading="form.processing"
+                                type="submit"
+                                label="Save"
+                            />
+                        </form>
+                    </template>
+                </Card>
+                <Card
+                    pt:body:class="max-w-2xl space-y-3"
+                    pt:caption:class="space-y-1"
+                >
+                    <template #title>Delete Account</template>
+                    <template #subtitle>
+                        Delete your account and all of its resources
+                    </template>
+                    <template #content>
+                        <DeleteUserModal v-model="deleteUserModalOpen" />
+                        <Message
+                            severity="error"
+                            pt:root:class="p-2"
+                        >
+                            <div class="flex flex-col gap-4">
+                                <div>
+                                    <div class="text-lg">Warning</div>
+                                    <div class="">Please proceed with caution, this cannot be undone.</div>
+                                </div>
+                                <div>
+                                    <Button
+                                        label="Delete Account"
+                                        severity="danger"
+                                        @click="deleteUserModalOpen = true"
+                                    />
+                                </div>
+                            </div>
+                        </Message>
+                    </template>
+                </Card>
+            </div>
+        </SettingsLayout>
+    </AuthenticatedLayout>
 </template>
