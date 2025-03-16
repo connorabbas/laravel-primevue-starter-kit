@@ -5,7 +5,6 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
-import ToggleDarkModeButton from '@/components/ToggleDarkModeButton.vue';
 
 const page = usePage();
 const currentRoute = computed(() => {
@@ -25,28 +24,33 @@ const mainMenuItems = computed(() => [
     },
 ]);
 
-// User menu (desktop)
-const userMenu = useTemplateRef('user-menu');
+// User menu
 const logoutForm = useForm({});
+const logout = () => {
+    logoutForm.post(route('logout'));
+};
 const userMenuItems = [
     {
-        label: 'Profile',
+        label: 'Settings',
         route: route('profile.edit'),
-        icon: 'pi pi-fw pi-user',
+        icon: 'pi pi-fw pi-cog',
     },
     {
         label: 'Log Out',
         icon: 'pi pi-fw pi-sign-out',
-        command: () => {
-            logoutForm.post(route('logout'));
-        },
+        command: () => logout(),
     },
 ];
+const userMenu = useTemplateRef('user-menu');
 const toggleUserMenu = (event) => {
     userMenu.value.childRef.toggle(event);
 };
+const mobileUserMenu = useTemplateRef('mobile-user-menu');
+const toggleMobileUserMenu = (event) => {
+    mobileUserMenu.value.childRef.toggle(event);
+};
 
-// Mobile menu (Drawer)
+// Mobile drawer menu
 const homeMobileMenuItems = computed(() => [
     {
         label: 'Welcome',
@@ -103,13 +107,6 @@ watchEffect(() => {
                         </template>
                         <template #end>
                             <div class="hidden lg:flex items-center ms-6 space-x-3">
-                                <div>
-                                    <ToggleDarkModeButton
-                                        severity="secondary"
-                                        rounded
-                                        text
-                                    />
-                                </div>
                                 <!-- User Dropdown Menu -->
                                 <div class="flex flex-col">
                                     <Button
@@ -156,13 +153,6 @@ watchEffect(() => {
                     v-model:visible="mobileMenuOpen"
                     position="right"
                 >
-                    <template #header>
-                        <ToggleDarkModeButton
-                            severity="secondary"
-                            rounded
-                            text
-                        />
-                    </template>
                     <div>
                         <div class="space-y-5">
                             <div class="flex flex-col gap-2">
@@ -177,27 +167,22 @@ watchEffect(() => {
                         </div>
                     </div>
                     <template #footer>
-                        <div class="flex items-center gap-2">
-                            <InertiaLink
-                                :href="route('profile.edit')"
-                                class="flex-auto"
-                            >
-                                <Button
-                                    label="Profile"
-                                    icon="pi pi-user"
-                                    severity="secondary"
-                                    outlined
-                                    fluid
-                                ></Button>
-                            </InertiaLink>
+                        <div class="flex flex-col">
                             <Button
-                                label="Logout"
-                                icon="pi pi-sign-out"
-                                class="flex-auto"
-                                severity="danger"
-                                text
-                                @click="logout"
-                            ></Button>
+                                id="mobile-user-menu-btn"
+                                severity="secondary"
+                                :label="page.props.auth.user.name"
+                                size="large"
+                                icon="pi pi-sort"
+                                iconPos="right"
+                                pt:root:class="flex justify-between"
+                                @click="toggleMobileUserMenu($event)"
+                            />
+                            <LinksMenu
+                                ref="mobile-user-menu"
+                                :model="userMenuItems"
+                                popup
+                            />
                         </div>
                     </template>
                 </Drawer>

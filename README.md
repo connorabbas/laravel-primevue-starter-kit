@@ -1,27 +1,33 @@
-# Laravel, Inertia.js, & PrimeVue Starter Kit
+# Laravel & PrimeVue Starter Kit
 
 ## About
 
 ![Static Badge](https://img.shields.io/badge/Laravel%20-%20v12%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)>) ![Static Badge](https://img.shields.io/badge/Tailwind%20CSS%20-%20v4%20-%20%230284c7)
 
-A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
+A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/).
 
 Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
 
+## Roadmap
+- [x] Updated User profile settings pages (similar to official Laravel starter kits)
+- [ ] Additional layouts (similar to official Laravel starter kits)
+- [ ] Alternative admin branch using [Filament PHP](https://filamentphp.com/)
+- [ ] Proper SSR support
+- [ ] Match UI/functionality to `connorabbas/primevue-spa-laravel-api` project
+- [ ] Hosted demo project
+
 ## Features
 
--   Same auth structure and features as Laravel Breeze with User Profile page
--   Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-inertia-primevue/tree/feature/admin-panel)
+-   Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-primevue-starter-kit/tree/feature/admin-panel)
 -   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
 -   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component
--   Light/Dark mode toggle
 -   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting (example usage in `feature/admin-panel` branch)
 -   Easily customizable theming
--   Configured to use TypeScript (not required)
+-   Opt-in TypeScript usage
 
 ## Theme
 
-This starter kit features a built-in light/dark mode toggle along with a collection of custom theme presets built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
+This starter kit features a light/dark/system color mode toggle along with a collection of custom theme presets to choose from, built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
 
 ### Prebuilt Theme Presets
 
@@ -49,11 +55,7 @@ Creating your own theme preset is simple. You can:
 
 For detailed guidance on customization, please refer to the [PrimeVue Styled Mode Docs](https://primevue.org/theming/styled/).
 
-## PrimeVue v4 w/ Tailwind CSS
-
-If you have used a previous version of this project using **PrimeVue V3**, you'll know that [PrimeFlex](https://primeflex.org/) was used instead of [Tailwind CSS](https://tailwindcss.com/) for utility class styling. With V4 however, the PrimeTek team has officially suggested [Moving from PrimeFlex to Tailwind CSS](https://primevue.org/guides/primeflex/).
-
-For this reason PrimeFlex has been removed, and Tailwind has been added into the project, along with the [tailwindcss-primeui](https://primevue.org/tailwind/#plugin) plugin. CSS layers have also been implemented so the Tailwind utilities can [override](https://primevue.org/tailwind/#override) the PrimeVue component styling when needed.
+### PrimeVue v4 w/ Tailwind CSS
 
 To clarify, Tailwind is **not** used for any component styling in this starter kit; instead, we use PrimeVue's styled mode with a custom theme preset implementation for component styling. Tailwind is applied solely for layout purposes **around** PrimeVue components and for minimal styling when needed.
 
