@@ -58,11 +58,11 @@ onMounted(() => {
                 <InputText
                     id="email"
                     v-model="form.email"
-                    type="email"
                     :invalid="Boolean(form.errors.email)"
+                    type="email"
+                    autocomplete="username"
                     required
                     fluid
-                    autocomplete="username"
                 />
                 <Message
                     v-if="form.errors?.email"
@@ -76,14 +76,14 @@ onMounted(() => {
 
             <div class="flex flex-col gap-2">
                 <label for="password">Password</label>
-                <InputText
+                <Password
                     id="password"
                     v-model="form.password"
-                    type="password"
                     :invalid="Boolean(form.errors.password)"
+                    autocomplete="new-password"
+                    toggleMask
                     required
                     fluid
-                    autocomplete="new-password"
                 />
                 <Message
                     v-if="form.errors?.password"
@@ -100,11 +100,11 @@ onMounted(() => {
                 <InputText
                     id="password_confirmation"
                     v-model="form.password_confirmation"
-                    type="password"
                     :invalid="Boolean(form.errors.password_confirmation)"
+                    type="password"
+                    autocomplete="new-password"
                     required
                     fluid
-                    autocomplete="new-password"
                 />
                 <Message
                     v-if="form.errors?.password_confirmation"

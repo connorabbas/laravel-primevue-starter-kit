@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
+import Password from 'primevue/password';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 
@@ -81,11 +82,11 @@ onMounted(() => {
                                 id="current_password"
                                 ref="current-password-input"
                                 v-model="form.current_password"
+                                :invalid="Boolean(form.errors?.current_password)"
                                 type="password"
+                                autocomplete="current-password"
                                 required
                                 fluid
-                                :invalid="Boolean(form.errors?.current_password)"
-                                autocomplete="current-password"
                             />
                             <Message
                                 v-if="form.errors?.current_password"
@@ -98,15 +99,15 @@ onMounted(() => {
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password">New Password</label>
-                            <InputText
+                            <Password
                                 id="password"
                                 ref="new-password-input"
                                 v-model="form.password"
-                                type="password"
+                                :invalid="Boolean(form.errors?.password)"
+                                autocomplete="new-password"
+                                toggleMask
                                 required
                                 fluid
-                                :invalid="Boolean(form.errors.password)"
-                                autocomplete="new-password"
                             />
                             <Message
                                 v-if="form.errors?.password"
@@ -122,11 +123,11 @@ onMounted(() => {
                             <InputText
                                 id="password_confirmation"
                                 v-model="form.password_confirmation"
+                                :invalid="Boolean(form.errors?.password_confirmation)"
                                 type="password"
+                                autocomplete="confirm-password"
                                 required
                                 fluid
-                                :invalid="Boolean(form.errors.password_confirmation)"
-                                autocomplete="new-password"
                             />
                             <Message
                                 v-if="form.errors?.password_confirmation"
