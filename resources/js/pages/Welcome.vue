@@ -49,7 +49,7 @@ const page = usePage();
                             <InertiaLink :href="route('dashboard')">
                                 <Button
                                     label="Dashboard"
-                                    icon="pi pi-home"
+                                    icon="pi pi-th-large"
                                     class="mr-4"
                                 />
                             </InertiaLink>

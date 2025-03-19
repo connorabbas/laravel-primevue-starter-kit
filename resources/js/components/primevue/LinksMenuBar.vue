@@ -54,7 +54,7 @@ defineExpose({
                     v-if="hasSubmenu"
                     :class="[
                         'pi',
-                        root ? 'pi-angle-down text-xs' : 'pi-angle-right',
+                        root ? 'pi-angle-down' : 'pi-angle-right',
                     ]"
                 ></i>
             </a>

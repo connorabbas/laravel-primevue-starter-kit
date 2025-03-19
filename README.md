@@ -6,15 +6,17 @@
 
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/).
 
+[Hosted Demo Project](https://laravel-primevue-starter-kit-demo-master-yhjxow.laravel.cloud/)
+
 Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
 
 ## Roadmap
+- [x] Hosted demo project
 - [x] Updated User profile settings pages (similar to official Laravel starter kits)
 - [ ] Additional layouts (similar to official Laravel starter kits)
 - [ ] Alternative admin branch using [Filament PHP](https://filamentphp.com/)
 - [ ] Proper SSR support
 - [ ] Match UI/functionality to `connorabbas/primevue-spa-laravel-api` project
-- [ ] Hosted demo project
 
 ## Features
 
