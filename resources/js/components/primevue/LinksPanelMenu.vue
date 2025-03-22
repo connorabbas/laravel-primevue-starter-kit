@@ -1,5 +1,17 @@
+<script setup lang="ts">
+import { useTemplateRef } from 'vue';
+import PanelMenu from 'primevue/panelmenu';
+
+type PanelMenuType = InstanceType<typeof PanelMenu>;
+const childRef = useTemplateRef<PanelMenuType>('child-ref');
+defineExpose({
+    childRef,
+});
+</script>
+
 <template>
     <PanelMenu
+        ref="child-ref"
         pt:root:class="p-0 m-0 gap-1"
         pt:panel:class="p-0 border-0"
         pt:header:class="p-0 border-0"

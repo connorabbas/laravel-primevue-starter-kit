@@ -1,16 +1,18 @@
-<script setup>
-import { usePage } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { useTemplateRef } from 'vue';
+import Breadcrumb from 'primevue/breadcrumb';
 
-const page = usePage();
+type BreadcrumbType = InstanceType<typeof Breadcrumb>;
+const childRef = useTemplateRef<BreadcrumbType>('child-ref');
+defineExpose({
+    childRef,
+});
 </script>
 
 <template>
     <Breadcrumb
+        ref="child-ref"
         pt:root:class="p-0 bg-transparent"
-        :home="{
-            icon: 'pi pi-home',
-            url: page.props.app.baseUrl,
-        }"
     >
         <template #item="{ item, props }">
             <InertiaLink
@@ -40,6 +42,5 @@ const page = usePage();
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </a>
         </template>
-        <template #separator> / </template>
     </Breadcrumb>
 </template>

@@ -2,7 +2,7 @@
     <section>
         <div class="flex items-end justify-between flex-wrap gap-2 md:gap-4">
             <div class="flex flex-col gap-2">
-                <h1 class="font-bold text-xl md:text-2xl leading-tight">
+                <h1 class="font-bold text-2xl leading-tight">
                     <slot name="title" />
                 </h1>
                 <div

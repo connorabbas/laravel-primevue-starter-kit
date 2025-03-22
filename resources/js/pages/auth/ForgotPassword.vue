@@ -1,7 +1,7 @@
 <script setup>
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
 
 defineProps({
     status: {
@@ -25,7 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestAuthLayout>
         <InertiaHead title="Forgot Password" />
 
         <template
@@ -57,11 +57,11 @@ onMounted(() => {
                     id="email"
                     ref="email-input"
                     v-model="form.email"
+                    :invalid="Boolean(form.errors.email)"
                     type="email"
+                    autocomplete="username"
                     required
                     fluid
-                    :invalid="Boolean(form.errors.email)"
-                    autocomplete="username"
                 />
                 <Message
                     v-if="form.errors?.email"
@@ -81,5 +81,5 @@ onMounted(() => {
                 />
             </div>
         </form>
-    </GuestLayout>
+    </GuestAuthLayout>
 </template>

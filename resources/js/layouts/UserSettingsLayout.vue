@@ -32,7 +32,7 @@ const sidebarNavItems = computed(() => [
 </script>
 
 <template>
-    <Container vertical>
+    <div>
         <PageTitleSection>
             <template #title>
                 Settings
@@ -42,7 +42,7 @@ const sidebarNavItems = computed(() => [
             </template>
         </PageTitleSection>
 
-        <Divider />
+        <Divider class="my-8" />
 
         <div class="flex flex-col gap-6 lg:gap-8 lg:flex-row">
             <aside class="w-full md:max-w-2xl lg:w-48">
@@ -65,5 +65,5 @@ const sidebarNavItems = computed(() => [
                 <slot />
             </section>
         </div>
-    </Container>
+    </div>
 </template>

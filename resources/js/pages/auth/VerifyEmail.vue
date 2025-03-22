@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
 
 const props = defineProps({
     status: {
@@ -21,7 +21,7 @@ const verificationLinkSent = computed(
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestAuthLayout>
         <InertiaHead title="Email Verification" />
 
         <template
@@ -60,5 +60,5 @@ const verificationLinkSent = computed(
                 </InertiaLink>
             </div>
         </form>
-    </GuestLayout>
+    </GuestAuthLayout>
 </template>

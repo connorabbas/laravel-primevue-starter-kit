@@ -1,72 +1,32 @@
-// https://eslint.org/docs/latest/use/configure/
-// https://eslint.vuejs.org/user-guide/
-// https://typescript-eslint.io/rules/?=recommended
+import prettier from 'eslint-config-prettier';
+import vue from 'eslint-plugin-vue';
 
-import eslint from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintPluginVue from 'eslint-plugin-vue';
-import globals from 'globals';
-import typescriptEslint from 'typescript-eslint';
+import {
+    defineConfigWithVueTs,
+    vueTsConfigs,
+} from '@vue/eslint-config-typescript';
 
-export default typescriptEslint.config(
+export default defineConfigWithVueTs(
+    vue.configs['flat/essential'],
+    vueTsConfigs.recommended,
     {
         ignores: [
-            '*.d.ts',
-            '**/coverage',
-            '**/dist',
-            'vendor/**',
-            'public/build/**',
+            'vendor',
+            'node_modules',
+            'public',
+            'bootstrap/ssr',
+            'tailwind.config.js',
         ],
     },
     {
-        files: ['**/*.js'],
-        ...eslint.configs.recommended,
-        languageOptions: {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-            globals: {
-                ...globals.browser,
-                process: 'readonly',
-                module: 'readonly',
-                require: 'readonly',
-                Ziggy: 'readonly',
-                window: 'readonly',
-            },
-        },
-    },
-    {
-        files: ['**/*.{ts,vue}'],
-        extends: [
-            eslint.configs.recommended,
-            ...typescriptEslint.configs.recommended,
-            ...eslintPluginVue.configs['flat/strongly-recommended'],
-        ],
-        languageOptions: {
-            ecmaVersion: 'latest',
-            globals: {
-                ...globals.browser,
-                Ziggy: 'readonly',
-            },
-            sourceType: 'module',
-            parserOptions: {
-                parser: typescriptEslint.parser,
-            },
-        },
         rules: {
             'vue/require-default-prop': 'off',
             'vue/attribute-hyphenation': 'off',
             'vue/v-on-event-hyphenation': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/block-lang': 'off',
-            'vue/first-attribute-linebreak': [
-                'error',
-                {
-                    singleline: 'ignore',
-                    multiline: 'ignore',
-                },
-            ],
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },
-    eslintConfigPrettier
+    prettier
 );

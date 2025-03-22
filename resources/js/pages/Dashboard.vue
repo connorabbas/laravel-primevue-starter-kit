@@ -1,17 +1,15 @@
 <script setup>
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AppLayout>
         <InertiaHead title="Dashboard" />
 
-        <Container vertical>
-            <Card>
-                <template #content>
-                    <p class="m-0">You are logged in!</p>
-                </template>
-            </Card>
-        </Container>
-    </AuthenticatedLayout>
+        <Card>
+            <template #content>
+                <p class="m-0">You are logged in!</p>
+            </template>
+        </Card>
+    </AppLayout>
 </template>

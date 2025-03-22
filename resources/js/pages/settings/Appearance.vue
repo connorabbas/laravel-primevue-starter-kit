@@ -1,11 +1,11 @@
 <script setup>
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AppLayout>
         <InertiaHead title="Appearance Settings" />
 
         <SettingsLayout>
@@ -22,5 +22,5 @@ import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
                 </template>
             </Card>
         </SettingsLayout>
-    </AuthenticatedLayout>
+    </AppLayout>
 </template>

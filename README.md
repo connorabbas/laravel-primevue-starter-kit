@@ -13,23 +13,23 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 ## Roadmap
 - [x] Hosted demo project
 - [x] Updated User profile settings pages (similar to official Laravel starter kits)
-- [ ] Additional layouts (similar to official Laravel starter kits)
-- [ ] Alternative admin branch using [Filament PHP](https://filamentphp.com/)
+- [x] Additional layouts (similar to official Laravel starter kits)
+- [ ] Alternative admin branch using either [Filament PHP](https://filamentphp.com/) or [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
 - [ ] Proper SSR support
-- [ ] Match UI/functionality to `connorabbas/primevue-spa-laravel-api` project
+- [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality
 
 ## Features
 
--   Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-primevue-starter-kit/tree/feature/admin-panel)
 -   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
 -   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component
 -   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting (example usage in `feature/admin-panel` branch)
+-   Light/dark/system color mode toggle
 -   Easily customizable theming
 -   Opt-in TypeScript usage
 
 ## Theme
 
-This starter kit features a light/dark/system color mode toggle along with a collection of custom theme presets to choose from, built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
+This starter kit provides a collection of custom theme presets to choose from, built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
 
 ### Prebuilt Theme Presets
 

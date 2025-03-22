@@ -1,9 +1,9 @@
 <script setup>
-import { useTemplateRef, onMounted } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import Password from 'primevue/password';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 
 defineProps({
@@ -52,14 +52,10 @@ const updatePassword = () => {
         },
     });
 };
-
-onMounted(() => {
-    currentPasswordInput.value.$el.focus();
-});
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AppLayout>
         <InertiaHead title="Password Settings" />
 
         <SettingsLayout>
@@ -147,5 +143,5 @@ onMounted(() => {
                 </template>
             </Card>
         </SettingsLayout>
-    </AuthenticatedLayout>
+    </AppLayout>
 </template>
