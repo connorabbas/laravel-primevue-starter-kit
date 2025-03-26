@@ -1,4 +1,6 @@
 import { DataTableFilterMetaData } from 'primevue';
+import { MenuItem } from 'primevue/menuitem';
+import type { LucideIcon } from 'lucide-vue-next';
 
 export interface User {
     id: number;
@@ -14,3 +16,8 @@ export type PageProps<
 export type PrimeVueDataFilters = {
     [key: string]: DataTableFilterMetaData;
 };
+
+export interface ExtendedMenuItem extends MenuItem {
+    route?: string;
+    lucideIcon?: LucideIcon;
+}

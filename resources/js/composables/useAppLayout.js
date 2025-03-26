@@ -1,6 +1,7 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
+import { LayoutGrid, House, Info, Github, Code, Settings, LogOut } from 'lucide-vue-next';
 
 export function useAppLayout() {
     const page = usePage();
@@ -16,29 +17,29 @@ export function useAppLayout() {
     const menuItems = computed(() => [
         {
             label: 'Home',
-            icon: 'pi pi-home',
+            lucideIcon: House,
             route: route('welcome'),
             active: currentRoute.value == 'welcome',
         },
         {
             label: 'Dashboard',
-            icon: 'pi pi-th-large',
+            lucideIcon: LayoutGrid,
             route: route('dashboard'),
             active: currentRoute.value == 'dashboard',
         },
         {
             label: 'Info',
-            icon: 'pi pi-info-circle',
+            lucideIcon: Info,
             items: [
                 {
                     label: 'PrimeVue Docs',
                     url: 'https://primevue.org/',
-                    icon: 'pi pi-prime',
+                    lucideIcon: Code,
                 },
                 {
                     label: 'Starter Kit Repo',
                     url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
-                    icon: 'pi pi-github',
+                    lucideIcon: Github,
                 },
             ],
         },
@@ -53,11 +54,11 @@ export function useAppLayout() {
         {
             label: 'Settings',
             route: route('profile.edit'),
-            icon: 'pi pi-fw pi-cog',
+            lucideIcon: Settings,
         },
         {
             label: 'Log Out',
-            icon: 'pi pi-fw pi-sign-out',
+            lucideIcon: LogOut,
             command: () => logout(),
         },
     ];

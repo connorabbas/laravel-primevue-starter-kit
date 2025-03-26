@@ -1,13 +1,14 @@
 <script setup>
 import { ref, watchEffect, inject } from 'vue';
+import { Sun, Moon, Monitor } from 'lucide-vue-next';
 
 const colorMode = inject('colorMode');
 const selectedColorMode = ref(colorMode.value);
 
 const options = [
-    { label: 'Light', value: 'light', icon: 'pi pi-sun' },
-    { label: 'Dark', value: 'dark', icon: 'pi pi-moon' },
-    { label: 'System', value: 'auto', icon: 'pi pi-desktop' },
+    { label: 'Light', value: 'light', icon: Sun },
+    { label: 'Dark', value: 'dark', icon: Moon },
+    { label: 'System', value: 'auto', icon: Monitor },
 ];
 
 watchEffect(() => colorMode.value = selectedColorMode.value)
@@ -21,8 +22,11 @@ watchEffect(() => colorMode.value = selectedColorMode.value)
         optionLabel="label"
         optionValue="value"
     >
-        <template #option="slotProps">
-            <i :class="slotProps.option.icon"></i> {{ slotProps.option.label }}
+        <template #option="{ option }">
+            <component
+                :is="option.icon"
+                class="size-4"
+            /> {{ option.label }}
         </template>
     </SelectButton>
 </template>

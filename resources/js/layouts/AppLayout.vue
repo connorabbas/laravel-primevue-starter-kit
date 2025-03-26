@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from '@/layouts/app/SidebarLayout.vue';
+import AppLayout from '@/layouts/app/HeaderLayout.vue';
 
 defineProps({
     breadcrumbs: {

@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import PanelMenu from 'primevue/panelmenu';
+import { ChevronDown, ChevronRight } from 'lucide-vue-next';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 type PanelMenuType = InstanceType<typeof PanelMenu>;
 const childRef = useTemplateRef<PanelMenuType>('child-ref');
@@ -12,6 +18,7 @@ defineExpose({
 <template>
     <PanelMenu
         ref="child-ref"
+        :model="props.model"
         pt:root:class="p-0 m-0 gap-1"
         pt:panel:class="p-0 border-0"
         pt:header:class="p-0 border-0"
@@ -30,9 +37,14 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'mr-2 p-panelmenu-item-icon',
+                        'p-panelmenu-item-icon',
                         item.icon,
                     ]"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-panelmenu-item-icon size-4"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
@@ -48,18 +60,26 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'mr-2 p-panelmenu-item-icon',
+                        'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
-                <span>{{ item.label }}</span>
-                <span
-                    v-if="item.items"
-                    :class="[
-                        'pi p-panelmenu-submenu-icon ml-auto',
-                        active ? 'pi-angle-down' : 'pi-angle-right',
-                    ]"
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-panelmenu-item-icon size-4"
                 />
+                <span>{{ item.label }}</span>
+                <template v-if="item.items">
+                    <ChevronDown
+                        v-if="active"
+                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                    />
+                    <ChevronRight
+                        v-else
+                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                    />
+                </template>
             </a>
         </template>
     </PanelMenu>

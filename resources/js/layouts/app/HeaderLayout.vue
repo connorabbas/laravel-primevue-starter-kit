@@ -7,6 +7,7 @@ import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
 import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
+import { ChevronsUpDown, ChevronDown, Menu } from 'lucide-vue-next';
 
 const props = defineProps({
     breadcrumbs: {
@@ -53,13 +54,15 @@ const toggleMobileUserMenu = (event) => {
                     <div class="flex flex-col">
                         <Button
                             id="mobile-user-menu-btn"
-                            pt:root:class="flex justify-between"
                             :label="page.props.auth.user.name"
                             severity="secondary"
-                            icon="pi pi-sort"
-                            iconPos="right"
+                            pt:root:class="flex flex-row-reverse justify-between"
                             @click="toggleMobileUserMenu($event)"
-                        />
+                        >
+                            <template #icon>
+                                <ChevronsUpDown class="size-4" />
+                            </template>
+                        </Button>
                         <LinksMenu
                             ref="mobile-user-menu"
                             :model="userMenuItems"
@@ -96,12 +99,15 @@ const toggleMobileUserMenu = (event) => {
                                     <Button
                                         id="user-menu-btn"
                                         :label="page.props.auth.user.name"
+                                        pt:root:class="flex flex-row-reverse justify-between"
                                         severity="secondary"
-                                        icon="pi pi-angle-down"
-                                        iconPos="right"
                                         text
                                         @click="toggleUserMenu($event)"
-                                    />
+                                    >
+                                        <template #icon>
+                                            <ChevronDown class="size-4" />
+                                        </template>
+                                    </Button>
                                     <div
                                         id="user-menu-append"
                                         class="relative"
@@ -121,11 +127,14 @@ const toggleMobileUserMenu = (event) => {
                                 <div class="relative">
                                     <Button
                                         severity="secondary"
-                                        icon="pi pi-bars"
-                                        pt:icon:class="text-xl"
+                                        class="p-1!"
                                         text
                                         @click="mobileMenuOpen = true"
-                                    />
+                                    >
+                                        <template #icon>
+                                            <Menu class="size-6" />
+                                        </template>
+                                    </Button>
                                 </div>
                             </div>
                         </template>

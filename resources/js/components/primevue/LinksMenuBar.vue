@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Menubar from 'primevue/menubar';
+import { ChevronDown, ChevronRight } from 'lucide-vue-next';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
@@ -12,6 +18,7 @@ defineExpose({
 <template>
     <Menubar
         ref="child-ref"
+        :model="props.model"
         breakpoint="1024px"
     >
         <template
@@ -30,10 +37,15 @@ defineExpose({
                 }"
                 custom
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-menubar-item-icon"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-menubar-item-icon size-4"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -44,19 +56,27 @@ defineExpose({
                 v-bind="props.action"
                 class="p-menubar-item-link"
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-menubar-item-icon"
                 />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-menubar-item-icon size-4"
+                />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
-                <i
-                    v-if="hasSubmenu"
-                    :class="[
-                        'pi',
-                        root ? 'pi-angle-down' : 'pi-angle-right',
-                    ]"
-                ></i>
+                <template v-if="hasSubmenu">
+                    <ChevronDown
+                        v-if="root"
+                        class="size-4 p-menubar-submenu-icon"
+                    />
+                    <ChevronRight
+                        v-else
+                        class="size-4 p-menubar-submenu-icon"
+                    />
+                </template>
             </a>
         </template>
         <template
