@@ -21,7 +21,7 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 ## Features
 
 -   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
--   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component
+-   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component and [Lucide Icons](https://lucide.dev/)
 -   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting (example usage in `feature/admin-panel` branch)
 -   Light/dark/system color mode toggle
 -   Easily customizable theming

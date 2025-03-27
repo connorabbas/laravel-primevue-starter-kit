@@ -24,7 +24,7 @@ defineExpose({
         pt:header:class="p-0 border-0"
         pt:itemContent:class="gap-1"
     >
-        <template #item="{ item, active }">
+        <template #item="{ item, root, active }">
             <InertiaLink
                 v-if="item.route"
                 :href="item.route"
@@ -37,14 +37,17 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'p-panelmenu-item-icon',
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-panelmenu-item-icon size-4"
+                    :class="[
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
+                        'size-4',
+                    ]"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
@@ -60,14 +63,17 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'p-panelmenu-item-icon',
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-panelmenu-item-icon size-4"
+                    :class="[
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
+                        'size-4',
+                    ]"
                 />
                 <span>{{ item.label }}</span>
                 <template v-if="item.items">

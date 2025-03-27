@@ -2,6 +2,7 @@
 import { useTemplateRef } from 'vue';
 import Breadcrumb from 'primevue/breadcrumb';
 import type { ExtendedMenuItem } from '@/types';
+import { ChevronRight } from 'lucide-vue-next';
 
 const props = defineProps<{
     model: ExtendedMenuItem[]
@@ -57,6 +58,9 @@ defineExpose({
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </a>
+        </template>
+        <template #separator>
+            <ChevronRight class="size-4" />
         </template>
     </Breadcrumb>
 </template>

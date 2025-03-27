@@ -3,10 +3,10 @@ import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
-import LinksMenu from '@/components/primevue/LinksMenu.vue';
-import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
-import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
-import { ChevronsUpDown, Menu } from 'lucide-vue-next';
+import Menu from '@/components/primevue/Menu.vue';
+import PanelMenu from '@/components/primevue/PanelMenu.vue';
+import Breadcrumb from '@/components/primevue/Breadcrumb.vue';
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
 
 const props = defineProps({
     breadcrumbs: {
@@ -43,7 +43,7 @@ const toggleMobileUserMenu = (event) => {
                 position="right"
             >
                 <div>
-                    <LinksPanelMenu
+                    <PanelMenu
                         :model="menuItems"
                         class="w-full"
                     />
@@ -61,7 +61,7 @@ const toggleMobileUserMenu = (event) => {
                                 <ChevronsUpDown class="size-4" />
                             </template>
                         </Button>
-                        <LinksMenu
+                        <Menu
                             ref="mobile-user-menu"
                             :model="userMenuItems"
                             popup
@@ -91,7 +91,7 @@ const toggleMobileUserMenu = (event) => {
                                 @click="mobileMenuOpen = true"
                             >
                                 <template #icon>
-                                    <Menu class="size-6" />
+                                    <MenuIcon class="size-6" />
                                 </template>
                             </Button>
                         </div>
@@ -115,7 +115,7 @@ const toggleMobileUserMenu = (event) => {
                             </InertiaLink>
                         </div>
                         <div>
-                            <LinksPanelMenu
+                            <PanelMenu
                                 :model="menuItems"
                                 class="w-full"
                             />
@@ -134,7 +134,7 @@ const toggleMobileUserMenu = (event) => {
                                 <ChevronsUpDown class="size-4" />
                             </template>
                         </Button>
-                        <LinksMenu
+                        <Menu
                             ref="user-menu"
                             :model="userMenuItems"
                             popup
@@ -150,7 +150,7 @@ const toggleMobileUserMenu = (event) => {
                     fluid
                 >
                     <!-- Breadcrumbs -->
-                    <LinksBreadcrumb
+                    <Breadcrumb
                         v-if="props.breadcrumbs.length"
                         :model="props.breadcrumbs"
                     />
