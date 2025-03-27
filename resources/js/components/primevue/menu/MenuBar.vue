@@ -45,7 +45,7 @@ defineExpose({
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-menubar-item-icon size-4"
+                    class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -64,17 +64,17 @@ defineExpose({
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-menubar-item-icon size-4"
+                    class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
                 <template v-if="hasSubmenu">
                     <ChevronDown
                         v-if="root"
-                        class="size-4 p-menubar-submenu-icon"
+                        class="p-menubar-submenu-icon"
                     />
                     <ChevronRight
                         v-else
-                        class="size-4 p-menubar-submenu-icon"
+                        class="p-menubar-submenu-icon"
                     />
                 </template>
             </a>

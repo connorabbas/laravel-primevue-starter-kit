@@ -2,12 +2,12 @@
 import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
-import Menu from '@/components/primevue/Menu.vue';
-import MenuBar from '@/components/primevue/MenuBar.vue';
-import PanelMenu from '@/components/primevue/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/Breadcrumb.vue';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
+import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import Menu from '@/components/primevue/menu/Menu.vue';
+import MenuBar from '@/components/primevue/menu/MenuBar.vue';
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
 
 const props = defineProps({
     breadcrumbs: {
@@ -60,7 +60,7 @@ const toggleMobileUserMenu = (event) => {
                             @click="toggleMobileUserMenu($event)"
                         >
                             <template #icon>
-                                <ChevronsUpDown class="size-4" />
+                                <ChevronsUpDown />
                             </template>
                         </Button>
                         <Menu
@@ -105,7 +105,7 @@ const toggleMobileUserMenu = (event) => {
                                         @click="toggleUserMenu($event)"
                                     >
                                         <template #icon>
-                                            <ChevronDown class="size-4" />
+                                            <ChevronDown />
                                         </template>
                                     </Button>
                                     <div
@@ -132,7 +132,7 @@ const toggleMobileUserMenu = (event) => {
                                         @click="mobileMenuOpen = true"
                                     >
                                         <template #icon>
-                                            <MenuIcon class="size-6" />
+                                            <MenuIcon class="size-6!" />
                                         </template>
                                     </Button>
                                 </div>

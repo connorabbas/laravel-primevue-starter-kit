@@ -53,7 +53,7 @@ const page = usePage();
                                     class="mr-4"
                                 >
                                     <template #icon>
-                                        <LayoutGrid class="size-4" />
+                                        <LayoutGrid />
                                     </template>
                                 </Button>
                             </InertiaLink>
@@ -64,7 +64,7 @@ const page = usePage();
                                     class="mr-4"
                                 >
                                     <template #icon>
-                                        <Settings class="size-4" />
+                                        <Settings />
                                     </template>
                                 </Button>
                             </InertiaLink>
@@ -76,7 +76,7 @@ const page = usePage();
                                     class="mr-4"
                                 >
                                     <template #icon>
-                                        <LogIn class="size-4" />
+                                        <LogIn />
                                     </template>
                                 </Button>
                             </InertiaLink>
@@ -87,7 +87,7 @@ const page = usePage();
                                     class="mr-4"
                                 >
                                     <template #icon>
-                                        <UserPlus class="size-4" />
+                                        <UserPlus />
                                     </template>
                                 </Button>
                             </InertiaLink>

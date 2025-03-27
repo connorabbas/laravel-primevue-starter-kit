@@ -1,44 +1,43 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
-import Breadcrumb from 'primevue/breadcrumb';
-import type { ExtendedMenuItem } from '@/types';
+import TieredMenu from 'primevue/tieredmenu';
 import { ChevronRight } from 'lucide-vue-next';
+import type { ExtendedMenuItem } from '@/types';
 
 const props = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-type BreadcrumbType = InstanceType<typeof Breadcrumb>;
-const childRef = useTemplateRef<BreadcrumbType>('child-ref');
+type TieredMenuType = InstanceType<typeof TieredMenu>
+const childRef = useTemplateRef<TieredMenuType>('child-ref');
 defineExpose({
     childRef,
 });
 </script>
 
 <template>
-    <Breadcrumb
+    <TieredMenu
         ref="child-ref"
         :model="props.model"
-        pt:root:class="p-0 bg-transparent"
     >
-        <template #item="{ item, props }">
+        <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
                 v-if="item.route"
                 :href="item.route"
-                class="p-breadcrumb-item-link"
+                class="p-tieredmenu-item-link"
                 custom
             >
                 <i
                     v-if="item.icon"
                     :class="item.icon"
-                    class="p-breadcrumb-item-icon"
+                    class="p-tieredmenu-item-icon"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-breadcrumb-item-icon size-4"
+                    class="p-tieredmenu-item-icon"
                 />
-                <span class="p-breadcrumb-item-label">{{ item.label }}</span>
+                <span class="p-tieredmenu-item-label">{{ item.label }}</span>
             </InertiaLink>
             <a
                 v-else
@@ -49,18 +48,19 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="item.icon"
-                    class="p-breadcrumb-item-icon"
+                    class="p-tieredmenu-item-icon"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-breadcrumb-item-icon size-4"
+                    class="p-tieredmenu-item-icon"
                 />
-                <span class="p-breadcrumb-item-label">{{ item.label }}</span>
+                <span class="p-tieredmenu-item-label">{{ item.label }}</span>
+                <ChevronRight
+                    v-if="hasSubmenu"
+                    class="p-tieredmenu-submenu-icon"
+                />
             </a>
         </template>
-        <template #separator>
-            <ChevronRight class="size-4" />
-        </template>
-    </Breadcrumb>
+    </TieredMenu>
 </template>

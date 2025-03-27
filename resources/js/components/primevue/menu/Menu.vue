@@ -38,7 +38,7 @@ defineExpose({
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-menu-item-icon size-4"
+                    class="p-menu-item-icon"
                 />
                 <span class="p-menu-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -56,7 +56,7 @@ defineExpose({
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-menu-item-icon size-4"
+                    class="p-menu-item-icon"
                 />
                 <span class="p-menu-item-label">{{ item.label }}</span>
             </a>
