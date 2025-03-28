@@ -4,7 +4,7 @@ import PanelMenu from 'primevue/panelmenu';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
@@ -18,7 +18,7 @@ defineExpose({
 <template>
     <PanelMenu
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
         pt:root:class="p-0 m-0 gap-1"
         pt:panel:class="p-0 border-0"
         pt:header:class="p-0 border-0"
@@ -42,8 +42,8 @@ defineExpose({
                     ]"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                     ]"
@@ -67,8 +67,8 @@ defineExpose({
                     ]"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                     ]"

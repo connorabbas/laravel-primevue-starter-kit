@@ -4,7 +4,7 @@ import Breadcrumb from 'primevue/breadcrumb';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
@@ -18,7 +18,7 @@ defineExpose({
 <template>
     <Breadcrumb
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
         pt:root:class="p-0 bg-transparent"
     >
         <template #item="{ item, props }">
@@ -34,8 +34,8 @@ defineExpose({
                     class="p-breadcrumb-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-breadcrumb-item-icon"
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
@@ -52,8 +52,8 @@ defineExpose({
                     class="p-breadcrumb-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-breadcrumb-item-icon"
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>

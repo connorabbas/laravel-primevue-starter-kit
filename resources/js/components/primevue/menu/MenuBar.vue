@@ -4,7 +4,7 @@ import Menubar from 'primevue/menubar';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
@@ -18,7 +18,7 @@ defineExpose({
 <template>
     <Menubar
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
         breakpoint="1024px"
     >
         <template
@@ -43,8 +43,8 @@ defineExpose({
                     class="p-menubar-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
@@ -62,8 +62,8 @@ defineExpose({
                     class="p-menubar-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>

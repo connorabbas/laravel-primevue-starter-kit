@@ -4,7 +4,7 @@ import TieredMenu from 'primevue/tieredmenu';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
@@ -18,7 +18,7 @@ defineExpose({
 <template>
     <TieredMenu
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
     >
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
@@ -33,8 +33,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>
@@ -51,8 +51,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>

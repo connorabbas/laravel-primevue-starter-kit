@@ -78,8 +78,8 @@ const toggleMobileUserMenu = (event) => {
             <nav class="dynamic-bg shadow-sm">
                 <Container>
                     <MenuBar
-                        :model="menuItems"
                         :key="currentRoute"
+                        :model="menuItems"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >

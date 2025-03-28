@@ -3,7 +3,7 @@ import { useTemplateRef } from 'vue';
 import Menu from 'primevue/menu';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
@@ -21,7 +21,7 @@ defineExpose({
 <template>
     <Menu
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
     >
         <template #item="{ item, props }">
             <InertiaLink
@@ -36,8 +36,8 @@ defineExpose({
                     class="p-menu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menu-item-icon"
                 />
                 <span class="p-menu-item-label">{{ item.label }}</span>
@@ -54,8 +54,8 @@ defineExpose({
                     class="p-menu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menu-item-icon"
                 />
                 <span class="p-menu-item-label">{{ item.label }}</span>
