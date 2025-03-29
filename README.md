@@ -11,18 +11,19 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
 
 ## Roadmap
-- [x] Hosted demo project
-- [x] Updated User profile settings pages (similar to official Laravel starter kits)
-- [x] Additional layouts (similar to official Laravel starter kits)
-- [ ] Alternative admin branch using either [Filament PHP](https://filamentphp.com/) or [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
-- [ ] Proper SSR support
-- [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality
+
+-   [x] Hosted demo project
+-   [x] Updated User profile settings pages (similar to official Laravel starter kits)
+-   [x] Additional layouts (similar to official Laravel starter kits)
+-   [ ] Alternative admin branch using either [Filament PHP](https://filamentphp.com/) or [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) (In development)
+-   [ ] TypeScript & SSR repo using [PrimeVue Volt](https://volt.primevue.org/) (In development)
+-   [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality (WIP)
 
 ## Features
 
 -   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
--   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component and [Lucide Icons](https://lucide.dev/)
--   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting (example usage in `feature/admin-panel` branch)
+-   Wrapper components for PrimeVue's `Breadcrumb`, `ContextMenu`, `Menu`, `MenuBar`, `PanelMenu`, & `TieredMenu` utilizing Inertia's `Link` component and [Lucide Icons](https://lucide.dev/)
+-   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting
 -   Light/dark/system color mode toggle
 -   Easily customizable theming
 -   Opt-in TypeScript usage
@@ -63,7 +64,7 @@ To clarify, Tailwind is **not** used for any component styling in this starter k
 
 ---
 
-## Usage with Docker
+## Local Development with Docker
 
 This starter kit is configured to use Docker Compose for local development with just a few extra steps, powered by images & configuration from [Laravel Sail](https://laravel.com/docs/master/sail). With this setup, you do not need PHP, Composer, PostgreSQL or Node.js installed on your machine to get up and running with this project.
 
@@ -79,7 +80,7 @@ This starter kit is configured to use Docker Compose for local development with 
 
     ```env
     # Use any desired domain ending with .localhost
-    # Match with value used in docker-compose.local.yml
+    # Match domain value in docker-compose.local.yml laravel service labels section
     APP_URL=http://laravel-primevue.localhost
 
     DB_CONNECTION=pgsql
@@ -89,14 +90,20 @@ This starter kit is configured to use Docker Compose for local development with 
     DB_USERNAME=sail
     DB_PASSWORD=password
 
+    WWWGROUP=1000
+    WWWUSER=1000
+
     # Update port values as needed when running multiple projects/services
-    APP_PORT=8000
+    #APP_PORT=80 not required when using Traefik reverse proxy
     VITE_PORT=5173
     FORWARD_DB_PORT=5432
     ```
 
 4. Build the Laravel app container using one of the following techniques:
-    - Build manually using docker compose CLI (like above)
+    - Build manually using docker compose CLI
+        ```bash
+           docker compose -f docker-compose.local.yml up -d
+        ```
     - Use [Laravel Sail](https://laravel.com/docs/master/sail)
     - Build as a [VS Code Dev Container](https://code.visualstudio.com/docs/devcontainers/tutorial) using the `Dev Containers: Reopen in Container` command
 

@@ -15,7 +15,6 @@ export default defineConfigWithVueTs(
             'node_modules',
             'public',
             'bootstrap/ssr',
-            'tailwind.config.js',
         ],
     },
     {
