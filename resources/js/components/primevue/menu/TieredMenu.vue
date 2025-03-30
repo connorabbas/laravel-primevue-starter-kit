@@ -8,8 +8,9 @@ const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-type TieredMenuType = InstanceType<typeof TieredMenu>
+type TieredMenuType = InstanceType<typeof TieredMenu>;
 const childRef = useTemplateRef<TieredMenuType>('child-ref');
+
 defineExpose({
     childRef,
 });
@@ -20,6 +21,16 @@ defineExpose({
         ref="child-ref"
         :model="componentProps.model"
     >
+        <template
+            v-for="(_, slotName) in $slots"
+            #[slotName]="slotProps"
+        >
+            <slot
+                v-if="slotName != 'item'"
+                :name="slotName"
+                v-bind="slotProps ?? {}"
+            />
+        </template>
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
                 v-if="item.route"

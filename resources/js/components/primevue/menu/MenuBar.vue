@@ -10,6 +10,7 @@ const componentProps = defineProps<{
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
+
 defineExpose({
     childRef,
 });
@@ -22,10 +23,14 @@ defineExpose({
         breakpoint="1024px"
     >
         <template
-            v-if="$slots.start"
-            #start
+            v-for="(_, slotName) in $slots"
+            #[slotName]="slotProps"
         >
-            <slot name="start"></slot>
+            <slot
+                v-if="slotName != 'item'"
+                :name="slotName"
+                v-bind="slotProps ?? {}"
+            />
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
             <InertiaLink
@@ -78,12 +83,6 @@ defineExpose({
                     />
                 </template>
             </a>
-        </template>
-        <template
-            v-if="$slots.end"
-            #end
-        >
-            <slot name="end"></slot>
         </template>
     </Menubar>
 </template>

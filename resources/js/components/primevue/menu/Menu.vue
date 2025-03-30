@@ -7,14 +7,12 @@ const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-// Alternatively, you can use the default <Menu /> component using a command callback, and a manual router visit:
-// https://primevue.org/menu/#command
-// https://inertiajs.com/manual-visits
-
-type MenuType = InstanceType<typeof Menu>
+type MenuType = InstanceType<typeof Menu>;
 const childRef = useTemplateRef<MenuType>('child-ref');
+
 defineExpose({
     childRef,
+    toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>
 
@@ -23,6 +21,16 @@ defineExpose({
         ref="child-ref"
         :model="componentProps.model"
     >
+        <template
+            v-for="(_, slotName) in $slots"
+            #[slotName]="slotProps"
+        >
+            <slot
+                v-if="slotName != 'item'"
+                :name="slotName"
+                v-bind="slotProps ?? {}"
+            />
+        </template>
         <template #item="{ item, props }">
             <InertiaLink
                 v-if="item.route"

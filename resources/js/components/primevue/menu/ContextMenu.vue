@@ -8,10 +8,12 @@ const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-type ContextMenuType = InstanceType<typeof ContextMenu>
+type ContextMenuType = InstanceType<typeof ContextMenu>;
 const childRef = useTemplateRef<ContextMenuType>('child-ref');
+
 defineExpose({
     childRef,
+    toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>
 
