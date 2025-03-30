@@ -142,21 +142,18 @@ const toggleMobileUserMenu = (event) => {
                 </Container>
             </nav>
 
-            <Container vertical>
-                <!-- Breadcrumbs -->
-                <Breadcrumb
-                    v-if="props.breadcrumbs.length"
-                    :model="props.breadcrumbs"
-                />
+            <main>
+                <Container vertical>
+                    <!-- Breadcrumbs -->
+                    <Breadcrumb
+                        v-if="props.breadcrumbs.length"
+                        :model="props.breadcrumbs"
+                    />
 
-                <!-- Page Content -->
-                <main
-                    id="page-content"
-                    class="grow"
-                >
+                    <!-- Page Content -->
                     <slot />
-                </main>
-            </Container>
+                </Container>
+            </main>
         </div>
     </div>
 </template>

@@ -144,7 +144,7 @@ const toggleMobileUserMenu = (event) => {
             </aside>
 
             <!-- Scrollable Content -->
-            <div class="flex flex-col h-full lg:pl-[18rem]">
+            <main class="flex flex-col h-full lg:pl-[18rem]">
                 <Container
                     vertical
                     fluid
@@ -156,14 +156,9 @@ const toggleMobileUserMenu = (event) => {
                     />
 
                     <!-- Page Content -->
-                    <main
-                        id="page-content"
-                        class="grow"
-                    >
-                        <slot />
-                    </main>
+                    <slot />
                 </Container>
-            </div>
+            </main>
         </div>
     </div>
 </template>
