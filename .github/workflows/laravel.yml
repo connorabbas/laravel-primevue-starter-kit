@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       
       - name: Install Dependencies
@@ -31,7 +31,7 @@ jobs:
     
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
-        php-version: '8.3'
+        php-version: '8.4'
         extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, json, libxml, zip
 
     - name: Copy .env
@@ -46,7 +46,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '22'
         cache: 'npm'
     
     - name: Install Node Dependencies
