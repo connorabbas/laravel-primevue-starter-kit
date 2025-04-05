@@ -11,12 +11,12 @@ defineProps({
 
 const emailInput = useTemplateRef('email-input');
 
-const form = useForm({
+const forgotPasswordForm = useForm({
     email: '',
 });
 
 const submit = () => {
-    form.post(route('password.email'));
+    forgotPasswordForm.post(route('password.email'));
 };
 
 onMounted(() => {
@@ -56,26 +56,26 @@ onMounted(() => {
                 <InputText
                     id="email"
                     ref="email-input"
-                    v-model="form.email"
-                    :invalid="Boolean(form.errors.email)"
+                    v-model="forgotPasswordForm.email"
+                    :invalid="Boolean(forgotPasswordForm.errors.email)"
                     type="email"
                     autocomplete="username"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.email"
+                    v-if="forgotPasswordForm.errors?.email"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.email }}
+                    {{ forgotPasswordForm.errors?.email }}
                 </Message>
             </div>
 
             <div class="flex justify-end items-center">
                 <Button
-                    :loading="form.processing"
+                    :loading="forgotPasswordForm.processing"
                     type="submit"
                     label="Email Password Reset Link"
                 />

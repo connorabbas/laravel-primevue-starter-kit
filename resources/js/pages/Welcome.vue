@@ -33,18 +33,33 @@ const page = usePage();
                         </div>
                         <p class="mt-0 mb-4 text-muted-color leading-normal">
                             A starter kit using
-                            <a
+                            <Button
+                                class="p-0 no-underline"
+                                variant="link"
+                                as="a"
+                                label="Laravel"
                                 href="https://laravel.com/docs/master"
-                                class="underline text-primary hover:text-color"
-                            >Laravel</a>,
-                            <a
+                                target="_blank"
+                                rel="noopener"
+                            />,
+                            <Button
+                                class="p-0 no-underline"
+                                variant="link"
+                                as="a"
+                                label="Inertia.js"
                                 href="https://inertiajs.com/"
-                                class="underline text-primary hover:text-color"
-                            >Inertia.js</a>, and
-                            <a
+                                target="_blank"
+                                rel="noopener"
+                            />, and
+                            <Button
+                                class="p-0 no-underline"
+                                variant="link"
+                                as="a"
+                                label="PrimeVue"
                                 href="https://primevue.org/"
-                                class="underline text-primary hover:text-color"
-                            >PrimeVue</a>.
+                                target="_blank"
+                                rel="noopener"
+                            />.
                         </p>
                         <template v-if="page.props.auth.user">
                             <InertiaLink :href="route('dashboard')">

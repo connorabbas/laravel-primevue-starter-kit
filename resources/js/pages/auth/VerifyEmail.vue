@@ -9,10 +9,13 @@ const props = defineProps({
     },
 });
 
-const form = useForm({});
-
+const sendVerificationForm = useForm({});
 const submit = () => {
-    form.post(route('verification.send'));
+    sendVerificationForm.post(route('verification.send'));
+};
+const logoutForm = useForm({});
+const logout = () => {
+    logoutForm.post(route('logout'));
 };
 
 const verificationLinkSent = computed(
@@ -44,21 +47,20 @@ const verificationLinkSent = computed(
             didn't receive the email, we will gladly send you another.
         </div>
 
-        <form @submit.prevent="submit">
-            <div class="mt-6 flex justify-between items-center">
+        <div class="mt-6 flex justify-between items-center">
+            <form @submit.prevent="submit">
                 <Button
-                    :loading="form.processing"
+                    :loading="sendVerificationForm.processing"
                     type="submit"
                     label="Resend Verification Email"
                 />
-                <InertiaLink
-                    :href="route('logout')"
-                    method="post"
-                    class="underline text-muted-color hover:text-color"
-                >
-                    Log Out
-                </InertiaLink>
-            </div>
-        </form>
+            </form>
+            <Button
+                :loading="logoutForm.processing"
+                variant="link"
+                label="Log Out"
+                @click="logout"
+            />
+        </div>
     </GuestAuthLayout>
 </template>

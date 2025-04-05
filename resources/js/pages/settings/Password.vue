@@ -19,7 +19,7 @@ const currentPasswordInput = useTemplateRef('current-password-input');
 const newPasswordInput = useTemplateRef('new-password-input');
 
 const toast = useToast();
-const form = useForm({
+const updatePasswordForm = useForm({
     current_password: '',
     password: '',
     password_confirmation: '',
@@ -34,19 +34,19 @@ const showSuccessToast = () => {
     });
 };
 const updatePassword = () => {
-    form.put(route('password.update'), {
+    updatePasswordForm.put(route('password.update'), {
         preserveScroll: true,
         onSuccess: () => {
-            form.reset();
+            updatePasswordForm.reset();
             showSuccessToast();
         },
         onError: () => {
-            if (form.errors?.password) {
-                form.reset('password', 'password_confirmation');
+            if (updatePasswordForm.errors?.password) {
+                updatePasswordForm.reset('password', 'password_confirmation');
                 newPasswordInput.value.$el.focus();
             }
-            if (form.errors?.current_password) {
-                form.reset('current_password');
+            if (updatePasswordForm.errors?.current_password) {
+                updatePasswordForm.reset('current_password');
                 currentPasswordInput.value.$el.focus();
             }
         },
@@ -77,20 +77,20 @@ const updatePassword = () => {
                             <InputText
                                 id="current_password"
                                 ref="current-password-input"
-                                v-model="form.current_password"
-                                :invalid="Boolean(form.errors?.current_password)"
+                                v-model="updatePasswordForm.current_password"
+                                :invalid="Boolean(updatePasswordForm.errors?.current_password)"
                                 type="password"
                                 autocomplete="current-password"
                                 required
                                 fluid
                             />
                             <Message
-                                v-if="form.errors?.current_password"
+                                v-if="updatePasswordForm.errors?.current_password"
                                 severity="error"
                                 variant="simple"
                                 size="small"
                             >
-                                {{ form.errors?.current_password }}
+                                {{ updatePasswordForm.errors?.current_password }}
                             </Message>
                         </div>
                         <div class="flex flex-col gap-2">
@@ -98,44 +98,44 @@ const updatePassword = () => {
                             <Password
                                 id="password"
                                 ref="new-password-input"
-                                v-model="form.password"
-                                :invalid="Boolean(form.errors?.password)"
+                                v-model="updatePasswordForm.password"
+                                :invalid="Boolean(updatePasswordForm.errors?.password)"
                                 autocomplete="new-password"
                                 toggleMask
                                 required
                                 fluid
                             />
                             <Message
-                                v-if="form.errors?.password"
+                                v-if="updatePasswordForm.errors?.password"
                                 severity="error"
                                 variant="simple"
                                 size="small"
                             >
-                                {{ form.errors?.password }}
+                                {{ updatePasswordForm.errors?.password }}
                             </Message>
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password_confirmation">Confirm Password</label>
                             <InputText
                                 id="password_confirmation"
-                                v-model="form.password_confirmation"
-                                :invalid="Boolean(form.errors?.password_confirmation)"
+                                v-model="updatePasswordForm.password_confirmation"
+                                :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"
                                 type="password"
                                 autocomplete="confirm-password"
                                 required
                                 fluid
                             />
                             <Message
-                                v-if="form.errors?.password_confirmation"
+                                v-if="updatePasswordForm.errors?.password_confirmation"
                                 severity="error"
                                 variant="simple"
                                 size="small"
                             >
-                                {{ form.errors?.password_confirmation }}
+                                {{ updatePasswordForm.errors?.password_confirmation }}
                             </Message>
                         </div>
                         <Button
-                            :loading="form.processing"
+                            :loading="updatePasswordForm.processing"
                             type="submit"
                             label="Save"
                         />

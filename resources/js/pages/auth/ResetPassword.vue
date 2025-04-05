@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emailInput = useTemplateRef('email-input');
 
-const form = useForm({
+const resetPwForm = useForm({
     token: props.token,
     email: props.email,
     password: '',
@@ -24,8 +24,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('password.store'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    resetPwForm.post(route('password.store'), {
+        onFinish: () => resetPwForm.reset('password', 'password_confirmation'),
     });
 };
 
@@ -47,20 +47,20 @@ onMounted(() => {
                 <InputText
                     id="email"
                     ref="email-input"
-                    v-model="form.email"
-                    :invalid="Boolean(form.errors.email)"
+                    v-model="resetPwForm.email"
+                    :invalid="Boolean(resetPwForm.errors.email)"
                     type="email"
                     autocomplete="username"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.email"
+                    v-if="resetPwForm.errors?.email"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.email }}
+                    {{ resetPwForm.errors?.email }}
                 </Message>
             </div>
 
@@ -68,47 +68,47 @@ onMounted(() => {
                 <label for="password">Password</label>
                 <Password
                     id="password"
-                    v-model="form.password"
-                    :invalid="Boolean(form.errors.password)"
+                    v-model="resetPwForm.password"
+                    :invalid="Boolean(resetPwForm.errors.password)"
                     autocomplete="new-password"
                     toggleMask
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.password"
+                    v-if="resetPwForm.errors?.password"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.password }}
+                    {{ resetPwForm.errors?.password }}
                 </Message>
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password_confirmation">Password</label>
-                <Password
+                <label for="password_confirmation">Confirm Password</label>
+                <InputText
                     id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    :invalid="Boolean(form.errors.password_confirmation)"
+                    v-model="resetPwForm.password_confirmation"
+                    :invalid="Boolean(resetPwForm.errors.password_confirmation)"
+                    type="password"
                     autocomplete="new-password"
-                    toggleMask
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.password_confirmation"
+                    v-if="resetPwForm.errors?.password_confirmation"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.password_confirmation }}
+                    {{ resetPwForm.errors?.password_confirmation }}
                 </Message>
             </div>
 
             <div class="flex justify-end items-center pt-2">
                 <Button
-                    :loading="form.processing"
+                    :loading="resetPwForm.processing"
                     type="submit"
                     label="Reset Password"
                 />

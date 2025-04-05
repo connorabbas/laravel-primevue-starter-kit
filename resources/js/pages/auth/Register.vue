@@ -3,7 +3,7 @@ import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
 
-const form = useForm({
+const registerForm = useForm({
     name: '',
     email: '',
     password: '',
@@ -13,8 +13,8 @@ const form = useForm({
 const nameInput = useTemplateRef('name-input');
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    registerForm.post(route('register'), {
+        onFinish: () => registerForm.reset('password', 'password_confirmation'),
     });
 };
 
@@ -36,20 +36,20 @@ onMounted(() => {
                 <InputText
                     id="name"
                     ref="name-input"
-                    v-model="form.name"
-                    :invalid="Boolean(form.errors.name)"
+                    v-model="registerForm.name"
+                    :invalid="Boolean(registerForm.errors.name)"
                     type="text"
                     autocomplete="name"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.name"
+                    v-if="registerForm.errors?.name"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.name }}
+                    {{ registerForm.errors?.name }}
                 </Message>
             </div>
 
@@ -57,20 +57,20 @@ onMounted(() => {
                 <label for="email">Email</label>
                 <InputText
                     id="email"
-                    v-model="form.email"
-                    :invalid="Boolean(form.errors.email)"
+                    v-model="registerForm.email"
+                    :invalid="Boolean(registerForm.errors.email)"
                     type="email"
                     autocomplete="username"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.email"
+                    v-if="registerForm.errors?.email"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.email }}
+                    {{ registerForm.errors?.email }}
                 </Message>
             </div>
 
@@ -78,20 +78,20 @@ onMounted(() => {
                 <label for="password">Password</label>
                 <Password
                     id="password"
-                    v-model="form.password"
-                    :invalid="Boolean(form.errors.password)"
+                    v-model="registerForm.password"
+                    :invalid="Boolean(registerForm.errors.password)"
                     autocomplete="new-password"
                     toggleMask
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.password"
+                    v-if="registerForm.errors?.password"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.password }}
+                    {{ registerForm.errors?.password }}
                 </Message>
             </div>
 
@@ -99,33 +99,34 @@ onMounted(() => {
                 <label for="password_confirmation">Confirm Password</label>
                 <InputText
                     id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    :invalid="Boolean(form.errors.password_confirmation)"
+                    v-model="registerForm.password_confirmation"
+                    :invalid="Boolean(registerForm.errors.password_confirmation)"
                     type="password"
                     autocomplete="new-password"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.password_confirmation"
+                    v-if="registerForm.errors?.password_confirmation"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.password_confirmation }}
+                    {{ registerForm.errors?.password_confirmation }}
                 </Message>
             </div>
 
-            <div class="flex justify-end items-center pt-2">
-                <InertiaLink
-                    :href="route('login')"
-                    class="mr-4 underline text-muted-color hover:text-color"
-                >
-                    Already registered?
+            <div class="flex justify-end items-center gap-4 pt-2">
+                <InertiaLink :href="route('login')">
+                    <Button
+                        class="p-0"
+                        variant="link"
+                        label="Already registered?"
+                    />
                 </InertiaLink>
                 <Button
                     type="submit"
-                    :loading="form.processing"
+                    :loading="registerForm.processing"
                     label="Register"
                 />
             </div>

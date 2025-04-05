@@ -14,15 +14,15 @@ defineProps({
 
 const emailInput = useTemplateRef('email-input');
 
-const form = useForm({
+const loginForm = useForm({
     email: '',
     password: '',
     remember: false,
 });
 
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    loginForm.post(route('login'), {
+        onFinish: () => loginForm.reset('password'),
     });
 };
 
@@ -57,20 +57,20 @@ onMounted(() => {
                 <InputText
                     id="email"
                     ref="email-input"
-                    v-model="form.email"
-                    :invalid="Boolean(form.errors.email)"
+                    v-model="loginForm.email"
+                    :invalid="Boolean(loginForm.errors.email)"
                     type="email"
                     autocomplete="username"
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.email"
+                    v-if="loginForm.errors?.email"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.email }}
+                    {{ loginForm.errors?.email }}
                 </Message>
             </div>
 
@@ -78,20 +78,20 @@ onMounted(() => {
                 <label for="password">Password</label>
                 <Password
                     id="password"
-                    v-model="form.password"
-                    :invalid="Boolean(form.errors.password)"
+                    v-model="loginForm.password"
+                    :invalid="Boolean(loginForm.errors.password)"
                     autocomplete="current-password"
                     toggleMask
                     required
                     fluid
                 />
                 <Message
-                    v-if="form.errors?.password"
+                    v-if="loginForm.errors?.password"
                     severity="error"
                     variant="simple"
                     size="small"
                 >
-                    {{ form.errors?.password }}
+                    {{ loginForm.errors?.password }}
                 </Message>
             </div>
 
@@ -100,7 +100,7 @@ onMounted(() => {
                     <div class="flex items-center">
                         <Checkbox
                             id="remember"
-                            v-model="form.remember"
+                            v-model="loginForm.remember"
                             class="mr-2"
                             :binary="true"
                         ></Checkbox>
@@ -109,16 +109,19 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div class="flex justify-end items-center pt-2">
+            <div class="flex justify-end items-center gap-4 pt-2">
                 <InertiaLink
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="mr-4 underline text-muted-color hover:text-color"
                 >
-                    Forgot your password?
+                    <Button
+                        class="p-0"
+                        variant="link"
+                        label="Forgot your password?"
+                    />
                 </InertiaLink>
                 <Button
-                    :loading="form.processing"
+                    :loading="loginForm.processing"
                     type="submit"
                     label="Log In"
                 />

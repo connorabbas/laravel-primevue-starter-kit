@@ -1,5 +1,5 @@
 <script setup>
-import { ref} from 'vue';
+import { ref } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -19,10 +19,15 @@ const deleteUserModalOpen = ref(false);
 
 const user = usePage().props.auth.user;
 const toast = useToast();
-const form = useForm({
+const updateProfileForm = useForm({
     name: user.name,
     email: user.email,
 });
+
+const sendVerificationForm = useForm({});
+const sendEmailVerification = () => {
+    sendVerificationForm.post(route('verification.send'));
+};
 
 const showSuccessToast = () => {
     toast.add({
@@ -33,7 +38,7 @@ const showSuccessToast = () => {
     });
 };
 const updateProfileInformation = () => {
-    form.patch(route('profile.update'), {
+    updateProfileForm.patch(route('profile.update'), {
         preserveScroll: true,
         onSuccess: () => {
             showSuccessToast();
@@ -65,52 +70,52 @@ const updateProfileInformation = () => {
                                 <label for="name">Name</label>
                                 <InputText
                                     id="name"
-                                    v-model="form.name"
-                                    :invalid="Boolean(form.errors.name)"
+                                    v-model="updateProfileForm.name"
+                                    :invalid="Boolean(updateProfileForm.errors.name)"
                                     type="text"
                                     autocomplete="name"
                                     required
                                     fluid
                                 />
                                 <Message
-                                    v-if="form.errors?.name"
+                                    v-if="updateProfileForm.errors?.name"
                                     severity="error"
                                     variant="simple"
                                     size="small"
                                 >
-                                    {{ form.errors?.name }}
+                                    {{ updateProfileForm.errors?.name }}
                                 </Message>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label for="email">Email</label>
                                 <InputText
                                     id="email"
-                                    v-model="form.email"
-                                    :invalid="Boolean(form.errors.email)"
+                                    v-model="updateProfileForm.email"
+                                    :invalid="Boolean(updateProfileForm.errors.email)"
                                     type="email"
                                     autocomplete="username"
                                     required
                                     fluid
                                 />
                                 <Message
-                                    v-if="form.errors?.email"
+                                    v-if="updateProfileForm.errors?.email"
                                     severity="error"
                                     variant="simple"
                                     size="small"
                                 >
-                                    {{ form.errors?.email }}
+                                    {{ updateProfileForm.errors?.email }}
                                 </Message>
                             </div>
                             <div v-if="mustVerifyEmail && user.email_verified_at === null">
                                 <p class="text-sm mt-2">
                                     Your email address is unverified.
-                                    <InertiaLink
-                                        :href="route('verification.send')"
-                                        method="post"
-                                        class="underline text-sm text-muted-color hover:text-color"
-                                    >
-                                        Click here to re-send the verification email.
-                                    </InertiaLink>
+                                    <Button
+                                        :loading="sendVerificationForm.processing"
+                                        class="p-0 text-sm"
+                                        variant="link"
+                                        label="Click here to re-send the verification email."
+                                        @click="sendEmailVerification"
+                                    />
                                 </p>
                                 <Message
                                     v-if="status === 'verification-link-sent'"
@@ -122,7 +127,7 @@ const updateProfileInformation = () => {
                                 </Message>
                             </div>
                             <Button
-                                :loading="form.processing"
+                                :loading="updateProfileForm.processing"
                                 type="submit"
                                 label="Save"
                             />

@@ -70,7 +70,7 @@ const toggleMobileUserMenu = (event) => {
                     </div>
                 </template>
             </Drawer>
-            <Toast position="top-center" />
+            <Toast position="bottom-right" />
         </Teleport>
 
         <!-- Mobile Header -->
