@@ -161,8 +161,19 @@ export function usePaginatedData(
             if (!filter?.value || !filter?.matchMode) {
                 return;
             }
-            if (filter.matchMode == FilterMatchMode.DATE_IS) {
+            if (
+                filter.matchMode == FilterMatchMode.DATE_IS ||
+                filter.matchMode == FilterMatchMode.DATE_IS_NOT ||
+                filter.matchMode == FilterMatchMode.DATE_BEFORE ||
+                filter.matchMode == FilterMatchMode.DATE_AFTER
+            ) {
                 filters.value[key].value = new Date(filter.value);
+            } else if (filter.matchMode == FilterMatchMode.BETWEEN) {
+                filter.value.forEach((value: any, index: number) => {
+                    if (typeof value === 'string') {
+                        filter.value[index] = new Date(value);
+                    }
+                });
             } else if (
                 typeof filter.value === 'string' &&
                 filter.value !== '' &&
@@ -207,6 +218,9 @@ export function usePaginatedData(
         }
         if (urlParams?.page) {
             pagination.value.page = parseInt(urlParams.page);
+        }
+        if (urlParams?.rows) {
+            pagination.value.rows = parseInt(urlParams.rows);
         }
     }
 

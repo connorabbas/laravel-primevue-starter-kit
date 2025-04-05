@@ -56,6 +56,7 @@ const toggleMobileUserMenu = (event) => {
                             id="mobile-user-menu-btn"
                             :label="page.props.auth.user.name"
                             severity="secondary"
+                            size="large"
                             pt:root:class="flex flex-row-reverse justify-between"
                             @click="toggleMobileUserMenu($event)"
                         >

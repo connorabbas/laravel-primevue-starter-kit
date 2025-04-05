@@ -57,6 +57,9 @@ export function useAppLayout() {
             lucideIcon: Settings,
         },
         {
+            separator: true
+        },
+        {
             label: 'Log Out',
             lucideIcon: LogOut,
             command: () => logout(),
