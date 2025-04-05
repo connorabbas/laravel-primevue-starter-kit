@@ -8,14 +8,15 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 
 [Hosted Demo Project](https://laravel-primevue-starter-kit-demo-master-yhjxow.laravel.cloud/)
 
-Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
+> [!TIP]
+> Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
 
 ## Roadmap
 
 -   [x] Hosted demo project
 -   [x] Updated User profile settings pages (similar to official Laravel starter kits)
 -   [x] Additional layouts (similar to official Laravel starter kits)
--   [ ] Alternative admin branch using either [Filament PHP](https://filamentphp.com/) or [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) (In development)
+-   [x] Alternative admin branch using [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
 -   [ ] TypeScript & SSR repo using [PrimeVue Volt](https://volt.primevue.org/) (In development)
 -   [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality (WIP)
 
@@ -27,6 +28,7 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 -   Light/dark/system color mode toggle
 -   Easily customizable theming
 -   Opt-in TypeScript usage
+-   [Admin role branch](https://github.com/connorabbas/laravel-primevue-starter-kit/tree/feature/admin-role) using [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
 
 ## Theme
 
