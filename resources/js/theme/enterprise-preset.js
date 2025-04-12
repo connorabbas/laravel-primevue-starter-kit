@@ -1,4 +1,4 @@
-import Preset from '@primeuix/themes/nora';
+import Preset from '@primeuix/themes/material';
 import { definePreset } from '@primeuix/themes';
 
 const customThemePreset = definePreset(Preset, {

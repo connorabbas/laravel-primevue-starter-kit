@@ -34,21 +34,24 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 
 This starter kit provides a collection of custom theme presets to choose from, built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
 
-### Prebuilt Theme Presets
+### Provided Theme Presets
 
-The prebuilt theme presets are located in the `/resources/js/theme` directory. Each preset offers a distinct visual style:
-
--   **noir**  
-    A minimal, monochromatic theme that serves as the default style.
+The theme presets are located in the `/resources/js/theme` directory. Each preset offers a distinct visual style:
 
 -   **bootstrap**  
-    Emulates the familiar look and feel of [Bootstrap](https://getbootstrap.com/).
+    Emulates the look and feel of [Bootstrap](https://getbootstrap.com/).
 
 -   **breeze**  
-    Captures the aesthetic of [Laravel Breeze](https://github.com/laravel/breeze).
+    Captures the aesthetic of [Laravel Breeze](https://github.com/laravel/breeze). (R.I.P. :pray:)
 
 -   **enterprise**  
     Provides a clean, no-nonsense corporate design.
+
+-   **noir**  
+    A minimal & clean monochromatic style that serves as the default theme.
+
+-   **warm**  
+    A boxy design with a warmer color pallette.
 
 ### Customizing Your Own Theme
 
