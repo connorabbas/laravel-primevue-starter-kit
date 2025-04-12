@@ -9,7 +9,7 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 [Hosted Demo Project](https://laravel-primevue-starter-kit-demo.laravel.cloud/)
 
 > [!TIP]
-> Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
+> Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [PrimeVue SPA & Laravel API Starter Kit](https://github.com/connorabbas/laravel-api-primevue-starter-kit) instead.
 
 ## Roadmap
 
@@ -17,8 +17,8 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 -   [x] Updated User profile settings pages (similar to official Laravel starter kits)
 -   [x] Additional layouts (similar to official Laravel starter kits)
 -   [x] Alternative admin branch using [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
+-   [x] Updated `connorabbas/laravel-api-primevue-starter-kit` project to match UI/functionality
 -   [ ] TypeScript & SSR repo using [PrimeVue Volt](https://volt.primevue.org/) (In development)
--   [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality (WIP)
 
 ## Features
 

@@ -15,17 +15,17 @@ const currentRoute = computed(() => {
 const sidebarNavItems = computed(() => [
     {
         title: 'Profile',
-        href: route('profile.edit'),
+        route: route('profile.edit'),
         active: currentRoute.value == 'profile.edit',
     },
     {
         title: 'Password',
-        href: route('password.edit'),
+        route: route('password.edit'),
         active: currentRoute.value == 'password.edit',
     },
     {
         title: 'Appearance',
-        href: route('appearance'),
+        route: route('appearance'),
         active: currentRoute.value == 'appearance',
     },
 ]);
@@ -49,11 +49,11 @@ const sidebarNavItems = computed(() => [
                 <nav class="flex flex-col space-x-0 space-y-1">
                     <Button
                         v-for="item in sidebarNavItems"
-                        :key="item.href"
+                        :key="item.route"
                         pt:root:class="flex items-center justify-start no-underline"
                         :severity="item.active ? 'secondary' : ''"
                         :variant="item.active ? 'outlined' : 'text'"
-                        :href="item.href"
+                        :href="item.route"
                         as="InertiaLink"
                     >
                         {{ item.title }}
