@@ -112,7 +112,7 @@ const toggleMobileUserMenu = (event) => {
                                     <div
                                         id="user-menu-append"
                                         class="relative"
-                                    ></div>
+                                    />
                                     <Menu
                                         ref="user-menu"
                                         appendTo="#user-menu-append"

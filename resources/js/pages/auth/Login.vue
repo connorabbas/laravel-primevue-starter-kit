@@ -103,7 +103,7 @@ onMounted(() => {
                             v-model="loginForm.remember"
                             class="mr-2"
                             :binary="true"
-                        ></Checkbox>
+                        />
                         <label for="remember">Remember me</label>
                     </div>
                 </div>

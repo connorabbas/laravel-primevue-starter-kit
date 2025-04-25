@@ -13,7 +13,9 @@ import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
                 pt:body:class="max-w-2xl space-y-3"
                 pt:caption:class="space-y-1"
             >
-                <template #title>Appearance settings</template>
+                <template #title>
+                    Appearance settings
+                </template>
                 <template #subtitle>
                     Update your account's appearance settings
                 </template>

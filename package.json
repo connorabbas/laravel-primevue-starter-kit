@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lint": "eslint ."
+        "lint": "eslint . --fix"
     },
     "devDependencies": {
         "@eslint/js": "^9.18.0",
@@ -28,7 +28,6 @@
         "@vueuse/core": "^13.0.0",
         "globals": "^16.0.0",
         "laravel-vite-plugin": "^1.2.0",
-        "lodash": "^4.17.21",
         "lodash-es": "^4.17.21",
         "lucide-vue-next": "^0.485.0",
         "primevue": "^4.3.3",

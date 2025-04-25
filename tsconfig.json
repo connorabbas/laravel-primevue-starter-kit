@@ -4,7 +4,6 @@
         "allowImportingTsExtensions": true,
         "module": "ESNext",
         "moduleResolution": "bundler",
-        "jsx": "preserve",
         "strict": true,
         "isolatedModules": true,
         "target": "ESNext",
@@ -25,5 +24,9 @@
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
         "resources/js/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules",
+        "public"
     ]
 }

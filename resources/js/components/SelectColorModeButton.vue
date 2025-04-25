@@ -11,7 +11,7 @@ const options = [
     { label: 'System', value: 'auto', icon: Monitor },
 ];
 
-watchEffect(() => colorMode.value = selectedColorMode.value)
+watchEffect(() => colorMode.value = selectedColorMode.value);
 </script>
 
 <template>

@@ -15,10 +15,9 @@ import PageTitleSection from '@/components/PageTitleSection.vue';
 import customThemePreset from '@/theme/noir-preset';
 import { useColorMode } from '@vueuse/core';
 
+/* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-// Set Light/Dark Color Mode
-const colorMode = useColorMode({ emitAuto: true });
+const colorMode = useColorMode({ emitAuto: true }); // Set Light/Dark Color Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
