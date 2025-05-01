@@ -29,7 +29,7 @@ const page = usePage();
                             Inertia.js,
                         </div>
                         <div class="text-6xl text-green-500 dark:text-green-400 text-emerald font-bold mb-4">
-                            & PrimeVue
+                            + PrimeVue
                         </div>
                         <p class="mt-0 mb-4 text-muted-color leading-normal">
                             A starter kit using
