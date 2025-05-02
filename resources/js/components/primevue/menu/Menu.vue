@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
-import Menu from 'primevue/menu';
+import Menu, { type MenuProps } from 'primevue/menu';
 import type { ExtendedMenuItem } from '@/types';
+import { ptViewMerge } from '@/utils';
 
-const componentProps = defineProps<{
-    model: ExtendedMenuItem[]
-}>();
+interface ExtendedMenuProps extends Omit<MenuProps, 'model'> {
+    model: ExtendedMenuItem[];
+}
+const componentProps = defineProps<ExtendedMenuProps>();
 
 type MenuType = InstanceType<typeof Menu>;
 const childRef = useTemplateRef<MenuType>('child-ref');
 
 defineExpose({
-    childRef,
+    el: childRef,
     toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>
@@ -19,7 +21,7 @@ defineExpose({
 <template>
     <Menu
         ref="child-ref"
-        :model="componentProps.model"
+        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template
             v-for="(_, slotName) in $slots"

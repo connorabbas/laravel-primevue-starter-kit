@@ -1,25 +1,27 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
-import TieredMenu from 'primevue/tieredmenu';
+import TieredMenu, { type TieredMenuProps } from 'primevue/tieredmenu';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
+import { ptViewMerge } from '@/utils';
 
-const componentProps = defineProps<{
-    model: ExtendedMenuItem[]
-}>();
+interface ExtendedTieredMenuProps extends Omit<TieredMenuProps, 'model'> {
+    model: ExtendedMenuItem[];
+}
+const componentProps = defineProps<ExtendedTieredMenuProps>();
 
 type TieredMenuType = InstanceType<typeof TieredMenu>;
 const childRef = useTemplateRef<TieredMenuType>('child-ref');
 
 defineExpose({
-    childRef,
+    el: childRef,
 });
 </script>
 
 <template>
     <TieredMenu
         ref="child-ref"
-        :model="componentProps.model"
+        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template
             v-for="(_, slotName) in $slots"

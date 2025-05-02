@@ -3,13 +3,15 @@ import { useTemplateRef, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import Tabs from 'primevue/tabs';
-import TabList from 'primevue/tablist';
+import TabList, { type TabListProps } from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import type { ExtendedMenuItem } from '@/types';
+import { ptViewMerge } from '@/utils';
 
-const props = defineProps<{
-    items: ExtendedMenuItem[]
-}>();
+interface ExtendedTabListProps extends Omit<TabListProps, 'items'> {
+    items: ExtendedMenuItem[];
+}
+const componentProps = defineProps<ExtendedTabListProps>();
 
 const page = usePage();
 const currentRoute = computed(() => {
@@ -23,19 +25,20 @@ const currentRoute = computed(() => {
 type TabsType = InstanceType<typeof Tabs>;
 const childRef = useTemplateRef<TabsType>('child-ref');
 defineExpose({
-    childRef,
+    el: childRef,
 });
 </script>
 
 <template>
     <Tabs
         ref="child-ref"
+        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
         :value="currentRoute ?? '/'"
         scrollable
     >
         <TabList>
             <InertiaLink
-                v-for="item in props.items"
+                v-for="item in componentProps.items"
                 :key="item.label"
                 :href="item.route ?? ''"
                 :class="['no-underline', { 'p-tab-active': item.active }]"

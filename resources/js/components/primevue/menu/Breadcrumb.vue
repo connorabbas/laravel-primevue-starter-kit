@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue';
-import Breadcrumb from 'primevue/breadcrumb';
+import { ref, useTemplateRef } from 'vue';
+import Breadcrumb, { type BreadcrumbPassThroughOptions, type BreadcrumbProps } from 'primevue/breadcrumb';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
+import { ptViewMerge } from '@/utils';
 
-const componentProps = defineProps<{
-    model: ExtendedMenuItem[]
-}>();
+interface ExtendedBreadcrumbProps extends Omit<BreadcrumbProps, 'model'> {
+    model: ExtendedMenuItem[];
+}
+const componentProps = defineProps<ExtendedBreadcrumbProps>();
+
+const defaultPt = ref<BreadcrumbPassThroughOptions>({
+    root: 'p-0 bg-transparent'
+});
 
 type BreadcrumbType = InstanceType<typeof Breadcrumb>;
 const childRef = useTemplateRef<BreadcrumbType>('child-ref');
-defineExpose({
-    childRef,
-});
+defineExpose({ el: childRef });
 </script>
 
 <template>
     <Breadcrumb
         ref="child-ref"
-        :model="componentProps.model"
-        pt:root:class="p-0 bg-transparent"
+        v-bind="{ ...componentProps, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template #item="{ item, props }">
             <InertiaLink

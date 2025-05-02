@@ -1,26 +1,28 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
-import Menubar from 'primevue/menubar';
+import Menubar, { type MenubarProps } from 'primevue/menubar';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
+import { ptViewMerge } from '@/utils';
 
-const componentProps = defineProps<{
-    model: ExtendedMenuItem[]
-}>();
+interface ExtendedMenubarProps extends Omit<MenubarProps, 'model'> {
+    model: ExtendedMenuItem[];
+}
+const componentProps = withDefaults(
+    defineProps<ExtendedMenubarProps>(),
+    { breakpoint: '1024px' }
+);
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
 
-defineExpose({
-    childRef,
-});
+defineExpose({ el: childRef });
 </script>
 
 <template>
     <Menubar
         ref="child-ref"
-        :model="componentProps.model"
-        breakpoint="1024px"
+        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template
             v-for="(_, slotName) in $slots"
