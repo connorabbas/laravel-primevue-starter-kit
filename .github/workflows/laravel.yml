@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  eslint:
+  javascript:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  laravel:
+  php:
     runs-on: ubuntu-latest
     
     steps:
@@ -42,6 +42,9 @@ jobs:
 
     - name: Run Pint
       run: vendor/bin/pint --test
+
+    - name: Run PHPStan
+      run: vendor/bin/phpstan analyse --memory-limit=2G
     
     - name: Setup Node.js
       uses: actions/setup-node@v3

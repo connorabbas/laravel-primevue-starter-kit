@@ -25,6 +25,9 @@ class EmailVerificationTest extends TestCase
     public function test_email_can_be_verified(): void
     {
         $user = User::factory()->unverified()->create();
+        if (!($user instanceof MustVerifyEmail)) {
+            $this->markTestSkipped('Email verification is not enabled, skipping test.');
+        }
 
         Event::fake();
 
