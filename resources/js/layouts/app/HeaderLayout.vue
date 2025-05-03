@@ -5,7 +5,7 @@ import { useAppLayout } from '@/composables/useAppLayout';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
-import MenuBar from '@/components/primevue/menu/MenuBar.vue';
+import Menubar from '@/components/primevue/menu/Menubar.vue';
 import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
 import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
 
@@ -79,7 +79,7 @@ const toggleMobileUserMenu = (event) => {
             <!-- Primary Navigation Menu -->
             <nav class="dynamic-bg shadow-sm">
                 <Container>
-                    <MenuBar
+                    <Menubar
                         :key="currentRoute"
                         :model="menuItems"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
@@ -140,7 +140,7 @@ const toggleMobileUserMenu = (event) => {
                                 </div>
                             </div>
                         </template>
-                    </MenuBar>
+                    </Menubar>
                 </Container>
             </nav>
 
