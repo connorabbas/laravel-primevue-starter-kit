@@ -1,10 +1,9 @@
 import { usePaginatedData } from './usePaginatedData';
-import cloneDeep from 'lodash-es/cloneDeep';
 import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(
-    propDataToFetch: string,
+    propDataToFetch: string | string[],
     initialFilters: PrimeVueDataFilters = {},
     initialRows: number = 20
 ) {
@@ -34,11 +33,12 @@ export function useLazyDataTable(
 
     /**
      * "Override" parent composable function
-     * Event driven filtering rather than reactive state
+     * Event-driven filtering rather than reactive state
      */
     function filter(event: DataTableFilterEvent) {
         pagination.value.page = 1;
         const newFilters: PrimeVueDataFilters = {};
+
         Object.entries(event.filters).forEach(([key, rawFilter]) => {
             if (
                 rawFilter &&
@@ -48,10 +48,14 @@ export function useLazyDataTable(
                 newFilters[key] = rawFilter as DataTableFilterMetaData;
             }
         });
+
         filters.value = newFilters;
         parseEventFilterValues();
-        fetchData().then(() => {
-            scrollToTop();
+
+        fetchData({
+            onFinish: () => {
+                scrollToTop();
+            },
         });
     }
 
@@ -59,8 +63,11 @@ export function useLazyDataTable(
         pagination.value.page = 1;
         sorting.value.field = event.sortField ? String(event.sortField) : '';
         sorting.value.order = event.sortOrder || 1;
-        fetchData().then(() => {
-            scrollToTop();
+
+        fetchData({
+            onFinish: () => {
+                scrollToTop();
+            },
         });
     }
 
@@ -69,15 +76,22 @@ export function useLazyDataTable(
      * usePaginatedData() resets sorting.value state as a new object, this will not work for DataTable's
      */
     function reset() {
-        const defaultFilters = cloneDeep(initialFilters);
+        const defaultFilters = structuredClone(initialFilters);
+
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
+
         sorting.value.field = '';
         sorting.value.order = 1;
         pagination.value.page = 1;
         pagination.value.rows = initialRows;
-        fetchData();
+
+        fetchData({
+            onFinish: () => {
+                scrollToTop();
+            },
+        });
     }
 
     return {

@@ -1,8 +1,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
+import type { Page, PageProps, Errors } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
 import debounce from 'lodash-es/debounce';
-import cloneDeep from 'lodash-es/cloneDeep';
 import { PageState, DataTablePageEvent } from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
 import qs from 'qs';
@@ -24,13 +24,13 @@ interface SortState {
 }
 
 export function usePaginatedData(
-    propDataToFetch: string,
+    propDataToFetch: string | string[],
     initialFilters: PrimeVueDataFilters = {},
     initialRows: number = 20
 ) {
     const urlParams = ref<PaginatedFilteredSortedQueryParams>({});
     const processing = ref<boolean>(false);
-    const filters = ref<PrimeVueDataFilters>(cloneDeep(initialFilters));
+    const filters = ref<PrimeVueDataFilters>(structuredClone(initialFilters));
     const sorting = ref<SortState>({
         field: '',
         order: 1,
@@ -44,9 +44,9 @@ export function usePaginatedData(
         return (pagination.value.page - 1) * pagination.value.rows;
     });
     const filteredOrSorted = computed(() => {
-        const filters = urlParams.value?.filters || {};
+        const paramsFilters = urlParams.value?.filters || {};
         const sortField = urlParams.value?.sortField || null;
-        const isFiltering = Object.values(filters).some(
+        const isFiltering = Object.values(paramsFilters).some(
             (filter) => filter.value !== null && filter.value !== ''
         );
         const isSorting = sortField !== null && sortField !== '';
@@ -64,11 +64,12 @@ export function usePaginatedData(
             ignoreQueryPrefix: true,
             strictNullHandling: true,
             decoder: function (str, defaultDecoder) {
-                // set empty string values to null
+                // set empty string values to null to match Laravel backend behavior
                 const value = defaultDecoder(str);
                 return value === '' ? null : value;
             },
         }) as PaginatedFilteredSortedQueryParams;
+
         urlParams.value = { ...params };
     }
 
@@ -79,9 +80,16 @@ export function usePaginatedData(
         });
     }
 
-    function fetchData() {
+    function fetchData(options: {
+        onSuccess?: (page: Page<PageProps>) => void;
+        onError?: (errors: Errors) => void;
+        onFinish?: () => void;
+    } = {}) {
+        const { onSuccess: successCallback, onError: errorCallback, onFinish: finishCallback } = options;
+
         return new Promise((resolve, reject) => {
             processing.value = true;
+
             router.visit(window.location.pathname, {
                 method: 'get',
                 data: {
@@ -94,28 +102,42 @@ export function usePaginatedData(
                 preserveUrl: false,
                 showProgress: true,
                 replace: true,
-                only: [propDataToFetch],
+                only: Array.isArray(propDataToFetch) ? propDataToFetch : [propDataToFetch],
                 onSuccess: (page) => {
+                    if (typeof successCallback === 'function') {
+                        successCallback(page);
+                    }
+
                     resolve(page);
                 },
                 onError: (errors) => {
+                    if (typeof errorCallback === 'function') {
+                        errorCallback(errors);
+                    }
+
                     reject(errors);
                 },
                 onFinish: () => {
                     setUrlParams();
                     processing.value = false;
+
+                    if (typeof finishCallback === 'function') {
+                        finishCallback();
+                    }
                 },
             });
         });
     }
 
     function paginate(event: PageState | DataTablePageEvent) {
-        if (event.rows != pagination.value.rows) {
+        if (event.rows !== pagination.value.rows) {
             pagination.value.page = 1;
         } else {
             pagination.value.page = event.page + 1;
         }
+
         pagination.value.rows = event.rows;
+
         fetchData().then(() => {
             scrollToTop();
         });
@@ -129,19 +151,23 @@ export function usePaginatedData(
     }
 
     function reset() {
-        const defaultFilters = cloneDeep(initialFilters);
+        const defaultFilters = structuredClone(initialFilters);
+
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
             filters.value[key].matchMode = defaultFilters[key].matchMode;
         });
+
         sorting.value = {
             field: '',
             order: 1,
         };
+
         pagination.value = {
             page: 1,
             rows: initialRows,
         };
+
         fetchData();
     }
 
@@ -151,23 +177,25 @@ export function usePaginatedData(
             preserveUrl: false,
             showProgress: true,
             replace: true,
-            only: [propDataToFetch],
+            only: Array.isArray(propDataToFetch) ? propDataToFetch : [propDataToFetch],
         });
     }
 
     function parseUrlFilterValues() {
         Object.keys(filters.value).forEach((key) => {
             const filter = filters.value[key];
+
             if (!filter?.value || !filter?.matchMode) {
                 return;
             }
+
             if (
                 filter.matchMode == FilterMatchMode.DATE_IS ||
                 filter.matchMode == FilterMatchMode.DATE_IS_NOT ||
                 filter.matchMode == FilterMatchMode.DATE_BEFORE ||
                 filter.matchMode == FilterMatchMode.DATE_AFTER
             ) {
-                filters.value[key].value = new Date(filter.value);
+                filters.value[key].value = new Date(filter.value as string);
             } else if (filter.matchMode == FilterMatchMode.BETWEEN) {
                 filter.value.forEach((value: any, index: number) => {
                     if (typeof value === 'string') {
@@ -190,12 +218,10 @@ export function usePaginatedData(
                 } else {
                     // Unique array values
                     const unique = [...new Set(filter.value)];
+
                     filter.value = unique;
                     filter.value.forEach((value: any, index: number) => {
-                        if (
-                            typeof value === 'string' &&
-                            !isNaN(Number(value))
-                        ) {
+                        if (typeof value === 'string' && !isNaN(Number(value))) {
                             filter.value[index] = Number(value);
                         }
                     });
@@ -204,23 +230,28 @@ export function usePaginatedData(
         });
     }
 
-    function parseUrlParams(urlParams: PaginatedFilteredSortedQueryParams) {
+    function parseUrlParams(urlParamsObj: PaginatedFilteredSortedQueryParams) {
         filters.value = {
-            ...cloneDeep(initialFilters),
-            ...urlParams?.filters,
+            ...structuredClone(initialFilters),
+            ...urlParamsObj?.filters,
         };
+
         parseUrlFilterValues();
-        if (urlParams?.sortField) {
-            sorting.value.field = urlParams.sortField;
+
+        if (urlParamsObj?.sortField) {
+            sorting.value.field = urlParamsObj.sortField;
         }
-        if (urlParams?.sortOrder) {
-            sorting.value.order = parseInt(urlParams.sortOrder);
+
+        if (urlParamsObj?.sortOrder) {
+            sorting.value.order = parseInt(urlParamsObj.sortOrder);
         }
-        if (urlParams?.page) {
-            pagination.value.page = parseInt(urlParams.page);
+
+        if (urlParamsObj?.page) {
+            pagination.value.page = parseInt(urlParamsObj.page);
         }
-        if (urlParams?.rows) {
-            pagination.value.rows = parseInt(urlParams.rows);
+
+        if (urlParamsObj?.rows) {
+            pagination.value.rows = parseInt(urlParamsObj.rows);
         }
     }
 
