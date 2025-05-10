@@ -12,12 +12,18 @@ import ToastService from 'primevue/toastservice';
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
-import customThemePreset from '@/theme/noir-preset';
 import { useColorMode } from '@vueuse/core';
+import { useThemePreset } from '@/composables/useThemePreset';
+
+// Site light/dark mode
+const colorMode = useColorMode({ emitAuto: true });
+
+// Site theme preset
+const { getCurrentPreset } = useThemePreset();
+const themePreset = getCurrentPreset();
 
 /* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const colorMode = useColorMode({ emitAuto: true }); // Set Light/Dark Color Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -33,7 +39,7 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
                 theme: {
-                    preset: customThemePreset,
+                    preset: themePreset,
                     options: {
                         darkModeSelector: '.dark',
                         cssLayer: {
