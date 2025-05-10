@@ -81,9 +81,9 @@ export function usePaginatedData(
     }
 
     function fetchData(options: {
-        onSuccess?: (page: Page<PageProps>) => void;
-        onError?: (errors: Errors) => void;
-        onFinish?: () => void;
+        onSuccess?: (page: Page<PageProps>) => void,
+        onError?: (errors: Errors) => void,
+        onFinish?: () => void,
     } = {}) {
         const { onSuccess: successCallback, onError: errorCallback, onFinish: finishCallback } = options;
 

@@ -43,11 +43,17 @@ const updatePassword = () => {
         onError: () => {
             if (updatePasswordForm.errors?.password) {
                 updatePasswordForm.reset('password', 'password_confirmation');
-                newPasswordInput.value.$el.focus();
+                const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input');
+                if (newPasswordInputElement) {
+                    newPasswordInputElement.focus();
+                }
             }
             if (updatePasswordForm.errors?.current_password) {
                 updatePasswordForm.reset('current_password');
-                currentPasswordInput.value.$el.focus();
+                const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input');
+                if (currentPasswordInputElement) {
+                    currentPasswordInputElement.focus();
+                }
             }
         },
     });
@@ -76,13 +82,14 @@ const updatePassword = () => {
                     >
                         <div class="flex flex-col gap-2">
                             <label for="current_password">Current Password</label>
-                            <InputText
+                            <Password
                                 id="current_password"
                                 ref="current-password-input"
                                 v-model="updatePasswordForm.current_password"
                                 :invalid="Boolean(updatePasswordForm.errors?.current_password)"
-                                type="password"
                                 autocomplete="current-password"
+                                :feedback="false"
+                                toggleMask
                                 required
                                 fluid
                             />
@@ -118,12 +125,13 @@ const updatePassword = () => {
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password_confirmation">Confirm Password</label>
-                            <InputText
+                            <Password
                                 id="password_confirmation"
                                 v-model="updatePasswordForm.password_confirmation"
                                 :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"
-                                type="password"
                                 autocomplete="confirm-password"
+                                :feedback="false"
+                                toggleMask
                                 required
                                 fluid
                             />

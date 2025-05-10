@@ -58,7 +58,7 @@ onMounted(() => {
                     id="email"
                     ref="email-input"
                     v-model="loginForm.email"
-                    :invalid="Boolean(loginForm.errors.email)"
+                    :invalid="Boolean(loginForm.errors?.email)"
                     type="email"
                     autocomplete="username"
                     required
@@ -79,7 +79,8 @@ onMounted(() => {
                 <Password
                     id="password"
                     v-model="loginForm.password"
-                    :invalid="Boolean(loginForm.errors.password)"
+                    :invalid="Boolean(loginForm.errors?.password)"
+                    :feedback="false"
                     autocomplete="current-password"
                     toggleMask
                     required

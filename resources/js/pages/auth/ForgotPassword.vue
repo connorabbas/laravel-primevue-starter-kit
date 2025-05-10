@@ -57,7 +57,7 @@ onMounted(() => {
                     id="email"
                     ref="email-input"
                     v-model="forgotPasswordForm.email"
-                    :invalid="Boolean(forgotPasswordForm.errors.email)"
+                    :invalid="Boolean(forgotPasswordForm.errors?.email)"
                     type="email"
                     autocomplete="username"
                     required

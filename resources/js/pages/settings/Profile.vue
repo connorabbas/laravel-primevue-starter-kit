@@ -73,7 +73,7 @@ const updateProfileInformation = () => {
                                 <InputText
                                     id="name"
                                     v-model="updateProfileForm.name"
-                                    :invalid="Boolean(updateProfileForm.errors.name)"
+                                    :invalid="Boolean(updateProfileForm.errors?.name)"
                                     type="text"
                                     autocomplete="name"
                                     required
@@ -93,7 +93,7 @@ const updateProfileInformation = () => {
                                 <InputText
                                     id="email"
                                     v-model="updateProfileForm.email"
-                                    :invalid="Boolean(updateProfileForm.errors.email)"
+                                    :invalid="Boolean(updateProfileForm.errors?.email)"
                                     type="email"
                                     autocomplete="username"
                                     required

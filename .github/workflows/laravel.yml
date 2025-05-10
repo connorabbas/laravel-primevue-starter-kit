@@ -21,7 +21,7 @@ jobs:
         run: npm ci
       
       - name: Run ESLint
-        run: npm run lint
+        run: npx eslint .
 
   php:
     runs-on: ubuntu-latest

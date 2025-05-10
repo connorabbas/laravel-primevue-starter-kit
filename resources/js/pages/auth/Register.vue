@@ -37,7 +37,7 @@ onMounted(() => {
                     id="name"
                     ref="name-input"
                     v-model="registerForm.name"
-                    :invalid="Boolean(registerForm.errors.name)"
+                    :invalid="Boolean(registerForm.errors?.name)"
                     type="text"
                     autocomplete="name"
                     required
@@ -58,7 +58,7 @@ onMounted(() => {
                 <InputText
                     id="email"
                     v-model="registerForm.email"
-                    :invalid="Boolean(registerForm.errors.email)"
+                    :invalid="Boolean(registerForm.errors?.email)"
                     type="email"
                     autocomplete="username"
                     required
@@ -79,7 +79,7 @@ onMounted(() => {
                 <Password
                     id="password"
                     v-model="registerForm.password"
-                    :invalid="Boolean(registerForm.errors.password)"
+                    :invalid="Boolean(registerForm.errors?.password)"
                     autocomplete="new-password"
                     toggleMask
                     required
@@ -97,12 +97,13 @@ onMounted(() => {
 
             <div class="flex flex-col gap-2">
                 <label for="password_confirmation">Confirm Password</label>
-                <InputText
+                <Password
                     id="password_confirmation"
                     v-model="registerForm.password_confirmation"
-                    :invalid="Boolean(registerForm.errors.password_confirmation)"
-                    type="password"
+                    :invalid="Boolean(registerForm.errors?.password_confirmation)"
+                    :feedback="false"
                     autocomplete="new-password"
+                    toggleMask
                     required
                     fluid
                 />

@@ -5,6 +5,7 @@ import { useForm } from '@inertiajs/vue3';
 const modalOpen = defineModel(false, {
     type: Boolean,
 });
+
 const passwordInput = useTemplateRef('password-input');
 
 const form = useForm({
@@ -15,14 +16,15 @@ const deleteUser = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
         onSuccess: () => (modalOpen.value = false),
-        onError: () => passwordInput.value.$el.focus(),
+        onError: () => {
+            const passwordInputElement = passwordInput.value.$el.querySelector('input');
+            if (passwordInputElement) {
+                passwordInputElement.focus();
+            }
+        },
         onFinish: () => form.reset(),
     });
 };
-
-function focusPasswordInput() {
-    passwordInput.value.$el.focus();
-}
 </script>
 
 <template>
@@ -34,7 +36,6 @@ function focusPasswordInput() {
         :draggable="false"
         dismissableMask
         modal
-        @show="focusPasswordInput"
     >
         <div class="mb-6">
             <p class="m-0 text-muted-color">
@@ -45,14 +46,14 @@ function focusPasswordInput() {
         </div>
 
         <div class="flex flex-col gap-2">
-            <InputText
+            <Password
                 id="password"
                 ref="password-input"
                 v-model="form.password"
-                :invalid="Boolean(form.errors.password)"
-                type="password"
-                placeholder="Password"
+                :invalid="Boolean(form.errors?.password)"
+                :feedback="false"
                 autocomplete="current-password"
+                toggleMask
                 autofocus
                 required
                 fluid
