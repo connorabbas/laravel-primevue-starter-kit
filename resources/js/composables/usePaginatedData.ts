@@ -1,11 +1,11 @@
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import type { Page, PageProps, Errors } from '@inertiajs/core';
+import type { Page, PageProps } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
-import debounce from 'lodash-es/debounce';
 import { PageState, DataTablePageEvent } from 'primevue';
-import { PrimeVueDataFilters } from '@/types';
+import debounce from 'lodash-es/debounce';
 import qs from 'qs';
+import type { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
 
 interface PaginatedFilteredSortedQueryParams {
     filters?: PrimeVueDataFilters;
@@ -58,7 +58,7 @@ export function usePaginatedData(
         filterCallback();
     }, 300);
 
-    function setUrlParams() {
+    function setUrlParams(): void {
         const queryString = window.location.search;
         const params = qs.parse(queryString, {
             ignoreQueryPrefix: true,
@@ -73,19 +73,15 @@ export function usePaginatedData(
         urlParams.value = { ...params };
     }
 
-    function scrollToTop() {
+    function scrollToTop(): void {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
     }
 
-    function fetchData(options: {
-        onSuccess?: (page: Page<PageProps>) => void,
-        onError?: (errors: Errors) => void,
-        onFinish?: () => void,
-    } = {}) {
-        const { onSuccess: successCallback, onError: errorCallback, onFinish: finishCallback } = options;
+    function fetchData(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+        const { onSuccess, onError, onFinish } = options;
 
         return new Promise((resolve, reject) => {
             processing.value = true;
@@ -104,32 +100,23 @@ export function usePaginatedData(
                 replace: true,
                 only: Array.isArray(propDataToFetch) ? propDataToFetch : [propDataToFetch],
                 onSuccess: (page) => {
-                    if (typeof successCallback === 'function') {
-                        successCallback(page);
-                    }
-
+                    onSuccess?.(page);
                     resolve(page);
                 },
                 onError: (errors) => {
-                    if (typeof errorCallback === 'function') {
-                        errorCallback(errors);
-                    }
-
+                    onError?.(errors);
                     reject(errors);
                 },
                 onFinish: () => {
                     setUrlParams();
                     processing.value = false;
-
-                    if (typeof finishCallback === 'function') {
-                        finishCallback();
-                    }
+                    onFinish?.();
                 },
             });
         });
     }
 
-    function paginate(event: PageState | DataTablePageEvent) {
+    function paginate(event: PageState | DataTablePageEvent): void {
         if (event.rows !== pagination.value.rows) {
             pagination.value.page = 1;
         } else {
@@ -143,45 +130,50 @@ export function usePaginatedData(
         });
     }
 
-    function filter() {
+    function filter(): void {
         pagination.value.page = 1;
         fetchData().then(() => {
             scrollToTop();
         });
     }
 
-    function reset() {
+    function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
         const defaultFilters = structuredClone(initialFilters);
-
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
-            filters.value[key].matchMode = defaultFilters[key].matchMode;
         });
+        sorting.value = { field: '', order: 1 };
+        pagination.value = { page: 1, rows: initialRows };
 
-        sorting.value = {
-            field: '',
-            order: 1,
-        };
-
-        pagination.value = {
-            page: 1,
-            rows: initialRows,
-        };
-
-        fetchData();
+        return fetchData(options);
     }
 
-    function hardReset() {
-        router.visit(window.location.pathname, {
-            method: 'get',
-            preserveUrl: false,
-            showProgress: true,
-            replace: true,
-            only: Array.isArray(propDataToFetch) ? propDataToFetch : [propDataToFetch],
+    function hardReset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+        const { onSuccess, onError, onFinish } = options;
+
+        return new Promise((resolve, reject) => {
+            router.visit(window.location.pathname, {
+                method: 'get',
+                preserveUrl: false,
+                showProgress: true,
+                replace: true,
+                only: Array.isArray(propDataToFetch) ? propDataToFetch : [propDataToFetch],
+                onSuccess(page) {
+                    onSuccess?.(page);
+                    resolve(page);
+                },
+                onError(errors) {
+                    onError?.(errors);
+                    reject(errors);
+                },
+                onFinish() {
+                    onFinish?.();
+                },
+            });
         });
     }
 
-    function parseUrlFilterValues() {
+    function parseUrlFilterValues(): void {
         Object.keys(filters.value).forEach((key) => {
             const filter = filters.value[key];
 
@@ -230,7 +222,7 @@ export function usePaginatedData(
         });
     }
 
-    function parseUrlParams(urlParamsObj: PaginatedFilteredSortedQueryParams) {
+    function parseUrlParams(urlParamsObj: PaginatedFilteredSortedQueryParams): void {
         filters.value = {
             ...structuredClone(initialFilters),
             ...urlParamsObj?.filters,

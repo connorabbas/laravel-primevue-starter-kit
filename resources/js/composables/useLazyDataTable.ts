@@ -1,6 +1,7 @@
-import { usePaginatedData } from './usePaginatedData';
+import type { Page, PageProps } from '@inertiajs/core';
 import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
-import { PrimeVueDataFilters } from '@/types';
+import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
+import { usePaginatedData } from './usePaginatedData';
 
 export function useLazyDataTable(
     propDataToFetch: string | string[],
@@ -35,7 +36,7 @@ export function useLazyDataTable(
      * "Override" parent composable function
      * Event-driven filtering rather than reactive state
      */
-    function filter(event: DataTableFilterEvent) {
+    function filter(event: DataTableFilterEvent): void {
         pagination.value.page = 1;
         const newFilters: PrimeVueDataFilters = {};
 
@@ -59,7 +60,7 @@ export function useLazyDataTable(
         });
     }
 
-    function sort(event: DataTableSortEvent) {
+    function sort(event: DataTableSortEvent): void {
         pagination.value.page = 1;
         sorting.value.field = event.sortField ? String(event.sortField) : '';
         sorting.value.order = event.sortOrder || 1;
@@ -75,21 +76,24 @@ export function useLazyDataTable(
      * "Override" parent composable function
      * usePaginatedData() resets sorting.value state as a new object, this will not work for DataTable's
      */
-    function reset() {
-        const defaultFilters = structuredClone(initialFilters);
+    function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+        const { onFinish: onFinishCallback, onSuccess, onError } = options;
 
+        const defaultFilters = structuredClone(initialFilters);
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
-
         sorting.value.field = '';
         sorting.value.order = 1;
         pagination.value.page = 1;
         pagination.value.rows = initialRows;
 
-        fetchData({
+        return fetchData({
+            onSuccess,
+            onError,
             onFinish: () => {
                 scrollToTop();
+                onFinishCallback?.();
             },
         });
     }
