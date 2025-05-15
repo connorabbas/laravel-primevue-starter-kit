@@ -2,11 +2,11 @@
 import { useTemplateRef } from 'vue';
 import PanelMenu, { type PanelMenuPassThroughOptions, type PanelMenuProps } from 'primevue/panelmenu';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedPanelMenuProps extends Omit<PanelMenuProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = defineProps<ExtendedPanelMenuProps>();
 

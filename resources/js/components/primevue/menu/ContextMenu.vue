@@ -2,11 +2,11 @@
 import { useTemplateRef } from 'vue';
 import ContextMenu, { type ContextMenuProps } from 'primevue/contextmenu';
 import { ChevronRight } from 'lucide-vue-next';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedContextMenuProps extends Omit<ContextMenuProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = defineProps<ExtendedContextMenuProps>();
 

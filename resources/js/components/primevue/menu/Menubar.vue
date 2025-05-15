@@ -2,11 +2,11 @@
 import { useTemplateRef } from 'vue';
 import Menubar, { type MenubarProps } from 'primevue/menubar';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedMenubarProps extends Omit<MenubarProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = withDefaults(
     defineProps<ExtendedMenubarProps>(),

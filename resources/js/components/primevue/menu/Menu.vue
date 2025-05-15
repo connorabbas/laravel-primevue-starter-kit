@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Menu, { type MenuProps } from 'primevue/menu';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedMenuProps extends Omit<MenuProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = defineProps<ExtendedMenuProps>();
 

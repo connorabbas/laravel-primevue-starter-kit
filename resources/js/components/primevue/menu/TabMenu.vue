@@ -5,11 +5,11 @@ import { route } from 'ziggy-js';
 import Tabs from 'primevue/tabs';
 import TabList, { type TabListProps } from 'primevue/tablist';
 import Tab from 'primevue/tab';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedTabListProps extends Omit<TabListProps, 'items'> {
-    items: ExtendedMenuItem[];
+    items: MenuItem[];
 }
 const componentProps = defineProps<ExtendedTabListProps>();
 

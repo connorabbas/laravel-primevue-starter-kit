@@ -2,11 +2,11 @@
 import { useTemplateRef } from 'vue';
 import TieredMenu, { type TieredMenuProps } from 'primevue/tieredmenu';
 import { ChevronRight } from 'lucide-vue-next';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedTieredMenuProps extends Omit<TieredMenuProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = defineProps<ExtendedTieredMenuProps>();
 

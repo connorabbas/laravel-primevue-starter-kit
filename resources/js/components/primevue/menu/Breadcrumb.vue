@@ -2,11 +2,11 @@
 import { ref, useTemplateRef } from 'vue';
 import Breadcrumb, { type BreadcrumbPassThroughOptions, type BreadcrumbProps } from 'primevue/breadcrumb';
 import { ChevronRight } from 'lucide-vue-next';
-import type { ExtendedMenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedBreadcrumbProps extends Omit<BreadcrumbProps, 'model'> {
-    model: ExtendedMenuItem[];
+    model: MenuItem[];
 }
 const componentProps = defineProps<ExtendedBreadcrumbProps>();
 
