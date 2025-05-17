@@ -125,15 +125,19 @@ export function usePaginatedData(
 
         pagination.value.rows = event.rows;
 
-        fetchData().then(() => {
-            scrollToTop();
+        fetchData({
+            onFinish: () => {
+                scrollToTop();
+            },
         });
     }
 
     function filter(): void {
         pagination.value.page = 1;
-        fetchData().then(() => {
-            scrollToTop();
+        fetchData({
+            onFinish: () => {
+                scrollToTop();
+            },
         });
     }
 
