@@ -116,7 +116,7 @@ export function usePaginatedData(
         });
     }
 
-    function paginate(event: PageState | DataTablePageEvent): void {
+    function paginate(event: PageState | DataTablePageEvent): Promise<Page<PageProps>> {
         if (event.rows !== pagination.value.rows) {
             pagination.value.page = 1;
         } else {
@@ -125,18 +125,23 @@ export function usePaginatedData(
 
         pagination.value.rows = event.rows;
 
-        fetchData({
+        return fetchData({
             onFinish: () => {
                 scrollToTop();
             },
         });
     }
 
-    function filter(): void {
+    function filter(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+        const { onFinish: onFinishCallback, onSuccess, onError } = options;
+
         pagination.value.page = 1;
-        fetchData({
+        return fetchData({
+            onSuccess,
+            onError,
             onFinish: () => {
                 scrollToTop();
+                onFinishCallback?.();
             },
         });
     }
@@ -156,6 +161,8 @@ export function usePaginatedData(
         const { onSuccess, onError, onFinish } = options;
 
         return new Promise((resolve, reject) => {
+            processing.value = true;
+
             router.visit(window.location.pathname, {
                 method: 'get',
                 preserveUrl: false,
@@ -171,6 +178,7 @@ export function usePaginatedData(
                     reject(errors);
                 },
                 onFinish() {
+                    processing.value = false;
                     onFinish?.();
                 },
             });
