@@ -77,11 +77,11 @@ onMounted(() => {
             <div class="flex flex-col gap-2">
                 <label for="password">Password</label>
                 <Password
-                    id="password"
                     v-model="loginForm.password"
                     :invalid="Boolean(loginForm.errors?.password)"
                     :feedback="false"
                     autocomplete="current-password"
+                    inputId="password"
                     toggleMask
                     required
                     fluid
@@ -100,9 +100,9 @@ onMounted(() => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Checkbox
-                            id="remember"
                             v-model="loginForm.remember"
                             class="mr-2"
+                            inputId="remember"
                             :binary="true"
                         />
                         <label for="remember">Remember me</label>
