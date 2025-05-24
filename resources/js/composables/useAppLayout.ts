@@ -1,6 +1,5 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
-import { route } from 'ziggy-js';
 import { LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2 } from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
@@ -74,21 +73,23 @@ export function useAppLayout() {
 
     // Mobile menu
     const mobileMenuOpen = ref(false);
-    const windowWidth = ref(window.innerWidth);
-    const updateWidth = () => {
-        windowWidth.value = window.innerWidth;
-    };
-    onMounted(() => {
-        window.addEventListener('resize', updateWidth);
-    });
-    onUnmounted(() => {
-        window.removeEventListener('resize', updateWidth);
-    });
-    watchEffect(() => {
-        if (windowWidth.value > 1024) {
-            mobileMenuOpen.value = false;
-        }
-    });
+    if (typeof window !== 'undefined') {
+        const windowWidth = ref(window.innerWidth);
+        const updateWidth = () => {
+            windowWidth.value = window.innerWidth;
+        };
+        onMounted(() => {
+            window.addEventListener('resize', updateWidth);
+        });
+        onUnmounted(() => {
+            window.removeEventListener('resize', updateWidth);
+        });
+        watchEffect(() => {
+            if (windowWidth.value > 1024) {
+                mobileMenuOpen.value = false;
+            }
+        });
+    }
 
     return {
         currentRoute,

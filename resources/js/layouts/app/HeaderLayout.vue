@@ -4,6 +4,7 @@ import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import ClientOnly from '@/components/ClientOnly.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 import Menubar from '@/components/primevue/menu/Menubar.vue';
 import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
@@ -38,43 +39,45 @@ const toggleMobileUserMenu = (event) => {
 
 <template>
     <div>
-        <Teleport to="body">
-            <!-- Mobile drawer menu -->
-            <Drawer
-                v-model:visible="mobileMenuOpen"
-                position="right"
-            >
-                <div>
-                    <PanelMenu
-                        :model="menuItems"
-                        class="mt-1 w-full"
-                    />
-                </div>
-                <template #footer>
-                    <div class="flex flex-col">
-                        <Button
-                            id="mobile-user-menu-btn"
-                            :label="page.props.auth.user.name"
-                            severity="secondary"
-                            size="large"
-                            pt:root:class="flex flex-row-reverse justify-between"
-                            @click="toggleMobileUserMenu($event)"
-                        >
-                            <template #icon>
-                                <ChevronsUpDown />
-                            </template>
-                        </Button>
-                        <Menu
-                            ref="mobile-user-menu"
-                            :model="userMenuItems"
-                            pt:root:class="z-[1200]"
-                            popup
+        <ClientOnly>
+            <Teleport to="body">
+                <!-- Mobile drawer menu -->
+                <Drawer
+                    v-model:visible="mobileMenuOpen"
+                    position="right"
+                >
+                    <div>
+                        <PanelMenu
+                            :model="menuItems"
+                            class="mt-1 w-full"
                         />
                     </div>
-                </template>
-            </Drawer>
-            <Toast position="top-center" />
-        </Teleport>
+                    <template #footer>
+                        <div class="flex flex-col">
+                            <Button
+                                id="mobile-user-menu-btn"
+                                :label="page.props.auth.user.name"
+                                severity="secondary"
+                                size="large"
+                                pt:root:class="flex flex-row-reverse justify-between"
+                                @click="toggleMobileUserMenu($event)"
+                            >
+                                <template #icon>
+                                    <ChevronsUpDown />
+                                </template>
+                            </Button>
+                            <Menu
+                                ref="mobile-user-menu"
+                                :model="userMenuItems"
+                                pt:root:class="z-[1200]"
+                                popup
+                            />
+                        </div>
+                    </template>
+                </Drawer>
+                <Toast position="top-center" />
+            </Teleport>
+        </ClientOnly>
         <div class="min-h-screen">
             <!-- Primary Navigation Menu -->
             <nav class="dynamic-bg shadow-sm">

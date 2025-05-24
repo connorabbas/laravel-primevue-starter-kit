@@ -1,7 +1,7 @@
 import '../css/app.css';
 import '../css/tailwind.css';
 
-import { createApp, h } from 'vue';
+import { createSSRApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -12,11 +12,8 @@ import ToastService from 'primevue/toastservice';
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
-import { useColorMode } from '@vueuse/core';
+import { useSiteColorMode } from '@/composables/useSiteColorMode';
 import themePreset from '@/theme/noir-preset';
-
-// Site light/dark mode
-const colorMode = useColorMode({ emitAuto: true });
 
 /* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -29,8 +26,10 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
-            .provide('colorMode', colorMode)
+        // Site light/dark mode
+        const colorMode = useSiteColorMode({ emitAuto: true });
+
+        const app = createSSRApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
@@ -50,7 +49,14 @@ createInertiaApp({
             .component('InertiaLink', Link)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
+            .provide('colorMode', colorMode)
             .mount(el);
+
+        // #app content set to hidden by default
+        // reduces jumpy initial render from SSR content (unstyled PrimeVue components)
+        el.style.visibility = 'visible';
+
+        return app;
     },
     progress: {
         color: 'var(--p-primary-500)',
