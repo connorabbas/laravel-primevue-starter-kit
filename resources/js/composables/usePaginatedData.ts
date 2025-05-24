@@ -1,4 +1,4 @@
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, toRaw } from 'vue';
 import { router } from '@inertiajs/vue3';
 import type { Page, PageProps } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -30,7 +30,7 @@ export function usePaginatedData(
 ) {
     const urlParams = ref<PaginatedFilteredSortedQueryParams>({});
     const processing = ref<boolean>(false);
-    const filters = ref<PrimeVueDataFilters>(structuredClone(initialFilters));
+    const filters = ref<PrimeVueDataFilters>(structuredClone(toRaw(initialFilters)));
     const sorting = ref<SortState>({
         field: '',
         order: 1,
@@ -147,7 +147,7 @@ export function usePaginatedData(
     }
 
     function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
-        const defaultFilters = structuredClone(initialFilters);
+        const defaultFilters = structuredClone(toRaw(initialFilters));
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
@@ -236,7 +236,7 @@ export function usePaginatedData(
 
     function parseUrlParams(urlParamsObj: PaginatedFilteredSortedQueryParams): void {
         filters.value = {
-            ...structuredClone(initialFilters),
+            ...structuredClone(toRaw(initialFilters)),
             ...urlParamsObj?.filters,
         };
 

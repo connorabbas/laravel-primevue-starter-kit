@@ -1,3 +1,4 @@
+import { toRaw } from 'vue';
 import type { Page, PageProps } from '@inertiajs/core';
 import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
 import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
@@ -79,7 +80,7 @@ export function useLazyDataTable(
     function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
         const { onFinish: onFinishCallback, onSuccess, onError } = options;
 
-        const defaultFilters = structuredClone(initialFilters);
+        const defaultFilters = structuredClone(toRaw(initialFilters));
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value;
         });
