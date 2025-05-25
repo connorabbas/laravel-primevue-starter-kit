@@ -10,7 +10,7 @@
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
 ```
-git clone -b feature/ssr https://github.com/connorabbas/laravel-inertia-primevue.git
+git clone -b legacy-ssr https://github.com/connorabbas/laravel-inertia-primevue.git
 ```
 
 This branch is tailored towards content-driven applications that rely on Server-Side Rendering (SSR).
@@ -75,4 +75,4 @@ CSS layers have also been implemented so that Tailwind utilities can override th
 
 ### Changes
 
-[Compare against the master branch](https://github.com/connorabbas/primevue-breeze-inertia/compare/master...feature/ssr)
+[Compare against the master branch](https://github.com/connorabbas/primevue-breeze-inertia/compare/master...legacy-ssr)
