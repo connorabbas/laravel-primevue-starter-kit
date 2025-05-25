@@ -10,7 +10,7 @@
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
 ```
-git clone -b feature/admin-panel https://github.com/connorabbas/laravel-inertia-primevue.git
+git clone -b feature/admin-auth-guard https://github.com/connorabbas/laravel-inertia-primevue.git
 ```
 
 ## Admin Panel
@@ -48,4 +48,4 @@ php artisan db:seed
 
 ### Changes
 
-[Compare against the master branch](https://github.com/connorabbas/primevue-breeze-inertia/compare/master...feature/admin-panel)
+[Compare against the master branch](https://github.com/connorabbas/primevue-breeze-inertia/compare/master...feature/admin-auth-guard)
