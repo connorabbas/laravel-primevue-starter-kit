@@ -124,7 +124,7 @@ const updatePassword = () => {
                             </Message>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label for="password-confirmation">Confirm Password</label>
+                            <label for="password-confirmation">Confirm New Password</label>
                             <Password
                                 v-model="updatePasswordForm.password_confirmation"
                                 :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"
@@ -147,7 +147,7 @@ const updatePassword = () => {
                         <Button
                             :loading="updatePasswordForm.processing"
                             type="submit"
-                            label="Save"
+                            label="Save password"
                         />
                     </form>
                 </template>

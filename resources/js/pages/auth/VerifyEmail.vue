@@ -27,6 +27,18 @@ const verificationLinkSent = computed(
     <GuestAuthLayout>
         <InertiaHead title="Email Verification" />
 
+        <template #title>
+            <div class="text-center">
+                Verify email
+            </div>
+        </template>
+
+        <template #subtitle>
+            <div class="text-center">
+                Please verify your email address by clicking on the link we just emailed to you.
+            </div>
+        </template>
+
         <template
             v-if="verificationLinkSent"
             #message
@@ -41,26 +53,24 @@ const verificationLinkSent = computed(
             </Message>
         </template>
 
-        <div class="mb-6 text-sm text-muted-color">
-            Thanks for signing up! Before getting started, could you verify your
-            email address by clicking on the link we just emailed to you? If you
-            didn't receive the email, we will gladly send you another.
-        </div>
-
-        <div class="mt-6 flex justify-between items-center">
+        <div class="space-y-6 sm:space-y-8">
             <form @submit.prevent="submit">
                 <Button
                     :loading="sendVerificationForm.processing"
                     type="submit"
-                    label="Resend Verification Email"
+                    label="Resend verification email"
+                    fluid
                 />
             </form>
-            <Button
-                :loading="logoutForm.processing"
-                variant="link"
-                label="Log Out"
-                @click="logout"
-            />
+            <div class="text-center">
+                <Button
+                    :loading="logoutForm.processing"
+                    class="p-0"
+                    variant="link"
+                    label="Log out"
+                    @click="logout"
+                />
+            </div>
         </div>
     </GuestAuthLayout>
 </template>

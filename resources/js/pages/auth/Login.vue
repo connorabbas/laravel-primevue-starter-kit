@@ -48,12 +48,24 @@ onMounted(() => {
             </Message>
         </template>
 
+        <template #title>
+            <div class="text-center">
+                Log in to your account
+            </div>
+        </template>
+
+        <template #subtitle>
+            <div class="text-center">
+                Enter your email and password below to log in
+            </div>
+        </template>
+
         <form
-            class="space-y-6"
+            class="space-y-6 sm:space-y-8"
             @submit.prevent="submit"
         >
             <div class="flex flex-col gap-2">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <InputText
                     id="email"
                     ref="email-input"
@@ -75,7 +87,19 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password">Password</label>
+                <div class="flex items-center justify-between">
+                    <label for="password">Password</label>
+                    <InertiaLink
+                        v-if="canResetPassword"
+                        :href="route('password.request')"
+                    >
+                        <Button
+                            class="p-0"
+                            variant="link"
+                            label="Forgot your password?"
+                        />
+                    </InertiaLink>
+                </div>
                 <Password
                     v-model="loginForm.password"
                     :invalid="Boolean(loginForm.errors?.password)"
@@ -110,22 +134,27 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div class="flex justify-end items-center gap-4 pt-2">
+            <div>
+                <Button
+                    :loading="loginForm.processing"
+                    type="submit"
+                    label="Log in"
+                    fluid
+                />
+            </div>
+
+            <div class="text-center">
+                <span class="text-muted-color mr-1">Don't have an account?</span>
                 <InertiaLink
                     v-if="canResetPassword"
-                    :href="route('password.request')"
+                    :href="route('register')"
                 >
                     <Button
                         class="p-0"
                         variant="link"
-                        label="Forgot your password?"
+                        label="Sign up"
                     />
                 </InertiaLink>
-                <Button
-                    :loading="loginForm.processing"
-                    type="submit"
-                    label="Log In"
-                />
             </div>
         </form>
     </GuestAuthLayout>

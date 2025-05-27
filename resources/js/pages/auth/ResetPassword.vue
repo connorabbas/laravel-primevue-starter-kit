@@ -38,12 +38,24 @@ onMounted(() => {
     <GuestAuthLayout>
         <InertiaHead title="Reset Password" />
 
+        <template #title>
+            <div class="text-center">
+                Reset password
+            </div>
+        </template>
+
+        <template #subtitle>
+            <div class="text-center">
+                Please enter your new password below
+            </div>
+        </template>
+
         <form
-            class="space-y-6"
+            class="space-y-6 sm:space-y-8"
             @submit.prevent="submit"
         >
             <div class="flex flex-col gap-2">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <InputText
                     id="email"
                     ref="email-input"
@@ -107,11 +119,12 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="flex justify-end items-center pt-2">
+            <div>
                 <Button
                     :loading="resetPwForm.processing"
                     type="submit"
-                    label="Reset Password"
+                    label="Reset password"
+                    fluid
                 />
             </div>
         </form>

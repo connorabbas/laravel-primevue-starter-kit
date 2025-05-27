@@ -41,18 +41,24 @@ onMounted(() => {
             </Message>
         </template>
 
-        <div class="mb-6 text-sm text-muted-color">
-            Forgot your password? No problem. Just let us know your email
-            address and we will email you a password reset link that will allow
-            you to choose a new one.
-        </div>
+        <template #title>
+            <div class="text-center">
+                Forgot password
+            </div>
+        </template>
+
+        <template #subtitle>
+            <div class="text-center">
+                Enter your email address to receive a password reset link
+            </div>
+        </template>
 
         <form
-            class="space-y-6"
+            class="space-y-6 sm:space-y-8"
             @submit.prevent="submit"
         >
             <div class="flex flex-col gap-2">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <InputText
                     id="email"
                     ref="email-input"
@@ -73,12 +79,24 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="flex justify-end items-center">
+            <div>
                 <Button
                     :loading="forgotPasswordForm.processing"
                     type="submit"
-                    label="Email Password Reset Link"
+                    label="Email password reset link"
+                    fluid
                 />
+            </div>
+
+            <div class="text-center">
+                <span class="text-muted-color mr-1">Or, return to</span>
+                <InertiaLink :href="route('login')">
+                    <Button
+                        class="p-0"
+                        variant="link"
+                        label="log in"
+                    />
+                </InertiaLink>
             </div>
         </form>
     </GuestAuthLayout>

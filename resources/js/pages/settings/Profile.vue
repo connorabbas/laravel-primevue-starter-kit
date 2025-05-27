@@ -89,7 +89,7 @@ const updateProfileInformation = () => {
                                 </Message>
                             </div>
                             <div class="flex flex-col gap-2">
-                                <label for="email">Email</label>
+                                <label for="email">Email address</label>
                                 <InputText
                                     id="email"
                                     v-model="updateProfileForm.email"
@@ -118,15 +118,15 @@ const updateProfileInformation = () => {
                                         label="Click here to re-send the verification email."
                                         @click="sendEmailVerification"
                                     />
+                                    <Message
+                                        v-if="status === 'verification-link-sent'"
+                                        severity="success"
+                                        :closable="false"
+                                        class="shadow-sm mt-4"
+                                    >
+                                        A new verification link has been sent to your email address.
+                                    </Message>
                                 </p>
-                                <Message
-                                    v-if="status === 'verification-link-sent'"
-                                    severity="success"
-                                    :closable="false"
-                                    class="shadow-sm mt-4"
-                                >
-                                    A new verification link has been sent to your email address.
-                                </Message>
                             </div>
                             <Button
                                 :loading="updateProfileForm.processing"
@@ -163,7 +163,7 @@ const updateProfileInformation = () => {
                                 </div>
                                 <div>
                                     <Button
-                                        label="Delete Account"
+                                        label="Delete account"
                                         severity="danger"
                                         @click="deleteUserModalOpen = true"
                                     />

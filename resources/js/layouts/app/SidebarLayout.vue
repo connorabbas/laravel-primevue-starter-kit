@@ -5,6 +5,7 @@ import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
 import { useAppLayout } from '@/composables/useAppLayout';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
+import FlashMessages from '@/components/FlashMessages.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
 import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
@@ -154,6 +155,9 @@ const toggleMobileUserMenu = (event) => {
                     vertical
                     fluid
                 >
+                    <!-- Session-based Flash Messages -->
+                    <FlashMessages />
+
                     <!-- Breadcrumbs -->
                     <Breadcrumb
                         v-if="props.breadcrumbs.length"

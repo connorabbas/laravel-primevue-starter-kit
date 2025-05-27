@@ -19,19 +19,20 @@ const submit = () => {
     <GuestAuthLayout>
         <InertiaHead title="Confirm password" />
 
-        <form @submit.prevent="submit">
-            <div class="space-y-6">
-                <PageTitleSection class="text-center">
-                    <template #title>
-                        Confirm your password
-                    </template>
-                    <template #subTitle>
-                        <div class="text-sm">
-                            This is a secure area of the application. Please confirm your password before continuing.
-                        </div>
-                    </template>
-                </PageTitleSection>
+        <template #title>
+            <div class="text-center">
+                Confirm your password
+            </div>
+        </template>
 
+        <template #subtitle>
+            <div class="text-center">
+                This is a secure area of the application. Please confirm your password before continuing.
+            </div>
+        </template>
+
+        <form @submit.prevent="submit">
+            <div class="space-y-6 sm:space-y-8">
                 <div class="flex flex-col gap-2">
                     <label for="password">Password</label>
                     <Password
@@ -58,7 +59,7 @@ const submit = () => {
                     <Button
                         :loading="form.processing"
                         type="submit"
-                        label="Confirm Password"
+                        label="Confirm password"
                     />
                 </div>
             </div>

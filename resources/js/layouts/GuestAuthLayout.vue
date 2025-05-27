@@ -4,22 +4,49 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
 
 <template>
     <Container>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
             <div>
                 <InertiaLink href="/">
-                    <ApplicationLogo class="w-15 h-15 fill-current text-surface-900 dark:text-surface-0" />
+                    <ApplicationLogo class="w-12 h-12 fill-current text-surface-900 dark:text-surface-0" />
                 </InertiaLink>
             </div>
             <div
                 v-if="$slots.message"
-                class="w-full sm:max-w-md mt-6 px-4 sm:px-0"
+                class="w-full sm:max-w-lg mt-6 px-4 sm:px-0"
             >
                 <slot name="message" />
             </div>
-            <div class="w-full sm:max-w-md mt-6">
-                <Card>
+            <div class="w-full sm:max-w-lg mt-6">
+                <Card
+                    pt:caption:class="space-y-2"
+                    pt:body:class="p-6 sm:p-8 space-y-6"
+                >
+                    <template
+                        v-if="$slots.header"
+                        #header
+                    >
+                        <slot name="header" />
+                    </template>
+                    <template
+                        v-if="$slots.title"
+                        #title
+                    >
+                        <slot name="title" />
+                    </template>
+                    <template
+                        v-if="$slots.subtitle"
+                        #subtitle
+                    >
+                        <slot name="subtitle" />
+                    </template>
                     <template #content>
                         <slot />
+                    </template>
+                    <template
+                        v-if="$slots.footer"
+                        #footer
+                    >
+                        <slot name="footer" />
                     </template>
                 </Card>
             </div>
