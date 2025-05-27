@@ -145,10 +145,7 @@ onMounted(() => {
 
             <div class="text-center">
                 <span class="text-muted-color mr-1">Don't have an account?</span>
-                <InertiaLink
-                    v-if="canResetPassword"
-                    :href="route('register')"
-                >
+                <InertiaLink :href="route('register')">
                     <Button
                         class="p-0"
                         variant="link"
