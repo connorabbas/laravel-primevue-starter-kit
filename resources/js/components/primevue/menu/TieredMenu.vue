@@ -6,7 +6,7 @@ import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedTieredMenuProps extends Omit<TieredMenuProps, 'model'> {
-    model: MenuItem[];
+    model?: MenuItem[] | undefined;
 }
 const componentProps = defineProps<ExtendedTieredMenuProps>();
 

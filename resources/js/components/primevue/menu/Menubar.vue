@@ -6,7 +6,7 @@ import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedMenubarProps extends Omit<MenubarProps, 'model'> {
-    model: MenuItem[];
+    model?: MenuItem[] | undefined;
 }
 const componentProps = withDefaults(
     defineProps<ExtendedMenubarProps>(),

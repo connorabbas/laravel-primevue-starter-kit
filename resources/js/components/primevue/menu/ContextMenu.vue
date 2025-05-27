@@ -6,7 +6,7 @@ import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedContextMenuProps extends Omit<ContextMenuProps, 'model'> {
-    model: MenuItem[];
+    model?: MenuItem[] | undefined;
 }
 const componentProps = defineProps<ExtendedContextMenuProps>();
 

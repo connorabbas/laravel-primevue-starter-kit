@@ -6,7 +6,7 @@ import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedBreadcrumbProps extends Omit<BreadcrumbProps, 'model'> {
-    model: MenuItem[];
+    model?: MenuItem[] | undefined;
 }
 const componentProps = defineProps<ExtendedBreadcrumbProps>();
 

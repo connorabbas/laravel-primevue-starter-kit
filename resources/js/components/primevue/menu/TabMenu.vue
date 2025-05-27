@@ -9,7 +9,7 @@ import type { MenuItem } from '@/types';
 import { ptViewMerge } from '@/utils';
 
 interface ExtendedTabListProps extends Omit<TabListProps, 'items'> {
-    items: MenuItem[];
+    items?: MenuItem[] | undefined;
 }
 const componentProps = defineProps<ExtendedTabListProps>();
 
