@@ -11,7 +11,7 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
         </div>
         <div
             v-if="$slots.message"
-            class="w-full sm:max-w-lg mt-6 px-4 sm:px-0"
+            class="w-full sm:max-w-lg mt-6"
         >
             <slot name="message" />
         </div>
