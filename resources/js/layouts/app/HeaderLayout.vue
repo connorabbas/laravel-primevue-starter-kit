@@ -3,8 +3,8 @@ import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
+import NavLogoLink from '@/components/NavLogoLink.vue';
 import FlashMessages from '@/components/FlashMessages.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 import Menubar from '@/components/primevue/menu/Menubar.vue';
@@ -91,11 +91,7 @@ const toggleMobileUserMenu = (event) => {
                     >
                         <template #start>
                             <div class="shrink-0 flex items-center mr-5">
-                                <InertiaLink :href="route('welcome')">
-                                    <ApplicationLogo
-                                        class="block h-8 lg:h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                    />
-                                </InertiaLink>
+                                <NavLogoLink />
                             </div>
                         </template>
                         <template #end>

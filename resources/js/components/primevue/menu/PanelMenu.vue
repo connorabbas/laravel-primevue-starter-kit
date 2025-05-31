@@ -32,7 +32,7 @@ defineExpose({ el: childRef });
                 v-if="item.route"
                 :href="item.route"
                 :class="[
-                    'p-panelmenu-item-link flex items-center cursor-pointer no-underline px-4 py-2',
+                    'p-panelmenu-item-link flex items-center cursor-pointer no-underline p-2',
                     { 'font-bold! text-muted-color': item.active },
                 ]"
                 custom
@@ -53,7 +53,7 @@ defineExpose({ el: childRef });
                 :href="item.url"
                 :target="item.target"
                 :class="[
-                    'flex items-center cursor-pointer no-underline px-4 py-2',
+                    'flex items-center cursor-pointer no-underline p-2',
                     hasSubmenu ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
                 ]"
             >

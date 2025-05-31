@@ -15,6 +15,11 @@ defineProps({
     },
 });
 
+const breadcrumbs = [
+    { label: 'Dashboard', route: route('dashboard') },
+    { label: 'Profile Settings' },
+];
+
 const deleteUserModalOpen = ref(false);
 
 const user = usePage().props.auth.user;
@@ -48,7 +53,7 @@ const updateProfileInformation = () => {
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs>
         <InertiaHead title="Profile Settings" />
 
         <SettingsLayout>

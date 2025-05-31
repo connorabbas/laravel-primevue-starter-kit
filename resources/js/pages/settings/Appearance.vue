@@ -2,10 +2,15 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
+
+const breadcrumbs = [
+    { label: 'Dashboard', route: route('dashboard') },
+    { label: 'Appearance Settings' },
+];
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs>
         <InertiaHead title="Appearance Settings" />
 
         <SettingsLayout>

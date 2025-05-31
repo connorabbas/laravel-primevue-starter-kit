@@ -15,6 +15,11 @@ defineProps({
     },
 });
 
+const breadcrumbs = [
+    { label: 'Dashboard', route: route('dashboard') },
+    { label: 'Password Settings' },
+];
+
 const currentPasswordInput = useTemplateRef('current-password-input');
 const newPasswordInput = useTemplateRef('new-password-input');
 
@@ -61,7 +66,7 @@ const updatePassword = () => {
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs>
         <InertiaHead title="Password Settings" />
 
         <SettingsLayout>

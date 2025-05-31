@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/layouts/app/HeaderLayout.vue';
 
-defineProps({
+const props = defineProps({
     breadcrumbs: {
         type: Array,
         default: () => [],
@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout :breadcrumbs="props.breadcrumbs">
         <slot />
     </AppLayout>
 </template>

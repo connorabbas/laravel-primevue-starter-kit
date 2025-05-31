@@ -28,22 +28,31 @@ export function useAppLayout() {
             active: currentRoute.value == 'dashboard',
         },
         {
-            label: 'Info',
+            label: 'Resources',
             lucideIcon: Info,
             items: [
                 {
+                    label: 'Laravel Docs',
+                    url: 'https://laravel.com/docs/master',
+                    target: '_blank',
+                    lucideIcon: ExternalLink,
+                },
+                {
                     label: 'PrimeVue Docs',
                     url: 'https://primevue.org/',
+                    target: '_blank',
                     lucideIcon: ExternalLink,
                 },
                 {
                     label: 'Starter Kit Docs',
                     url: 'https://connorabbas.github.io/laravel-primevue-starter-kit-docs/',
+                    target: '_blank',
                     lucideIcon: FileSearch,
                 },
                 {
                     label: 'Starter Kit Repo',
                     url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
+                    target: '_blank',
                     lucideIcon: FolderGit2,
                 },
             ],

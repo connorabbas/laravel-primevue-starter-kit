@@ -1,9 +1,11 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
+
+const breadcrumbs = [{ label: 'Dashboard' }];
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs>
         <InertiaHead title="Dashboard" />
 
         <Card>
