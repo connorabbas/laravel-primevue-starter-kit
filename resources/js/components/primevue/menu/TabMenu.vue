@@ -49,8 +49,11 @@ defineExpose({
                     :value="item.route"
                     :class="[
                         'flex items-center gap-2 hover:text-color',
-                        item.active ? 'p-tab-active' : 'text-muted-color'
+                        item.active ? 'p-tab-active' : 'text-muted-color',
+                        item.class
                     ]"
+                    :style="item.style"
+                    :aria-disabled="item.disabled === true"
                 >
                     <i
                         v-if="item.icon"

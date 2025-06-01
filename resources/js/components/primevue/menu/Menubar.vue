@@ -36,12 +36,12 @@ defineExpose({ el: childRef });
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
             <InertiaLink
-                v-if="item.route"
+                v-if="item.visible !== false && item.route"
                 :href="item.route"
-                class="p-menubar-item-link"
-                :class="{
-                    'font-bold! text-muted-color': item.active,
-                }"
+                :target="item.target"
+                :class="['p-menubar-item-link', { 'font-bold! text-muted-color': item.active }, item.class]"
+                :style="item.style"
+                :aria-disabled="item.disabled === true"
                 custom
             >
                 <i
@@ -57,11 +57,13 @@ defineExpose({ el: childRef });
                 <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
             <a
-                v-else
+                v-else-if="item.visible !== false"
+                v-bind="props.action"
                 :href="item.url"
                 :target="item.target"
-                v-bind="props.action"
-                class="p-menubar-item-link"
+                :class="item.class"
+                :style="item.style"
+                :aria-disabled="item.disabled === true"
             >
                 <i
                     v-if="item.icon"

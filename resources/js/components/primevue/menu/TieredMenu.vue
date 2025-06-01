@@ -35,9 +35,12 @@ defineExpose({
         </template>
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
-                v-if="item.route"
+                v-if="item.visible !== false && item.route"
                 :href="item.route"
-                class="p-tieredmenu-item-link"
+                :target="item.target"
+                :class="['p-tieredmenu-item-link', item.class]"
+                :style="item.style"
+                :aria-disabled="item.disabled === true"
                 custom
             >
                 <i
@@ -53,10 +56,13 @@ defineExpose({
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>
             </InertiaLink>
             <a
-                v-else
+                v-else-if="item.visible !== false"
+                v-bind="props.action"
                 :href="item.url"
                 :target="item.target"
-                v-bind="props.action"
+                :class="item.class"
+                :style="item.style"
+                :aria-disabled="item.disabled === true"
             >
                 <i
                     v-if="item.icon"
