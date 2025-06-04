@@ -25,7 +25,7 @@ const verificationLinkSent = computed(
 
 <template>
     <GuestAuthLayout>
-        <InertiaHead title="Email Verification" />
+        <InertiaHead title="Email verification" />
 
         <template #title>
             <div class="text-center">

@@ -5,13 +5,13 @@ import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
-    { label: 'Appearance Settings' },
+    { label: 'Appearance settings' },
 ];
 </script>
 
 <template>
     <AppLayout :breadcrumbs>
-        <InertiaHead title="Appearance Settings" />
+        <InertiaHead title="Appearance settings" />
 
         <SettingsLayout>
             <Card

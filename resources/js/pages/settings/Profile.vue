@@ -17,7 +17,7 @@ defineProps({
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
-    { label: 'Profile Settings' },
+    { label: 'Profile settings' },
 ];
 
 const deleteUserModalOpen = ref(false);
@@ -54,7 +54,7 @@ const updateProfileInformation = () => {
 
 <template>
     <AppLayout :breadcrumbs>
-        <InertiaHead title="Profile Settings" />
+        <InertiaHead title="Profile settings" />
 
         <SettingsLayout>
             <div class="space-y-4 md:space-y-8">
@@ -63,7 +63,7 @@ const updateProfileInformation = () => {
                     pt:caption:class="space-y-1"
                 >
                     <template #title>
-                        Profile Information
+                        Profile information
                     </template>
                     <template #subtitle>
                         Update your name and email address
@@ -146,7 +146,7 @@ const updateProfileInformation = () => {
                     pt:caption:class="space-y-1"
                 >
                     <template #title>
-                        Delete Account
+                        Delete account
                     </template>
                     <template #subtitle>
                         Delete your account and all of its resources

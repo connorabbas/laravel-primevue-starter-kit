@@ -36,7 +36,7 @@ onMounted(() => {
 
 <template>
     <GuestAuthLayout>
-        <InertiaHead title="Reset Password" />
+        <InertiaHead title="Reset password" />
 
         <template #title>
             <div class="text-center">
@@ -77,7 +77,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password">New Password</label>
+                <label for="password">New password</label>
                 <Password
                     v-model="resetPwForm.password"
                     :invalid="Boolean(resetPwForm.errors?.password)"
@@ -98,7 +98,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password-confirmation">Confirm New Password</label>
+                <label for="password-confirmation">Confirm new password</label>
                 <Password
                     v-model="resetPwForm.password_confirmation"
                     :invalid="Boolean(resetPwForm.errors?.password_confirmation)"

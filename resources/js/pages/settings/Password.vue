@@ -17,7 +17,7 @@ defineProps({
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
-    { label: 'Password Settings' },
+    { label: 'Password settings' },
 ];
 
 const currentPasswordInput = useTemplateRef('current-password-input');
@@ -67,7 +67,7 @@ const updatePassword = () => {
 
 <template>
     <AppLayout :breadcrumbs>
-        <InertiaHead title="Password Settings" />
+        <InertiaHead title="Password settings" />
 
         <SettingsLayout>
             <Card
@@ -75,7 +75,7 @@ const updatePassword = () => {
                 pt:caption:class="space-y-1"
             >
                 <template #title>
-                    Update Password
+                    Update password
                 </template>
                 <template #subtitle>
                     Ensure your account is using a long, random password to stay secure
@@ -86,7 +86,7 @@ const updatePassword = () => {
                         @submit.prevent="updatePassword"
                     >
                         <div class="flex flex-col gap-2">
-                            <label for="current-password">Current Password</label>
+                            <label for="current-password">Current password</label>
                             <Password
                                 ref="current-password-input"
                                 v-model="updatePasswordForm.current_password"
@@ -108,7 +108,7 @@ const updatePassword = () => {
                             </Message>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label for="password">New Password</label>
+                            <label for="password">New password</label>
                             <Password
                                 ref="new-password-input"
                                 v-model="updatePasswordForm.password"
@@ -129,7 +129,7 @@ const updatePassword = () => {
                             </Message>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label for="password-confirmation">Confirm New Password</label>
+                            <label for="password-confirmation">Confirm pew password</label>
                             <Password
                                 v-model="updatePasswordForm.password_confirmation"
                                 :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"

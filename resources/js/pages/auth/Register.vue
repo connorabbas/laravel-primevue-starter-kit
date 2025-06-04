@@ -108,7 +108,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password-confirmation">Confirm Password</label>
+                <label for="password-confirmation">Confirm password</label>
                 <Password
                     v-model="registerForm.password_confirmation"
                     :invalid="Boolean(registerForm.errors?.password_confirmation)"
