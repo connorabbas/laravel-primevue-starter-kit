@@ -46,13 +46,12 @@ defineExpose({ el: childRef });
             >
                 <i
                     v-if="item.icon"
-                    :class="item.icon"
-                    class="p-menubar-item-icon"
+                    :class="['p-menubar-item-icon', item.icon]"
                 />
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    class="p-menubar-item-icon"
+                    :class="['p-menubar-item-icon', item.lucideIconClass]"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -67,13 +66,12 @@ defineExpose({ el: childRef });
             >
                 <i
                     v-if="item.icon"
-                    :class="item.icon"
-                    class="p-menubar-item-icon"
+                    :class="['p-menubar-item-icon', item.icon]"
                 />
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    class="p-menubar-item-icon"
+                    :class="['p-menubar-item-icon', item.lucideIconClass]"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
                 <template v-if="hasSubmenu">

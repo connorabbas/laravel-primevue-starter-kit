@@ -36,13 +36,12 @@ defineExpose({
             >
                 <i
                     v-if="item.icon"
-                    :class="item.icon"
-                    class="p-contextmenu-item-icon"
+                    :class="['p-contextmenu-item-icon', item.icon]"
                 />
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    class="p-contextmenu-item-icon"
+                    :class="['p-contextmenu-item-icon', item.lucideIconClass]"
                 />
                 <span class="p-contextmenu-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -57,13 +56,12 @@ defineExpose({
             >
                 <i
                     v-if="item.icon"
-                    :class="item.icon"
-                    class="p-contextmenu-item-icon"
+                    :class="['p-contextmenu-item-icon', item.icon]"
                 />
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    class="p-contextmenu-item-icon"
+                    :class="['p-contextmenu-item-icon', item.lucideIconClass]"
                 />
                 <span class="p-contextmenu-item-label">{{ item.label }}</span>
                 <ChevronRight

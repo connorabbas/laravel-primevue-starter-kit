@@ -51,7 +51,7 @@ defineExpose({ el: childRef });
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    :class="[root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon']"
+                    :class="[root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon', item.lucideIconClass]"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
@@ -74,7 +74,7 @@ defineExpose({ el: childRef });
                 <component
                     :is="item.lucideIcon"
                     v-else-if="item.lucideIcon"
-                    :class="[root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon']"
+                    :class="[root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon', item.lucideIconClass]"
                 />
                 <span>{{ item.label }}</span>
                 <template v-if="hasSubmenu">

@@ -62,6 +62,7 @@ defineExpose({
                     <component
                         :is="item.lucideIcon"
                         v-else-if="item.lucideIcon"
+                        :class="item.lucideIconClass"
                     />
                     <span>{{ item.label }}</span>
                 </Tab>
