@@ -3,7 +3,7 @@ import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
 
-defineProps({
+const props = defineProps({
     canResetPassword: {
         type: Boolean,
     },
@@ -36,7 +36,7 @@ onMounted(() => {
         <InertiaHead title="Log in" />
 
         <template
-            v-if="status"
+            v-if="props.status"
             #message
         >
             <Message
@@ -44,7 +44,7 @@ onMounted(() => {
                 :closable="false"
                 class="shadow-sm"
             >
-                {{ status }}
+                {{ props.status }}
             </Message>
         </template>
 
@@ -90,7 +90,7 @@ onMounted(() => {
                 <div class="flex items-center justify-between">
                     <label for="password">Password</label>
                     <InertiaLink
-                        v-if="canResetPassword"
+                        v-if="props.canResetPassword"
                         :href="route('password.request')"
                     >
                         <Button

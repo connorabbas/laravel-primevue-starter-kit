@@ -1,11 +1,20 @@
 <script setup>
+import { ref, onUnmounted } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
 import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-next';
+
+const page = usePage();
+const requestsKey = ref(0);
+onUnmounted(router.on('finish', () => requestsKey.value++));
 </script>
 
 <template>
-    <div class="m-0">
+    <div
+        :key="requestsKey"
+        class="m-0"
+    >
         <Message
-            v-if="$page.props.flash.success"
+            v-if="page.props.flash.success"
             class="mb-6"
             severity="success"
             closable
@@ -13,10 +22,10 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <Check />
             </template>
-            {{ $page.props.flash.success }}
+            {{ page.props.flash.success }}
         </Message>
         <Message
-            v-if="$page.props.flash.info"
+            v-if="page.props.flash.info"
             class="mb-6"
             severity="info"
             closable
@@ -24,10 +33,10 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <Info />
             </template>
-            {{ $page.props.flash.info }}
+            {{ page.props.flash.info }}
         </Message>
         <Message
-            v-if="$page.props.flash.warn"
+            v-if="page.props.flash.warn"
             class="mb-6"
             severity="warn"
             closable
@@ -35,10 +44,10 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <TriangleAlert />
             </template>
-            {{ $page.props.flash.warn }}
+            {{ page.props.flash.warn }}
         </Message>
         <Message
-            v-if="$page.props.flash.error"
+            v-if="page.props.flash.error"
             class="mb-6"
             severity="error"
             closable
@@ -46,10 +55,10 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <CircleAlert />
             </template>
-            {{ $page.props.flash.error }}
+            {{ page.props.flash.error }}
         </Message>
         <Message
-            v-if="$page.props.flash.message"
+            v-if="page.props.flash.message"
             class="mb-6"
             severity="secondary"
             closable
@@ -57,7 +66,7 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <Megaphone />
             </template>
-            {{ $page.props.flash.message }}
+            {{ page.props.flash.message }}
         </Message>
     </div>
 </template>

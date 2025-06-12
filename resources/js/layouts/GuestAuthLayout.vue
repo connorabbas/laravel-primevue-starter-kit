@@ -1,21 +1,23 @@
 <script setup>
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import FlashMessages from '@/components/FlashMessages.vue';
 </script>
 
 <template>
     <Container class="min-h-svh flex flex-col justify-center items-center">
-        <div>
+        <div class="mb-6">
             <InertiaLink href="/">
                 <ApplicationLogo class="w-12 h-12 fill-current text-surface-900 dark:text-surface-0" />
             </InertiaLink>
         </div>
+        <FlashMessages class="w-full sm:max-w-lg" />
         <div
             v-if="$slots.message"
-            class="w-full sm:max-w-lg mt-6"
+            class="w-full sm:max-w-lg mb-6"
         >
             <slot name="message" />
         </div>
-        <div class="w-full sm:max-w-lg mt-6">
+        <div class="w-full sm:max-w-lg">
             <Card
                 pt:caption:class="space-y-2"
                 pt:body:class="p-6 sm:p-8 space-y-6"
