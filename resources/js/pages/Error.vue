@@ -3,26 +3,17 @@ import { computed } from 'vue';
 import { ArrowLeft } from 'lucide-vue-next';
 
 const props = defineProps({
+    errorTitles: Object,
+    errorDetails: Object,
+    status: Number,
     homepageRoute: String,
-    status: Number
 });
 
 const title = computed(() => {
-    return {
-        503: 'Service Unavailable',
-        500: 'Server Error',
-        404: 'Page Not Found',
-        403: 'Forbidden',
-    }[props.status];
+    return props.errorTitles[props.status];
 });
-
-const description = computed(() => {
-    return {
-        503: 'Sorry, we are doing some maintenance. Please check back soon.',
-        500: 'Whoops, something went wrong on our servers.',
-        404: 'Sorry, the page you are looking for could not be found.',
-        403: 'Sorry, you are forbidden from accessing this page.',
-    }[props.status];
+const details = computed(() => {
+    return props.errorDetails[props.status];
 });
 </script>
 
@@ -33,15 +24,15 @@ const description = computed(() => {
             <div class="h-screen flex items-center justify-center">
                 <Card class="p-4 py-6 sm:p-12">
                     <template #content>
-                        <div class="flex flex-col gap-8 items-center justify-center text-center">
-                            <h1 class="font-extrabold text-5xl md:text-8xl text-primary">
+                        <div class="flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
+                            <h1 class="font-extrabold text-2xl md:text-4xl text-primary">
                                 {{ props.status }}
                             </h1>
                             <h2 class="font-extrabold text-4xl md:text-6xl">
                                 {{ title }}
                             </h2>
-                            <p class="text-xl font-semibold md:text-3xl text-muted-color">
-                                {{ description }}
+                            <p class="text-xl font-semibold text-muted-color">
+                                {{ details }}
                             </p>
                             <InertiaLink :href="props.homepageRoute">
                                 <Button

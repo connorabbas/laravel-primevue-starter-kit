@@ -9,6 +9,7 @@ import { route as ziggyRoute } from 'ziggy-js';
 
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
@@ -33,8 +34,18 @@ createServer((page) =>
                 emitAuto: true,
             });
 
+            // Global Toast component
+            const Root = {
+                setup() {
+                    return () => h('div', [
+                        h(App, props),
+                        h(Toast, { position: 'bottom-right' })
+                    ]);
+                }
+            };
+
             // Create app
-            const app = createSSRApp({ render: () => h(App, props) });
+            const app = createSSRApp(Root);
 
             // Configure Ziggy for SSR
             const ziggyConfig = {

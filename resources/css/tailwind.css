@@ -6,6 +6,7 @@
 @source '../../storage/framework/views/*.php';
 @source '../../resources/views/**/*.blade.php';
 @source '../../resources/js/**/*.vue';
+@source '../../resources/js/theme/*.js';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
