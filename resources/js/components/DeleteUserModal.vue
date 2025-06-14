@@ -30,9 +30,9 @@ const deleteUser = () => {
 <template>
     <Dialog
         v-model:visible="modalOpen"
+        class="m-4 sm:m-0 w-[40rem]"
         position="center"
         header="Are you sure you want to delete your account?"
-        :style="{ width: '40rem' }"
         :draggable="false"
         dismissableMask
         modal

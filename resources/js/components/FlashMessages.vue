@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-next';
+import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next';
 
 const page = usePage();
 const flashed = ref(0);
@@ -56,7 +56,7 @@ watch(() => page.props.flash, () => {
             closable
         >
             <template #icon>
-                <CircleAlert />
+                <CircleX />
             </template>
             {{ page.props.flash.error }}
         </Message>
