@@ -3,6 +3,14 @@
  * https://primevue.org/passthrough/#global
  */
 export default {
+    dialog: {
+        root: {
+            class: 'm-4 sm:m-0'
+        },
+        mask: {
+            class: 'backdrop-blur-xs'
+        },
+    },
     toast: {
         root: {
             // Full width/centered on mobile, bottom right desktop

@@ -76,6 +76,9 @@ const toggleMobileUserMenu = (event) => {
                         </div>
                     </template>
                 </Drawer>
+                <ScrollTop
+                    :buttonProps="{ class: 'fixed! right-4! bottom-4! md:right-8! md:bottom-8! z-[1000]!', rounded: true, raised: true }"
+                />
             </Teleport>
         </ClientOnly>
         <div class="min-h-screen">
