@@ -7,9 +7,6 @@ export default {
         root: {
             class: 'm-4 sm:m-0'
         },
-        mask: {
-            class: 'backdrop-blur-xs'
-        },
     },
     toast: {
         root: {
