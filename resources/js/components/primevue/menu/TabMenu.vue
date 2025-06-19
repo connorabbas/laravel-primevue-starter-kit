@@ -24,9 +24,7 @@ const currentRoute = computed(() => {
 
 type TabsType = InstanceType<typeof Tabs>;
 const childRef = useTemplateRef<TabsType>('child-ref');
-defineExpose({
-    el: childRef,
-});
+defineExpose({ $el: childRef });
 </script>
 
 <template>

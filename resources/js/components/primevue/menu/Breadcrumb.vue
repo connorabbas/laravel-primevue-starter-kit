@@ -16,7 +16,7 @@ const defaultPt = ref<BreadcrumbPassThroughOptions>({
 
 type BreadcrumbType = InstanceType<typeof Breadcrumb>;
 const childRef = useTemplateRef<BreadcrumbType>('child-ref');
-defineExpose({ el: childRef });
+defineExpose({ $el: childRef });
 </script>
 
 <template>

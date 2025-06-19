@@ -19,7 +19,7 @@ const defaultPt: PanelMenuPassThroughOptions = {
 
 type PanelMenuType = InstanceType<typeof PanelMenu>;
 const childRef = useTemplateRef<PanelMenuType>('child-ref');
-defineExpose({ el: childRef });
+defineExpose({ $el: childRef });
 </script>
 
 <template>

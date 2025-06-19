@@ -14,7 +14,7 @@ type ContextMenuType = InstanceType<typeof ContextMenu>;
 const childRef = useTemplateRef<ContextMenuType>('child-ref');
 
 defineExpose({
-    el: childRef,
+    $el: childRef,
     toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>

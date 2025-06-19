@@ -16,7 +16,7 @@ const componentProps = withDefaults(
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
 
-defineExpose({ el: childRef });
+defineExpose({ $el: childRef });
 </script>
 
 <template>

@@ -29,12 +29,12 @@ const {
 
 const userMenu = useTemplateRef('user-menu');
 const toggleUserMenu = (event) => {
-    userMenu.value.el.toggle(event);
+    userMenu.value.$el.toggle(event);
 };
 
 const mobileUserMenu = useTemplateRef('mobile-user-menu');
 const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.el.toggle(event);
+    mobileUserMenu.value.$el.toggle(event);
 };
 </script>
 

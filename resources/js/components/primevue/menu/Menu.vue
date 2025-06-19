@@ -13,7 +13,7 @@ type MenuType = InstanceType<typeof Menu>;
 const childRef = useTemplateRef<MenuType>('child-ref');
 
 defineExpose({
-    el: childRef,
+    $el: childRef,
     toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>

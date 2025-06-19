@@ -13,9 +13,7 @@ const componentProps = defineProps<ExtendedTieredMenuProps>();
 type TieredMenuType = InstanceType<typeof TieredMenu>;
 const childRef = useTemplateRef<TieredMenuType>('child-ref');
 
-defineExpose({
-    el: childRef,
-});
+defineExpose({ $el: childRef });
 </script>
 
 <template>
