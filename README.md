@@ -11,6 +11,6 @@ A basic authentication starter kit using [Laravel](https://laravel.com/docs/mast
 
 ## Resources
 
-[🌐 **Demo Application**](https://laravel-primevue-starter-kit-demo.laravel.cloud/)
+[🌐 **Demo Application**](https://demo.laravel-primevue-starter-kit.com/)
 
 [📚 **Documentation**](https://connorabbas.github.io/laravel-primevue-starter-kit-docs/)
