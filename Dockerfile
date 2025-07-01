@@ -9,13 +9,13 @@ RUN install-php-extensions bcmath gd pgsql
 # Node Image
 FROM node:${NODE_VERSION}-alpine AS node
 
-# Composer Stage
+# Install Composer packages
 FROM base AS composer
 WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
 
-# Assets Stage
+# Install and bundle NPM packages
 FROM node:${NODE_VERSION}-alpine AS build-assets
 WORKDIR /var/www/html
 COPY package*.json ./
@@ -59,7 +59,7 @@ COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./
 COPY --chown=www-data:www-data . .
 USER www-data
 
-# SSR Node Production Image
+# SSR Production Image
 FROM base AS ssr-release
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
