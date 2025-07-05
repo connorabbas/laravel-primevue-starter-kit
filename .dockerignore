@@ -1,0 +1,6 @@
+.git
+tests
+.env*
+Dockerfile*
+docker-*.yml
+*.md
