@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
         // Prohibits: db:wipe, migrate:fresh, migrate:refresh, and migrate:reset
-        DB::prohibitDestructiveCommands($isProduction); 
+        DB::prohibitDestructiveCommands($isProduction);
     }
 }
