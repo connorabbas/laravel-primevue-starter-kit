@@ -63,7 +63,7 @@ return Application::configure(basePath: dirname(__DIR__))
                         ->setStatusCode($statusCode);
                 } else {
                     // Show standard modal for easier debugging locally
-                    if (app()->isLocal() && $statusCode === 500) {
+                    if (app()->hasDebugModeEnabled() && $statusCode === 500) {
                         return $response;
                     }
                     // Return JSON response for PrimeVue toast to display, handled by Inertia router event listener
