@@ -1,0 +1,60 @@
+services:
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: release
+    restart: always
+    env_file: '.env'
+    environment:
+      PHP_OPCACHE_ENABLE: '1'
+      SSL_MODE: 'mixed'
+    volumes:
+      - 'storage-public:/var/www/html/storage/app/public/'
+      - 'storage-sessions:/var/www/html/storage/framework/sessions'
+      - 'storage-logs:/var/www/html/storage/logs'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.your-app-name.rule=Host(`your-domain.com`)'
+      - 'traefik.http.routers.your-app-name.entrypoints=websecure'
+      - 'traefik.http.routers.your-app-name.tls=true'
+      - 'traefik.http.routers.your-app-name.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.your-app-name.loadbalancer.server.port=8080' # exposed http port from serversideup image
+      # Health check
+      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.path=/healthcheck'
+      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.interval=30s'
+      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.timeout=5s'
+      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.scheme=http'
+    networks:
+      - proxy
+    depends_on:
+      - pgsql
+
+  pgsql:
+    image: postgres:17
+    restart: always
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - proxy
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
+      retries: 3
+      timeout: 5s
+
+volumes:
+  postgres-data:
+  storage-public:
+  storage-sessions:
+  storage-logs:
+
+networks:
+  proxy:
+    name: traefik_network
+    external: true
