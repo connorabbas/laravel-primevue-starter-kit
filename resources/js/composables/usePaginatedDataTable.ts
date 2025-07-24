@@ -4,7 +4,7 @@ import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } fro
 import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
 import { usePaginatedData } from './usePaginatedData';
 
-export function useLazyDataTable(
+export function usePaginatedDataTable(
     propDataToFetch: string | string[],
     initialFilters: PrimeVueDataFilters = {},
     initialRows: number = 20
