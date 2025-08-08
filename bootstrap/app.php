@@ -47,7 +47,13 @@ return Application::configure(basePath: dirname(__DIR__))
             ];
 
             if (in_array($statusCode, [500, 503, 404, 403])) {
-                if (!$request->inertia()) {
+                if (
+                    $statusCode === 500
+                    && app()->hasDebugModeEnabled()
+                    && get_class($exception) !== ErrorToastException::class
+                ) {
+                    return $response;
+                } elseif (!$request->inertia()) {
                     // Show error page component for standard visits
                     return Inertia::render('Error', [
                         'errorTitles' => $errorTitles,
@@ -62,10 +68,6 @@ return Application::configure(basePath: dirname(__DIR__))
                         ->toResponse($request)
                         ->setStatusCode($statusCode);
                 } else {
-                    // Show standard modal for easier debugging locally
-                    if (app()->hasDebugModeEnabled() && $statusCode === 500) {
-                        return $response;
-                    }
                     // Return JSON response for PrimeVue toast to display, handled by Inertia router event listener
                     $errorSummary = "$statusCode - $errorTitles[$statusCode]";
                     $errorDetail = $errorDetails[$statusCode];
