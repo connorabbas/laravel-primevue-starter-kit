@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: release
+      target: ssr-release
     restart: always
     env_file: '.env'
     environment:
