@@ -19,7 +19,7 @@ services:
       - '.:/var/www/html'
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.laravel-primevue.rule=Host(`laravel-primevue.localhost`)'
+      - 'traefik.http.routers.laravel-primevue.rule=Host(`${APP_DOMAIN}`)'
       - 'traefik.http.services.laravel-primevue.loadbalancer.server.port=8080' # exposed http port from serversideup image
     networks:
       - proxy
@@ -30,7 +30,7 @@ services:
   pgsql:
     image: 'postgres:17'
     ports:
-      - '${FORWARD_DB_PORT:-5432}:5432'
+      - '${DB_FORWARD_PORT:-5432}:5432'
     environment:
       PGPASSWORD: '${DB_PASSWORD:-secret}'
       POSTGRES_DB: '${DB_DATABASE}'

@@ -14,17 +14,18 @@ services:
       - 'storage-sessions:/var/www/html/storage/framework/sessions'
       - 'storage-logs:/var/www/html/storage/logs'
     labels:
+      # Adjust "laravel-primevue" service name as needed
       - 'traefik.enable=true'
-      - 'traefik.http.routers.your-app-name.rule=Host(`your-domain.com`)'
-      - 'traefik.http.routers.your-app-name.entrypoints=websecure'
-      - 'traefik.http.routers.your-app-name.tls=true'
-      - 'traefik.http.routers.your-app-name.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.your-app-name.loadbalancer.server.port=8080' # exposed http port from serversideup image
+      - 'traefik.http.routers.laravel-primevue.rule=Host(`${APP_DOMAIN}`)'
+      - 'traefik.http.routers.laravel-primevue.entrypoints=websecure'
+      - 'traefik.http.routers.laravel-primevue.tls=true'
+      - 'traefik.http.routers.laravel-primevue.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.server.port=8080' # exposed http port from serversideup image
       # Health check
-      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.path=/healthcheck'
-      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.interval=30s'
-      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.timeout=5s'
-      - 'traefik.http.services.your-app-name.loadbalancer.healthcheck.scheme=http'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.path=/healthcheck'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.interval=30s'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.timeout=5s'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.scheme=http'
     networks:
       - proxy
     depends_on:
@@ -34,7 +35,7 @@ services:
     image: postgres:17
     restart: always
     ports:
-      - '${FORWARD_DB_PORT:-5432}:5432'
+      - '${DB_FORWARD_PORT:-5432}:5432'
     environment:
       POSTGRES_DB: '${DB_DATABASE}'
       POSTGRES_USER: '${DB_USERNAME}'
