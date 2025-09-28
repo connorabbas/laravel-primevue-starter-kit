@@ -1,13 +1,14 @@
-<script setup>
-import AppLayout from '@/layouts/AppLayout.vue';
+<script setup lang="ts">
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import AppLayout from '@/layouts/AppLayout.vue'
 
-const breadcrumbs = [{ label: 'Dashboard' }];
+const breadcrumbs = [{ label: 'Dashboard' }]
 </script>
 
 <template>
-    <AppLayout :breadcrumbs>
-        <InertiaHead title="Dashboard" />
+    <InertiaHead title="Dashboard" />
 
+    <AppLayout :breadcrumbs>        
         <Card>
             <template #content>
                 <p class="m-0">

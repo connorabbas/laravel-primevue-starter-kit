@@ -1,40 +1,40 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
-const props = defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+const props = defineProps<{
+    canResetPassword: boolean,
+    status?: string,
+}>()
 
-const emailInput = useTemplateRef('email-input');
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const emailInput = useTemplateRef<InputTextType>('email-input')
 
 const loginForm = useForm({
     email: '',
     password: '',
     remember: false,
-});
+})
 
 const submit = () => {
     loginForm.post(route('login'), {
         onFinish: () => loginForm.reset('password'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    if (emailInput.value) {
+        emailInput.value.$el.focus()
+    }
+})
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Log in" />
+    <InertiaHead title="Log in" />
 
+    <GuestAuthLayout>
         <template
             v-if="props.status"
             #message

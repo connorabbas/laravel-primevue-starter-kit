@@ -18,6 +18,8 @@
                 "laravel.vscode-laravel",
                 "Vue.volar",
                 "hollowtree.vue-snippets",
+                "dbaeumer.vscode-eslint",
+                "EditorConfig.EditorConfig",
                 "bradlc.vscode-tailwindcss",
                 "eamodio.gitlens",
                 "esbenp.prettier-vscode",

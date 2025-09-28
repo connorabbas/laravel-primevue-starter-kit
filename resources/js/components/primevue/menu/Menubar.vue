@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue';
-import Menubar, { type MenubarProps } from 'primevue/menubar';
-import { ChevronDown, ChevronRight } from 'lucide-vue-next';
-import type { MenuItem } from '@/types';
-import { ptViewMerge } from '@/utils';
+import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
+import Menubar, { type MenubarProps } from 'primevue/menubar'
+import { ChevronDown, ChevronRight } from 'lucide-vue-next'
+import type { MenuItem } from '@/types'
+import { ptViewMerge } from '@/utils'
 
 interface ExtendedMenubarProps extends Omit<MenubarProps, 'model'> {
     model?: MenuItem[] | undefined;
@@ -11,12 +12,12 @@ interface ExtendedMenubarProps extends Omit<MenubarProps, 'model'> {
 const componentProps = withDefaults(
     defineProps<ExtendedMenubarProps>(),
     { breakpoint: '1024px' }
-);
+)
 
 type MenubarType = InstanceType<typeof Menubar>;
-const childRef = useTemplateRef<MenubarType>('child-ref');
+const childRef = useTemplateRef<MenubarType>('child-ref')
 
-defineExpose({ $el: childRef });
+defineExpose({ $el: childRef })
 </script>
 
 <template>

@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue';
-import PanelMenu, { type PanelMenuPassThroughOptions, type PanelMenuProps } from 'primevue/panelmenu';
-import { ChevronDown, ChevronRight } from 'lucide-vue-next';
-import type { MenuItem } from '@/types';
-import { ptViewMerge } from '@/utils';
+import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
+import PanelMenu, { type PanelMenuPassThroughOptions, type PanelMenuProps } from 'primevue/panelmenu'
+import { ChevronDown, ChevronRight } from 'lucide-vue-next'
+import type { MenuItem } from '@/types'
+import { ptViewMerge } from '@/utils'
 
 interface ExtendedPanelMenuProps extends Omit<PanelMenuProps, 'model'> {
     model?: MenuItem[] | undefined;
 }
-const componentProps = defineProps<ExtendedPanelMenuProps>();
+const componentProps = defineProps<ExtendedPanelMenuProps>()
 
 const defaultPt: PanelMenuPassThroughOptions = {
     root: 'p-0 m-0 gap-1',
     panel: 'p-0 bg-transparent border-0',
     header: 'p-0 border-0',
     itemContent: 'gap-1',
-};
+}
 
 type PanelMenuType = InstanceType<typeof PanelMenu>;
-const childRef = useTemplateRef<PanelMenuType>('child-ref');
-defineExpose({ $el: childRef });
+const childRef = useTemplateRef<PanelMenuType>('child-ref')
+defineExpose({ $el: childRef })
 </script>
 
 <template>

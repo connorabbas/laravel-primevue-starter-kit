@@ -1,39 +1,28 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
-import { useAppLayout } from '@/composables/useAppLayout';
-import ClientOnly from '@/components/ClientOnly.vue';
-import FlashMessages from '@/components/FlashMessages.vue';
-import NavLogoLink from '@/components/NavLogoLink.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
+<script setup lang="ts">
+import { usePage } from '@inertiajs/vue3'
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
+import { useAppLayout } from '@/composables/useAppLayout'
+import ClientOnly from '@/components/ClientOnly.vue'
+import Container from '@/components/Container.vue'
+import PopupMenuButton from '@/components/PopupMenuButton.vue'
+import FlashMessages from '@/components/FlashMessages.vue'
+import NavLogoLink from '@/components/NavLogoLink.vue'
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import { MenuItem } from '@/types'
 
-const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        required: false,
-        default: () => [],
-    },
-});
+const props = withDefaults(defineProps<{
+    breadcrumbs?: MenuItem[],
+}>(), {
+    breadcrumbs: () => [],
+})
 
-const page = usePage();
+const page = usePage()
 const {
     mobileMenuOpen,
     menuItems,
     userMenuItems,
-} = useAppLayout();
-
-const userMenu = useTemplateRef('user-menu');
-const toggleUserMenu = (event) => {
-    userMenu.value.$el.toggle(event);
-};
-
-const mobileUserMenu = useTemplateRef('mobile-user-menu');
-const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.$el.toggle(event);
-};
+} = useAppLayout()
 </script>
 
 <template>
@@ -52,26 +41,16 @@ const toggleMobileUserMenu = (event) => {
                         />
                     </div>
                     <template #footer>
-                        <div class="flex flex-col">
-                            <Button
-                                id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
-                                pt:root:class="flex flex-row-reverse justify-between"
-                                severity="secondary"
-                                size="large"
-                                @click="toggleMobileUserMenu($event)"
-                            >
-                                <template #icon>
-                                    <ChevronsUpDown />
-                                </template>
-                            </Button>
-                            <Menu
-                                ref="mobile-user-menu"
-                                :model="userMenuItems"
-                                pt:root:class="z-[1200]"
-                                popup
-                            />
-                        </div>
+                        <PopupMenuButton
+                            name="mobile-user-menu-dd"
+                            button-size="large"
+                            :menu-items="userMenuItems"
+                            :button-label="page.props.auth.user.name"
+                        >
+                            <template #toggleIcon>
+                                <ChevronsUpDown />
+                            </template>
+                        </PopupMenuButton>
                     </template>
                 </Drawer>
                 <ScrollTop
@@ -122,23 +101,15 @@ const toggleMobileUserMenu = (event) => {
                         </div>
                     </div>
                     <div>
-                        <Button
-                            id="user-menu-btn"
-                            :label="page.props.auth.user.name"
-                            pt:root:class="flex flex-row-reverse justify-between"
-                            severity="secondary"
-                            fluid
-                            @click="toggleUserMenu($event)"
+                        <PopupMenuButton
+                            name="desktop-user-menu-dd"
+                            :menu-items="userMenuItems"
+                            :button-label="page.props.auth.user.name"
                         >
-                            <template #icon>
+                            <template #toggleIcon>
                                 <ChevronsUpDown />
                             </template>
-                        </Button>
-                        <Menu
-                            ref="user-menu"
-                            :model="userMenuItems"
-                            popup
-                        />
+                        </PopupMenuButton>
                     </div>
                 </div>
             </aside>

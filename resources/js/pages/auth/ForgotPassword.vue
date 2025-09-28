@@ -1,35 +1,37 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
-defineProps({
-    status: {
-        type: String,
-    },
-});
+const props = defineProps<{
+    status?: string
+}>()
 
-const emailInput = useTemplateRef('email-input');
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const emailInput = useTemplateRef<InputTextType>('email-input')
 
 const forgotPasswordForm = useForm({
     email: '',
-});
+})
 
 const submit = () => {
-    forgotPasswordForm.post(route('password.email'));
-};
+    forgotPasswordForm.post(route('password.email'))
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    if (emailInput.value) {
+        emailInput.value.$el.focus()
+    }
+})
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Forgot password" />
+    <InertiaHead title="Forgot password" />
 
+    <GuestAuthLayout>
         <template
-            v-if="status"
+            v-if="props.status"
             #message
         >
             <Message
@@ -37,7 +39,7 @@ onMounted(() => {
                 :closable="false"
                 class="shadow-sm"
             >
-                {{ status }}
+                {{ props.status }}
             </Message>
         </template>
 

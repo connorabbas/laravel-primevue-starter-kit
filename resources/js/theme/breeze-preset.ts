@@ -1,5 +1,5 @@
-import Preset from '@primeuix/themes/aura';
-import { definePreset } from '@primeuix/themes';
+import Preset from '@primeuix/themes/aura'
+import { definePreset } from '@primeuix/themes'
 
 const customThemePreset = definePreset(Preset, {
     semantic: {
@@ -49,6 +49,6 @@ const customThemePreset = definePreset(Preset, {
             },
         },
     },
-});
+})
 
-export default customThemePreset;
+export default customThemePreset

@@ -1,32 +1,36 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
 const registerForm = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
-});
+})
 
-const nameInput = useTemplateRef('name-input');
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const nameInput = useTemplateRef<InputTextType>('name-input')
 
 const submit = () => {
     registerForm.post(route('register'), {
         onFinish: () => registerForm.reset('password', 'password_confirmation'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    nameInput.value.$el.focus();
-});
+    if (nameInput.value) {
+        nameInput.value.$el.focus()
+    }
+})
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Register" />
+    <InertiaHead title="Register" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Create an account

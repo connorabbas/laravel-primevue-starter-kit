@@ -1,24 +1,27 @@
-<script setup>
-import { computed } from 'vue';
-import { ArrowLeft } from 'lucide-vue-next';
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { ArrowLeft } from 'lucide-vue-next'
+import Container from '@/components/Container.vue'
 
-const props = defineProps({
-    errorTitles: Object,
-    errorDetails: Object,
-    status: Number,
-    homepageRoute: String,
-});
+const props = defineProps<{
+    errorTitles: Record<number, string>
+    errorDetails: Record<number, string>
+    status: number
+    homepageRoute: string
+}>()
 
 const title = computed(() => {
-    return props.errorTitles[props.status];
-});
+    return props.errorTitles[props.status]
+})
 const details = computed(() => {
-    return props.errorDetails[props.status];
-});
+    return props.errorDetails[props.status]
+})
 </script>
 
 <template>
     <InertiaHead title="Error" />
+
     <Container fluid>
         <main>
             <div class="h-screen flex items-center justify-center">

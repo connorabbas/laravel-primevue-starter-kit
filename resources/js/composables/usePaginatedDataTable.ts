@@ -1,8 +1,8 @@
-import { toRaw } from 'vue';
-import type { Page, PageProps } from '@inertiajs/core';
-import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
-import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
-import { usePaginatedData } from './usePaginatedData';
+import { toRaw } from 'vue'
+import type { Page, PageProps } from '@inertiajs/core'
+import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue'
+import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types'
+import { usePaginatedData } from './usePaginatedData'
 
 export function usePaginatedDataTable(
     propDataToFetch: string | string[],
@@ -21,16 +21,16 @@ export function usePaginatedDataTable(
         fetchData,
         paginate,
         hardReset,
-    } = usePaginatedData(propDataToFetch, initialFilters, initialRows);
+    } = usePaginatedData(propDataToFetch, initialFilters, initialRows)
 
     function parseEventFilterValues() {
         Object.keys(filters.value).forEach((key) => {
-            const filter = filters.value[key];
+            const filter = filters.value[key]
             // empty arrays can cause filtering issues, set to null instead
             if (Array.isArray(filter.value) && filter.value.length === 0) {
-                filters.value[key].value = null;
+                filters.value[key].value = null
             }
-        });
+        })
     }
 
     /**
@@ -38,8 +38,8 @@ export function usePaginatedDataTable(
      * Event-driven filtering rather than reactive state
      */
     function filter(event: DataTableFilterEvent): void {
-        pagination.value.page = 1;
-        const newFilters: PrimeVueDataFilters = {};
+        pagination.value.page = 1
+        const newFilters: PrimeVueDataFilters = {}
 
         Object.entries(event.filters).forEach(([key, rawFilter]) => {
             if (
@@ -47,30 +47,30 @@ export function usePaginatedDataTable(
                 typeof rawFilter === 'object' &&
                 'matchMode' in rawFilter
             ) {
-                newFilters[key] = rawFilter as DataTableFilterMetaData;
+                newFilters[key] = rawFilter as DataTableFilterMetaData
             }
-        });
+        })
 
-        filters.value = newFilters;
-        parseEventFilterValues();
+        filters.value = newFilters
+        parseEventFilterValues()
 
         fetchData({
             onFinish: () => {
-                scrollToTop();
+                scrollToTop()
             },
-        });
+        })
     }
 
     function sort(event: DataTableSortEvent): void {
-        pagination.value.page = 1;
-        sorting.value.field = event.sortField ? String(event.sortField) : '';
-        sorting.value.order = event.sortOrder || 1;
+        pagination.value.page = 1
+        sorting.value.field = event.sortField ? String(event.sortField) : ''
+        sorting.value.order = event.sortOrder || 1
 
         fetchData({
             onFinish: () => {
-                scrollToTop();
+                scrollToTop()
             },
-        });
+        })
     }
 
     /**
@@ -78,25 +78,25 @@ export function usePaginatedDataTable(
      * usePaginatedData() resets sorting.value state as a new object, this will not work for DataTable's
      */
     function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
-        const { onFinish: onFinishCallback, onSuccess, onError } = options;
+        const { onFinish: onFinishCallback, onSuccess, onError } = options
 
-        const defaultFilters = structuredClone(toRaw(initialFilters));
+        const defaultFilters = structuredClone(toRaw(initialFilters))
         Object.keys(defaultFilters).forEach((key) => {
-            filters.value[key].value = defaultFilters[key].value;
-        });
-        sorting.value.field = '';
-        sorting.value.order = 1;
-        pagination.value.page = 1;
-        pagination.value.rows = initialRows;
+            filters.value[key].value = defaultFilters[key].value
+        })
+        sorting.value.field = ''
+        sorting.value.order = 1
+        pagination.value.page = 1
+        pagination.value.rows = initialRows
 
         return fetchData({
             onSuccess,
             onError,
             onFinish: () => {
-                scrollToTop();
-                onFinishCallback?.();
+                scrollToTop()
+                onFinishCallback?.()
             },
-        });
+        })
     }
 
     return {
@@ -113,5 +113,5 @@ export function usePaginatedDataTable(
         sort,
         reset,
         hardReset,
-    };
+    }
 }

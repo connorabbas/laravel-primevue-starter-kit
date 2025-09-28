@@ -1,15 +1,16 @@
-<script setup>
-import { computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import PageTitleSection from '@/components/PageTitleSection.vue'
 
-const page = usePage();
+const page = usePage()
 const currentRoute = computed(() => {
     // Access page.url to trigger re-computation on navigation.
     /* eslint-disable @typescript-eslint/no-unused-vars */
-    const url = page.url;
+    const url = page.url
     /* eslint-enable @typescript-eslint/no-unused-vars */
-    return route().current();
-});
+    return route().current()
+})
 
 const sidebarNavItems = computed(() => [
     {
@@ -27,7 +28,7 @@ const sidebarNavItems = computed(() => [
         route: route('appearance'),
         active: currentRoute.value == 'appearance',
     },
-]);
+])
 </script>
 
 <template>

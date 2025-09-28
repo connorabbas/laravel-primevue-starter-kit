@@ -1,43 +1,41 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
-const props = defineProps({
-    email: {
-        type: String,
-        required: true,
-    },
-    token: {
-        type: String,
-        required: true,
-    },
-});
+const props = defineProps<{
+    email: string,
+    token: string,
+}>()
 
-const emailInput = useTemplateRef('email-input');
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const emailInput = useTemplateRef<InputTextType>('email-input')
 
 const resetPwForm = useForm({
     token: props.token,
     email: props.email,
     password: '',
     password_confirmation: '',
-});
+})
 
 const submit = () => {
     resetPwForm.post(route('password.store'), {
         onFinish: () => resetPwForm.reset('password', 'password_confirmation'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    if (emailInput.value) {
+        emailInput.value.$el.focus()
+    }
+})
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Reset password" />
+    <InertiaHead title="Reset password" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Reset password

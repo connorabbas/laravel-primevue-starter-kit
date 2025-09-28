@@ -1,6 +1,9 @@
-@import 'tailwindcss/theme.css' layer(tailwind-theme);
-@import './custom-preflight.css' layer(tailwind-base);
-@import 'tailwindcss/utilities.css' layer(tailwind-utilities);
+@layer theme, base, primevue, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+/* Custom Preflight implementation that plays nice with PrimeVue component styling */
+@import './custom-preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 @import 'tailwindcss-primeui';
 
 @source '../../storage/framework/views/*.php';
@@ -12,6 +15,7 @@
 
 @theme {
     --font-sans: Inter, sans-serif;
+    --header-height: 4.5rem;
 }
 
 @utility dynamic-bg {
@@ -20,4 +24,8 @@
 
 @utility dynamic-border {
     @apply border-surface-200 dark:border-surface-800;
+}
+
+@utility delete-menu-item {
+    @apply text-red-500 dark:text-red-400 hover:bg-red-500/10 rounded-[var(--p-menu-item-border-radius)] transition-colors duration-[var(--p-menu-transition-duration)];
 }
