@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue';
-import TieredMenu, { type TieredMenuProps } from 'primevue/tieredmenu';
-import { ChevronRight } from 'lucide-vue-next';
-import type { MenuItem } from '@/types';
-import { ptViewMerge } from '@/utils';
+import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
+import TieredMenu, { type TieredMenuProps } from 'primevue/tieredmenu'
+import { ChevronRight } from 'lucide-vue-next'
+import type { MenuItem } from '@/types'
+import { ptViewMerge } from '@/utils'
 
 interface ExtendedTieredMenuProps extends Omit<TieredMenuProps, 'model'> {
     model?: MenuItem[] | undefined;
 }
-const componentProps = defineProps<ExtendedTieredMenuProps>();
+const componentProps = defineProps<ExtendedTieredMenuProps>()
 
 type TieredMenuType = InstanceType<typeof TieredMenu>;
-const childRef = useTemplateRef<TieredMenuType>('child-ref');
+const childRef = useTemplateRef<TieredMenuType>('child-ref')
 
-defineExpose({ $el: childRef });
+defineExpose({ $el: childRef })
 </script>
 
 <template>

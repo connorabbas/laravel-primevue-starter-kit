@@ -1,24 +1,24 @@
-<script setup>
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const form = useForm({
     password: '',
-});
+})
 
 const submit = () => {
     form.post(route('password.confirm'), {
         onFinish: () => {
-            form.reset();
+            form.reset()
         },
-    });
-};
+    })
+}
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Confirm password" />
+    <InertiaHead title="Confirm password" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Confirm your password

@@ -1,41 +1,30 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { useAppLayout } from '@/composables/useAppLayout';
-import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
-import ClientOnly from '@/components/ClientOnly.vue';
-import NavLogoLink from '@/components/NavLogoLink.vue';
-import FlashMessages from '@/components/FlashMessages.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
-import Menubar from '@/components/primevue/menu/Menubar.vue';
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
+<script setup lang="ts">
+import { usePage } from '@inertiajs/vue3'
+import { useAppLayout } from '@/composables/useAppLayout'
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
+import ClientOnly from '@/components/ClientOnly.vue'
+import Container from '@/components/Container.vue'
+import PopupMenuButton from '@/components/PopupMenuButton.vue'
+import NavLogoLink from '@/components/NavLogoLink.vue'
+import FlashMessages from '@/components/FlashMessages.vue'
+import Menubar from '@/components/primevue/menu/Menubar.vue'
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import { MenuItem } from '@/types'
 
-const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        required: false,
-        default: () => [],
-    },
-});
+const props = withDefaults(defineProps<{
+    breadcrumbs?: MenuItem[],
+}>(), {
+    breadcrumbs: () => [],
+})
 
-const page = usePage();
+const page = usePage()
 const {
     currentRoute,
     mobileMenuOpen,
     menuItems,
     userMenuItems,
-} = useAppLayout();
-
-const userMenu = useTemplateRef('user-menu');
-const toggleUserMenu = (event) => {
-    userMenu.value.$el.toggle(event);
-};
-
-const mobileUserMenu = useTemplateRef('mobile-user-menu');
-const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.$el.toggle(event);
-};
+} = useAppLayout()
 </script>
 
 <template>
@@ -54,26 +43,16 @@ const toggleMobileUserMenu = (event) => {
                         />
                     </div>
                     <template #footer>
-                        <div class="flex flex-col">
-                            <Button
-                                id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
-                                severity="secondary"
-                                size="large"
-                                pt:root:class="flex flex-row-reverse justify-between"
-                                @click="toggleMobileUserMenu($event)"
-                            >
-                                <template #icon>
-                                    <ChevronsUpDown />
-                                </template>
-                            </Button>
-                            <Menu
-                                ref="mobile-user-menu"
-                                :model="userMenuItems"
-                                pt:root:class="z-[1200]"
-                                popup
-                            />
-                        </div>
+                        <PopupMenuButton
+                            name="mobile-user-menu-dd"
+                            button-size="large"
+                            :menu-items="userMenuItems"
+                            :button-label="page.props.auth.user.name"
+                        >
+                            <template #toggleIcon>
+                                <ChevronsUpDown />
+                            </template>
+                        </PopupMenuButton>
                     </template>
                 </Drawer>
                 <ScrollTop
@@ -88,7 +67,7 @@ const toggleMobileUserMenu = (event) => {
                     <Menubar
                         :key="currentRoute"
                         :model="menuItems"
-                        pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
+                        pt:root:class="px-0 py-0 border-0 rounded-none bg-transparent h-[var(--header-height)]!"
                         pt:button:class="hidden"
                     >
                         <template #start>
@@ -98,48 +77,28 @@ const toggleMobileUserMenu = (event) => {
                         </template>
                         <template #end>
                             <!-- User Dropdown Menu -->
-                            <div class="hidden lg:flex items-center ms-6 space-x-3">
-                                <div class="flex flex-col">
-                                    <Button
-                                        id="user-menu-btn"
-                                        :label="page.props.auth.user.name"
-                                        pt:root:class="flex flex-row-reverse justify-between"
-                                        severity="secondary"
-                                        text
-                                        @click="toggleUserMenu($event)"
-                                    >
-                                        <template #icon>
-                                            <ChevronDown />
-                                        </template>
-                                    </Button>
-                                    <div
-                                        id="user-menu-append"
-                                        class="relative"
-                                    />
-                                    <Menu
-                                        ref="user-menu"
-                                        appendTo="#user-menu-append"
-                                        :model="userMenuItems"
-                                        pt:root:class="left-auto! top-0! right-0 z-[1200]"
-                                        popup
-                                    />
-                                </div>
+                            <div class="hidden lg:flex">
+                                <PopupMenuButton
+                                    name="desktop-user-menu-dd"
+                                    button-variant="text"
+                                    fixed-position="right"
+                                    :menu-items="userMenuItems"
+                                    :button-label="page.props.auth.user.name"
+                                />
                             </div>
 
                             <!-- Mobile Menu Toggle -->
-                            <div class="flex items-center lg:hidden">
-                                <div class="relative">
-                                    <Button
-                                        severity="secondary"
-                                        class="p-1!"
-                                        text
-                                        @click="mobileMenuOpen = true"
-                                    >
-                                        <template #icon>
-                                            <MenuIcon class="size-6!" />
-                                        </template>
-                                    </Button>
-                                </div>
+                            <div class="flex lg:hidden">
+                                <Button
+                                    severity="secondary"
+                                    class="p-1!"
+                                    text
+                                    @click="mobileMenuOpen = true"
+                                >
+                                    <template #icon>
+                                        <MenuIcon class="size-6!" />
+                                    </template>
+                                </Button>
                             </div>
                         </template>
                     </Menubar>

@@ -1,21 +1,13 @@
-<script setup>
-const props = defineProps({
-    fluid: {
-        type: Boolean,
-        default: false,
-        required: false,
-    },
-    vertical: {
-        type: Boolean,
-        default: false,
-        required: false,
-    },
-    flushMobile: {
-        type: Boolean,
-        default: false,
-        required: false,
-    },
-});
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+    fluid?: boolean,
+    vertical?: boolean,
+    flushMobile?: boolean,
+}>(), {
+    fluid: false,
+    vertical: false,
+    flushMobile: false,
+})
 </script>
 
 <template>

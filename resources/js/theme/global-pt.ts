@@ -17,4 +17,4 @@ export default {
             class: 'shadow-lg mb-0 mt-4'
         },
     },
-};
+}

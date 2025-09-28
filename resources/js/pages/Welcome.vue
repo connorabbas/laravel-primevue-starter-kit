@@ -1,19 +1,14 @@
-<script setup>
-import { usePage } from '@inertiajs/vue3';
-import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next';
+<script setup lang="ts">
+import { usePage, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next'
+import Container from '@/components/Container.vue'
 
-defineProps({
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-});
+defineProps<{
+    laravelVersion: string,
+    phpVersion: string,
+}>()
 
-const page = usePage();
+const page = usePage()
 </script>
 
 <template>

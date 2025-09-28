@@ -10,7 +10,7 @@ services:
       - 'host.docker.internal:host-gateway'
     #ports:
       #- '${APP_PORT:-80}:80' not required using Traefik
-      #- '${VITE_PORT:-5173}:${VITE_PORT:-5173}' Not required if using dev containers (auto forwards port to localhost)
+      #- '${VITE_APP_PORT:-5173}:${VITE_APP_PORT:-5173}' Not required if using dev containers (auto forwards port to localhost)
     environment:
       WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1

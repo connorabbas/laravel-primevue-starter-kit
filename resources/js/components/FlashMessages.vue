@@ -1,14 +1,14 @@
-<script setup>
-import { ref, watch } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next';
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next'
 
-const page = usePage();
-const flashed = ref(0);
+const page = usePage()
+const flashed = ref(0)
 
 watch(() => page.props.flash, () => {
-    flashed.value++;
-}, { deep: true });
+    flashed.value++
+}, { deep: true })
 </script>
 
 <template>
