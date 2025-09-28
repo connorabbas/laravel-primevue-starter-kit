@@ -10,7 +10,7 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     #ports:
-      #- '${VITE_PORT:-5173}:${VITE_PORT:-5173}' # Not necessarily required for dev containers (auto port forwarding)
+      #- '${VITE_APP_PORT:-5173}:${VITE_APP_PORT:-5173}' # Not necessarily required for dev containers (auto port forwarding)
     environment:
       PHP_OPCACHE_ENABLE: '1'
       PHP_OPCACHE_REVALIDATE_FREQ: '0'
