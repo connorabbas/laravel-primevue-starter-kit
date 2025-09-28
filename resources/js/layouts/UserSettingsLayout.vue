@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 
 const page = usePage()
@@ -54,7 +54,7 @@ const sidebarNavItems = computed(() => [
                         :severity="item.active ? 'secondary' : ''"
                         :variant="item.active ? 'outlined' : 'text'"
                         :href="item.route"
-                        as="InertiaLink"
+                        :as="InertiaLink"
                     >
                         {{ item.title }}
                     </Button>
