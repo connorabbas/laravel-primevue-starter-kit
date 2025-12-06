@@ -2,6 +2,7 @@
 import { useTemplateRef } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import Password from 'primevue/password'
+import InputErrors from '@/components/InputErrors.vue'
 
 const modalOpen = defineModel<boolean>({ default: false })
 
@@ -30,7 +31,7 @@ const deleteUser = () => {
 <template>
     <Dialog
         v-model:visible="modalOpen"
-        class="w-[40rem]"
+        class="w-160"
         position="center"
         header="Are you sure you want to delete your account?"
         :draggable="false"
@@ -59,14 +60,7 @@ const deleteUser = () => {
                 fluid
                 @keyup.enter="deleteUser"
             />
-            <Message
-                v-if="form.errors?.password"
-                severity="error"
-                variant="simple"
-                size="small"
-            >
-                {{ form.errors?.password }}
-            </Message>
+            <InputErrors :errors="form.errors?.password" />
         </div>
 
         <template #footer>

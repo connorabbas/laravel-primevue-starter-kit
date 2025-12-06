@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue'
 import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
 
 const registerForm = useForm({
@@ -59,14 +60,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="registerForm.errors?.name"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ registerForm.errors?.name }}
-                </Message>
+                <InputErrors :errors="registerForm.errors?.name" />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -80,14 +74,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="registerForm.errors?.email"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ registerForm.errors?.email }}
-                </Message>
+                <InputErrors :errors="registerForm.errors?.email" />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -101,14 +88,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="registerForm.errors?.password"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ registerForm.errors?.password }}
-                </Message>
+                <InputErrors :errors="registerForm.errors?.password" />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -123,14 +103,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="registerForm.errors?.password_confirmation"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ registerForm.errors?.password_confirmation }}
-                </Message>
+                <InputErrors :errors="registerForm.errors?.password_confirmation" />
             </div>
 
             <div>

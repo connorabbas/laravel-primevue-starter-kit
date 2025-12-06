@@ -5,6 +5,7 @@ import { useToast } from 'primevue/usetoast'
 import Password from 'primevue/password'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
+import InputErrors from '@/components/InputErrors.vue'
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
@@ -90,14 +91,7 @@ const updatePassword = () => {
                                 required
                                 fluid
                             />
-                            <Message
-                                v-if="updatePasswordForm.errors?.current_password"
-                                severity="error"
-                                variant="simple"
-                                size="small"
-                            >
-                                {{ updatePasswordForm.errors?.current_password }}
-                            </Message>
+                            <InputErrors :errors="updatePasswordForm.errors?.current_password" />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password">New password</label>
@@ -111,14 +105,7 @@ const updatePassword = () => {
                                 required
                                 fluid
                             />
-                            <Message
-                                v-if="updatePasswordForm.errors?.password"
-                                severity="error"
-                                variant="simple"
-                                size="small"
-                            >
-                                {{ updatePasswordForm.errors?.password }}
-                            </Message>
+                            <InputErrors :errors="updatePasswordForm.errors?.password" />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password-confirmation">Confirm new password</label>
@@ -132,14 +119,7 @@ const updatePassword = () => {
                                 required
                                 fluid
                             />
-                            <Message
-                                v-if="updatePasswordForm.errors?.password_confirmation"
-                                severity="error"
-                                variant="simple"
-                                size="small"
-                            >
-                                {{ updatePasswordForm.errors?.password_confirmation }}
-                            </Message>
+                            <InputErrors :errors="updatePasswordForm.errors?.password_confirmation" />
                         </div>
                         <Button
                             :loading="updatePasswordForm.processing"

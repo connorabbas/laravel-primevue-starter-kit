@@ -5,6 +5,7 @@ import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import DeleteUserModal from '@/components/DeleteUserModal.vue'
+import InputErrors from '@/components/InputErrors.vue'
 
 defineProps<{
     mustVerifyEmail: boolean,
@@ -80,14 +81,7 @@ const updateProfileInformation = () => {
                                     required
                                     fluid
                                 />
-                                <Message
-                                    v-if="updateProfileForm.errors?.name"
-                                    severity="error"
-                                    variant="simple"
-                                    size="small"
-                                >
-                                    {{ updateProfileForm.errors?.name }}
-                                </Message>
+                                <InputErrors :errors="updateProfileForm.errors?.name" />
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label for="email">Email address</label>
@@ -100,14 +94,7 @@ const updateProfileInformation = () => {
                                     required
                                     fluid
                                 />
-                                <Message
-                                    v-if="updateProfileForm.errors?.email"
-                                    severity="error"
-                                    variant="simple"
-                                    size="small"
-                                >
-                                    {{ updateProfileForm.errors?.email }}
-                                </Message>
+                                <InputErrors :errors="updateProfileForm.errors?.email" />
                             </div>
                             <div v-if="mustVerifyEmail && user.email_verified_at === null">
                                 <p class="text-sm mt-2">
