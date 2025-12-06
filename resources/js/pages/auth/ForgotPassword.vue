@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue'
 import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
 
 const props = defineProps<{
@@ -71,14 +72,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="forgotPasswordForm.errors?.email"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ forgotPasswordForm.errors?.email }}
-                </Message>
+                <InputErrors :errors="forgotPasswordForm.errors?.email" />
             </div>
 
             <div>

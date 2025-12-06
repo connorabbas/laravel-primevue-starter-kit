@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputErrors from '@/components/InputErrors.vue'
 
 const form = useForm({
     password: '',
@@ -45,14 +46,7 @@ const submit = () => {
                         required
                         fluid
                     />
-                    <Message
-                        v-if="form.errors?.password"
-                        severity="error"
-                        variant="simple"
-                        size="small"
-                    >
-                        {{ form.errors?.password }}
-                    </Message>
+                    <InputErrors :errors="form.errors?.password" />
                 </div>
 
                 <div class="flex justify-end items-center">

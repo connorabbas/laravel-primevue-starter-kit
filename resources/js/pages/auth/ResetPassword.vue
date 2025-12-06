@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue'
 import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
 
 const props = defineProps<{
@@ -64,14 +65,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="resetPwForm.errors?.email"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ resetPwForm.errors?.email }}
-                </Message>
+                <InputErrors :errors="resetPwForm.errors?.email" />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -85,14 +79,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="resetPwForm.errors?.password"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ resetPwForm.errors?.password }}
-                </Message>
+                <InputErrors :errors="resetPwForm.errors?.password" />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -107,14 +94,7 @@ onMounted(() => {
                     required
                     fluid
                 />
-                <Message
-                    v-if="resetPwForm.errors?.password_confirmation"
-                    severity="error"
-                    variant="simple"
-                    size="small"
-                >
-                    {{ resetPwForm.errors?.password_confirmation }}
-                </Message>
+                <InputErrors :errors="resetPwForm.errors?.password_confirmation" />
             </div>
 
             <div>
