@@ -45,11 +45,12 @@ const {
                     <template #footer>
                         <PopupMenuButton
                             name="mobile-user-menu-dd"
-                            button-size="large"
+                            severity="secondary"
+                            size="large"
                             :menu-items="userMenuItems"
-                            :button-label="page.props.auth.user.name"
+                            :label="page.props.auth.user.name"
                         >
-                            <template #toggleIcon>
+                            <template #icon>
                                 <ChevronsUpDown />
                             </template>
                         </PopupMenuButton>
@@ -80,10 +81,11 @@ const {
                             <div class="hidden lg:flex">
                                 <PopupMenuButton
                                     name="desktop-user-menu-dd"
-                                    button-variant="text"
-                                    fixed-position="right"
+                                    side="right"
+                                    severity="secondary"
                                     :menu-items="userMenuItems"
-                                    :button-label="page.props.auth.user.name"
+                                    :label="page.props.auth.user.name"
+                                    text
                                 />
                             </div>
 

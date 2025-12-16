@@ -1,21 +1,30 @@
 <script setup lang="ts">
+/**
+ * @see https://primevue.org/menu/#popup
+ * Intended for single-instance use cases, could also be called a "Dropdown"
+ * For a looped dataset (ex. DataTable) it's better to have just one Menu component on the page (outside the v-for)
+ * then have multiple Buttons to trigger the Menu, dynamically changing the content based on the iteration dataset
+ */
+
 import { computed, useTemplateRef } from 'vue'
 import Menu from '@/components/primevue/menu/Menu.vue'
+import Button, { type ButtonProps } from 'primevue/button'
 import { ChevronDown } from 'lucide-vue-next'
 import { MenuItem } from '@/types'
+import { ptViewMerge } from '@/utils'
 
-const props = withDefaults(defineProps<{
+// Forward the component attributes/props to the Button component
+defineOptions({
+    inheritAttrs: false
+})
+
+interface Props extends /* @vue-ignore */ ButtonProps {
     name: string,
     menuItems: MenuItem[],
-    buttonLabel?: string,
-    buttonSeverity?: 'secondary' | 'success' | 'info' | 'warn' | 'help' | 'danger' | 'contrast' | undefined,
-    buttonVariant?: 'default' | 'outlined' | 'text' | 'link' | undefined,
-    buttonSize?: 'small' | 'large' | undefined,
-    fixedPosition?: 'left' | 'right',
-}>(), {
-    buttonSeverity: 'secondary',
-    buttonVariant: 'default',
-})
+    side?: 'left' | 'right', // leave empty for auto-target (body)
+    label?: string, // already included in ButtonProps, explicity added to work within template logic
+}
+const props = withDefaults(defineProps<Props>(), {})
 
 const appendToId = computed(() => {
     return props.name.replace(/[^a-zA-Z0-9]/g, '') + '_append'
@@ -31,8 +40,8 @@ const toggleDropdownMenu = (event: Event) => {
 
 const menuPositionClasses = computed(() => {
     let classes = ''
-    if (props?.fixedPosition) {
-        switch (props?.fixedPosition) {
+    if (props?.side) {
+        switch (props?.side) {
         case 'left':
             classes = 'left-auto! top-0! left-0'
             break
@@ -51,41 +60,50 @@ const menuPositionClasses = computed(() => {
 <template>
     <div class="flex flex-col">
         <Button
-            id="instances-menu-btn"
-            :label="props?.buttonLabel"
-            :pt:root:class="{ 'flex flex-row-reverse justify-between': props?.buttonLabel }"
-            :severity="props.buttonSeverity"
-            :variant="props.buttonVariant === 'default' ? undefined : props.buttonVariant"
-            :size="props?.buttonSize"
+            v-bind="{ ...props, ...$attrs, ptOptions: { mergeProps: ptViewMerge } }"
+            :pt:root:class="{ 'flex flex-row-reverse justify-between': props?.label && !$slots.default }"
             @click="toggleDropdownMenu($event)"
         >
             <template
-                v-if="$slots.content && !props?.buttonLabel"
-                #default
-            >
-                <slot name="content" />
-            </template>
-            <template
-                v-else
-                #icon
+                v-if="$slots.loadingicon"
+                #loadingicon="slotProps"
             >
                 <slot
-                    v-if="$slots.toggleIcon"
-                    name="toggleIcon"
+                    name="loadingicon"
+                    v-bind="slotProps"
                 />
-                <ChevronDown v-else />
+            </template>
+            <template
+                v-if="$slots.icon || props?.label"
+                #icon="slotProps"
+            >
+                <slot
+                    name="icon"
+                    v-bind="slotProps"
+                >
+                    <ChevronDown />
+                </slot>
+            </template>
+            <template
+                v-if="$slots.default && !props?.label"
+                #default="slotProps"
+            >
+                <slot
+                    name="default"
+                    v-bind="slotProps"
+                />
             </template>
         </Button>
         <div
-            v-if="props?.fixedPosition"
+            v-if="props?.side"
             :id="appendToId"
             class="relative"
         />
         <Menu
             :ref="props.name"
-            :appendTo="props?.fixedPosition ? `#${appendToId}` : 'body'"
+            :appendTo="props?.side ? `#${appendToId}` : 'body'"
             :model="props.menuItems"
-            :pt:root:class="['z-1200 w-[12.5rem] min-w-max', menuPositionClasses]"
+            :pt:root:class="['z-1200 w-50 min-w-max', menuPositionClasses]"
             popup
         />
     </div>

@@ -1,6 +1,7 @@
 html {
     /* font size will determine the component/utility scaling */
     font-size: 14px;
+    line-height: 1.15;
 }
 
 body {
