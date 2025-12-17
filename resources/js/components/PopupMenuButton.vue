@@ -7,7 +7,7 @@
  */
 
 import { computed, useTemplateRef } from 'vue'
-import Menu from '@/components/primevue/menu/Menu.vue'
+import Menu from '@/components/router-link-menus/Menu.vue'
 import Button, { type ButtonProps } from 'primevue/button'
 import { ChevronDown } from 'lucide-vue-next'
 import { MenuItem } from '@/types'

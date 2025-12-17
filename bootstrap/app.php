@@ -69,10 +69,10 @@ return Application::configure(basePath: dirname(__DIR__))
                         ->setStatusCode($statusCode);
                 } else {
                     // Return JSON response for PrimeVue toast to display, handled by Inertia router event listener
-                    $errorSummary = "$statusCode - $errorTitles[$statusCode]";
+                    $errorSummary = "$errorTitles[$statusCode] - $statusCode";
                     $errorDetail = $errorDetails[$statusCode];
                     if (get_class($exception) === ErrorToastException::class) {
-                        $errorSummary = "$statusCode - Error";
+                        $errorSummary = "Error";
                         $errorDetail = $exception->getMessage();
                     }
                     return response()->json([
