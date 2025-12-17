@@ -1,10 +1,5 @@
-@layer theme, base, primevue, utilities;
-
-@import 'tailwindcss/theme.css' layer(theme);
-/* Custom Preflight implementation that plays nice with PrimeVue component styling */
-@import './custom-preflight.css' layer(base);
-@import 'tailwindcss/utilities.css' layer(utilities);
-@import 'tailwindcss-primeui';
+@import "tailwindcss";
+@import "tailwindcss-primeui";
 
 @source '../../storage/framework/views/*.php';
 @source '../../resources/views/**/*.blade.php';

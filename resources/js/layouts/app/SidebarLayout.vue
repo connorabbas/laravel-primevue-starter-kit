@@ -7,8 +7,8 @@ import Container from '@/components/Container.vue'
 import PopupMenuButton from '@/components/PopupMenuButton.vue'
 import FlashMessages from '@/components/FlashMessages.vue'
 import NavLogoLink from '@/components/NavLogoLink.vue'
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import PanelMenu from '@/components/router-link-menus/PanelMenu.vue'
+import Breadcrumb from '@/components/router-link-menus/Breadcrumb.vue'
 import { MenuItem } from '@/types'
 
 const props = withDefaults(defineProps<{
@@ -43,11 +43,12 @@ const {
                     <template #footer>
                         <PopupMenuButton
                             name="mobile-user-menu-dd"
-                            button-size="large"
+                            severity="secondary"
+                            size="large"
                             :menu-items="userMenuItems"
-                            :button-label="page.props.auth.user.name"
+                            :label="page.props.auth.user.name"
                         >
-                            <template #toggleIcon>
+                            <template #icon>
                                 <ChevronsUpDown />
                             </template>
                         </PopupMenuButton>
@@ -103,10 +104,11 @@ const {
                     <div>
                         <PopupMenuButton
                             name="desktop-user-menu-dd"
+                            severity="secondary"
                             :menu-items="userMenuItems"
-                            :button-label="page.props.auth.user.name"
+                            :label="page.props.auth.user.name"
                         >
-                            <template #toggleIcon>
+                            <template #icon>
                                 <ChevronsUpDown />
                             </template>
                         </PopupMenuButton>
