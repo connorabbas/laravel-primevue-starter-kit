@@ -26,7 +26,7 @@ defineExpose({ $el: childRef })
 <template>
     <PanelMenu
         ref="child-ref"
-        v-bind="{ ...componentProps, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
+        v-bind="{ ...componentProps, ...$attrs, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template #item="{ item, root, active, props, hasSubmenu }">
             <Divider

@@ -23,7 +23,7 @@ defineExpose({
 <template>
     <ContextMenu
         ref="child-ref"
-        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
+        v-bind="{ ...componentProps, ...$attrs, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
