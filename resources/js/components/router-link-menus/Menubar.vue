@@ -23,7 +23,7 @@ defineExpose({ $el: childRef })
 <template>
     <Menubar
         ref="child-ref"
-        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
+        v-bind="{ ...componentProps, ...$attrs, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template
             v-for="(_, slotName) in $slots"

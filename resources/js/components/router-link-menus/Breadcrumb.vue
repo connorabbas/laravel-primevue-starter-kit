@@ -23,7 +23,7 @@ defineExpose({ $el: childRef })
 <template>
     <Breadcrumb
         ref="child-ref"
-        v-bind="{ ...componentProps, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
+        v-bind="{ ...componentProps, ...$attrs, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template #item="{ item, props }">
             <InertiaLink

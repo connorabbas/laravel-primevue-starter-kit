@@ -3,15 +3,15 @@ import { useTemplateRef, computed } from 'vue'
 import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
 import Tabs from 'primevue/tabs'
-import TabList, { type TabListProps } from 'primevue/tablist'
-import Tab from 'primevue/tab'
+import Tab, { type TabsProps } from 'primevue/tabs'
+import TabList from 'primevue/tablist'
 import type { MenuItem } from '@/types'
 import { ptViewMerge } from '@/utils'
 
-interface ExtendedTabListProps extends Omit<TabListProps, 'items'> {
-    items?: MenuItem[] | undefined;
+interface ExtendedTabsProps extends Omit<TabsProps, 'value' | 'items'> {
+    items: MenuItem[];
 }
-const componentProps = defineProps<ExtendedTabListProps>()
+const componentProps = defineProps<ExtendedTabsProps>()
 
 const page = usePage()
 const currentRoute = computed(() => {
@@ -30,7 +30,7 @@ defineExpose({ $el: childRef })
 <template>
     <Tabs
         ref="child-ref"
-        v-bind="{ ...componentProps, ptOptions: { mergeProps: ptViewMerge } }"
+        v-bind="{ ...componentProps, ...$attrs, ptOptions: { mergeProps: ptViewMerge } }"
         :value="currentRoute ?? '/'"
         scrollable
     >
@@ -39,15 +39,14 @@ defineExpose({ $el: childRef })
                 v-for="item in componentProps.items"
                 :key="item.route"
                 :href="item.route ?? ''"
-                :class="['no-underline', { 'p-tab-active': item.active }]"
+                :class="['p-tab no-underline', { 'p-tab-active': item.active }]"
                 custom
             >
                 <Tab
                     v-if="item.route"
                     :value="item.route"
                     :class="[
-                        'flex items-center gap-2 hover:text-color',
-                        item.active ? 'p-tab-active' : 'text-muted-color',
+                        'flex flex-row items-center gap-2 hover:text-color',
                         item.class
                     ]"
                     :style="item.style"
