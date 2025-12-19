@@ -2,9 +2,16 @@
 import { ref, watch } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next'
+import { FlashProps } from '@/types'
 
 const page = usePage()
 const flashed = ref(0)
+
+const clearFlash = (type: keyof FlashProps) => {
+    if (page.props.flash?.[type]) {
+        page.props.flash[type] = null
+    }
+}
 
 watch(() => page.props.flash, () => {
     flashed.value++
@@ -21,6 +28,7 @@ watch(() => page.props.flash, () => {
             class="mb-6"
             severity="success"
             closable
+            @close="clearFlash('success')"
         >
             <template #icon>
                 <Check />
@@ -32,6 +40,7 @@ watch(() => page.props.flash, () => {
             class="mb-6"
             severity="info"
             closable
+            @close="clearFlash('info')"
         >
             <template #icon>
                 <Info />
@@ -43,6 +52,7 @@ watch(() => page.props.flash, () => {
             class="mb-6"
             severity="warn"
             closable
+            @close="clearFlash('warn')"
         >
             <template #icon>
                 <TriangleAlert />
@@ -54,6 +64,7 @@ watch(() => page.props.flash, () => {
             class="mb-6"
             severity="error"
             closable
+            @close="clearFlash('error')"
         >
             <template #icon>
                 <CircleX />
@@ -65,6 +76,7 @@ watch(() => page.props.flash, () => {
             class="mb-6"
             severity="secondary"
             closable
+            @close="clearFlash('message')"
         >
             <template #icon>
                 <Megaphone />
