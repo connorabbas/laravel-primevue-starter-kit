@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3'
-import { useStorage } from '@vueuse/core'
 import {
     ChevronsUpDown,
     Menu as MenuIcon,
@@ -8,6 +7,7 @@ import {
     PanelLeftOpen
 } from 'lucide-vue-next'
 import { useAppLayout } from '@/composables/useAppLayout'
+import { useSsrStorage } from '@/composables/useSsrStorage'
 import ClientOnly from '@/components/ClientOnly.vue'
 import Container from '@/components/Container.vue'
 import PopupMenuButton from '@/components/PopupMenuButton.vue'
@@ -31,7 +31,7 @@ const {
     userMenuItems,
 } = useAppLayout()
 
-const sidebarOpen = useStorage('desktop-sidebar-open', true)
+const sidebarOpen = useSsrStorage('desktop-sidebar-open', true)
 const toggleSidebar = () => {
     sidebarOpen.value = !sidebarOpen.value
 }
