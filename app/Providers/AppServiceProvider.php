@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,11 +24,35 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $isProduction = $this->app->isProduction();
+        $this->configureDefaults();
+    }
+
+    /**
+     * Configure default behaviors for production-ready applications.
+     */
+    protected function configureDefaults(): void
+    {
+        $isProduction = app()->isProduction();
+
         if ($isProduction) {
             URL::forceScheme('https');
         }
-        // Prohibits: db:wipe, migrate:fresh, migrate:refresh, and migrate:reset
-        DB::prohibitDestructiveCommands($isProduction);
+
+        Date::use(CarbonImmutable::class);
+
+        DB::prohibitDestructiveCommands(
+            $isProduction,
+        );
+
+        Password::defaults(
+            fn (): ?Password => $isProduction
+            ? Password::min(12)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+            : null
+        );
     }
 }
