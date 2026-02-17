@@ -46,5 +46,8 @@ export default defineConfig(({ mode }) => {
         preview: {
             port: devPort,
         },
+        ssr: {
+            noExternal: true, // bundle node server related files, so we don't need node_modules in production
+        },
     }
 })
