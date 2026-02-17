@@ -73,7 +73,7 @@ onMounted(() => {
                 <Password
                     v-model="resetPwForm.password"
                     :invalid="Boolean(resetPwForm.errors?.password)"
-                    autocomplete="new-password"
+                    :inputProps="{ autocomplete: 'new-password' }"
                     inputId="password"
                     toggleMask
                     required
@@ -88,7 +88,6 @@ onMounted(() => {
                     v-model="resetPwForm.password_confirmation"
                     :invalid="Boolean(resetPwForm.errors?.password_confirmation)"
                     :feedback="false"
-                    autocomplete="new-password"
                     inputId="password-confirmation"
                     toggleMask
                     required

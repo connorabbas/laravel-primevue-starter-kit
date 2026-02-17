@@ -82,7 +82,7 @@ onMounted(() => {
                 <Password
                     v-model="registerForm.password"
                     :invalid="Boolean(registerForm.errors?.password)"
-                    autocomplete="new-password"
+                    :inputProps="{ autocomplete: 'new-password' }"
                     inputId="password"
                     toggleMask
                     required
@@ -97,7 +97,6 @@ onMounted(() => {
                     v-model="registerForm.password_confirmation"
                     :invalid="Boolean(registerForm.errors?.password_confirmation)"
                     :feedback="false"
-                    autocomplete="new-password"
                     inputId="password-confirmation"
                     toggleMask
                     required
