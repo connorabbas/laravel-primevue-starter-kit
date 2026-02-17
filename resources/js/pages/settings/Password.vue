@@ -85,7 +85,7 @@ const updatePassword = () => {
                                 v-model="updatePasswordForm.current_password"
                                 :invalid="Boolean(updatePasswordForm.errors?.current_password)"
                                 :feedback="false"
-                                autocomplete="current-password"
+                                :inputProps="{ autocomplete: 'current-password' }"
                                 inputId="current-password"
                                 toggleMask
                                 required
@@ -99,7 +99,7 @@ const updatePassword = () => {
                                 ref="new-password-input"
                                 v-model="updatePasswordForm.password"
                                 :invalid="Boolean(updatePasswordForm.errors?.password)"
-                                autocomplete="new-password"
+                                :inputProps="{ autocomplete: 'new-password' }"
                                 inputId="password"
                                 toggleMask
                                 required
@@ -113,7 +113,6 @@ const updatePassword = () => {
                                 v-model="updatePasswordForm.password_confirmation"
                                 :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"
                                 :feedback="false"
-                                autocomplete="confirm-password"
                                 inputId="password-confirmation"
                                 toggleMask
                                 required

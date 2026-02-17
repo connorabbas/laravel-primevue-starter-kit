@@ -40,7 +40,7 @@ const submit = () => {
                         v-model="form.password"
                         :invalid="Boolean(form.errors?.password)"
                         :feedback="false"
-                        autocomplete="current-password"
+                        :inputProps="{ autocomplete: 'current-password' }"
                         inputId="password"
                         toggleMask
                         required

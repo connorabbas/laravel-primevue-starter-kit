@@ -98,7 +98,7 @@ onMounted(() => {
                     v-model="loginForm.password"
                     :invalid="Boolean(loginForm.errors?.password)"
                     :feedback="false"
-                    autocomplete="current-password"
+                    :inputProps="{ autocomplete: 'current-password' }"
                     inputId="password"
                     toggleMask
                     required
