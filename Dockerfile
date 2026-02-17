@@ -23,15 +23,15 @@ RUN npm ci
 COPY --from=composer /var/www/html/vendor/tightenco/ziggy ./vendor/tightenco/ziggy
 COPY vite.config.ts ./
 COPY resources ./resources
-RUN npm run build
+RUN npm run build:ssr
 
 # Development Image
 FROM base AS development
-ARG USER_ID
-ARG GROUP_ID
+ARG USER_ID=1000
+ARG GROUP_ID=1000
 USER root
 RUN apk update \
-    && apk add --no-cache curl git bash gnupg postgresql-client openssh-client \
+    && apk add --no-cache curl git bash gnupg postgresql-client openssh-client ncurses \
     && apk add --no-cache --virtual .build-deps build-base autoconf \
     && install-php-extensions xdebug \
         bcmath \
@@ -59,6 +59,11 @@ COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+# Optionally add OpenCode for agentic programming
+#USER www-data
+#RUN curl -fsSL https://opencode.ai/install | bash
+#ENV PATH="/home/www-data/.opencode/bin:$PATH"
+#USER root
 COPY .devcontainer/.bashrc /home/www-data/.bashrc
 COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN usermod -s /bin/bash www-data \

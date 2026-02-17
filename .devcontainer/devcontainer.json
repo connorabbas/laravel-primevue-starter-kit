@@ -31,6 +31,8 @@
             ],
             "settings": {
                 "html.format.wrapAttributes": "force-expand-multiline",
+                "javascript.format.semicolons": "remove",
+                "typescript.format.semicolons": "remove",
                 "[vue]": {
                     "editor.defaultFormatter": "Vue.volar",
                     "editor.tabSize": 4
