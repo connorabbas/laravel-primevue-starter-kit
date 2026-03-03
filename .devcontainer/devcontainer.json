@@ -2,18 +2,19 @@
 {
     "name": "Laravel PrimeVue Starter",
     "dockerComposeFile": [
-        "../docker-compose.local.yml"
+        "../docker-compose.dev.yml"
     ],
     "service": "laravel",
     "workspaceFolder": "/var/www/html",
     "mounts": [
-        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/sail/.ssh,readonly"
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/www-data/.ssh,readonly"
     ],
     "customizations": {
         "vscode": {
             "extensions": [
                 "DEVSENSE.phptools-vscode",
                 "MehediDracula.php-namespace-resolver",
+                "xdebug.php-debug",
                 "laravel.vscode-laravel",
                 "Vue.volar",
                 "hollowtree.vue-snippets",
@@ -30,6 +31,8 @@
             ],
             "settings": {
                 "html.format.wrapAttributes": "force-expand-multiline",
+                "javascript.format.semicolons": "remove",
+                "typescript.format.semicolons": "remove",
                 "[vue]": {
                     "editor.defaultFormatter": "Vue.volar",
                     "editor.tabSize": 4
@@ -37,7 +40,7 @@
             }
         }
     },
-    "remoteUser": "sail",
+    "remoteUser": "www-data",
     "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
     // "forwardPorts": [],
     // "runServices": [],
