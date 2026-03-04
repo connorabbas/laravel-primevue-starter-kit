@@ -1,0 +1,23 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "laravel-boost": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "php",
+                "artisan",
+                "boost:mcp"
+            ]
+        },
+        "primevue": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@primevue/mcp"
+            ],
+            "enabled": true
+        }
+    }
+}
