@@ -33,57 +33,77 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             $statusCode = $response->getStatusCode();
-            $errorTitles = [
-                403 => 'Forbidden',
-                404 => 'Not Found',
-                500 => 'Server Error',
-                503 => 'Service Unavailable',
-            ];
-            $errorDetails = [
-                403 => 'Sorry, you are unauthorized to access this resource/action.',
-                404 => 'Sorry, the resource you are looking for could not be found.',
-                500 => 'Whoops, something went wrong on our end. Please try again.',
-                503 => 'Sorry, we are doing some maintenance. Please check back soon.',
-            ];
+            $errorStatuses = config('errors.statuses', []);
+            $clientErrorDefaults = config('errors.defaults.4xx', []);
+            $serverErrorDefaults = config('errors.defaults.5xx', []);
 
-            if (in_array($statusCode, [500, 503, 404, 403])) {
+            $resolveErrorMetadata = function (int $status) use ($errorStatuses, $clientErrorDefaults, $serverErrorDefaults): array {
+                if (isset($errorStatuses[$status]) && is_array($errorStatuses[$status])) {
+                    return $errorStatuses[$status];
+                }
+
+                if ($status >= 500) {
+                    return $serverErrorDefaults;
+                }
+
+                if ($status >= 400) {
+                    return $clientErrorDefaults;
+                }
+
+                return [];
+            };
+
+            if ($statusCode === 419) {
+                $errorMetadata = $resolveErrorMetadata($statusCode);
+
+                return back()->with([
+                    'flash_warn' => $errorMetadata['detail'] ?? 'The page expired, please try again.',
+                ]);
+            }
+
+            if ($statusCode >= 400) {
+                $errorMetadata = $resolveErrorMetadata($statusCode);
+                $errorTitle = Response::$statusTexts[$statusCode] ?? 'Error';
+                $errorDetail = $errorMetadata['detail'] ?? 'An unexpected error occurred.';
+
                 if (
-                    $statusCode === 500
+                    $statusCode >= 500
                     && app()->hasDebugModeEnabled()
-                    && get_class($exception) !== ErrorToastException::class
+                    && !($exception instanceof ErrorToastException)
                 ) {
                     return $response;
-                } elseif (!$request->inertia()) {
-                    // Show error page component for standard visits
-                    return Inertia::render('Error', [
-                        'errorTitles' => $errorTitles,
-                        'errorDetails' => $errorDetails,
-                        'status' => $statusCode,
-                        'homepageRoute' => route('welcome'),
-                        'ziggy' => fn () => [
-                            ...(new Ziggy())->toArray(),
-                            'location' => $request->url(),
-                        ],
-                    ])
-                        ->toResponse($request)
-                        ->setStatusCode($statusCode);
-                } else {
-                    // Return JSON response for PrimeVue toast to display, handled by Inertia router event listener
-                    $errorSummary = "$errorTitles[$statusCode] - $statusCode";
-                    $errorDetail = $errorDetails[$statusCode];
-                    if (get_class($exception) === ErrorToastException::class) {
-                        $errorSummary = "Error";
+                }
+
+                if ($request->inertia() && !$request->isMethod('GET')) {
+                    $errorSummary = "{$errorTitle} - {$statusCode}";
+                    $toastTitle = $errorTitle;
+
+                    if ($exception instanceof ErrorToastException) {
+                        $toastTitle = 'Error';
+                        $errorSummary = 'Error';
                         $errorDetail = $exception->getMessage();
                     }
+
                     return response()->json([
+                        'status' => $statusCode,
+                        'error_title' => $toastTitle,
                         'error_summary' => $errorSummary,
                         'error_detail' => $errorDetail,
                     ], $statusCode);
                 }
-            } elseif ($statusCode === 419) {
-                return back()->with([
-                    'flash_warn' => 'The page expired, please try again.',
-                ]);
+
+                return Inertia::render('Error', [
+                    'title' => $errorTitle,
+                    'detail' => $errorDetail,
+                    'status' => $statusCode,
+                    'homepageRoute' => route(name: 'welcome', absolute: false),
+                    'ziggy' => fn () => [
+                        ...(new Ziggy())->toArray(),
+                        'location' => $request->url(),
+                    ],
+                ])
+                    ->toResponse($request)
+                    ->setStatusCode($statusCode);
             }
 
             return $response;
