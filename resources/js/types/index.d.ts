@@ -25,6 +25,15 @@ export interface FlashProps {
     message?: string | null;
 }
 
+export interface ErrorResponsePayload {
+    status: number;
+    error_title: string;
+    error_summary: string;
+    error_detail: string;
+    error_severity?: string;
+    error_life?: number;
+}
+
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     colorScheme: 'auto' | 'light' | 'dark';
     ziggy: Config & { location: string };

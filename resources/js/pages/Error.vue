@@ -1,26 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
 import { ArrowLeft } from 'lucide-vue-next'
 import Container from '@/components/Container.vue'
 
 const props = defineProps<{
-    errorTitles: Record<number, string>
-    errorDetails: Record<number, string>
+    title: string
+    detail: string
     status: number
     homepageRoute: string
 }>()
-
-const title = computed(() => {
-    return props.errorTitles[props.status]
-})
-const details = computed(() => {
-    return props.errorDetails[props.status]
-})
 </script>
 
 <template>
-    <InertiaHead title="Error" />
+    <InertiaHead :title="props.title" />
 
     <Container fluid>
         <main>
@@ -32,10 +24,10 @@ const details = computed(() => {
                                 {{ props.status }}
                             </h1>
                             <h2 class="font-extrabold text-4xl md:text-6xl">
-                                {{ title }}
+                                {{ props.title }}
                             </h2>
                             <p class="text-xl font-semibold text-muted-color">
-                                {{ details }}
+                                {{ props.detail }}
                             </p>
                             <InertiaLink :href="props.homepageRoute">
                                 <Button

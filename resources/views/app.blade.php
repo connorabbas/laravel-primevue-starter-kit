@@ -10,6 +10,16 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    <script>
+        // To avoid flashings in the SSR because of the selected color scheme
+        const theme = localStorage.getItem('vueuse-color-scheme') || 'auto'
+        if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
     <!-- Fonts -->
     <link
         rel="preconnect"
