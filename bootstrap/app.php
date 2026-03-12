@@ -25,6 +25,14 @@ return Application::configure(basePath: dirname(__DIR__))
                 AddLinkHeadersForPreloadedAssets::class,
             ],
         );
+        // TrustProxies middleware for Traefik handling assets over https
+        /* $middleware->trustProxies(
+            at: '*',
+            headers: Request::HEADER_X_FORWARDED_FOR
+            | Request::HEADER_X_FORWARDED_HOST
+            | Request::HEADER_X_FORWARDED_PORT
+            | Request::HEADER_X_FORWARDED_PROTO
+        ); */
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
