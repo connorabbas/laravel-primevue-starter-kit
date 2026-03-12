@@ -9,6 +9,8 @@ services:
     environment:
       PHP_OPCACHE_ENABLE: '1'
       SSL_MODE: 'mixed'
+      AUTORUN_ENABLED: 'true'
+      AUTORUN_DEBUG: 'true'
     volumes:
       - 'storage-public:/var/www/html/storage/app/public/'
       - 'storage-sessions:/var/www/html/storage/framework/sessions'
@@ -22,7 +24,7 @@ services:
       - 'traefik.http.routers.laravel-primevue.tls.certresolver=letsencrypt'
       - 'traefik.http.services.laravel-primevue.loadbalancer.server.port=8080' # exposed http port from serversideup image
       # Health check
-      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.path=/healthcheck'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.path=/up'
       - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.interval=30s'
       - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.timeout=5s'
       - 'traefik.http.services.laravel-primevue.loadbalancer.healthcheck.scheme=http'

@@ -59,11 +59,6 @@ COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
-# Optionally add OpenCode for agentic programming
-#USER www-data
-#RUN curl -fsSL https://opencode.ai/install | bash
-#ENV PATH="/home/www-data/.opencode/bin:$PATH"
-#USER root
 COPY .devcontainer/.bashrc /home/www-data/.bashrc
 COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN usermod -s /bin/bash www-data \
@@ -84,19 +79,13 @@ COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./
 COPY --chown=www-data:www-data . .
 USER www-data
 
-# SSR Production Image
-FROM base AS ssr-release
+# SSR Production Image - Include Node.js and s6 overlay config to run the Inertia SSR artisan command
+FROM release AS ssr-release
+USER root
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
-COPY --chown=www-data:www-data --chmod=755 .infrastructure/s6-overlay/inertia-ssr /etc/s6-overlay/s6-rc.d/inertia-ssr
-RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr \
-    && chown www-data:www-data /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr \
-    && chmod 755 /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr
-WORKDIR /var/www/html
-COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
-COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./public/build
+COPY --chown=www-data:www-data --chmod=755 .s6-overlay/s6-rc.d /etc/s6-overlay/s6-rc.d
 COPY --chown=www-data:www-data --from=build-assets /var/www/html/bootstrap/ssr ./bootstrap/ssr
-COPY --chown=www-data:www-data . .
 USER www-data
