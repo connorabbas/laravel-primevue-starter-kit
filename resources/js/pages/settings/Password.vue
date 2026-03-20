@@ -32,7 +32,7 @@ const showSuccessToast = () => {
     })
 }
 const updatePassword = () => {
-    updatePasswordForm.put(route('password.update'), {
+    updatePasswordForm.put(route('user-password.update'), {
         preserveScroll: true,
         onSuccess: () => {
             updatePasswordForm.reset()
