@@ -21,7 +21,7 @@ const resetPwForm = useForm({
 })
 
 const submit = () => {
-    resetPwForm.post(route('password.store'), {
+    resetPwForm.post(route('password.update'), {
         onFinish: () => resetPwForm.reset('password', 'password_confirmation'),
     })
 }

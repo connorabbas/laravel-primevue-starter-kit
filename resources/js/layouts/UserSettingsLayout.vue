@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
+import { KeyRound, Palette, ShieldCheck, UserRound } from 'lucide-vue-next'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 
 const page = usePage()
@@ -15,16 +16,25 @@ const currentRoute = computed(() => {
 const sidebarNavItems = computed(() => [
     {
         title: 'Profile',
+        icon: UserRound,
         route: route('profile.edit'),
         active: currentRoute.value == 'profile.edit',
     },
     {
         title: 'Password',
+        icon: KeyRound,
         route: route('password.edit'),
         active: currentRoute.value == 'password.edit',
     },
     {
+        title: 'Two-Factor Auth',
+        icon: ShieldCheck,
+        route: route('two-factor.show'),
+        active: currentRoute.value == 'two-factor.show',
+    },
+    {
         title: 'Appearance',
+        icon: Palette,
         route: route('appearance'),
         active: currentRoute.value == 'appearance',
     },
@@ -51,12 +61,18 @@ const sidebarNavItems = computed(() => [
                         v-for="item in sidebarNavItems"
                         :key="item.route"
                         pt:root:class="flex items-center justify-start no-underline"
+                        :label="item.title"
                         :severity="item.active ? 'secondary' : ''"
                         :variant="item.active ? 'outlined' : 'text'"
                         :href="item.route"
                         :as="InertiaLink"
                     >
-                        {{ item.title }}
+                        <template #icon>
+                            <component
+                                :is="item.icon"
+                                class="size-4"
+                            />
+                        </template>
                     </Button>
                 </nav>
             </aside>
