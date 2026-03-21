@@ -3,6 +3,7 @@ import { Head as InertiaHead, Link as InertiaLink, usePage } from '@inertiajs/vu
 import {
     ArrowRight,
     ArrowUpRight,
+    ChartNoAxesCombined,
     DatabaseZap,
     LayoutGrid,
     Lock,
@@ -11,7 +12,6 @@ import {
     Rocket,
     Server,
     Settings,
-    ShieldCheck,
     Star,
     UserPlus,
     Waypoints,
@@ -26,11 +26,10 @@ const props = defineProps<{
 
 const page = usePage()
 
-
 const featureCards = [
     {
         title: 'Pre-configured authentication',
-        description: 'Registration, login, password reset, email verification, and profile management are ready before feature work begins.',
+        description: 'Registration, login, password reset, email verification, two-factor auth, and profile management are ready from the start.',
         icon: Lock,
     },
     {
@@ -66,7 +65,7 @@ const featureCards = [
     {
         title: 'Built for scale',
         description: 'Modern Vue 3 architecture with Composition API, proper error handling, and security best practices built-in.',
-        icon: ShieldCheck,
+        icon: ChartNoAxesCombined,
     },
     {
         title: 'Customizable to your needs',
@@ -148,7 +147,7 @@ const featureCards = [
 
                         <h1
                             id="welcome-heading"
-                            class="mt-8 max-w-4xl text-5xl font-semibold tracking-tight text-balance text-surface-950 sm:text-6xl lg:text-7xl dark:text-white dark:text-shadow"
+                            class="mt-8 max-w-4xl text-5xl font-semibold tracking-tight text-balance text-surface-950 sm:text-6xl lg:text-7xl dark:text-white dark:text-shadow-lg"
                         >
                             Laravel + PrimeVue Starter Kit
                         </h1>
@@ -276,33 +275,18 @@ const featureCards = [
                             </p>
 
                             <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-                                <template v-if="page.props.auth.user">
-                                    <Button
-                                        :as="InertiaLink"
-                                        :href="route('dashboard')"
-                                        label="Open dashboard"
-                                        size="large"
-                                    >
-                                        <template #icon>
-                                            <ArrowRight />
-                                        </template>
-                                    </Button>
-                                </template>
-
-                                <template v-else>
-                                    <Button
-                                        as="a"
-                                        href="https://connorabbas.github.io/laravel-primevue-starter-kit-docs/get-started/installation-guide.html"
-                                        target="_blank"
-                                        rel="noopener"
-                                        label="Get started"
-                                        size="large"
-                                    >
-                                        <template #icon>
-                                            <ArrowRight />
-                                        </template>
-                                    </Button>
-                                </template>
+                                <Button
+                                    as="a"
+                                    href="https://connorabbas.github.io/laravel-primevue-starter-kit-docs/get-started/installation-guide.html"
+                                    target="_blank"
+                                    rel="noopener"
+                                    label="Get started"
+                                    size="large"
+                                >
+                                    <template #icon>
+                                        <ArrowRight />
+                                    </template>
+                                </Button>
 
                                 <Button
                                     as="a"
