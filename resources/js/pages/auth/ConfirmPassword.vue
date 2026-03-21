@@ -49,11 +49,12 @@ const submit = () => {
                     <InputErrors :errors="form.errors?.password" />
                 </div>
 
-                <div class="flex justify-end items-center">
+                <div>
                     <Button
                         :loading="form.processing"
                         type="submit"
                         label="Confirm password"
+                        fluid
                     />
                 </div>
             </div>
