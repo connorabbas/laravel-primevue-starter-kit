@@ -52,10 +52,9 @@ const deleteUser = () => {
                 v-model="form.password"
                 :invalid="Boolean(form.errors?.password)"
                 :feedback="false"
-                :inputProps="{ autocomplete: 'current-password' }"
+                :inputProps="{ autocomplete: 'current-password', autofocus: true }"
                 inputId="password"
                 toggleMask
-                autofocus
                 required
                 fluid
                 @keyup.enter="deleteUser"
