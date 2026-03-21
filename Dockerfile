@@ -4,7 +4,7 @@ ARG NODE_VERSION=22
 # https://serversideup.net/open-source/docker-php/docs
 FROM serversideup/php:8.4-fpm-nginx-alpine AS base
 USER root
-RUN install-php-extensions bcmath gd pgsql
+RUN install-php-extensions bcmath gd pdo_pgsql
 
 # Node Image
 FROM node:${NODE_VERSION}-alpine AS node
