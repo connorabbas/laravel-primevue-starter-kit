@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from 'vue'
-import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { useForm, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
@@ -28,9 +28,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Forgot password" />
-
-    <GuestAuthLayout>
+    <GuestAuthLayout
+        title="Forgot password"
+        description="Request a password reset link to regain access to your account."
+    >
         <template
             v-if="props.status"
             #message

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 
@@ -34,9 +34,10 @@ const toggleMode = () => {
 </script>
 
 <template>
-    <InertiaHead title="Two-factor challenge" />
-
-    <GuestAuthLayout>
+    <GuestAuthLayout
+        title="Two-factor challenge"
+        description="Complete two-factor authentication to finish signing in to your account."
+    >
         <template #title>
             <div class="text-center">
                 Two-factor challenge

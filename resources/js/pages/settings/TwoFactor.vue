@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import { Check, Copy } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { useToast } from 'primevue/usetoast'
@@ -124,9 +124,11 @@ const copySetupKey = async () => {
 </script>
 
 <template>
-    <InertiaHead title="Two-factor authentication" />
-
-    <AppLayout :breadcrumbs>
+    <AppLayout
+        title="Two-factor authentication"
+        :breadcrumbs
+        description="Manage two-factor authentication and recovery options for your account."
+    >
         <SettingsLayout>
             <div class="space-y-4 md:space-y-8">
                 <Card
