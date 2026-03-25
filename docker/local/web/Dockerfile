@@ -67,6 +67,11 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/8.4/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
+USER sail
+RUN curl -fsSL https://opencode.ai/install | bash
+ENV PATH="/home/sail/.opencode/bin:$PATH"
+USER root
+
 EXPOSE 80/tcp
 
 ENTRYPOINT ["start-container"]

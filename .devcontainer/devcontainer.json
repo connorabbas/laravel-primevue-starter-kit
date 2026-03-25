@@ -8,6 +8,7 @@
     "workspaceFolder": "/var/www/html",
     "mounts": [
         "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/sail/.ssh,readonly",
+        "type=bind,source=/home/${localEnv:USER}/.gitconfig,target=/home/sail/.gitconfig,readonly",
         "type=bind,source=/home/${localEnv:USER}/.config/opencode,target=/home/sail/.config/opencode",
         "type=bind,source=/home/${localEnv:USER}/.local/share/opencode,target=/home/sail/.local/share/opencode",
         "type=bind,source=/home/${localEnv:USER}/.local/state/opencode,target=/home/sail/.local/state/opencode"
