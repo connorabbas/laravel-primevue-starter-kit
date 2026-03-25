@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from 'vue'
-import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { useForm, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
@@ -29,9 +29,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Register" />
-
-    <GuestAuthLayout>
+    <GuestAuthLayout
+        title="Register"
+        description="Create a new account to start using this Laravel and PrimeVue application."
+    >
         <template #title>
             <div class="text-center">
                 Create an account

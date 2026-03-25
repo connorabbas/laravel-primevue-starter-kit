@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head as InertiaHead, Link as InertiaLink, usePage } from '@inertiajs/vue3'
+import { Link as InertiaLink, usePage } from '@inertiajs/vue3'
 import {
     ArrowRight,
     ArrowUpRight,
@@ -16,6 +16,7 @@ import {
     UserPlus,
     Waypoints,
 } from 'lucide-vue-next'
+import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'
 
@@ -76,7 +77,10 @@ const featureCards = [
 </script>
 
 <template>
-    <InertiaHead title="Welcome" />
+    <AppHead
+        title="Welcome"
+        description="A production-ready Laravel starter kit powered by Inertia and PrimeVue for building accessible, performant applications faster."
+    />
 
     <main
         class="relative min-h-svh overflow-hidden bg-surface-50 text-surface-950 transition-colors dark:bg-surface-950 dark:text-surface-0"

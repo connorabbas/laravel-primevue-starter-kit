@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useForm, usePage, Head as InertiaHead } from '@inertiajs/vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
 import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
@@ -50,9 +50,11 @@ const updateProfileInformation = () => {
 </script>
 
 <template>
-    <InertiaHead title="Profile settings" />
-
-    <AppLayout :breadcrumbs>
+    <AppLayout
+        title="Profile settings"
+        :breadcrumbs
+        description="Update your profile details, email address, and account preferences."
+    >
         <SettingsLayout>
             <div class="space-y-4 md:space-y-8">
                 <Card

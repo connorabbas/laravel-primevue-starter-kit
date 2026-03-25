@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 import { ArrowLeft } from 'lucide-vue-next'
+import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 
 const props = defineProps<{
@@ -12,7 +13,10 @@ const props = defineProps<{
 </script>
 
 <template>
-    <InertiaHead :title="props.title" />
+    <AppHead
+        :title="props.title"
+        :description="props.detail"
+    />
 
     <Container fluid>
         <main>

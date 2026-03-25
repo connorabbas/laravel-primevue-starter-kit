@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Head as InertiaHead } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'
@@ -11,9 +10,11 @@ const breadcrumbs = [
 </script>
 
 <template>
-    <InertiaHead title="Appearance settings" />
-
-    <AppLayout :breadcrumbs>
+    <AppLayout
+        title="Appearance settings"
+        :breadcrumbs
+        description="Customize the interface appearance and color mode for your account."
+    >
         <SettingsLayout>
             <Card
                 pt:body:class="max-w-2xl space-y-3"

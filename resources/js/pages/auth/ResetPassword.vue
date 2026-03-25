@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from 'vue'
-import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
@@ -34,9 +34,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Reset password" />
-
-    <GuestAuthLayout>
+    <GuestAuthLayout
+        title="Reset password"
+        description="Choose a new password to restore access to your account securely."
+    >
         <template #title>
             <div class="text-center">
                 Reset password
