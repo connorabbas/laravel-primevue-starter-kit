@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import { useToast } from 'primevue/usetoast'
 import Password from 'primevue/password'
 import AppLayout from '@/layouts/AppLayout.vue'
@@ -32,7 +32,7 @@ const showSuccessToast = () => {
     })
 }
 const updatePassword = () => {
-    updatePasswordForm.put(route('password.update'), {
+    updatePasswordForm.put(route('user-password.update'), {
         preserveScroll: true,
         onSuccess: () => {
             updatePasswordForm.reset()
@@ -59,9 +59,11 @@ const updatePassword = () => {
 </script>
 
 <template>
-    <InertiaHead title="Password settings" />
-
-    <AppLayout :breadcrumbs>
+    <AppLayout
+        title="Password settings"
+        :breadcrumbs
+        description="Change your account password and keep your account secure."
+    >
         <SettingsLayout>
             <Card
                 pt:body:class="max-w-2xl space-y-3"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from 'vue'
-import { useForm, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { useForm, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
@@ -33,9 +33,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Log in" />
-
-    <GuestAuthLayout>
+    <GuestAuthLayout
+        title="Log in"
+        description="Log in to access your account, dashboard, and application workspace."
+    >
         <template
             v-if="props.status"
             #message

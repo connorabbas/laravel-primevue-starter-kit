@@ -10,10 +10,36 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    <script>
+        // To avoid flashings in the SSR because of the selected color scheme
+        const theme = localStorage.getItem('vueuse-color-scheme') || 'auto'
+        if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <link
+        rel="icon"
+        href="/favicon.ico"
+        sizes="any"
+    >
+    <link
+        rel="icon"
+        href="/favicon.svg"
+        type="image/svg+xml"
+    >
+    <link
+        rel="apple-touch-icon"
+        href="/apple-touch-icon.png"
+    >
+
     <!-- Fonts -->
     <link
         rel="preconnect"
         href="https://fonts.bunny.net"
+        crossorigin
     >
     <link
         href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap"

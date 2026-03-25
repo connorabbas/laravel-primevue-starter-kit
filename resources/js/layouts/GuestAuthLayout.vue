@@ -1,11 +1,26 @@
 <script setup lang="ts">
 import { Link as InertiaLink } from '@inertiajs/vue3'
+import AppHead from '@/components/AppHead.vue'
 import ApplicationLogo from '@/components/ApplicationLogo.vue'
 import Container from '@/components/Container.vue'
 import FlashMessages from '@/components/FlashMessages.vue'
+
+const props = withDefaults(defineProps<{
+    title: string,
+    description?: string,
+}>(), {
+    description: 'Access authentication and account recovery pages for this Laravel and PrimeVue starter kit.',
+})
 </script>
 
 <template>
+    <AppHead
+        :title="props.title"
+        :description="props.description"
+    >
+        <slot name="head" />
+    </AppHead>
+
     <Container class="min-h-svh flex flex-col justify-center items-center">
         <div class="mb-6">
             <InertiaLink href="/">
