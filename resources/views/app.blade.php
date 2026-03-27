@@ -8,8 +8,6 @@
         content="width=device-width, initial-scale=1"
     >
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
-
     <script>
         // To avoid flashings in the SSR because of the selected color scheme
         const theme = localStorage.getItem('vueuse-color-scheme') || 'auto'
@@ -49,11 +47,13 @@
     <!-- Scripts -->
     @routes
     @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
-    @inertiaHead
+    <x-inertia::head>
+        <title data-inertia>{{ config('app.name', 'Laravel') }}</title>
+    </x-inertia::head>
 </head>
 
 <body class="font-sans antialiased h-full bg-surface-100 dark:bg-surface-950">
-    @inertia
+    <x-inertia::app />
 </body>
 
 </html>
