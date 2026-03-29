@@ -62,7 +62,7 @@ const sidebarNavItems = computed(() => [
                         :key="item.route"
                         pt:root:class="flex items-center justify-start no-underline"
                         :label="item.title"
-                        :severity="item.active ? 'secondary' : ''"
+                        :severity="item.active ? undefined : 'secondary'"
                         :variant="item.active ? 'outlined' : 'text'"
                         :href="item.route"
                         :as="InertiaLink"
