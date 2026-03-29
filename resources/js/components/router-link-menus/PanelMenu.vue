@@ -39,7 +39,7 @@ defineExpose({ $el: childRef })
                 :target="item.target"
                 :class="[
                     'p-panelmenu-item-link flex items-center cursor-pointer no-underline px-3 py-2',
-                    { 'font-bold! text-muted-color': item.active },
+                    { 'font-bold! text-primary hover:text-[var(--p-panelmenu-item-focus-color)]': item.active },
                 ]"
                 :style="item.style"
                 :aria-disabled="item.disabled === true"
