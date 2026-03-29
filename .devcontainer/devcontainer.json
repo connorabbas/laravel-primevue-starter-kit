@@ -2,7 +2,7 @@
 {
     "name": "Laravel PrimeVue Starter",
     "dockerComposeFile": [
-        "../docker-compose.local.yml"
+        "../docker-compose.dev.yml"
     ],
     "service": "laravel",
     "workspaceFolder": "/var/www/html",

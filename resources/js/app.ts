@@ -34,7 +34,7 @@ createInertiaApp({
             setup() {
                 const toast = useToast()
 
-                router.on('invalid', (event) => {
+                router.on('httpException', (event) => {
                     const responseBody = event.detail.response?.data as Partial<ErrorResponsePayload> | undefined
 
                     if (
@@ -54,7 +54,7 @@ createInertiaApp({
                     }
                 })
 
-                router.on('exception', (event) => {
+                router.on('networkError', (event) => {
                     event.preventDefault()
 
                     toast.add({
