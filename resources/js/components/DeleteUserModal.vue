@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/vue3'
 import Password from 'primevue/password'
 import InputErrors from '@/components/InputErrors.vue'
 
-const modalOpen = defineModel<boolean>({ default: false })
+const visible = defineModel<boolean>('visible', { default: false })
 
 type PasswordInputType = InstanceType<typeof Password> & { $el: HTMLElement };
 const passwordInput = useTemplateRef<PasswordInputType>('password-input')
@@ -16,7 +16,7 @@ const form = useForm({
 const deleteUser = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
-        onSuccess: () => (modalOpen.value = false),
+        onSuccess: () => (visible.value = false),
         onError: () => {
             if (passwordInput.value && passwordInput.value?.$el) {
                 const passwordInputElement = passwordInput.value.$el.querySelector('input')
@@ -30,7 +30,7 @@ const deleteUser = () => {
 
 <template>
     <Dialog
-        v-model:visible="modalOpen"
+        v-model:visible="visible"
         class="w-160"
         position="center"
         header="Are you sure you want to delete your account?"
@@ -66,9 +66,9 @@ const deleteUser = () => {
             <Button
                 class="mr-2"
                 label="Cancel"
-                plain
+                severity="secondary"
                 text
-                @click="modalOpen = false"
+                @click="visible = false"
             />
             <Button
                 :loading="form.processing"
