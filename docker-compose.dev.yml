@@ -1,60 +1,56 @@
 services:
   laravel:
     build:
-      context: ./docker/local/web
+      context: .
       dockerfile: Dockerfile
+      target: development
       args:
-        WWWGROUP: '${WWWGROUP}'
-    image: sail-8.4/app
+        USER_ID: '${USER_ID:-1000}'
+        GROUP_ID: '${GROUP_ID:-1000}'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     #ports:
-      #- '${APP_PORT:-80}:80' not required using Traefik
-      #- '${VITE_APP_PORT:-5173}:${VITE_APP_PORT:-5173}' Not required if using dev containers (auto forwards port to localhost)
+      #- '${VITE_APP_PORT:-5173}:${VITE_APP_PORT:-5173}' # Not necessarily required for dev containers (auto port forwarding)
     environment:
-      WWWUSER: '${WWWUSER}'
-      LARAVEL_SAIL: 1
-      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+      PHP_OPCACHE_ENABLE: '1'
+      PHP_OPCACHE_REVALIDATE_FREQ: '0'
+      XDEBUG_MODE: '${XDEBUG_MODE:-off}'
     volumes:
       - '.:/var/www/html'
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.laravel-primevue.rule=Host(`laravel-primevue.localhost`)"
-      - "traefik.http.services.laravel-primevue.loadbalancer.server.port=80"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.laravel-primevue.rule=Host(`${APP_DOMAIN}`)'
+      - 'traefik.http.services.laravel-primevue.loadbalancer.server.port=8080' # exposed http port from serversideup image
     networks:
-      - sail
       - proxy
+      - laravel
     depends_on:
       - pgsql
 
   pgsql:
     image: 'postgres:17'
     ports:
-      - '${FORWARD_DB_PORT:-5432}:5432'
+      - '${DB_FORWARD_PORT:-5432}:5432'
     environment:
       PGPASSWORD: '${DB_PASSWORD:-secret}'
       POSTGRES_DB: '${DB_DATABASE}'
       POSTGRES_USER: '${DB_USERNAME}'
       POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
-      - 'laravel-primevue-pgsql:/var/lib/postgresql/data'
-      - './docker/local/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+      - 'postgres-data:/var/lib/postgresql/data'
+      - './database/create-pg-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
-      - sail
+      - laravel
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
       retries: 3
       timeout: 5s
 
 volumes:
-  laravel-primevue-pgsql:
-    driver: local
+  postgres-data:
 
 networks:
-  sail:
-    driver: bridge
+  laravel:
   proxy:
     name: traefik_proxy
     external: true
