@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3'
 import { useAppLayout } from '@/composables/useAppLayout'
-import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
+import { ChevronsUpDown, Menu as MenuIcon } from '@lucide/vue'
 import ClientOnly from '@/components/ClientOnly.vue'
 import Container from '@/components/Container.vue'
 import PopupMenuButton from '@/components/PopupMenuButton.vue'

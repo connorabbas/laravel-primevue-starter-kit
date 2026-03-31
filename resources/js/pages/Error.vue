@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link as InertiaLink } from '@inertiajs/vue3'
-import { ArrowLeft } from 'lucide-vue-next'
+import { ArrowLeft } from '@lucide/vue'
 import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 

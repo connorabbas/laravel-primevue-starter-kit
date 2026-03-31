@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watchEffect, inject, useId } from 'vue'
-import { Sun, Moon, Monitor } from 'lucide-vue-next'
+import { Sun, Moon, Monitor } from '@lucide/vue'
 import type { UseColorModeReturn } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{

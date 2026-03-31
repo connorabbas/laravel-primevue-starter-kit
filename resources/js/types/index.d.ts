@@ -1,7 +1,7 @@
 import type { DataTableFilterMetaData } from 'primevue'
 import type { Page, Errors } from '@inertiajs/core'
 import type { MenuItem as PrimeVueMenuItem } from 'primevue/menuitem'
-import type { LucideIcon } from 'lucide-vue-next'
+import type { LucideIcon } from '@lucide/vue'
 import type { Config } from 'ziggy-js'
 
 export interface User {

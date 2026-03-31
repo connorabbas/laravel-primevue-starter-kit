@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
-import { Check, Copy } from 'lucide-vue-next'
+import { Check, Copy } from '@lucide/vue'
 import { useClipboard } from '@vueuse/core'
 import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'

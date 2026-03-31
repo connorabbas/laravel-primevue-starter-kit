@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next'
+import { Check, CircleX, Info, TriangleAlert, Megaphone } from '@lucide/vue'
 import { FlashProps } from '@/types'
 
 const page = usePage()
