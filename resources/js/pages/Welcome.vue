@@ -15,7 +15,7 @@ import {
     Star,
     UserPlus,
     Waypoints,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'

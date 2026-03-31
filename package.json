@@ -9,12 +9,12 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.0.0",
+        "@lucide/vue": "^1.7.0",
         "@primeuix/themes": "^2.0.3",
         "@vue/server-renderer": "^3.5.30",
         "@vueuse/core": "^14.2.1",
         "@vueuse/integrations": "^14.2.1",
         "lodash-es": "^4.17.23",
-        "lucide-vue-next": "^0.577.0",
         "primevue": "^4.5.4",
         "tailwind-merge": "^3.5.0",
         "tailwindcss": "^4.2.2",

@@ -2,7 +2,7 @@
 import { ref, useTemplateRef } from 'vue'
 import { Link as InertiaLink } from '@inertiajs/vue3'
 import Breadcrumb, { type BreadcrumbPassThroughOptions, type BreadcrumbProps } from 'primevue/breadcrumb'
-import { ChevronRight } from 'lucide-vue-next'
+import { ChevronRight } from '@lucide/vue'
 import type { MenuItem } from '@/types'
 import { ptViewMerge } from '@/utils'
 

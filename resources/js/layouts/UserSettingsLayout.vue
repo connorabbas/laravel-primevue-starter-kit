@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
-import { KeyRound, Palette, ShieldCheck, UserRound } from 'lucide-vue-next'
+import { KeyRound, Palette, ShieldCheck, UserRound } from '@lucide/vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 
 const page = usePage()
