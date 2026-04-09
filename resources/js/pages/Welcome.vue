@@ -27,6 +27,27 @@ const props = defineProps<{
 
 const page = usePage()
 
+const heroTagEnterClass = 'welcome-animate-enter-soft animate-duration-1200'
+const heroHeadingEnterClass = 'welcome-animate-enter-soft animate-duration-1250 [animation-delay:100ms] animate-fill-backwards'
+const heroCopyEnterClass = 'welcome-animate-enter-soft animate-duration-1250 [animation-delay:200ms] animate-fill-backwards'
+const heroActionsEnterClass = 'welcome-animate-enter-soft animate-duration-1250 [animation-delay:300ms] animate-fill-backwards'
+
+const sectionTitleEnterClass = 'welcome-animate-enter-soft-up animate-duration-1250 [animation-delay:400ms] animate-fill-backwards'
+const sectionCopyEnterClass = 'welcome-animate-enter-soft-up animate-duration-1250 [animation-delay:500ms] animate-fill-backwards'
+const ctaCardEnterClass = 'animate-enter fade-in-10 slide-in-from-b-10 animate-duration-700'
+const ctaActionsEnterClass = 'animate-enter fade-in-10 zoom-in-95 animate-duration-600 [animation-delay:180ms] animate-fill-backwards'
+const ctaMetaEnterClass = 'animate-enter fade-in-10 slide-in-from-b-4 animate-duration-600 [animation-delay:320ms] animate-fill-backwards'
+
+const featureCardEnterClasses = [
+    'animate-enter fade-in-10 slide-in-from-b-6 animate-duration-700',
+    'animate-enter fade-in-10 slide-in-from-b-8 animate-duration-700 [animation-delay:80ms] animate-fill-backwards',
+    'animate-enter fade-in-10 slide-in-from-b-10 animate-duration-700 [animation-delay:160ms] animate-fill-backwards',
+] as const
+
+const getFeatureCardEnterClass = (index: number): string => {
+    return featureCardEnterClasses[index % featureCardEnterClasses.length]
+}
+
 const featureCards = [
     {
         title: 'Pre-configured authentication',
@@ -131,7 +152,10 @@ const featureCards = [
                     class="flex flex-1 items-center py-16 sm:py-20 lg:py-24"
                 >
                     <div class="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
-                        <div class="flex gap-4">
+                        <div
+                            v-animateonscroll.once="{ enterClass: heroTagEnterClass, threshold: [0.1], rootMargin: '0px 0px -10% 0px' }"
+                            class="flex gap-4"
+                        >
                             <Tag
                                 class="backdrop-blur-sm"
                                 value="Laravel"
@@ -151,17 +175,22 @@ const featureCards = [
 
                         <h1
                             id="welcome-heading"
+                            v-animateonscroll.once="{ enterClass: heroHeadingEnterClass, threshold: [0.1], rootMargin: '0px 0px -8% 0px' }"
                             class="mt-8 max-w-4xl text-5xl font-semibold tracking-tight text-balance text-surface-950 sm:text-6xl lg:text-7xl dark:text-white dark:text-shadow-lg"
                         >
                             Laravel + PrimeVue Starter Kit
                         </h1>
 
-                        <p class="mt-6 max-w-3xl text-base leading-8 text-surface-600 sm:text-lg dark:text-surface-300">
+                        <p
+                            v-animateonscroll.once="{ enterClass: heroCopyEnterClass, threshold: [0.1], rootMargin: '0px 0px -8% 0px' }"
+                            class="mt-6 max-w-3xl text-base leading-8 text-surface-600 sm:text-lg dark:text-surface-300"
+                        >
                             A production-ready Laravel starter template powered by PrimeVue. Build beautiful,
                             accessible, and performant applications in minutes, not hours.
                         </p>
 
                         <nav
+                            v-animateonscroll.once="{ enterClass: heroActionsEnterClass, threshold: [0.1], rootMargin: '0px 0px -8% 0px' }"
                             aria-label="Primary actions"
                             class="mt-10 flex flex-wrap items-center justify-center gap-3"
                         >
@@ -216,11 +245,15 @@ const featureCards = [
                     <div class="mx-auto max-w-2xl text-center">
                         <h2
                             id="feature-heading"
+                            v-animateonscroll.once="{ enterClass: sectionTitleEnterClass, threshold: [0.15], rootMargin: '0px 0px -6% 0px' }"
                             class="text-3xl font-semibold tracking-tight text-surface-950 sm:text-4xl dark:text-white"
                         >
                             Everything you need to build modern Laravel + Vue apps
                         </h2>
-                        <p class="mt-4 text-base leading-8 text-surface-600 dark:text-surface-300">
+                        <p
+                            v-animateonscroll.once="{ enterClass: sectionCopyEnterClass, threshold: [0.15], rootMargin: '0px 0px -6% 0px' }"
+                            class="mt-4 text-base leading-8 text-surface-600 dark:text-surface-300"
+                        >
                             Start with a solid foundation. This starter kit includes all the essentials for building
                             production-ready
                             Laravel applications with PrimeVue's powerful component system.
@@ -229,8 +262,9 @@ const featureCards = [
 
                     <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         <Card
-                            v-for="feature in featureCards"
+                            v-for="(feature, index) in featureCards"
                             :key="feature.title"
+                            v-animateonscroll.once="{ enterClass: getFeatureCardEnterClass(index), threshold: [0.2], rootMargin: '0px 0px -8% 0px' }"
                             class="group h-full border border-surface-200/80 bg-white/80 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-1 hover:border-surface-300 dark:border-surface-800/80 dark:bg-surface-900/70 dark:hover:border-surface-700"
                             pt:body:class="h-full"
                             pt:content:class="flex h-full flex-col p-4"
@@ -258,68 +292,118 @@ const featureCards = [
                 </section>
 
                 <section class="mx-auto w-full max-w-6xl py-14 sm:py-16">
-                    <Card
-                        class="border border-surface-200/80 bg-white/80 backdrop-blur-sm dark:border-surface-800/80 dark:bg-surface-900/75"
-                        pt:body:class="p-0"
-                        pt:content:class="px-6 py-10 text-center sm:px-10 sm:py-12 lg:px-16 lg:py-14"
+                    <div
+                        v-animateonscroll.once="{ enterClass: ctaCardEnterClass, threshold: [0.2], rootMargin: '0px 0px -10% 0px' }"
                     >
-                        <template #content>
-                            <p
-                                class="m-0 text-sm font-medium uppercase tracking-widest text-surface-500 dark:text-surface-400"
-                            >
-                                Ready to build your next Laravel + Vue app?
-                            </p>
-                            <h2
-                                class="mt-4 text-3xl font-semibold tracking-tight text-surface-950 dark:text-white sm:text-4xl"
-                            >
-                                Discover the power of Laravel + PrimeVue
-                            </h2>
-                            <p class="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted-color">
-                                Launch with a starter that already covers the essentials.
-                            </p>
-
-                            <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-                                <Button
-                                    as="a"
-                                    href="https://connorabbas.github.io/laravel-primevue-starter-kit-docs/get-started/installation-guide.html"
-                                    target="_blank"
-                                    rel="noopener"
-                                    label="Get started"
-                                    size="large"
+                        <Card
+                            class="border border-surface-200/80 bg-white/80 backdrop-blur-sm dark:border-surface-800/80 dark:bg-surface-900/75"
+                            pt:body:class="p-0"
+                            pt:content:class="px-6 py-10 text-center sm:px-10 sm:py-12 lg:px-16 lg:py-14"
+                        >
+                            <template #content>
+                                <p
+                                    class="m-0 text-sm font-medium uppercase tracking-widest text-surface-500 dark:text-surface-400"
                                 >
-                                    <template #icon>
-                                        <ArrowRight />
-                                    </template>
-                                </Button>
-
-                                <Button
-                                    as="a"
-                                    href="https://github.com/connorabbas/laravel-primevue-starter-kit"
-                                    target="_blank"
-                                    rel="noopener"
-                                    label="Star on GitHub"
-                                    variant="outlined"
-                                    severity="secondary"
-                                    size="large"
+                                    Ready to build your next Laravel + Vue app?
+                                </p>
+                                <h2
+                                    class="mt-4 text-3xl font-semibold tracking-tight text-surface-950 dark:text-white sm:text-4xl"
                                 >
-                                    <template #icon>
-                                        <Star />
-                                    </template>
-                                </Button>
-                            </div>
+                                    Discover the power of Laravel + PrimeVue
+                                </h2>
+                                <p class="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted-color">
+                                    Launch with a starter that already covers the essentials.
+                                </p>
 
-                            <div
-                                class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-surface-200 pt-6 text-sm text-surface-500 dark:border-surface-800 dark:text-surface-400 sm:flex-row sm:gap-6"
-                            >
-                                <div class="">
-                                    <span>Laravel {{ props.laravelVersion }} / PHP {{ props.phpVersion }}</span>
+                                <div
+                                    v-animateonscroll.once="{ enterClass: ctaActionsEnterClass, threshold: [0.25], rootMargin: '0px 0px -8% 0px' }"
+                                    class="mt-8 flex flex-wrap items-center justify-center gap-3"
+                                >
+                                    <Button
+                                        as="a"
+                                        href="https://connorabbas.github.io/laravel-primevue-starter-kit-docs/get-started/installation-guide.html"
+                                        target="_blank"
+                                        rel="noopener"
+                                        label="Get started"
+                                        size="large"
+                                    >
+                                        <template #icon>
+                                            <ArrowRight />
+                                        </template>
+                                    </Button>
+
+                                    <Button
+                                        as="a"
+                                        href="https://github.com/connorabbas/laravel-primevue-starter-kit"
+                                        target="_blank"
+                                        rel="noopener"
+                                        label="Star on GitHub"
+                                        variant="outlined"
+                                        severity="secondary"
+                                        size="large"
+                                    >
+                                        <template #icon>
+                                            <Star />
+                                        </template>
+                                    </Button>
                                 </div>
-                                <SelectColorModeButton :show-label="false" />
-                            </div>
-                        </template>
-                    </Card>
+
+                                <div
+                                    v-animateonscroll.once="{ enterClass: ctaMetaEnterClass, threshold: [0.25], rootMargin: '0px 0px -8% 0px' }"
+                                    class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-surface-200 pt-6 text-sm text-surface-500 dark:border-surface-800 dark:text-surface-400 sm:flex-row sm:gap-6"
+                                >
+                                    <div class="">
+                                        <span>Laravel {{ props.laravelVersion }} / PHP {{ props.phpVersion }}</span>
+                                    </div>
+                                    <SelectColorModeButton :show-label="false" />
+                                </div>
+                            </template>
+                        </Card>
+                    </div>
                 </section>
             </div>
         </Container>
     </main>
 </template>
+
+<style scoped>
+@keyframes welcome-enter-soft {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes welcome-enter-soft-up {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.98);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.welcome-animate-enter-soft {
+    animation-name: welcome-enter-soft;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+}
+
+.welcome-animate-enter-soft-up {
+    animation-name: welcome-enter-soft-up;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+}
+</style>
