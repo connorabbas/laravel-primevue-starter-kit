@@ -3,15 +3,10 @@ import { computed } from 'vue'
 import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
 import { KeyRound, Palette, ShieldCheck, UserRound } from '@lucide/vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
+import { route } from '@/utils/route'
 
 const page = usePage()
-const currentRoute = computed(() => {
-    // Access page.url to trigger re-computation on navigation.
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const url = page.url
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-    return route().current()
-})
+const currentRoute = computed(() => page.props.currentRouteName)
 
 const sidebarNavItems = computed(() => [
     {

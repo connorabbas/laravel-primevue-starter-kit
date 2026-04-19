@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\UserData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Middleware;
-use Tighten\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -47,12 +48,9 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'colorScheme' => fn () => $request->cookie('colorScheme', 'auto'),
-            'ziggy' => fn () => [
-                ...(new Ziggy())->toArray(),
-                'location' => $request->url(),
-            ],
+            'currentRouteName' => fn () => $request->route()?->getName(),
             'auth' => [
-                'user' => $request->user(),
+                'user' => Auth::check() ? UserData::from($request->user()) : null,
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('flash_success'),

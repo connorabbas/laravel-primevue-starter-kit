@@ -2,16 +2,11 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { usePage, useForm } from '@inertiajs/vue3'
 import { LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2 } from '@lucide/vue'
 import { MenuItem } from '@/types'
+import { route } from '@/utils/route'
 
 export function useAppLayout() {
     const page = usePage()
-    const currentRoute = computed(() => {
-        // Access page.url to trigger re-computation on navigation.
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        const url = page.url
-        /* eslint-enable @typescript-eslint/no-unused-vars */
-        return route().current()
-    })
+    const currentRoute = computed(() => page.props.currentRouteName)
 
     // Menu items
     const menuItems = computed<MenuItem[]>(() => [
@@ -19,7 +14,7 @@ export function useAppLayout() {
             key: 'home',
             label: 'Home',
             lucideIcon: House,
-            route: route('welcome'),
+            route: '/',
             active: currentRoute.value == 'welcome',
         },
         {

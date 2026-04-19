@@ -58,7 +58,7 @@ const toggleSidebar = () => {
                             severity="secondary"
                             size="large"
                             :menu-items="userMenuItems"
-                            :label="page.props.auth.user.name"
+                            :label="page.props.auth.user?.name"
                         >
                             <template #icon>
                                 <ChevronsUpDown />
@@ -119,7 +119,7 @@ const toggleSidebar = () => {
                             name="desktop-user-menu-dd"
                             severity="secondary"
                             :menu-items="userMenuItems"
-                            :label="page.props.auth.user.name"
+                            :label="page.props.auth.user?.name"
                         >
                             <template #icon>
                                 <ChevronsUpDown />

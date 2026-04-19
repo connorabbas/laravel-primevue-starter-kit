@@ -50,7 +50,7 @@ const {
                             severity="secondary"
                             size="large"
                             :menu-items="userMenuItems"
-                            :label="page.props.auth.user.name"
+                            :label="page.props.auth.user?.name"
                         >
                             <template #icon>
                                 <ChevronsUpDown />
@@ -68,7 +68,7 @@ const {
             <nav class="dynamic-bg shadow-sm">
                 <Container>
                     <Menubar
-                        :key="currentRoute"
+                        :key="currentRoute ?? page.url"
                         :model="menuItems"
                         pt:root:class="px-0 py-0 border-0 rounded-none bg-transparent h-[var(--header-height)]!"
                         pt:button:class="hidden"
@@ -86,7 +86,7 @@ const {
                                     side="right"
                                     severity="secondary"
                                     :menu-items="userMenuItems"
-                                    :label="page.props.auth.user.name"
+                                    :label="page.props.auth.user?.name"
                                     text
                                 />
                             </div>
