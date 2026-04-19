@@ -45,7 +45,6 @@
     />
 
     <!-- Scripts -->
-    @routes
     @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
     <x-inertia::head>
         <title data-inertia>{{ config('app.name', 'Laravel') }}</title>

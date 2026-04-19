@@ -13,12 +13,13 @@
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/fortify": "^1.36",
         "laravel/framework": "^13.0",
-        "tightenco/ziggy": "^2.5"
+        "spatie/laravel-data": "^4.14",
+        "spatie/laravel-typescript-transformer": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.4",
-        "laravel/boost": "^2.0",
+        "laravel/boost": "^2.4",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.41",
@@ -62,7 +63,7 @@
         "analyse": "phpstan analyse --memory-limit=2G",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#a3e635\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" \"php artisan typescript:transform --watch\" --names=server,queue,logs,vite,types"
         ],
         "test": [
             "@php artisan config:clear --ansi",

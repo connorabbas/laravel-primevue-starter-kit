@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, computed } from 'vue'
-import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
-import { route } from 'ziggy-js'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 import Tabs from 'primevue/tabs'
 import Tab, { type TabsProps } from 'primevue/tabs'
 import TabList from 'primevue/tablist'
@@ -12,15 +11,7 @@ interface ExtendedTabsProps extends Omit<TabsProps, 'value' | 'items'> {
     items: MenuItem[];
 }
 const componentProps = defineProps<ExtendedTabsProps>()
-
-const page = usePage()
-const currentRoute = computed(() => {
-    // Access page.url to trigger re-computation on navigation.
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const url = page.url
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-    return route().current()
-})
+const activeRoute = computed(() => componentProps.items.find((item) => item.active)?.route ?? null)
 
 type TabsType = InstanceType<typeof Tabs>;
 const childRef = useTemplateRef<TabsType>('child-ref')
@@ -31,7 +22,7 @@ defineExpose({ $el: childRef })
     <Tabs
         ref="child-ref"
         v-bind="{ ...componentProps, ...$attrs, ptOptions: { mergeProps: ptViewMerge } }"
-        :value="currentRoute ?? '/'"
+        :value="activeRoute ?? ''"
         scrollable
     >
         <TabList>

@@ -5,7 +5,8 @@
         "dev": "vite",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "lint": "eslint . --fix"
+        "lint": "eslint . --fix",
+        "typecheck": "vue-tsc --noEmit"
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.0.0",
@@ -20,8 +21,7 @@
         "tailwindcss": "^4.2.2",
         "tailwindcss-primeui": "^0.6.1",
         "universal-cookie": "^8.0.1",
-        "vue": "^3.5.30",
-        "ziggy-js": "^2.6.2"
+        "vue": "^3.5.30"
     },
     "devDependencies": {
         "@primevue/auto-import-resolver": "^4.5.4",

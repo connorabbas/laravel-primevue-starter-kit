@@ -4,6 +4,7 @@ import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
 import InputText from 'primevue/inputtext'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     email: string,

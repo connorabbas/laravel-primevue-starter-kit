@@ -4,7 +4,6 @@ import '../css/tailwind.css'
 import { createInertiaApp, router } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createSSRApp, DefineComponent, h } from 'vue'
-import { ZiggyVue } from 'ziggy-js'
 
 import PrimeVue from 'primevue/config'
 import Toast from 'primevue/toast'
@@ -12,7 +11,6 @@ import ToastService from 'primevue/toastservice'
 import { useToast } from 'primevue/usetoast'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
-import type { ErrorResponsePayload } from '@/types'
 import globalPt from '@/theme/global-pt'
 import themePreset from '@/theme/noir-preset'
 
@@ -35,20 +33,19 @@ createInertiaApp({
                 const toast = useToast()
 
                 router.on('httpException', (event) => {
-                    const responseBody = event.detail.response?.data as Partial<ErrorResponsePayload> | undefined
+                    const responseBody = event.detail.response?.data as Partial<App.Data.ErrorToastResponseData> | undefined
 
                     if (
                         responseBody?.status
-                        && responseBody?.error_title
-                        && responseBody?.error_summary
-                        && responseBody?.error_detail
+                        && responseBody?.errorSummary
+                        && responseBody?.errorDetail
                     ) {
                         event.preventDefault()
 
                         toast.add({
                             severity: responseBody.status >= 500 ? 'error' : 'warn',
-                            summary: responseBody.error_summary,
-                            detail: responseBody.error_detail,
+                            summary: responseBody.errorSummary,
+                            detail: responseBody.errorDetail,
                             life: 5000,
                         })
                     }
@@ -74,7 +71,6 @@ createInertiaApp({
 
         createSSRApp(Root)
             .use(plugin)
-            .use(ZiggyVue)
             .use(PrimeVue, {
                 theme: {
                     preset: themePreset,

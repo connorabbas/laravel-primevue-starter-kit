@@ -26,6 +26,61 @@ type InertiaPageProps = PageProps & Omit<AppPageProps, 'queryParams'> & {
     queryParams: QueryParams
 }
 
+function formatDateForQuery(date: Date): string {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
+}
+
+function normalizeFilterValueForQuery(value: unknown): unknown {
+    if (value instanceof Date) {
+        return formatDateForQuery(value)
+    }
+
+    if (Array.isArray(value)) {
+        return value.map((item) => normalizeFilterValueForQuery(item))
+    }
+
+    return value
+}
+
+function normalizeFiltersForQuery(filters: PrimeVueDataFilters): PrimeVueDataFilters {
+    return Object.fromEntries(
+        Object.entries(filters).map(([key, filter]) => [
+            key,
+            {
+                ...filter,
+                value: normalizeFilterValueForQuery(filter.value),
+            },
+        ])
+    )
+}
+
+function parseDateFromQuery(value: unknown): Date | null {
+    if (value instanceof Date) {
+        return value
+    }
+
+    if (typeof value !== 'string' || value === '') {
+        return null
+    }
+
+    const dateOnlyMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+    if (dateOnlyMatch) {
+        const year = Number(dateOnlyMatch[1])
+        const month = Number(dateOnlyMatch[2])
+        const day = Number(dateOnlyMatch[3])
+
+        return new Date(year, month - 1, day)
+    }
+
+    const parsed = new Date(value)
+
+    return Number.isNaN(parsed.getTime()) ? null : parsed
+}
+
 export function usePaginatedData(
     propDataToFetch: string | string[],
     initialFilters: PrimeVueDataFilters = {},
@@ -77,7 +132,7 @@ export function usePaginatedData(
             router.visit(window.location.pathname, {
                 method: 'get',
                 data: {
-                    filters: filters.value as any,
+                    filters: normalizeFiltersForQuery(filters.value) as any,
                     ...pagination.value,
                     sortField: sorting.value.field,
                     sortOrder: sorting.value.order,
@@ -186,11 +241,17 @@ export function usePaginatedData(
                 FilterMatchMode.DATE_BEFORE,
                 FilterMatchMode.DATE_AFTER,
             ].includes(filter.matchMode)) {
-                filters.value[key].value = new Date(filter.value as string)
+                const parsedDate = parseDateFromQuery(filter.value)
+
+                if (parsedDate) {
+                    filters.value[key].value = parsedDate
+                }
             } else if (filter.matchMode === FilterMatchMode.BETWEEN) {
                 filter.value.forEach((value: any, index: number) => {
-                    if (typeof value === 'string') {
-                        filter.value[index] = new Date(value)
+                    const parsedDate = parseDateFromQuery(value)
+
+                    if (parsedDate) {
+                        filter.value[index] = parsedDate
                     }
                 })
             } else if (

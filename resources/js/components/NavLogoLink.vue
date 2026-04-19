@@ -5,7 +5,7 @@ import { Link as InertiaLink } from '@inertiajs/vue3'
 
 <template>
     <Button
-        :href="route('welcome')"
+        href="/"
         :as="InertiaLink"
         pt:root:class="flex items-center justify-start gap-4 no-underline p-0"
         variant="link"

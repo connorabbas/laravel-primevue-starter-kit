@@ -4,7 +4,6 @@ import createServer from '@inertiajs/vue3/server'
 import { renderToString } from '@vue/server-renderer'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createSSRApp, DefineComponent, h } from 'vue'
-import { route as ziggyRoute, ZiggyVue } from 'ziggy-js'
 
 import PrimeVue from 'primevue/config'
 import Toast from 'primevue/toast'
@@ -41,30 +40,11 @@ createServer((page) =>
                 }
             }
 
-            // Create app
-            const app = createSSRApp(Root)
-
-            // Configure Ziggy for SSR
-            const ziggyConfig = {
-                ...page.props.ziggy,
-                location: new URL(page.props.ziggy.location),
-            }
-            const boundRoute: typeof ziggyRoute = ((name?: any, params?: any, absolute?: boolean) => {
-                return ziggyRoute(name, params, absolute, ziggyConfig)
-            }) as typeof ziggyRoute
-            app.config.globalProperties.route = boundRoute
-            app.config.globalProperties.$route = boundRoute
-            if (typeof globalThis !== 'undefined') {
-                (globalThis as any).route = boundRoute
-            }
-
-            app.use(plugin)
-                .use(ZiggyVue, ziggyConfig)
-                .use(PrimeVue, { theme: 'none' }) // TODO: PrimeVue won't render it's styles server side
+            return createSSRApp(Root)
+                .use(plugin)
+                .use(PrimeVue, { theme: 'none' }) // PrimeVue won't render it's styles server side, @see https://github.com/primefaces/primevue/issues/7289
                 .use(ToastService)
                 .provide('colorMode', colorMode)
-
-            return app
         },
     }),
 )

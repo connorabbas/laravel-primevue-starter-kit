@@ -19,6 +19,7 @@ import {
 import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     laravelVersion: string,
@@ -38,15 +39,8 @@ const ctaCardEnterClass = 'animate-enter fade-in-10 slide-in-from-b-10 animate-d
 const ctaActionsEnterClass = 'animate-enter fade-in-10 zoom-in-95 animate-duration-600 [animation-delay:180ms] animate-fill-backwards'
 const ctaMetaEnterClass = 'animate-enter fade-in-10 slide-in-from-b-4 animate-duration-600 [animation-delay:320ms] animate-fill-backwards'
 
-const featureCardEnterClasses = [
-    'animate-enter fade-in-10 slide-in-from-b-6 animate-duration-700',
-    'animate-enter fade-in-10 slide-in-from-b-8 animate-duration-700 [animation-delay:80ms] animate-fill-backwards',
-    'animate-enter fade-in-10 slide-in-from-b-10 animate-duration-700 [animation-delay:160ms] animate-fill-backwards',
-] as const
-
-const getFeatureCardEnterClass = (index: number): string => {
-    return featureCardEnterClasses[index % featureCardEnterClasses.length]
-}
+const featureCardEnterClass =
+    'animate-enter fade-in-10 slide-in-from-b-6 animate-duration-700 [animation-delay:100ms] animate-fill-backwards'
 
 const featureCards = [
     {
@@ -86,7 +80,7 @@ const featureCards = [
     },
     {
         title: 'Built for scale',
-        description: 'Modern Vue 3 architecture with Composition API, proper error handling, and security best practices built-in.',
+        description: 'Modern Vue 3 architecture with Composition API, proper error handling, e2e type safety between PHP and TS, and security best practices built-in.',
         icon: ChartNoAxesCombined,
     },
     {
@@ -262,9 +256,9 @@ const featureCards = [
 
                     <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         <Card
-                            v-for="(feature, index) in featureCards"
+                            v-for="feature in featureCards"
                             :key="feature.title"
-                            v-animateonscroll.once="{ enterClass: getFeatureCardEnterClass(index), threshold: [0.2], rootMargin: '0px 0px -8% 0px' }"
+                            v-animateonscroll.once="{ enterClass: featureCardEnterClass, threshold: [0.2], rootMargin: '0px 0px -8% 0px' }"
                             class="group h-full border border-surface-200/80 bg-white/80 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-1 hover:border-surface-300 dark:border-surface-800/80 dark:bg-surface-900/70 dark:hover:border-surface-700"
                             pt:body:class="h-full"
                             pt:content:class="flex h-full flex-col p-4"

@@ -2,6 +2,7 @@
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
+import { route } from '@/utils/route'
 
 const form = useForm({
     password: '',

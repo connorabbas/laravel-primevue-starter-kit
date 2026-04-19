@@ -7,6 +7,7 @@ import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     status?: string
@@ -209,7 +210,7 @@ const copySetupKey = async () => {
                         Store these backup codes somewhere secure in case you lose access to your authenticator app
                     </template>
                     <template #content>
-                        <div class="grid gap-2 rounded-lg border dynamic-border p-4 sm:grid-cols-2">
+                        <div class="grid gap-2 [border-radius:var(--p-card-border-radius)] border dynamic-border p-4 sm:grid-cols-2">
                             <code
                                 v-for="code in recoveryCodes"
                                 :key="code"
@@ -246,7 +247,7 @@ const copySetupKey = async () => {
 
                     <div
                         v-if="qrCode"
-                        class="mx-auto w-fit rounded-lg border dynamic-border p-4"
+                        class="mx-auto w-fit [border-radius:var(--p-card-border-radius)] border dynamic-border p-4"
                         v-html="qrCode"
                     />
 

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     status?: string

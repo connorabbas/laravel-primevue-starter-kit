@@ -6,6 +6,7 @@ import Password from 'primevue/password'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
+import { route } from '@/utils/route'
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
