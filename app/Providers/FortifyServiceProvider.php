@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Laravel\Fortify\Contracts\TwoFactorConfirmedResponse as TwoFactorConfirmedResponseContract;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
@@ -17,7 +18,17 @@ class FortifyServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        $this->app->instance(
+            TwoFactorConfirmedResponseContract::class,
+            new class () implements TwoFactorConfirmedResponseContract {
+                public function toResponse($request)
+                {
+                    Inertia::flash('success_toast', 'Two-factor authentication is now active');
+
+                    return back()->with('status', Fortify::TWO_FACTOR_AUTHENTICATION_CONFIRMED);
+                }
+            }
+        );
     }
 
     public function boot(): void

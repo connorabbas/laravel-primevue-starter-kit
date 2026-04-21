@@ -35,14 +35,14 @@ class ErrorResponseTest extends TestCase
             ->assertJsonPath('errorDetail', config('errors.defaults.4xx.detail'));
     }
 
-    public function test_session_expired_errors_redirect_back_with_configured_flash_message(): void
+    public function test_session_expired_errors_redirect_back_with_configured_inertia_flash_message(): void
     {
         Route::post('/_tests/error-419', fn () => abort(419));
 
         $response = $this->from(route('welcome', absolute: false))->post('/_tests/error-419');
 
         $response->assertRedirect(route('welcome', absolute: false))
-            ->assertSessionHas('flash_warn', config('errors.statuses.419.detail'));
+            ->assertInertiaFlash('warn_message', config('errors.statuses.419.detail'));
     }
 
     public function test_error_page_receives_resolved_error_metadata_for_get_requests(): void

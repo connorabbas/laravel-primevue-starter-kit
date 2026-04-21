@@ -4,7 +4,7 @@ import type { Page, PageProps } from '@inertiajs/core'
 import { FilterMatchMode } from '@primevue/core/api'
 import { PageState, DataTablePageEvent } from 'primevue'
 import debounce from 'lodash-es/debounce'
-import type { AppPageProps, PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types'
+import type { AppPageProps, PrimeVueDataFilters, InertiaRouterFetchCallbacks, PaginatedDataVisitPayload } from '@/types'
 
 interface QueryParams {
     filters?: PrimeVueDataFilters;
@@ -124,12 +124,12 @@ export function usePaginatedData(
         })
     }
 
-    function fetchData(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+    function fetchData(options: InertiaRouterFetchCallbacks<PaginatedDataVisitPayload> = {}): Promise<Page<PageProps>> {
         const { onSuccess, onError, onFinish } = options
 
         return new Promise((resolve, reject) => {
             processing.value = true
-            router.visit(window.location.pathname, {
+            router.visit<PaginatedDataVisitPayload>(window.location.pathname, {
                 method: 'get',
                 data: {
                     filters: normalizeFiltersForQuery(filters.value) as any,
@@ -152,9 +152,9 @@ export function usePaginatedData(
                     onError?.(errors)
                     reject(errors)
                 },
-                onFinish: () => {
+                onFinish: (visit) => {
                     processing.value = false
-                    onFinish?.()
+                    onFinish?.(visit)
                 },
             })
         })
@@ -175,21 +175,21 @@ export function usePaginatedData(
         })
     }
 
-    function filter(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+    function filter(options: InertiaRouterFetchCallbacks<PaginatedDataVisitPayload> = {}): Promise<Page<PageProps>> {
         const { onFinish: onFinishCallback, onSuccess, onError } = options
         pagination.value.page = 1
 
         return fetchData({
             onSuccess,
             onError,
-            onFinish: () => {
+            onFinish: (visit) => {
                 scrollToTop()
-                onFinishCallback?.()
+                onFinishCallback?.(visit)
             },
         })
     }
 
-    function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+    function reset(options: InertiaRouterFetchCallbacks<PaginatedDataVisitPayload> = {}): Promise<Page<PageProps>> {
         const defaultFilters = structuredClone(toRaw(initialFilters))
         Object.keys(defaultFilters).forEach((key) => {
             filters.value[key].value = defaultFilters[key].value
@@ -221,9 +221,9 @@ export function usePaginatedData(
                     onError?.(errors)
                     reject(errors)
                 },
-                onFinish: () => {
+                onFinish: (visit) => {
                     processing.value = false
-                    onFinish?.()
+                    onFinish?.(visit)
                 },
             })
         })

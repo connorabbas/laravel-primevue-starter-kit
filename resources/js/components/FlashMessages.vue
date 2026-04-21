@@ -1,87 +1,74 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 import { Check, CircleX, Info, TriangleAlert, Megaphone } from '@lucide/vue'
-import { FlashProps } from '@/types'
+import type { FlashProps } from '@/types'
+import { resolveFlashSeverity } from '@/utils'
 
 const page = usePage()
-const flashed = ref(0)
+const dismissedMessageKeys = ref<string[]>([])
 
-const clearFlash = (type: keyof FlashProps) => {
-    if (page.props.flash?.[type]) {
-        page.props.flash[type] = null
+const messageIconBySeverity = {
+    success: Check,
+    info: Info,
+    warn: TriangleAlert,
+    error: CircleX,
+    secondary: Megaphone,
+} as const
+
+const visibleFlashMessages = computed(() => {
+    const flashEntries = Object.entries(page.flash as FlashProps)
+
+    return flashEntries
+        .filter(([key, value]) => {
+            return (
+                key.endsWith('_message')
+                && typeof value === 'string'
+                && value.trim() !== ''
+                && !dismissedMessageKeys.value.includes(key)
+            )
+        })
+        .map(([key, value]) => {
+            const severity = resolveFlashSeverity(key)
+
+            return {
+                key,
+                message: value,
+                severity,
+                icon: messageIconBySeverity[severity],
+            }
+        })
+})
+
+const dismissMessage = (key: string): void => {
+    if (!dismissedMessageKeys.value.includes(key)) {
+        dismissedMessageKeys.value.push(key)
     }
 }
 
-watch(() => page.props.flash, () => {
-    flashed.value++
-}, { deep: true })
+watch(
+    () => page.flash,
+    () => {
+        dismissedMessageKeys.value = []
+    },
+    { deep: true },
+)
 </script>
 
 <template>
-    <div
-        :key="flashed"
-        class="m-0"
-    >
+    <div class="m-0">
         <Message
-            v-if="page.props.flash.success"
+            v-for="flashMessage in visibleFlashMessages"
+            :key="flashMessage.key"
             class="mb-6"
-            severity="success"
+            :severity="flashMessage.severity"
             closable
-            @close="clearFlash('success')"
+            @close="dismissMessage(flashMessage.key)"
         >
             <template #icon>
-                <Check />
+                <component :is="flashMessage.icon" />
             </template>
-            {{ page.props.flash.success }}
-        </Message>
-        <Message
-            v-if="page.props.flash.info"
-            class="mb-6"
-            severity="info"
-            closable
-            @close="clearFlash('info')"
-        >
-            <template #icon>
-                <Info />
-            </template>
-            {{ page.props.flash.info }}
-        </Message>
-        <Message
-            v-if="page.props.flash.warn"
-            class="mb-6"
-            severity="warn"
-            closable
-            @close="clearFlash('warn')"
-        >
-            <template #icon>
-                <TriangleAlert />
-            </template>
-            {{ page.props.flash.warn }}
-        </Message>
-        <Message
-            v-if="page.props.flash.error"
-            class="mb-6"
-            severity="error"
-            closable
-            @close="clearFlash('error')"
-        >
-            <template #icon>
-                <CircleX />
-            </template>
-            {{ page.props.flash.error }}
-        </Message>
-        <Message
-            v-if="page.props.flash.message"
-            class="mb-6"
-            severity="secondary"
-            closable
-            @close="clearFlash('message')"
-        >
-            <template #icon>
-                <Megaphone />
-            </template>
-            {{ page.props.flash.message }}
+            {{ flashMessage.message }}
         </Message>
     </div>
 </template>

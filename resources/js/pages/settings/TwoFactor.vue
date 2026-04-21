@@ -97,12 +97,6 @@ const submitConfirmationCode = () => {
         preserveScroll: true,
         errorBag: 'confirmTwoFactorAuthentication',
         onSuccess: () => {
-            toast.add({
-                severity: 'success',
-                summary: 'Saved',
-                detail: 'Two-factor authentication is now active',
-                life: 3000,
-            })
             setupModalOpen.value = false
         },
     })

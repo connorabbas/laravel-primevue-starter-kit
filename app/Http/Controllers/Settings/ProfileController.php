@@ -39,6 +39,8 @@ class ProfileController extends Controller
 
         $user?->save();
 
+        Inertia::flash('success_toast', 'Profile information has been updated');
+
         return redirect()->route('profile.edit');
     }
 

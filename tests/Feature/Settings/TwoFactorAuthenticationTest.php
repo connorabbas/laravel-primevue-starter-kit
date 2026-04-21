@@ -62,7 +62,8 @@ class TwoFactorAuthenticationTest extends TestCase
                 'code' => $otpCode,
             ]);
 
-        $response->assertSessionHasNoErrors();
+        $response->assertSessionHasNoErrors()
+            ->assertInertiaFlash('success_toast', 'Two-factor authentication is now active');
 
         $user->refresh();
 
