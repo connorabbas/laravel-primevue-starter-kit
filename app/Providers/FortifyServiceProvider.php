@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -25,7 +26,9 @@ class FortifyServiceProvider extends ServiceProvider
                 {
                     Inertia::flash('success_toast', 'Two-factor authentication is now active');
 
-                    return back()->with('status', Fortify::TWO_FACTOR_AUTHENTICATION_CONFIRMED);
+                    return $request->wantsJson()
+                        ? new JsonResponse('', 200)
+                        : back()->with('status', Fortify::TWO_FACTOR_AUTHENTICATION_CONFIRMED);
                 }
             }
         );
