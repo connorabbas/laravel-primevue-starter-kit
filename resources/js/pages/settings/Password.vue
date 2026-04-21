@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 import { useForm } from '@inertiajs/vue3'
-import { useToast } from 'primevue/usetoast'
 import Password from 'primevue/password'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
@@ -17,27 +16,17 @@ type PasswordInputType = InstanceType<typeof Password> & { $el: HTMLElement };
 const currentPasswordInput = useTemplateRef<PasswordInputType>('current-password-input')
 const newPasswordInput = useTemplateRef<PasswordInputType>('new-password-input')
 
-const toast = useToast()
 const updatePasswordForm = useForm({
     current_password: '',
     password: '',
     password_confirmation: '',
 })
 
-const showSuccessToast = () => {
-    toast.add({
-        severity: 'success',
-        summary: 'Saved',
-        detail: 'Your password has been updated',
-        life: 3000,
-    })
-}
 const updatePassword = () => {
     updatePasswordForm.put(route('user-password.update'), {
         preserveScroll: true,
         onSuccess: () => {
             updatePasswordForm.reset()
-            showSuccessToast()
         },
         onError: () => {
             if (updatePasswordForm.errors?.password) {

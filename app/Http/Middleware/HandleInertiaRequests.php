@@ -52,13 +52,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => Auth::check() ? UserData::from($request->user()) : null,
             ],
-            'flash' => [
-                'success' => fn () => $request->session()->get('flash_success'),
-                'info' => fn () => $request->session()->get('flash_info'),
-                'warn' => fn () => $request->session()->get('flash_warn'),
-                'error' => fn () => $request->session()->get('flash_error'),
-                'message' => fn () => $request->session()->get('flash_message'),
-            ],
             'queryParams' => Inertia::always($request->query()),
         ];
     }

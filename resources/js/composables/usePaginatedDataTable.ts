@@ -1,7 +1,7 @@
 import { toRaw } from 'vue'
 import type { Page, PageProps } from '@inertiajs/core'
 import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue'
-import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types'
+import { PrimeVueDataFilters, InertiaRouterFetchCallbacks, PaginatedDataVisitPayload } from '@/types'
 import { usePaginatedData } from './usePaginatedData'
 
 export function usePaginatedDataTable(
@@ -77,7 +77,7 @@ export function usePaginatedDataTable(
      * "Override" parent composable function
      * usePaginatedData() resets sorting.value state as a new object, this will not work for DataTable's
      */
-    function reset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
+    function reset(options: InertiaRouterFetchCallbacks<PaginatedDataVisitPayload> = {}): Promise<Page<PageProps>> {
         const { onFinish: onFinishCallback, onSuccess, onError } = options
 
         const defaultFilters = structuredClone(toRaw(initialFilters))
@@ -92,9 +92,9 @@ export function usePaginatedDataTable(
         return fetchData({
             onSuccess,
             onError,
-            onFinish: () => {
+            onFinish: (visit) => {
                 scrollToTop()
-                onFinishCallback?.()
+                onFinishCallback?.(visit)
             },
         })
     }

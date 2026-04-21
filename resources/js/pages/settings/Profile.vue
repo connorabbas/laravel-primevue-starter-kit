@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useForm, usePage } from '@inertiajs/vue3'
-import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import DeleteUserModal from '@/components/DeleteUserModal.vue'
@@ -21,7 +20,6 @@ const breadcrumbs = [
 const deleteUserModalOpen = ref(false)
 
 const user = usePage().props.auth.user
-const toast = useToast()
 const updateProfileForm = useForm({
     name: user?.name,
     email: user?.email,
@@ -32,20 +30,9 @@ const sendEmailVerification = () => {
     sendVerificationForm.post(route('verification.send'))
 }
 
-const showSuccessToast = () => {
-    toast.add({
-        severity: 'success',
-        summary: 'Saved',
-        detail: 'Profile information has been updated',
-        life: 3000,
-    })
-}
 const updateProfileInformation = () => {
     updateProfileForm.patch(route('profile.update'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            showSuccessToast()
-        },
+        preserveScroll: true
     })
 }
 </script>
