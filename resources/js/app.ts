@@ -27,20 +27,17 @@ createInertiaApp({
         // Site light/dark mode
         const colorMode = useSiteColorMode({ emitAuto: true })
 
-        // Root template with global toast component
-        const Root = {
-            setup() {
+        createSSRApp({
+            setup: () => {
                 // Inertia router events for Error toast handling, flash data, etc.
                 useInertiaRouterEvents()
-
-                return () => h('div', [
-                    h(App, props),
-                    h(Toast, { position: 'bottom-right' })
-                ])
-            }
-        }
-
-        createSSRApp(Root)
+            },
+            render: () => h('div', [
+                // Root template with global toast component
+                h(App, props),
+                h(Toast, { position: 'bottom-right' })
+            ])
+        })
             .use(plugin)
             .use(PrimeVue, {
                 theme: {

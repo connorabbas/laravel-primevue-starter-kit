@@ -23,24 +23,20 @@ createServer((page) =>
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
         setup({ App, props, plugin }) {
-            // Color mode set from cookie on the server
+            // Site light/dark mode, set from cookie for SSR
             const cookieColorMode = props.initialPage.props.colorScheme
             const colorMode = useSiteColorMode({
                 cookieColorMode,
                 emitAuto: true,
             })
 
-            // Global Toast component
-            const Root = {
-                setup() {
-                    return () => h('div', [
-                        h(App, props),
-                        h(Toast, { position: 'bottom-right' })
-                    ])
-                }
-            }
-
-            return createSSRApp(Root)
+            return createSSRApp({
+                render: () => h('div', [
+                    // Root template with global toast component
+                    h(App, props),
+                    h(Toast, { position: 'bottom-right' })
+                ])
+            })
                 .use(plugin)
                 .use(PrimeVue, { theme: 'none' }) // PrimeVue won't render it's styles server side, @see https://github.com/primefaces/primevue/issues/7289
                 .use(ToastService)
