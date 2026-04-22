@@ -6,9 +6,6 @@ FROM serversideup/php:8.4-fpm-nginx-alpine AS base
 USER root
 RUN install-php-extensions bcmath gd pdo_pgsql
 
-# Node Image
-FROM node:${NODE_VERSION}-alpine AS node
-
 # Install Composer packages
 FROM base AS composer
 WORKDIR /var/www/html
@@ -30,7 +27,7 @@ ARG USER_ID=1000
 ARG GROUP_ID=1000
 USER root
 RUN apk update \
-    && apk add --no-cache curl git bash gnupg postgresql-client openssh-client ncurses \
+    && apk add --no-cache curl git bash gnupg postgresql-client openssh-client ncurses nodejs npm \
     && apk add --no-cache --virtual .build-deps build-base autoconf \
     && install-php-extensions xdebug \
         bcmath \
@@ -54,10 +51,7 @@ RUN apk update \
         exif \
     && rm -rf /var/cache/apk/* \
     && apk del --force-broken-world .build-deps
-COPY --from=node /usr/lib /usr/lib
-COPY --from=node /usr/local/lib /usr/local/lib
-COPY --from=node /usr/local/include /usr/local/include
-COPY --from=node /usr/local/bin /usr/local/bin
+USER root
 COPY .devcontainer/.bashrc /home/www-data/.bashrc
 COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN usermod -s /bin/bash www-data \
@@ -78,13 +72,10 @@ COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./
 COPY --chown=www-data:www-data . .
 USER www-data
 
-# SSR Production Image - Include Node.js and s6 overlay config to run the Inertia SSR artisan command
+# SSR Production Image
 FROM release AS ssr-release
 USER root
-COPY --from=node /usr/lib /usr/lib
-COPY --from=node /usr/local/lib /usr/local/lib
-COPY --from=node /usr/local/include /usr/local/include
-COPY --from=node /usr/local/bin /usr/local/bin
+RUN apk add --no-cache nodejs npm
 COPY --chown=www-data:www-data --chmod=755 .s6-overlay/s6-rc.d /etc/s6-overlay/s6-rc.d
 COPY --chown=www-data:www-data --from=build-assets /var/www/html/bootstrap/ssr ./bootstrap/ssr
 USER www-data

@@ -1,6 +1,98 @@
+# Version control
 .git
-tests
+.gitignore
+.gitattributes
+
+# Environment files (inject via Swarm secrets / stack env)
 .env*
+!.env.example
+
+# Docker & infrastructure (prevent recursive context)
 Dockerfile*
 docker-*.yml
+*.swarm.yml
+terraform/
+ansible/
+deploy/
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+Jenkinsfile
+
+# AI / agentic tooling
+.agents
+.opencode
+.claude
+.cursor
+.windsurf
+.aider*
+.copilot
+.codeium
+.continue
+.roo/
+
+# IDE & editors
+.idea
+.vscode
+.editorconfig
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencies (rebuilt inside image)
+node_modules
+vendor
+.npm
+.pnpm-store
+
+# Built / generated frontend assets
+public/build
+public/hot
+public/storage
+public/mix-manifest.json
+
+# Laravel caches & local state
+storage/logs
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/testing/.gitignore
+!storage/framework/views/.gitignore
+storage/app/public/*
+storage/debugbar
+bootstrap/cache/*.php
+
+# Testing & code quality
+tests
+phpunit.xml
+phpunit.xml.dist
+.phpunit.result.cache
+.phpunit.cache
+phpstan.neon
+phpstan.neon.dist
+pint.json
+.php-cs-fixer.cache
+.php-cs-fixer.php
+coverage/
+.coverage
+
+# Documentation & logs
 *.md
+!composer.json
+*.log
+LICENSE
+docs/
+
+# Debug & profiling
+telescope.db
+.telescope
