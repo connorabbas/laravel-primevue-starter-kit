@@ -2,8 +2,7 @@ services:
   laravel:
     build:
       context: .
-      dockerfile: Dockerfile
-      target: development
+      dockerfile: Dockerfile.dev
       args:
         USER_ID: '${USER_ID:-1000}'
         GROUP_ID: '${GROUP_ID:-1000}'
