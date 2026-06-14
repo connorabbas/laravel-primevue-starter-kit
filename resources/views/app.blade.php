@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    @class(['dark' => request()->cookie('colorScheme', 'auto') === 'dark'])
+>
 
 <head>
     <meta charset="utf-8">
@@ -8,15 +11,28 @@
         content="width=device-width, initial-scale=1"
     >
 
+    {{-- Inline script to detect system dark mode preference and apply it immediately --}}
     <script>
-        // To avoid flashings in the SSR because of the selected color scheme
-        const theme = localStorage.getItem('vueuse-color-scheme') || 'auto'
-        if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        (function () {
+            const colorScheme = '{{ request()->cookie('colorScheme', 'auto') }}'
+            if (colorScheme === 'dark' || (colorScheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        })();
     </script>
+
+    {{-- Inline style to set the background color based on preferred color mode (set to theme colors if desired) --}}
+    <style>
+        html {
+            background-color: #fff;
+        }
+
+        html.dark {
+            background-color: #000;
+        }
+    </style>
 
     <link
         rel="icon"
@@ -33,18 +49,7 @@
         href="/apple-touch-icon.png"
     >
 
-    <!-- Fonts -->
-    <link
-        rel="preconnect"
-        href="https://fonts.bunny.net"
-        crossorigin
-    >
-    <link
-        href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap"
-        rel="stylesheet"
-    />
-
-    <!-- Scripts -->
+    @fonts
     @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
     <x-inertia::head>
         <title data-inertia>{{ config('app.name', 'Laravel') }}</title>

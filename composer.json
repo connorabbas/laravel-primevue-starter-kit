@@ -12,7 +12,7 @@
         "php": "^8.3",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/fortify": "^1.36",
-        "laravel/framework": "^13.0",
+        "laravel/framework": "^13.15",
         "spatie/laravel-data": "^4.14",
         "spatie/laravel-typescript-transformer": "^3.0"
     },
