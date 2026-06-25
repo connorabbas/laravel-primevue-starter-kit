@@ -4,9 +4,9 @@ includes:
 
 parameters:
     level: 8
-    treatPhpDocTypesAsCertain: false
     paths:
-        - app
-        - database/factories
-        - database/seeders
-        - routes
+        - app/
+        - bootstrap/app.php
+        - config/
+        - database/
+        - routes/
