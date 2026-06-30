@@ -39,7 +39,7 @@ export function useAppLayout() {
                 {
                     key: 'resources-primevue',
                     label: 'PrimeVue Docs',
-                    url: 'https://primevue.org/',
+                    url: 'https://v4.primevue.org/',
                     target: '_blank',
                     lucideIcon: ExternalLink,
                 },

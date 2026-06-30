@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * @see https://primevue.org/menu/#popup
+ * @see https://v4.primevue.org/menu/#popup
  * Intended for single-instance use cases, could also be called a "Dropdown"
  * For a looped dataset (ex. DataTable) it's better to have just one Menu component on the page (outside the v-for)
  * then have multiple Buttons to trigger the Menu, dynamically changing the content based on the iteration dataset
