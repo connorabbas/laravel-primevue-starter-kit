@@ -1,7 +1,7 @@
 import Preset from '@primeuix/themes/aura'
 import { definePreset } from '@primeuix/themes'
 
-// https://primevue.org/theming/styled/#noir
+// https://v4.primevue.org/theming/styled/#noir
 const customThemePreset = definePreset(Preset, {
     semantic: {
         primary: {

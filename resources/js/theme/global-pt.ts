@@ -1,6 +1,6 @@
 /**
  * Global pass through styling for components
- * https://primevue.org/passthrough/#global
+ * https://v4.primevue.org/passthrough/#global
  */
 export default {
     dialog: {
