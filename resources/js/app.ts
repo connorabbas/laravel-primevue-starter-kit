@@ -4,15 +4,14 @@ import '../css/tailwind.css'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createSSRApp, DefineComponent, h } from 'vue'
-import { useInertiaRouterEvents } from '@/composables/useInertiaRouterEvents'
 
 import PrimeVue from 'primevue/config'
-import Toast from 'primevue/toast'
 import ToastService from 'primevue/toastservice'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 import globalPt from '@/theme/global-pt'
 import themePreset from '@/theme/noir-preset'
+import AppRoot from '@/components/AppRoot.vue'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -28,15 +27,9 @@ createInertiaApp({
         const colorMode = useSiteColorMode({ emitAuto: true })
 
         createSSRApp({
-            setup: () => {
-                // Inertia router events for Error toast handling, flash data, etc.
-                useInertiaRouterEvents()
-            },
-            render: () => h('div', [
-                // Root template with global toast component
-                h(App, props),
-                h(Toast, { position: 'bottom-right' })
-            ])
+            render: () => h(AppRoot, {}, {
+                default: () => h(App, props)
+            })
         })
             .use(plugin)
             .use(PrimeVue, {
