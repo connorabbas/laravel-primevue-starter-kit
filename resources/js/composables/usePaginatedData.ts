@@ -4,25 +4,25 @@ import type { Page, PageProps } from '@inertiajs/core'
 import { FilterMatchMode } from '@primevue/core/api'
 import { PageState, DataTablePageEvent } from 'primevue'
 import debounce from 'lodash-es/debounce'
-import type { AppPageProps, PrimeVueDataFilters, InertiaRouterFetchCallbacks, PaginatedDataVisitPayload } from '@/types'
+import type { SharedPageProps, PrimeVueDataFilters, InertiaRouterFetchCallbacks, PaginatedDataVisitPayload } from '@/types'
 
 interface QueryParams {
-    filters?: PrimeVueDataFilters;
-    page?: string;
-    rows?: string;
-    sortField?: string;
-    sortOrder?: string;
-    [key: string]: any;
+    filters?: PrimeVueDataFilters
+    page?: string
+    rows?: string
+    sortField?: string
+    sortOrder?: string
+    [key: string]: any
 }
 interface PaginationState {
-    page: number;
-    rows: number;
+    page: number
+    rows: number
 }
 interface SortState {
-    field: string;
-    order: number;
+    field: string
+    order: number
 }
-type InertiaPageProps = PageProps & Omit<AppPageProps, 'queryParams'> & {
+type InertiaPageProps = PageProps & Omit<SharedPageProps, 'queryParams'> & {
     queryParams: QueryParams
 }
 

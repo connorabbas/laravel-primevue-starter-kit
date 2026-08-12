@@ -9,9 +9,9 @@ export type UserData = {
 id: number,
 name: string,
 email: string,
-emailVerifiedAt: string | string | null,
-createdAt: string | string,
-updatedAt: string | string,
+emailVerifiedAt: string | null,
+createdAt: string,
+updatedAt: string,
 };
 }
 }
