@@ -16,9 +16,9 @@ class UserData extends Data
         public string $name,
         public string $email,
         public bool $isAdmin,
-        public CarbonImmutable|string|null $emailVerifiedAt,
-        public CarbonImmutable|string $createdAt,
-        public CarbonImmutable|string $updatedAt,
+        public ?CarbonImmutable $emailVerifiedAt,
+        public CarbonImmutable $createdAt,
+        public CarbonImmutable $updatedAt,
     ) {
     }
 

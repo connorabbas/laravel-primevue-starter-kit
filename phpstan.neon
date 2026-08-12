@@ -10,3 +10,4 @@ parameters:
         - config/
         - database/
         - routes/
+    parseModelCastsMethod: true
