@@ -89,7 +89,7 @@ const routes = {
     "user-password.update": "settings/password",
     "two-factor.show": "settings/two-factor",
     "boost.browser-logs": "_boost/browser-logs",
-    "welcome": "/",
+    "welcome": "",
     "dashboard": "dashboard",
     "admin.dashboard": "admin/dashboard",
     "appearance": "settings/appearance"

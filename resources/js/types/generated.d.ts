@@ -10,9 +10,9 @@ id: number,
 name: string,
 email: string,
 isAdmin: boolean,
-emailVerifiedAt: string | string | null,
-createdAt: string | string,
-updatedAt: string | string,
+emailVerifiedAt: string | null,
+createdAt: string,
+updatedAt: string,
 };
 }
 }

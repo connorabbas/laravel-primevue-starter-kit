@@ -4,9 +4,9 @@ import type { CookieSetOptions } from 'universal-cookie'
 import { watch } from 'vue'
 
 interface SiteColorModeOptions extends UseColorModeOptions {
-    cookieKey?: string;
-    cookieOpts?: CookieSetOptions;
-    cookieColorMode?: BasicColorSchema;
+    cookieKey?: string
+    cookieOpts?: CookieSetOptions
+    cookieColorMode?: BasicColorSchema
 }
 
 export function useSiteColorMode(opts: SiteColorModeOptions = {}) {
