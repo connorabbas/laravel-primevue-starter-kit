@@ -1,0 +1,55 @@
+ARG PHP_VERSION=8.4
+ARG NODE_VERSION=22
+
+# ==========================================
+# Development Image (Debian)
+# ==========================================
+FROM serversideup/php:${PHP_VERSION}-fpm-nginx-bookworm AS development
+ARG NODE_VERSION
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+USER root
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+    && apt-get update && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        git \
+        gnupg \
+        gosu \
+        ca-certificates \
+        postgresql-client \
+        openssh-client \
+        ncurses-bin \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_VERSION}.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends nodejs \
+    && install-php-extensions \
+        bcmath \
+        exif \
+        gd \
+        intl \
+        mysqli \
+        opcache \
+        pdo_mysql \
+        pdo_pgsql \
+        redis \
+        zip \
+        xdebug \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY .devcontainer/.bashrc /home/www-data/.bashrc
+COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN mkdir -p /home/www-data \
+    && usermod -d /home/www-data -s /bin/bash www-data \
+    && git config --global --add safe.directory /var/www/html \
+    && mkdir -p /home/www-data/.ssh \
+    && chown -R www-data:www-data /home/www-data \
+    && docker-php-serversideup-set-id www-data $USER_ID:$GROUP_ID \
+    && docker-php-serversideup-set-file-permissions --owner $USER_ID:$GROUP_ID --service nginx
+USER www-data
+WORKDIR /var/www/html
