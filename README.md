@@ -12,6 +12,6 @@ Browse the [📚 **Documentation**](https://connorabbas.github.io/laravel-primev
 
 
 > [!WARNING]
-> Before adopting this starter kit, be aware that it is designed for [PrimeVue v4](https://v4.primevue.org/), the final MIT-licensed open source release. PrimeTek has announced that PrimeVue v5 will transition to the [new PrimeUI licensing model](https://primeui.dev/pricing) and will no longer be released as open source. As a result, this starter kit will does not plan to migrate to PrimeVue v5.
+> Before adopting this starter kit, be aware that it is designed for [PrimeVue v4](https://v4.primevue.org/), the final MIT-licensed open source release. PrimeTek has announced that PrimeVue v5 will transition to the [new PrimeUI licensing model](https://primeui.dev/pricing) and will no longer be released as open source. As a result, this starter kit does not plan to migrate to PrimeVue v5.
 >
 > Consider migrating the PrimeVue packages to use [OpenVue](https://openvue.dev/), or use the [Laravel Nuxt UI Starter Kit](https://github.com/connorabbas/laravel-nuxtui-starter-kit) as an alternative.
