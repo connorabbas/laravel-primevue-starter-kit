@@ -7,14 +7,15 @@
     "service": "laravel",
     "workspaceFolder": "/var/www/html",
     "mounts": [
-        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/sail/.ssh,readonly",
-        "type=bind,source=/home/${localEnv:USER}/.gitconfig,target=/home/sail/.gitconfig,readonly"
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/www-data/.ssh,readonly",
+        "type=bind,source=/home/${localEnv:USER}/.gitconfig,target=/home/www-data/.gitconfig,readonly"
     ],
     "customizations": {
         "vscode": {
             "extensions": [
                 "DEVSENSE.phptools-vscode",
                 "MehediDracula.php-namespace-resolver",
+                "xdebug.php-debug",
                 "laravel.vscode-laravel",
                 "Vue.volar",
                 "hollowtree.vue-snippets",
@@ -40,7 +41,7 @@
             }
         }
     },
-    "remoteUser": "sail",
+    "remoteUser": "www-data",
     "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
     // "forwardPorts": [],
     // "runServices": [],
